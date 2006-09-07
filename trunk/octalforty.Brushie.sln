@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.Instrumentation.Core", "Instrumentation\octalforty.Brushie.Instrumentation.Core\octalforty.Brushie.Instrumentation.Core.csproj", "{D2994426-B352-4C80-A05A-8E5C2032D93C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.Xml", "octalforty.Brushie.Xml\octalforty.Brushie.Xml.csproj", "{D970186E-319F-4B63-B7A1-855BA17EF4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.UnitTests", "octalforty.Brushie.UnitTests\octalforty.Brushie.UnitTests.csproj", "{8AEE6F94-DFAE-4FBF-A504-A1F99E185433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{D2994426-B352-4C80-A05A-8E5C2032D93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2994426-B352-4C80-A05A-8E5C2032D93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2994426-B352-4C80-A05A-8E5C2032D93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D970186E-319F-4B63-B7A1-855BA17EF4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D970186E-319F-4B63-B7A1-855BA17EF4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D970186E-319F-4B63-B7A1-855BA17EF4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D970186E-319F-4B63-B7A1-855BA17EF4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AEE6F94-DFAE-4FBF-A504-A1F99E185433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AEE6F94-DFAE-4FBF-A504-A1F99E185433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AEE6F94-DFAE-4FBF-A504-A1F99E185433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AEE6F94-DFAE-4FBF-A504-A1F99E185433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
