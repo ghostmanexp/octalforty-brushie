@@ -24,6 +24,5 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
             return null;
         }
         #endregion
-
     }
 }

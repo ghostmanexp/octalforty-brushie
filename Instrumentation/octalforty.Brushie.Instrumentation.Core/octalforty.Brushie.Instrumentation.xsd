@@ -6,7 +6,7 @@
                 <xs:element name="persisters" minOccurs="1" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="persister">
+                            <xs:element name="persister" minOccurs="1" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
@@ -26,10 +26,21 @@
                 <xs:element name="messages" minOccurs="0" maxOccurs="1">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="message">
+                            <xs:element name="message" minOccurs="1" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:attribute name="type" type="xs:string" use="required" />
                                     <xs:attribute name="name" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="formatters" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="formatter" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:attribute name="type" type="xs:string" use="required" />
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>

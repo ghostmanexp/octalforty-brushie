@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InstrumentationManager_InternalInstrument_NoPersistersWithGivenNameRegistered" xml:space="preserve">
-    <value>No persisters with name {0} were registered.</value>
+    <value>No persisters with name "{0}" were registered.</value>
   </data>
   <data name="InstrumentationManager_InternalInstrument_UnableToResolvePersistersForMessage" xml:space="preserve">
-    <value>Unable to resolve persisters for message of type {0} from {1} with severity {2}.</value>
+    <value>Unable to resolve persisters for message of type "{0}" from "{1}" with severity "{2}".</value>
   </data>
 </root>

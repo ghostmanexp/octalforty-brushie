@@ -6,15 +6,20 @@
         <persister type="octalforty.Brushie.Instrumentation.Core.Persisters.TextMessageConsolePersister, octalforty.Brushie.Instrumentation.Core"
             name="textMessageConsolePersister">
             <property name="" value="" />
-        </persister>
+        </persister>        
     </persisters>
 
     <!-- Optionally lists messages used in octalforty Brushie Instrumentation framework. -->
     <messages>
         <!-- A single message. -->
         <message type="octalforty.Brushie.Instrumentation.Core.Messages.TextMessage, octalforty.Brushie.Instrumentation.Core"
-            name="textMessage" />
+            name="textMessage" />        
     </messages>
+
+    <!-- Lists formatters used in octalforty Brushie Instrumentation framework. -->
+    <formatters>
+        <formatter type="octalforty.Brushie.Instrumentation.Core.Formatters.GenericFormatter, octalforty.Brushie.Instrumentation.Core" />        
+    </formatters>
 
     <!-- Binds persisters with messages. -->
     <bindings>
