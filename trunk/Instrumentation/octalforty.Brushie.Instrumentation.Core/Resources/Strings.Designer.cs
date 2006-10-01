@@ -61,7 +61,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No persisters with name {0} were registered..
+        ///   Looks up a localized string similar to No persisters with name &quot;{0}&quot; were registered..
         /// </summary>
         internal static string InstrumentationManager_InternalInstrument_NoPersistersWithGivenNameRegistered {
             get {
@@ -70,7 +70,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to resolve persisters for message of type {0} from {1} with severity {2}..
+        ///   Looks up a localized string similar to Unable to resolve persisters for message of type &quot;{0}&quot; from &quot;{1}&quot; with severity &quot;{2}&quot;..
         /// </summary>
         internal static string InstrumentationManager_InternalInstrument_UnableToResolvePersistersForMessage {
             get {

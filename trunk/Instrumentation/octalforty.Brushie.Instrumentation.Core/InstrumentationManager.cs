@@ -53,11 +53,11 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// <param name="message"></param>
         private void InternalInstrument(IMessage message)
         {
-            //
-            // Resolving persister names.
-            string[] persisterNames;
             lock(syncRoot)
             {
+                //
+                // Resolving persister names.
+                string[] persisterNames;
                 persisterNames = PersisterResolver.ResolvePersisterNames(bindings, message);
 
                 if(persisterNames == null || persisterNames.GetLength(0) == 0)
