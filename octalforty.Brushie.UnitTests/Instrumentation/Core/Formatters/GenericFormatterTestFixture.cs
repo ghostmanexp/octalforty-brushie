@@ -16,9 +16,9 @@ namespace octalforty.Brushie.UnitTests.Instrumentation.Core.Formatters
         {
             IFormatter formatter = new GenericFormatter();
             
-            Assert.AreEqual("1", formatter.Format(1));
-            Assert.AreEqual("(null)", formatter.Format(null));
-            Assert.AreEqual("Formatter", formatter.Format("Formatter"));
+            Assert.AreEqual("1", formatter.Format(1, ""));
+            Assert.AreEqual("(null)", formatter.Format(null, ""));
+            Assert.AreEqual("Formatter", formatter.Format("Formatter", ""));
         }
     }
 }

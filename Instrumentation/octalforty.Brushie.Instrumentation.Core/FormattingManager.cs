@@ -42,13 +42,22 @@ namespace octalforty.Brushie.Instrumentation.Core
         }
         
         /// <summary>
-        /// Formats <paramref name="value"/> and returns its string representation.
+        /// Removes all formatters from the formatting chain.
+        /// </summary>
+        public static void RemoveFormatters()
+        {
+            Instance.InternalRemoveFormatters();
+        }
+
+        /// <summary>
+        /// Formats <paramref name="value"/> and returns its string representation according
+        /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        public static string Format(object value)
+        public static string Format(object value, string formatString)
         {
-            return Instance.IternalFormat(value);
+            return Instance.IternalFormat(value, formatString);
         }
 
         /// <summary>
@@ -58,6 +67,14 @@ namespace octalforty.Brushie.Instrumentation.Core
         private void InternalAddFormatter(IFormatter formatter)
         {
             InternalAddFormatterRecursive(rootFormatter, formatter);
+        }
+
+        /// <summary>
+        /// Removes all formatters from the formatting chain.
+        /// </summary>
+        private void InternalRemoveFormatters()
+        {
+            rootFormatter = new NullFormatter();
         }
 
         /// <summary>
@@ -71,15 +88,16 @@ namespace octalforty.Brushie.Instrumentation.Core
             else 
                 InternalAddFormatterRecursive(parentFormatter.NextFormatter, formatter);
         }
-        
+
         /// <summary>
-        /// Formats <paramref name="value"/> and returns its string representation.
+        /// Formats <paramref name="value"/> and returns its string representation according
+        /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        private string IternalFormat(object value)
+        private string IternalFormat(object value, string formatString)
         {
-            return rootFormatter.Format(value);
+            return rootFormatter.Format(value, formatString);
         }
     }
 }

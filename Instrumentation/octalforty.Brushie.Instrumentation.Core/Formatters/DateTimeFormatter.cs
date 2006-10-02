@@ -1,12 +1,11 @@
-﻿using System;
-using System.Globalization;
+using System;
 
 namespace octalforty.Brushie.Instrumentation.Core.Formatters
 {
     /// <summary>
-    /// Formats <see cref="DateTime"/> instances according to ISO 8601.
+    /// Formats instances of <see cref="System.DateTime"/> structure.
     /// </summary>
-    public class Iso8601DateTimeFormatter : FormatterBase
+    public class DateTimeFormatter : FormatterBase
     {
         #region FormatterBase Members
         /// <summary>
@@ -17,10 +16,14 @@ namespace octalforty.Brushie.Instrumentation.Core.Formatters
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        protected override string InternalFormat(object value)
+        protected override string InternalFormat(object value, string formatString)
         {
             if(value is DateTime)
-                return ((DateTime)value).ToString("s", DateTimeFormatInfo.InvariantInfo);
+            {
+                DateTime dateTime = (DateTime)value;
+                return formatString == null || formatString == string.Empty ?
+                    dateTime.ToString() : dateTime.ToString(formatString);
+            } // if
             
             return null;
         }

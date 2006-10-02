@@ -1,7 +1,8 @@
-﻿namespace octalforty.Brushie.Instrumentation.Core.Formatters
+namespace octalforty.Brushie.Instrumentation.Core.Formatters
 {
     /// <summary>
-    /// Generic formatter which invokes <see cref="object.ToString"/> method on the value supplied.
+    /// Generic formatter which simply invokes <see cref="object.ToString"/> on
+    /// supplied instance.
     /// </summary>
     public class GenericFormatter : FormatterBase
     {
@@ -14,7 +15,7 @@
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        protected override string InternalFormat(object value)
+        protected override string InternalFormat(object value, string formatString)
         {
             return value == null ? "(null)" : value.ToString();
         }

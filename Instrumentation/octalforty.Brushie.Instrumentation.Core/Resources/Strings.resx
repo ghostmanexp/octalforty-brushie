@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Binding_Binding_RequiredPropertyMissing" xml:space="preserve">
+    <value>Required property "{0}" is missing.</value>
+  </data>
+  <data name="FormattingPersister_Configure_RequiredPropertyMissing" xml:space="preserve">
+    <value>Required property "{0}" is missing.</value>
+  </data>
   <data name="InstrumentationManager_InternalInstrument_NoPersistersWithGivenNameRegistered" xml:space="preserve">
     <value>No persisters with name "{0}" were registered.</value>
   </data>

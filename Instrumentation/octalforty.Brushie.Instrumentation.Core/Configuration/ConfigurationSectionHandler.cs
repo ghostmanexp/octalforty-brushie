@@ -21,7 +21,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// <param name="configContext">Configuration context object.</param>
         public object Create(object parent, object configContext, XmlNode section)
         {
-            return null;
+            return new ConfigurationSettings(section);
         }
         #endregion
     }
