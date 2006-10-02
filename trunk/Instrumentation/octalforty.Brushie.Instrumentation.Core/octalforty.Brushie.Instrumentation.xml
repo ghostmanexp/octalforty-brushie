@@ -3,9 +3,9 @@
     <!-- Defines all persister classes used in octalforty Brushie Instrumentation framework -->
     <persisters>
         <!-- A single persister. Required attributes are type and name. -->
-        <persister type="octalforty.Brushie.Instrumentation.Core.Persisters.TextMessageConsolePersister, octalforty.Brushie.Instrumentation.Core"
-            name="textMessageConsolePersister">
-            <property name="" value="" />
+        <persister type="octalforty.Brushie.Instrumentation.Core.Persisters.ConsolePersister, octalforty.Brushie.Instrumentation.Core"
+            name="consolePersister">
+            <property name="formatString" value="{Time:yyyy-MM-dd hh:mm:ss.fff} - {Severity:-20} - {Source:-30} - {Message}" />
         </persister>        
     </persisters>
 
@@ -18,6 +18,7 @@
 
     <!-- Lists formatters used in octalforty Brushie Instrumentation framework. -->
     <formatters>
+        <formatter type="octalforty.Brushie.Instrumentation.Core.Formatters.DateTimeFormatter, octalforty.Brushie.Instrumentation.Core" />
         <formatter type="octalforty.Brushie.Instrumentation.Core.Formatters.GenericFormatter, octalforty.Brushie.Instrumentation.Core" />        
     </formatters>
 

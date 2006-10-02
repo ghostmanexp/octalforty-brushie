@@ -13,10 +13,11 @@
         { get; set; }
         
         /// <summary>
-        /// Formats <paramref name="value"/> and returns its string representation.
+        /// Formats <paramref name="value"/> and returns its string representation according
+        /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        string Format(object value);
+        string Format(object value, string formatString);
     }
 }

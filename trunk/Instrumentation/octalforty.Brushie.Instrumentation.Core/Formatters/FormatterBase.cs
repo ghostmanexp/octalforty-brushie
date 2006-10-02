@@ -20,15 +20,16 @@
         }
 
         /// <summary>
-        /// Formats <paramref name="value"/> and returns its string representation.
+        /// Formats <paramref name="value"/> and returns its string representation according
+        /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        public virtual string Format(object value)
+        public virtual string Format(object value, string formatString)
         {
-            string formattedValue = InternalFormat(value);
+            string formattedValue = InternalFormat(value, formatString);
             if(formattedValue == null && NextFormatter != null)
-                return NextFormatter.Format(value);
+                return NextFormatter.Format(value, formatString);
             
             return formattedValue;
         }
@@ -43,7 +44,7 @@
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
         /// <returns></returns>
-        protected abstract string InternalFormat(object value);
+        protected abstract string InternalFormat(object value, string formatString);
         #endregion
     }
 }
