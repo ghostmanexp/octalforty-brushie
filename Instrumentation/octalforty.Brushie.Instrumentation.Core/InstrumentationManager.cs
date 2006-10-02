@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 
 using octalforty.Brushie.Instrumentation.Core.Exceptions;
+using octalforty.Brushie.Instrumentation.Core.Formatters;
 using octalforty.Brushie.Instrumentation.Core.Internal;
+using octalforty.Brushie.Instrumentation.Core.Persisters;
 using octalforty.Brushie.Instrumentation.Core.Resources;
 
 namespace octalforty.Brushie.Instrumentation.Core
@@ -19,6 +21,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         private IDictionary<string, IPersister> persisters = new Dictionary<string, IPersister>();
         private IList<Binding> bindings = new List<Binding>();
         private object syncRoot = new object();
+        private IPersister persister = new ConsolePersister();
         #endregion
 
         #region Public Static Properties
@@ -36,6 +39,14 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         private InstrumentationManager()
         {
+            Dictionary<string, string> properties = new Dictionary<string, string>();
+            properties.Add("formatString", 
+                "{Time:yyyy-MM-dd HH:mm:ss.fff} - {Severity} - {Source} - {Message}");
+            
+            persister.Configure(properties);
+            
+            FormattingManager.AddFormatter(new DateTimeFormatter());
+            FormattingManager.AddFormatter(new GenericFormatter());
         }
         
         /// <summary>
@@ -57,7 +68,7 @@ namespace octalforty.Brushie.Instrumentation.Core
             {
                 //
                 // Resolving persister names.
-                string[] persisterNames;
+                /*string[] persisterNames;
                 persisterNames = PersisterResolver.ResolvePersisterNames(bindings, message);
 
                 if(persisterNames == null || persisterNames.GetLength(0) == 0)
@@ -76,7 +87,11 @@ namespace octalforty.Brushie.Instrumentation.Core
 
                     IPersister persister = persisters[persisterName];
                     persister.Persist(message);
-                } // foreach
+                } // foreach              
+            */
+                //
+                // For the time being, persist with trace persister.
+                persister.Persist(message);
             } // lock
         }
     }

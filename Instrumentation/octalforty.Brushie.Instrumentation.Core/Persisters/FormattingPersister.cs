@@ -52,6 +52,8 @@ namespace octalforty.Brushie.Instrumentation.Core.Persisters
                 throw new InstrumentationException(
                     string.Format(Strings.FormattingPersister_Configure_RequiredPropertyMissing,
                         FormatStringPropertyName));
+
+            formatString = properties[FormatStringPropertyName];
         }
         #endregion
     }
