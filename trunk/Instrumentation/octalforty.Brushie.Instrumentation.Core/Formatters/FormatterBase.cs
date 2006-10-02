@@ -9,6 +9,13 @@
         private IFormatter nextFormatter;
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="FormatterBase"/> class.
+        /// </summary>
+        protected FormatterBase()
+        {
+        }
+
         #region IFormatter Members
         /// <summary>
         /// Gets or sets a reference to the next formatter in the chain.

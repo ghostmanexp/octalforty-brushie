@@ -70,6 +70,25 @@ namespace octalforty.Brushie.Instrumentation.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Required attribute &quot;{0}&quot; is missing..
+        /// </summary>
+        internal static string ConfigurationObjectWithNameAndType_ConfigurationObjectWithNameAndType_RequiredAttributeMissing {
+            get {
+                return ResourceManager.GetString("ConfigurationObjectWithNameAndType_ConfigurationObjectWithNameAndType_RequiredAtt" +
+                        "ributeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required attribute &quot;{0}&quot; is missing..
+        /// </summary>
+        internal static string ConfigurationObjectWithType_ConfigurationObjectWithType_RequiredAttributeMissing {
+            get {
+                return ResourceManager.GetString("ConfigurationObjectWithType_ConfigurationObjectWithType_RequiredAttributeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Required property &quot;{0}&quot; is missing..
         /// </summary>
         internal static string FormattingPersister_Configure_RequiredPropertyMissing {
