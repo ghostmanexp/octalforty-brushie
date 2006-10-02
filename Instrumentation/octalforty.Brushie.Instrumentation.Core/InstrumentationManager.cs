@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 
+using octalforty.Brushie.Instrumentation.Core.Configuration;
 using octalforty.Brushie.Instrumentation.Core.Exceptions;
-using octalforty.Brushie.Instrumentation.Core.Formatters;
 using octalforty.Brushie.Instrumentation.Core.Internal;
-using octalforty.Brushie.Instrumentation.Core.Persisters;
 using octalforty.Brushie.Instrumentation.Core.Resources;
 
 namespace octalforty.Brushie.Instrumentation.Core
@@ -19,9 +18,8 @@ namespace octalforty.Brushie.Instrumentation.Core
 
         #region Private Member Variables
         private IDictionary<string, IPersister> persisters = new Dictionary<string, IPersister>();
-        private IList<Binding> bindings = new List<Binding>();
+        private IList<Internal.Binding> bindings = new List<Internal.Binding>();
         private object syncRoot = new object();
-        private IPersister persister = new ConsolePersister();
         #endregion
 
         #region Public Static Properties
@@ -39,14 +37,20 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         private InstrumentationManager()
         {
-            Dictionary<string, string> properties = new Dictionary<string, string>();
-            properties.Add("formatString", 
-                "{Time:yyyy-MM-dd HH:mm:ss.fff} - {Severity} - {Source} - {Message}");
+            //
+            // Adding persisters.
+            foreach(Persister persister in ConfigurationSettings.Instance.Persisters)
+            {
+                IPersister persisterInstance = ObjectFactory.CreatePersister(persister);
+                persisterInstance.Configure(persister.Properties);
+                
+                persisters.Add(persister.Name, persisterInstance);
+            } // foreach
             
-            persister.Configure(properties);
-            
-            FormattingManager.AddFormatter(new DateTimeFormatter());
-            FormattingManager.AddFormatter(new GenericFormatter());
+            //
+            // Adding bindings.
+            foreach(Configuration.Binding binding in ConfigurationSettings.Instance.Bindings)
+                bindings.Add(new Internal.Binding(binding));
         }
         
         /// <summary>
@@ -68,7 +72,7 @@ namespace octalforty.Brushie.Instrumentation.Core
             {
                 //
                 // Resolving persister names.
-                /*string[] persisterNames;
+                string[] persisterNames;
                 persisterNames = PersisterResolver.ResolvePersisterNames(bindings, message);
 
                 if(persisterNames == null || persisterNames.GetLength(0) == 0)
@@ -88,10 +92,6 @@ namespace octalforty.Brushie.Instrumentation.Core
                     IPersister persister = persisters[persisterName];
                     persister.Persist(message);
                 } // foreach              
-            */
-                //
-                // For the time being, persist with trace persister.
-                persister.Persist(message);
             } // lock
         }
     }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Instrumentation\Core\Configuration\ConfigurationSettingsTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Formatters\DateTimeFormatterTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Formatters\GenericFormatterTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Util\MessageFormatterTestFixture.cs" />
@@ -65,4 +66,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(SolutionDir)Instrumentation\octalforty.Brushie.Instrumentation.Core\octalforty.Brushie.Instrumentation.xml" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

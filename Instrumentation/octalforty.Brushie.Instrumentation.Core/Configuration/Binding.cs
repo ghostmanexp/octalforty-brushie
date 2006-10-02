@@ -9,7 +9,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
     /// <summary>
     /// Contains settings for <c>binding</c> configuration element.
     /// </summary>
-    public class Binding
+    public class Binding : ConfigurationObject
     {
         #region Private Constants
         private readonly string PersisterNamePropertyName = "persisterName";
@@ -61,7 +61,8 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// given XML node.
         /// </summary>
         /// <param name="bindingXmlNode"></param>
-        public Binding(XmlNode bindingXmlNode)
+        public Binding(XmlNode bindingXmlNode) :
+            base(bindingXmlNode)
         {
             if(bindingXmlNode.Attributes[PersisterNamePropertyName] == null)
                 throw new ConfigurationException(
@@ -70,9 +71,14 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
             
             persisterName = bindingXmlNode.Attributes[PersisterNamePropertyName].Value;
 
-            severities = GetStringArray(bindingXmlNode.SelectNodes("./severity"));
-            sources = GetStringArray(bindingXmlNode.SelectNodes("./source"));
-            messages = GetStringArray(bindingXmlNode.SelectNodes("./message"));
+            System.Xml.XmlNamespaceManager namespaceManager = new XmlNamespaceManager();
+
+            severities = GetStringArray(bindingXmlNode.SelectNodes("./instrumentation:severity", 
+                namespaceManager));
+            sources = GetStringArray(bindingXmlNode.SelectNodes("./instrumentation:source", 
+                namespaceManager));
+            messages = GetStringArray(bindingXmlNode.SelectNodes("./instrumentation:message", 
+                namespaceManager));
         }
 
         private string[] GetStringArray(XmlNodeList xmlNodeList)

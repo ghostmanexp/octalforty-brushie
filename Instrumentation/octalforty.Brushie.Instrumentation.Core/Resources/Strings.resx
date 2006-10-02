@@ -120,6 +120,12 @@
   <data name="Binding_Binding_RequiredPropertyMissing" xml:space="preserve">
     <value>Required property "{0}" is missing.</value>
   </data>
+  <data name="ConfigurationObjectWithNameAndType_ConfigurationObjectWithNameAndType_RequiredAttributeMissing" xml:space="preserve">
+    <value>Required attribute "{0}" is missing.</value>
+  </data>
+  <data name="ConfigurationObjectWithType_ConfigurationObjectWithType_RequiredAttributeMissing" xml:space="preserve">
+    <value>Required attribute "{0}" is missing.</value>
+  </data>
   <data name="FormattingPersister_Configure_RequiredPropertyMissing" xml:space="preserve">
     <value>Required property "{0}" is missing.</value>
   </data>

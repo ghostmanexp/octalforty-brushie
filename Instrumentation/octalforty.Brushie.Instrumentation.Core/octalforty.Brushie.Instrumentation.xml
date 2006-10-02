@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<octalforty.brushie.instrumentation xmlns="http://schemas.octalforty.com/brushie/1.0/instrumentation">
+<octalforty.brushie.instrumentation xmlns="http://schemas.octalfortystudios.com/brushie/1.0/instrumentation">
     <!-- Defines all persister classes used in octalforty Brushie Instrumentation framework -->
     <persisters>
         <!-- A single persister. Required attributes are type and name. -->

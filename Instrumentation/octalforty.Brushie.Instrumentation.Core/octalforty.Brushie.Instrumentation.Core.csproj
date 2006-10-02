@@ -29,16 +29,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Binding.cs" />
+    <Compile Include="Configuration\ConfigurationObject.cs" />
+    <Compile Include="Configuration\ConfigurationObjectWithNameAndType.cs" />
+    <Compile Include="Configuration\ConfigurationObjectWithType.cs" />
     <Compile Include="Configuration\ConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\ConfigurationSettings.cs" />
     <Compile Include="Configuration\Formatter.cs" />
     <Compile Include="Configuration\Message.cs" />
     <Compile Include="Configuration\Persister.cs" />
+    <Compile Include="Configuration\XmlNamespaceManager.cs" />
     <Compile Include="Exceptions\ConfigurationException.cs" />
     <Compile Include="Exceptions\InstrumentationException.cs" />
     <Compile Include="Formatters\DateTimeFormatter.cs" />
@@ -50,6 +55,7 @@
     <Compile Include="InstrumentationManager.cs" />
     <Compile Include="Internal\Binding.cs" />
     <Compile Include="Internal\NullFormatter.cs" />
+    <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\PersisterResolver.cs" />
     <Compile Include="IPersister.cs" />
     <Compile Include="MessageSeverity.cs" />
@@ -58,6 +64,7 @@
     <Compile Include="Persisters\ConsolePersister.cs" />
     <Compile Include="Persisters\DebugPersister.cs" />
     <Compile Include="Persisters\FormattingPersister.cs" />
+    <Compile Include="Persisters\NullPersister.cs" />
     <Compile Include="Persisters\PersisterBase.cs" />
     <Compile Include="Persisters\TextWriterPersister.cs" />
     <Compile Include="Persisters\TracePersister.cs" />

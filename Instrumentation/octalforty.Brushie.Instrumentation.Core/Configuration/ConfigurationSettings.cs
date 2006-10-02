@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Configuration;
 using System.Xml;
 
 namespace octalforty.Brushie.Instrumentation.Core.Configuration
@@ -49,6 +50,20 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         }
         #endregion
 
+        #region Public Static Properties
+        /// <summary>
+        /// Gets a reference to the instance of <see cref="ConfigurationSettings"/> class.
+        /// </summary>
+        public static ConfigurationSettings Instance
+        {
+            get
+            {
+                return ConfigurationManager.GetSection("octalforty.brushie.instrumentation")
+                    as ConfigurationSettings;
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of <see cref="ConfigurationSettings"/> class
         /// from a given XML node.
@@ -56,9 +71,79 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// <param name="configurationXmlNode"></param>
         public ConfigurationSettings(XmlNode configurationXmlNode)
         {
-            //
-            // Initializing bindings
-            XmlNodeList bindingsNodeList = configurationXmlNode.SelectNodes("./bindings/binding");
+            System.Xml.XmlNamespaceManager namespaceManager =
+                new XmlNamespaceManager();
+            InitializePersisters(configurationXmlNode, namespaceManager);
+            InitializeMessages(configurationXmlNode, namespaceManager);
+            InitializeFormatters(configurationXmlNode, namespaceManager);
+            InitializeBindings(configurationXmlNode, namespaceManager);
+        }
+
+        /// <summary>
+        /// Initializes persisters.
+        /// </summary>
+        /// <param name="configurationXmlNode"></param>
+        private void InitializePersisters(XmlNode configurationXmlNode, 
+            System.Xml.XmlNamespaceManager namespaceManager)
+        {
+            XmlNodeList persistersNodeList =
+                configurationXmlNode.SelectNodes("./instrumentation:persisters/instrumentation:persister", 
+                namespaceManager);
+            List<Persister> persistersList = new List<Persister>();
+
+            foreach(XmlNode persisterXmlNode in persistersNodeList)
+                persistersList.Add(new Persister(persisterXmlNode));
+
+            persisters = persistersList.ToArray();
+            
+        }
+
+        /// <summary>
+        /// Initializes messages.
+        /// </summary>
+        /// <param name="configurationXmlNode"></param>
+        private void InitializeMessages(XmlNode configurationXmlNode, 
+            System.Xml.XmlNamespaceManager namespaceManager)
+        {
+            XmlNodeList messagesNodeList =
+                configurationXmlNode.SelectNodes("./instrumentation:messages/instrumentation:message", 
+                namespaceManager);
+            List<Message> messagesList = new List<Message>();
+
+            foreach(XmlNode messageXmlNode in messagesNodeList)
+                messagesList.Add(new Message(messageXmlNode));
+
+            messages = messagesList.ToArray();
+        }
+
+        /// <summary>
+        /// Initializes formatters.
+        /// </summary>
+        /// <param name="configurationXmlNode"></param>
+        private void InitializeFormatters(XmlNode configurationXmlNode, 
+            System.Xml.XmlNamespaceManager namespaceManager)
+        {
+            XmlNodeList formattersNodeList =
+                configurationXmlNode.SelectNodes("./instrumentation:formatters/instrumentation:formatter", 
+                namespaceManager);
+            List<Formatter> formattersList = new List<Formatter>();
+
+            foreach(XmlNode formatterXmlNode in formattersNodeList)
+                formattersList.Add(new Formatter(formatterXmlNode));
+
+            formatters = formattersList.ToArray();
+        }
+
+        /// <summary>
+        /// Initializes bindings.
+        /// </summary>
+        /// <param name="configurationXmlNode"></param>
+        private void InitializeBindings(XmlNode configurationXmlNode, 
+            System.Xml.XmlNamespaceManager namespaceManager)
+        {
+            XmlNodeList bindingsNodeList =
+                configurationXmlNode.SelectNodes("./instrumentation:bindings/instrumentation:binding", 
+                namespaceManager);
             List<Binding> bindingsList = new List<Binding>();
             
             foreach(XmlNode bindingXmlNode in bindingsNodeList)

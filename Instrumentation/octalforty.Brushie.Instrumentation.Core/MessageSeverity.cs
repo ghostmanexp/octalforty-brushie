@@ -41,6 +41,11 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// <summary>
         /// Exception message.
         /// </summary>
-        Exception
+        Exception,
+        
+        /// <summary>
+        /// Special value meaning "All Severities".
+        /// </summary>
+        Sink
     }
 }
