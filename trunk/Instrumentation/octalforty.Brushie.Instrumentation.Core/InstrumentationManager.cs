@@ -20,6 +20,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         private IDictionary<string, IPersister> persisters = new Dictionary<string, IPersister>();
         private IList<Internal.Binding> bindings = new List<Internal.Binding>();
         private object syncRoot = new object();
+        private bool isInstrumentationEnabled = false;
         #endregion
 
         #region Public Static Properties
@@ -37,20 +38,25 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         private InstrumentationManager()
         {
-            //
-            // Adding persisters.
-            foreach(Persister persister in ConfigurationSettings.Instance.Persisters)
+            if(ConfigurationSettings.Instance != null)
             {
-                IPersister persisterInstance = ObjectFactory.CreatePersister(persister);
-                persisterInstance.Configure(persister.Properties);
+                //
+                // Adding persisters.
+                foreach(Persister persister in ConfigurationSettings.Instance.Persisters)
+                {
+                    IPersister persisterInstance = ObjectFactory.CreatePersister(persister);
+                    persisterInstance.Configure(persister.Properties);
+
+                    persisters.Add(persister.Name, persisterInstance);
+                } // foreach
+
+                //
+                // Adding bindings.
+                foreach(Configuration.Binding binding in ConfigurationSettings.Instance.Bindings)
+                    bindings.Add(new Internal.Binding(binding));
                 
-                persisters.Add(persister.Name, persisterInstance);
-            } // foreach
-            
-            //
-            // Adding bindings.
-            foreach(Configuration.Binding binding in ConfigurationSettings.Instance.Bindings)
-                bindings.Add(new Internal.Binding(binding));
+                isInstrumentationEnabled = true;
+            } // if
         }
         
         /// <summary>
@@ -70,6 +76,9 @@ namespace octalforty.Brushie.Instrumentation.Core
         {
             lock(syncRoot)
             {
+                if(!isInstrumentationEnabled)
+                    return;
+                
                 //
                 // Resolving persister names.
                 string[] persisterNames;
