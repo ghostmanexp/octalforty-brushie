@@ -33,11 +33,13 @@ namespace octalforty.Brushie.Instrumentation.Core
         {
             //
             // Adding formatters.
-            
-            foreach(Formatter formatter in Configuration.ConfigurationSettings.Instance.Formatters)
+            if(ConfigurationSettings.Instance != null)
             {
-                InternalAddFormatter(ObjectFactory.CreateFormatter(formatter));
-            } // foreach
+                foreach(Formatter formatter in ConfigurationSettings.Instance.Formatters)
+                {
+                    InternalAddFormatter(ObjectFactory.CreateFormatter(formatter));
+                } // foreach
+            } // if
         }
         
         /// <summary>

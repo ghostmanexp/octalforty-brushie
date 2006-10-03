@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.Test", "octalforty.Brushie.Test\octalforty.Brushie.Test.csproj", "{1D6C1A31-A16A-4D4B-B2E5-7B96F7CE6FBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.Text", "octalforty.Brushie.Text\octalforty.Brushie.Text.csproj", "{6D115D49-63E6-40D6-833D-A2CD399395FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{1D6C1A31-A16A-4D4B-B2E5-7B96F7CE6FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D6C1A31-A16A-4D4B-B2E5-7B96F7CE6FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D6C1A31-A16A-4D4B-B2E5-7B96F7CE6FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D115D49-63E6-40D6-833D-A2CD399395FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D115D49-63E6-40D6-833D-A2CD399395FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D115D49-63E6-40D6-833D-A2CD399395FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D115D49-63E6-40D6-833D-A2CD399395FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
