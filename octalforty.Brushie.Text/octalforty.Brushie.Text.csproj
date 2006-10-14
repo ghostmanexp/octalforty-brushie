@@ -33,7 +33,6 @@
       <HintPath>..\ThirdParty\Lucene.Net-1.4.3\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
