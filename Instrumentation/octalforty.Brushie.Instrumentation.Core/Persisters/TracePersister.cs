@@ -9,6 +9,13 @@ namespace octalforty.Brushie.Instrumentation.Core.Persisters
     /// </summary>
     public class TracePersister : FormattingPersister
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="TracePersister"/> class.
+        /// </summary>
+        public TracePersister()
+        {
+        }
+
         #region FormattingPersister Members
         /// <summary>
         /// Persists message <paramref name="message"/>.

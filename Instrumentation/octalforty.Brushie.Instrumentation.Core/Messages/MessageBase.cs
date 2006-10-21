@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace octalforty.Brushie.Instrumentation.Core.Messages
 {
@@ -11,6 +12,17 @@ namespace octalforty.Brushie.Instrumentation.Core.Messages
         private MessageSeverity severity;
         private string source;
         private DateTime time;
+        private int threadID;
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Gets a value which uniquely identifies the thread.
+        /// </summary>
+        public int ThreadID
+        {
+            get { return threadID; }
+        }
         #endregion
 
         /// <summary>
@@ -18,6 +30,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Messages
         /// </summary>
         protected MessageBase()
         {
+            threadID = Thread.CurrentThread.ManagedThreadId;
         }
 
         /// <summary>
@@ -27,7 +40,8 @@ namespace octalforty.Brushie.Instrumentation.Core.Messages
         /// <param name="severity">Message severity.</param>
         /// <param name="source">Message source.</param>
         /// <param name="time">Message time.</param>
-        protected MessageBase(MessageSeverity severity, string source, DateTime time)
+        protected MessageBase(MessageSeverity severity, string source, DateTime time) :
+            this()
         {
             this.severity = severity;
             this.source = source;
