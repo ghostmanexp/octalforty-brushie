@@ -39,6 +39,13 @@ namespace octalforty.Brushie.Instrumentation.Core.Persisters
         }
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="FormattingPersister"/> class.
+        /// </summary>
+        protected FormattingPersister()
+        {
+        }
+
         #region PersisterBase Members
         /// <summary>
         /// Configures persister with information from <paramref name="properties"/> dictionary.

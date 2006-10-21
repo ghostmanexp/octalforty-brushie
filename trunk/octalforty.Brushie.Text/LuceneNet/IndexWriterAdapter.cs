@@ -165,7 +165,7 @@ namespace octalforty.Brushie.Text.LuceneNet
         private void CheckIsDisposed()
         {
             if(isDisposed)
-                throw new ObjectDisposedException("indexWriter");
+                throw new ObjectDisposedException("IndexWriterAdapter");
         }
     }
 }
