@@ -15,7 +15,10 @@ namespace octalforty.Brushie.Instrumentation.Core.Persisters
     ///     <listheader><term>Property</term><description>Description</description></listheader>
     ///     <item>
     ///         <term>formatString</term>
-    ///         <description>Format string used to format the output string.</description>
+    ///         <description>
+    ///             Format string used to format the output string. For example:
+    ///             <code>{Time:yyyy-MM-dd hh:mm:ss.fff} - {Severity:-20} - {Source:-30} - {Message}</code>
+    ///         </description>
     ///     </item>
     /// </list>
     /// </remarks>
