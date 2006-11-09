@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -11,6 +12,12 @@ namespace octalforty.Brushie.Instrumentation.Core.Util
     /// </summary>
     public static class MessageFormatter
     {
+        #region Private Static Member Variables
+        private static Dictionary<Type, Dictionary<string, PropertyInfo>> messagePropertiesCache =
+            new Dictionary<Type, Dictionary<string, PropertyInfo>>();
+        private static object syncRoot = new object();
+        #endregion
+
         public static string FormatMessage(IMessage message, string formatString)
         {
             string result = formatString;
@@ -38,13 +45,25 @@ namespace octalforty.Brushie.Instrumentation.Core.Util
 
         private static Dictionary<string, PropertyInfo> GetObjectProperties(IMessage message)
         {
-            PropertyInfo[] propertyInfos = message.GetType().GetProperties();
-            Dictionary<string, PropertyInfo> properties = new Dictionary<string, PropertyInfo>();
+            lock(syncRoot)
+            {
+                Type messageType = message.GetType();
 
-            foreach(PropertyInfo propertyInfo in propertyInfos)
-                properties.Add(propertyInfo.Name, propertyInfo);
+                if(!messagePropertiesCache.ContainsKey(messageType))
+                {
+                    PropertyInfo[] propertyInfos = messageType.GetProperties();
 
-            return properties;
+                    Dictionary<string, PropertyInfo> properties = 
+                        new Dictionary<string, PropertyInfo>();
+
+                    foreach(PropertyInfo propertyInfo in propertyInfos)
+                        properties.Add(propertyInfo.Name, propertyInfo);
+                    
+                    messagePropertiesCache.Add(messageType, properties);
+                } // if
+                
+                return messagePropertiesCache[messageType];
+            } // lock
         }
     }
 }
