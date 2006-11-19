@@ -95,7 +95,9 @@ namespace octalforty.Brushie.Xml
         
         /// <summary>
         /// Adds attribute to internal attributes stack. Attributes are added to the
-        /// next element appended with <see cref="AppendElement"/> or <see cref="AppendStartTag(string)"/>.
+        /// next element appended with <see cref="AppendElement(string,string)"/>
+        /// (<see cref="AppendElement(string,string,string)"/>) or 
+        /// <see cref="AppendStartTag(string)"/>.
         /// </summary>
         /// <param name="name">Attribute name.</param>
         /// <param name="value">Attribute value.</param>
@@ -111,7 +113,8 @@ namespace octalforty.Brushie.Xml
         
         /// <summary>
         /// Adds attribute to internal attributes stack. Attributes are added to the
-        /// next element appended with <see cref="AppendElement"/> or <see cref="AppendStartTag(string)"/>.
+        /// next element appended with <see cref="AppendElement(string,string)"/>
+        /// (<see cref="AppendElement(string,string,string)"/>) or <see cref="AppendStartTag(string)"/>.
         /// </summary>
         /// <param name="_namespace">Attribute namespace.</param>
         /// <param name="name">Attribute name.</param>
