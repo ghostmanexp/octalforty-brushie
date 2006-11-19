@@ -17,6 +17,7 @@
         /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
+        /// <param name="formatString">Format string to be used.</param>
         /// <returns></returns>
         string Format(object value, string formatString);
     }

@@ -15,6 +15,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Internal
         /// format <paramref name="value"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
+        /// <param name="formatString">Format string to be used.</param>
         /// <returns></returns>
         protected override string InternalFormat(object value, string formatString)
         {

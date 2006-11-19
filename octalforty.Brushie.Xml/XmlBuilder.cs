@@ -116,6 +116,7 @@ namespace octalforty.Brushie.Xml
         /// <param name="_namespace">Attribute namespace.</param>
         /// <param name="name">Attribute name.</param>
         /// <param name="value">Attribute value.</param>
+        /// <exception cref="ArgumentNullException">
         /// When <paramref name="name"/> is a null reference.
         /// </exception>
         /// <exception cref="ArgumentException">
