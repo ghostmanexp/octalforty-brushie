@@ -137,12 +137,13 @@ namespace octalforty.Brushie.Text.LuceneNet
         #endregion
         
         /// <summary>
-        /// Dispose(bool disposing) executes in two distinct scenarios. If disposing equals 
-        /// <see langword="true" />, the method has been called directly or indirectly by a 
-        /// user's code. Managed and unmanaged resources can be disposed. <para />
-        /// If disposing equals <see langword="false" />, the method has been called by the 
-        /// runtime from inside the finalizer and you should not reference other objects. 
-        /// Only unmanaged resources can be disposed.
+        /// <see cref="Dispose(bool)"/> executes in two distinct scenarios. If 
+        /// <paramref name="disposing"/> equals <see langword="true" />, the method has been 
+        /// called directly or indirectly by a user's code. Managed and unmanaged resources 
+        /// can be disposed.<para />
+        /// If <paramref name="disposing"/> equals <see langword="false" />, the method has 
+        /// been called by the runtime from inside the finalizer and you should not reference 
+        /// other objects. Only unmanaged resources can be disposed.
         /// </summary>
         /// <param name="disposing"></param>
         private void Dispose(bool disposing)
