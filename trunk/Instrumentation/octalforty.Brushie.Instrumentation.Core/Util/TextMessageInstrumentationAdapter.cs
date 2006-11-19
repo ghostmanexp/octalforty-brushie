@@ -4,6 +4,9 @@ using octalforty.Brushie.Instrumentation.Core.Messages;
 
 namespace octalforty.Brushie.Instrumentation.Core.Util
 {
+    /// <summary>
+    /// Adapter used to simplyfy instrumentation of complex data structures.
+    /// </summary>
     public sealed class TextMessageInstrumentationAdapter
     {
         #region Private Member Variables

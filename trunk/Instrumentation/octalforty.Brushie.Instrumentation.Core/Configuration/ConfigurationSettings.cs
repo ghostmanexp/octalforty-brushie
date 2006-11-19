@@ -83,6 +83,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// Initializes persisters.
         /// </summary>
         /// <param name="configurationXmlNode"></param>
+        /// <param name="namespaceManager"></param>
         private void InitializePersisters(XmlNode configurationXmlNode, 
             System.Xml.XmlNamespaceManager namespaceManager)
         {
@@ -102,6 +103,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// Initializes messages.
         /// </summary>
         /// <param name="configurationXmlNode"></param>
+        /// <param name="namespaceManager"></param>
         private void InitializeMessages(XmlNode configurationXmlNode, 
             System.Xml.XmlNamespaceManager namespaceManager)
         {
@@ -120,6 +122,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// Initializes formatters.
         /// </summary>
         /// <param name="configurationXmlNode"></param>
+        /// <param name="namespaceManager"></param>
         private void InitializeFormatters(XmlNode configurationXmlNode, 
             System.Xml.XmlNamespaceManager namespaceManager)
         {
@@ -138,6 +141,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         /// Initializes bindings.
         /// </summary>
         /// <param name="configurationXmlNode"></param>
+        /// <param name="namespaceManager"></param>
         private void InitializeBindings(XmlNode configurationXmlNode, 
             System.Xml.XmlNamespaceManager namespaceManager)
         {

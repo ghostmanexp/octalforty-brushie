@@ -64,6 +64,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
+        /// <param name="formatString">Format string to be used.</param>
         /// <returns></returns>
         public static string Format(object value, string formatString)
         {
@@ -90,6 +91,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// <summary>
         /// Recursively adds <paramref name="formatter"/> to the formatting chain.
         /// </summary>
+        /// <param name="parentFormatter">Parent formatter.</param>
         /// <param name="formatter">Formatter.</param>
         private void InternalAddFormatterRecursive(IFormatter parentFormatter, IFormatter formatter)
         {
@@ -104,6 +106,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
+        /// <param name="formatString">Format string to be used.</param>
         /// <returns></returns>
         private string IternalFormat(object value, string formatString)
         {

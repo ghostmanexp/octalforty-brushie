@@ -18,6 +18,12 @@ namespace octalforty.Brushie.Instrumentation.Core.Util
         private static object syncRoot = new object();
         #endregion
 
+        /// <summary>
+        /// Formats <paramref name="message"/> according to <paramref name="formatString"/>.
+        /// </summary>
+        /// <param name="message">Message to be formatted.</param>
+        /// <param name="formatString">Format string used when formatting message.</param>
+        /// <returns></returns>
         public static string FormatMessage(IMessage message, string formatString)
         {
             string result = formatString;

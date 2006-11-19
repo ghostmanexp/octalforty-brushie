@@ -31,6 +31,7 @@
         /// to <paramref name="formatString"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
+        /// <param name="formatString">Format string to be used.</param>
         /// <returns></returns>
         public virtual string Format(object value, string formatString)
         {
@@ -50,6 +51,7 @@
         /// format <paramref name="value"/>.
         /// </summary>
         /// <param name="value">Object to be formatted.</param>
+        /// <param name="formatString">Format string to be used.</param>
         /// <returns></returns>
         protected abstract string InternalFormat(object value, string formatString);
         #endregion
