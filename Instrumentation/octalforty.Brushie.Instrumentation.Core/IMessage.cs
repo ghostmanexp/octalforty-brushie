@@ -25,5 +25,11 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         DateTime Time
         { get; }
+
+        /// <summary>
+        /// Gets a value which uniquely identifies the thread.
+        /// </summary>
+        int ThreadID
+        { get; }
     }
 }
