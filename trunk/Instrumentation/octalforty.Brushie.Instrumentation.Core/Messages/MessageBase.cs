@@ -15,16 +15,6 @@ namespace octalforty.Brushie.Instrumentation.Core.Messages
         private int threadID;
         #endregion
 
-        #region Public Properties
-        /// <summary>
-        /// Gets a value which uniquely identifies the thread.
-        /// </summary>
-        public int ThreadID
-        {
-            get { return threadID; }
-        }
-        #endregion
-
         /// <summary>
         /// Initializes a new instance of <see cref="MessageBase"/> class.
         /// </summary>
@@ -71,6 +61,14 @@ namespace octalforty.Brushie.Instrumentation.Core.Messages
         public virtual DateTime Time
         {
             get { return time; }
+        }
+
+        /// <summary>
+        /// Gets a value which uniquely identifies the thread.
+        /// </summary>
+        public virtual int ThreadID
+        {
+            get { return threadID; }
         }
         #endregion
     }
