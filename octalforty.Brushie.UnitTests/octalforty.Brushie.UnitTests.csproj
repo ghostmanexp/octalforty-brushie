@@ -41,6 +41,7 @@
       <HintPath>..\ThirdParty\NUint-2.2.8\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +50,8 @@
     <Compile Include="Instrumentation\Core\Formatters\GenericFormatterTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Util\MessageFormatterTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text\LuceneNet\DocumentAdapterTestFixture.cs" />
+    <Compile Include="Text\LuceneNet\FieldAdapterTestFixture.cs" />
     <Compile Include="Text\LuceneNet\IndexWriterAdapterTestFixture.cs" />
     <Compile Include="Xml\XmlBuilderTestFixture.cs" />
   </ItemGroup>
