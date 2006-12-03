@@ -1,7 +1,6 @@
 using System;
 
 using Lucene.Net.Analysis;
-using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
@@ -99,20 +98,20 @@ namespace octalforty.Brushie.Text.LuceneNet
         /// </summary>
         /// <param name="document">Document to be added.</param>
         /// <param name="analyzer"></param>
-        public void AddDocument(Document document, Analyzer analyzer)
+        public void AddDocument(DocumentAdapter document, Analyzer analyzer)
         {
             CheckIsDisposed();
-            indexWriter.AddDocument(document, analyzer);
+            indexWriter.AddDocument(document.Document, analyzer);
         }
 
         /// <summary>
         /// Adds <paramref name="document"/> to the index.
         /// </summary>
         /// <param name="document">Document to be added.</param>
-        public void AddDocument(Document document)
+        public void AddDocument(DocumentAdapter document)
         {
             CheckIsDisposed();
-            indexWriter.AddDocument(document);
+            indexWriter.AddDocument(document.Document);
         }
         
         /// <summary>
