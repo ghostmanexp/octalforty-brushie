@@ -36,7 +36,7 @@ namespace octalforty.Brushie.UnitTests.Text.LuceneNet
                         Document document = new Document();
                         document.Add(Field.Text("text", textReader));
                         
-                        indexWriterAdapter.AddDocument(document);
+                        indexWriterAdapter.AddDocument(new DocumentAdapter(document));
                     } // using
                 } // foreach
                 
