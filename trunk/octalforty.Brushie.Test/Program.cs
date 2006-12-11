@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 using octalforty.Brushie.Instrumentation.Core;
 using octalforty.Brushie.Instrumentation.Core.Messages;
@@ -14,7 +12,7 @@ namespace octalforty.Brushie.Test
         {
             PerformanceCounter performanceCounter = PerformanceCounter.AutostartPerformanceCounter();
 
-            for(int i = 0; i < 100; ++i)
+            for(int i = 0; i < 10000; ++i)
                 InstrumentationManager.Instrument(new TextMessage(MessageSeverity.Debug, "asdf",
                     DateTime.Now, "Hi!"));
             
