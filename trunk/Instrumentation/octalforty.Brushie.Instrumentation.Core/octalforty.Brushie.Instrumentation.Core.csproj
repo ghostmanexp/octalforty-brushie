@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +52,7 @@
     <Compile Include="Formatters\FormatterBase.cs" />
     <Compile Include="Formatters\GenericFormatter.cs" />
     <Compile Include="FormattingManager.cs" />
+    <Compile Include="IBinder.cs" />
     <Compile Include="IFormatter.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="InstrumentationManager.cs" />
