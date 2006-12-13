@@ -29,8 +29,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Messages
         /// <param name="source">Message source.</param>
         /// <param name="time">Message time.</param>
         /// <param name="message">Message string.</param>
-        public TextMessage(MessageSeverity severity, string source, 
-            DateTime time, string message) : 
+        public TextMessage(MessageSeverity severity, string source, DateTime time, string message) : 
             base(severity, source, time)
         {
             this.message = message;
