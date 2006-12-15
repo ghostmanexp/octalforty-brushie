@@ -6,5 +6,12 @@ namespace octalforty.Brushie.Instrumentation.Core
     /// </summary>
     public interface IBinder
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="persister"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        bool CanBindTo(IPersister persister, IMessage message);
     }
 }
