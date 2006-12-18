@@ -159,6 +159,7 @@ namespace octalforty.Brushie.Xml
         /// Appends start tag with all attributes previously added with 
         /// <see cref="AddAttribute(string,string)"/> or <see cref="AddAttribute(string,string,string)"/>.
         /// </summary>
+        /// <param name="_namespace"></param>
         /// <param name="name">Tag name.</param>
         /// <exception cref="ArgumentNullException">
         /// When <paramref name="name"/> is a null reference.
@@ -240,7 +241,7 @@ namespace octalforty.Brushie.Xml
         /// <param name="_namespace"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        private string GetEffectiveName(string _namespace, string name)
+        private static string GetEffectiveName(string _namespace, string name)
         {
             return _namespace == null || _namespace == string.Empty ?
                 name : string.Format("{0}:{1}", _namespace, name);
