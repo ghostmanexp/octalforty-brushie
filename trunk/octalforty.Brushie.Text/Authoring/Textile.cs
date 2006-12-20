@@ -11,12 +11,12 @@ namespace octalforty.Brushie.Text.Authoring
         private static readonly Regex headersRegex =
             new Regex(@"(?<Header>^h(?<Level>\d)\.\s(?<Text>.*)$)", RegexOptions.Multiline);
         private static readonly Regex boldRegex =
-            new Regex(@"(?<Expression>(?<!\\)\*(?<InnerText>(.+?))(?<!\\)\*)", RegexOptions.Multiline);
+            new Regex(@"(?<Expression>(?<!\\)\*(?<InnerText>(.+?))(?<!\\)\*)", RegexOptions.Compiled);
         private static readonly Regex italicsRegex =
-            new Regex(@"(?<Expression>(?<!\\)_(?<InnerText>(.+?))(?<!\\)_)", RegexOptions.Multiline);
+            new Regex(@"(?<Expression>(?<!\\)_(?<InnerText>(.+?))(?<!\\)_)", RegexOptions.Compiled);
         private static Regex linkRegex =
             new Regex(@"(?<!\\)(?<Expression>\[((?<Alias>(.+?))\|)?(?<Uri>(.+?))(\|(?<Tip>(.+?)))?(?<!\\)\])",
-                RegexOptions.Multiline);
+                RegexOptions.Compiled);
         #endregion
 
         /// <summary>
@@ -127,8 +127,8 @@ namespace octalforty.Brushie.Text.Authoring
         /// <returns></returns>
         public static string AuthorTextBreaks(string content)
         {
-            content = content.Replace("\n\n", "<p />");
-            content = content.Replace("\n", "<br />");
+            content = content.Replace("\r\n\r\n", "<p />");
+            content = content.Replace("\r\n", "<br />");
 
             return content;
         }
