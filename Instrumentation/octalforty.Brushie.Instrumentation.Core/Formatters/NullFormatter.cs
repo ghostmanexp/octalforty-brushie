@@ -1,12 +1,19 @@
 ﻿using octalforty.Brushie.Instrumentation.Core.Formatters;
 
-namespace octalforty.Brushie.Instrumentation.Core.Internal
+namespace octalforty.Brushie.Instrumentation.Core.Formatters
 {
     /// <summary>
     /// Special case formatter.
     /// </summary>
-    internal class NullFormatter : FormatterBase
+    public class NullFormatter : FormatterBase
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="NullFormatter"/> class.
+        /// </summary>
+        public NullFormatter()
+        {
+        }
+
         #region FormatterBase Members
         /// <summary>
         /// Internal method, invoked from <see cref="FormatterBase.Format"/> implementation.<para />

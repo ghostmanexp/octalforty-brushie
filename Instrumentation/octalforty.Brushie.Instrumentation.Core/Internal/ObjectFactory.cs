@@ -15,7 +15,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Internal
         /// </summary>
         /// <param name="formatter"></param>
         /// <returns></returns>
-        public static IFormatter CreateFormatter(Formatter formatter)
+        public static IFormatter CreateFormatter(FormatterElement formatter)
         {
             Type formatterType = Type.GetType(formatter.Type);
             IFormatter formatterInstance = Activator.CreateInstance(formatterType)
@@ -29,7 +29,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Internal
         /// </summary>
         /// <param name="persister"></param>
         /// <returns></returns>
-        public static IPersister CreatePersister(Persister persister)
+        public static IPersister CreatePersister(PersisterElement persister)
         {
             Type persisterType = Type.GetType(persister.Type);
             IPersister persisterInstance = Activator.CreateInstance(persisterType)

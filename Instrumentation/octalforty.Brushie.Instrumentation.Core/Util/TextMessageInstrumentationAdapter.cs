@@ -44,22 +44,42 @@ namespace octalforty.Brushie.Instrumentation.Core.Util
             this.defaultSource = defaultSource;
         }
         
+        /// <summary>
+        /// Instruments <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message"></param>
         public void Instrument(string message)
         {
             Instrument(DefaultSeverity, message);
         }
         
+        /// <summary>
+        /// Instruments message <paramref name="messageFormat"/> formatted with <paramref name="args"/>.
+        /// </summary>
+        /// <param name="messageFormat"></param>
+        /// <param name="args"></param>
         public void InstrumentFormat(string messageFormat, params object[] args)
         {
             Instrument(string.Format(messageFormat, args));
         }
 
+        /// <summary>
+        /// Instruments <paramref name="message"/>.
+        /// </summary>
+        /// <param name="severity"></param>
+        /// <param name="message"></param>
         public void Instrument(MessageSeverity severity, string message)
         {
             InstrumentationManager.Instrument(new TextMessage(severity, DefaultSource, 
                 DateTime.Now, message));
         }
 
+        /// <summary>
+        /// Instruments message <paramref name="messageFormat"/> formatted with <paramref name="args"/>.
+        /// </summary>
+        /// <param name="severity"></param>
+        /// <param name="messageFormat"></param>
+        /// <param name="args"></param>
         public void InstrumentFormat(MessageSeverity severity, string messageFormat, 
             params object[] args)
         {

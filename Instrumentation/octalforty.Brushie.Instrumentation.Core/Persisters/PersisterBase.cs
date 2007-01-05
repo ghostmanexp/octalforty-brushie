@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Specialized;
 
 namespace octalforty.Brushie.Instrumentation.Core.Persisters
 {
@@ -19,7 +19,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Persisters
         /// Configures persister with information from <paramref name="properties"/> dictionary.
         /// </summary>
         /// <param name="properties">Properties of the persister.</param>
-        public virtual void Configure(IDictionary<string, string> properties)
+        public virtual void Configure(StringDictionary properties)
         {
         }
 

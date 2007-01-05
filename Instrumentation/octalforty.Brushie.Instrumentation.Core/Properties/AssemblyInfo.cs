@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -9,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("octalforty studios")]
 [assembly: AssemblyProduct("octalforty Brushie")]
-[assembly: AssemblyCopyright("Copyright © 2006 octalforty studios")]
+[assembly: AssemblyCopyright("Copyright © 2006-2007 octalforty studios")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -17,6 +18,8 @@ using System.Runtime.InteropServices;
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
+
+[assembly: InternalsVisibleTo("octalforty.Brushie.UnitTests")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("d664d728-6e17-463a-b7c0-b2cf76f5778b")]

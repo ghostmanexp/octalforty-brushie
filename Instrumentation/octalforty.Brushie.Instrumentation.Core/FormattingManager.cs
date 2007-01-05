@@ -1,5 +1,4 @@
-﻿using octalforty.Brushie.Instrumentation.Core.Configuration;
-using octalforty.Brushie.Instrumentation.Core.Internal;
+﻿using octalforty.Brushie.Instrumentation.Core.Formatters;
 
 namespace octalforty.Brushie.Instrumentation.Core
 {
@@ -31,15 +30,6 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         private FormattingManager()
         {
-            //
-            // Adding formatters.
-            if(ConfigurationSettings.Instance != null)
-            {
-                foreach(Formatter formatter in ConfigurationSettings.Instance.Formatters)
-                {
-                    InternalAddFormatter(ObjectFactory.CreateFormatter(formatter));
-                } // foreach
-            } // if
         }
         
         /// <summary>

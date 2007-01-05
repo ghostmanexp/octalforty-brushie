@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections.Specialized;
 
 using octalforty.Brushie.Instrumentation.Core.Exceptions;
 using octalforty.Brushie.Instrumentation.Core.Resources;
@@ -54,7 +54,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Persisters
         /// Configures persister with information from <paramref name="properties"/> dictionary.
         /// </summary>
         /// <param name="properties">Properties of the persister.</param>
-        public override void Configure(IDictionary<string, string> properties)
+        public override void Configure(StringDictionary properties)
         {
             base.Configure(properties);
 
