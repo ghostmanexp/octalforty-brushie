@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using octalforty.Brushie.Instrumentation.Core.Configuration;
+
 namespace octalforty.Brushie.Instrumentation.Core.Internal
 {
     internal class Binding
@@ -48,35 +50,70 @@ namespace octalforty.Brushie.Instrumentation.Core.Internal
 
         /// <summary>
         /// Initializes a new instance of <see cref="Binding"/> class
-        /// from an instance of <see cref="Configuration.Binding"/> class.
+        /// from an instance of <see cref="Configuration.BindingElement"/> class.
         /// </summary>
         /// <param name="binding"></param>
-        public Binding(Configuration.Binding binding)
+        public Binding(BindingElement binding)
         {
             persisterName = binding.PersisterName;
-            sources = binding.Sources;
+            sources = GetSources(binding.Source);
             
             InitializeSeverities(binding);
             InitializeMessages(binding);
         }
 
-        private void InitializeMessages(Configuration.Binding binding)
+        private void InitializeMessages(BindingElement binding)
         {
             List<Type> effectiveMessages = new List<Type>();
-            foreach(string message in binding.Messages)
-                effectiveMessages.Add(Type.GetType(message));
+            string[] _messages = GetMessages(binding.Message);
+            
+            foreach(string _message in _messages)
+                effectiveMessages.Add(Type.GetType(_message));
 
             messages = effectiveMessages.ToArray();
         }
 
-        private void InitializeSeverities(Configuration.Binding binding)
+        private void InitializeSeverities(BindingElement binding)
         {
             List<MessageSeverity> effectiveSeverities = new List<MessageSeverity>();
-            foreach(string severity in binding.Severities)
-                effectiveSeverities.Add((MessageSeverity)Enum.Parse(typeof(MessageSeverity), 
-                    severity, true));
+            string[] _severities = GetSeverities(binding.Severity);
+
+            foreach(string _severity in _severities)
+            {
+                if(_severity == "*")
+                    effectiveSeverities.Add(MessageSeverity.Sink);
+                else
+                    effectiveSeverities.Add((MessageSeverity)Enum.Parse(
+                        typeof(MessageSeverity), _severity, true));
+            } // else
             
             severities = effectiveSeverities.ToArray();
+        }
+
+        private string[] GetMessages(string message)
+        {
+            return SplitString(message);
+        }
+
+        private string[] GetSources(string source)
+        {
+            return SplitString(source);
+        }
+
+        private string[] GetSeverities(string severity)
+        {
+            return SplitString(severity);
+        }
+
+        private static string[] SplitString(string sourceString)
+        {
+            List<string> effectiveStrings = new List<string>();
+            string[] _strings = sourceString.Split(',');
+
+            foreach(string _string in _strings)
+                effectiveStrings.Add(_string);
+
+            return effectiveStrings.ToArray();
         }
     }
 }

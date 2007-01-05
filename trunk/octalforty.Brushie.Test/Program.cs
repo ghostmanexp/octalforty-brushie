@@ -8,9 +8,10 @@ namespace octalforty.Brushie.Test
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            PerformanceCounter performanceCounter = PerformanceCounter.AutostartPerformanceCounter();
+            PerformanceCounter performanceCounter = new PerformanceCounter();
+            performanceCounter.Start();
 
             for(int i = 0; i < 10000; ++i)
                 InstrumentationManager.Instrument(new TextMessage(MessageSeverity.Debug, "asdf",

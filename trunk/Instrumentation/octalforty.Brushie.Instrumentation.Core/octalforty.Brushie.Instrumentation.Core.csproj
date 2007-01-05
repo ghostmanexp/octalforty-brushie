@@ -36,28 +36,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Binding.cs" />
-    <Compile Include="Configuration\ConfigurationObject.cs" />
-    <Compile Include="Configuration\ConfigurationObjectWithNameAndType.cs" />
-    <Compile Include="Configuration\ConfigurationObjectWithType.cs" />
-    <Compile Include="Configuration\ConfigurationSectionHandler.cs" />
-    <Compile Include="Configuration\ConfigurationSettings.cs" />
-    <Compile Include="Configuration\Formatter.cs" />
-    <Compile Include="Configuration\Message.cs" />
-    <Compile Include="Configuration\Persister.cs" />
-    <Compile Include="Configuration\XmlNamespaceManager.cs" />
+    <Compile Include="Binders\BinderBase.cs" />
+    <Compile Include="Binders\MessageTypeBinder.cs" />
+    <Compile Include="Binders\SeverityBinder.cs" />
+    <Compile Include="Binders\SourceBinder.cs" />
+    <Compile Include="Configuration\BindingElement.cs" />
+    <Compile Include="Configuration\BindingElementCollection.cs" />
+    <Compile Include="Configuration\ConfigurationElementWithNameAndType.cs" />
+    <Compile Include="Configuration\ConfigurationElementWithType.cs" />
+    <Compile Include="Configuration\ConfigurationManager.cs" />
+    <Compile Include="Configuration\FormatterElement.cs" />
+    <Compile Include="Configuration\FormatterElementCollection.cs" />
+    <Compile Include="Configuration\MessageElement.cs" />
+    <Compile Include="Configuration\MessageElementCollection.cs" />
+    <Compile Include="Configuration\PersisterElement.cs" />
+    <Compile Include="Configuration\PersisterElementCollection.cs" />
     <Compile Include="Exceptions\ConfigurationException.cs" />
     <Compile Include="Exceptions\InstrumentationException.cs" />
     <Compile Include="Formatters\DateTimeFormatter.cs" />
     <Compile Include="Formatters\FormatterBase.cs" />
     <Compile Include="Formatters\GenericFormatter.cs" />
+    <Compile Include="Formatters\NullFormatter.cs" />
     <Compile Include="FormattingManager.cs" />
     <Compile Include="IBinder.cs" />
     <Compile Include="IFormatter.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="InstrumentationManager.cs" />
+    <Compile Include="Configuration\InstrumentationSection.cs" />
     <Compile Include="Internal\Binding.cs" />
-    <Compile Include="Internal\NullFormatter.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\PersisterResolver.cs" />
     <Compile Include="IPersister.cs" />
@@ -99,6 +105,12 @@
     <None Include="octalforty.Brushie.Instrumentation.xsx">
       <DependentUpon>octalforty.Brushie.Instrumentation.xsd</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\octalforty.Brushie.Configuration\octalforty.Brushie.Configuration.csproj">
+      <Project>{64CCF4C6-F4BF-4DED-A08A-DC544E671C12}</Project>
+      <Name>octalforty.Brushie.Configuration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

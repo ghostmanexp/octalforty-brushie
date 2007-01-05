@@ -7,11 +7,17 @@ namespace octalforty.Brushie.Instrumentation.Core
     public interface IBinder
     {
         /// <summary>
-        /// 
+        /// Gets or sets a reference to the next <see cref="IBinder"/> in the binding chain.
         /// </summary>
-        /// <param name="persister"></param>
+        IBinder NextBinder
+        { get; set; }
+
+        /// <summary>
+        /// Determines whether the <paramref name="message"/> can be bound to the
+        /// persister in question or not.
+        /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        bool CanBindTo(IPersister persister, IMessage message);
+        bool CanBind(IMessage message);
     }
 }

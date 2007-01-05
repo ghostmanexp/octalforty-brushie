@@ -5,7 +5,9 @@
         <!-- A single persister. Required attributes are type and name. -->
         <persister type="octalforty.Brushie.Instrumentation.Core.Persisters.ConsolePersister, octalforty.Brushie.Instrumentation.Core"
             name="consolePersister">
-            <property name="formatString" value="{Time:yyyy-MM-dd hh:mm:ss.fff} - {Severity:-20} - {Source:-30} - {Message}" />
+            <properties>
+                <property name="formatString" value="{Time:yyyy-MM-dd hh:mm:ss.fff} - {Severity:-20} - {Source:-30} - {Message}" />
+            </properties>
         </persister>        
     </persisters>
 
@@ -22,14 +24,10 @@
         <formatter type="octalforty.Brushie.Instrumentation.Core.Formatters.GenericFormatter, octalforty.Brushie.Instrumentation.Core" />        
     </formatters>
 
-    <!-- Binds persisters with messages. -->
+    <!-- Binds persisters to messages. -->
     <bindings>
         <!-- Binds all messages with arbitrary severity and arbitrary source to the 
              textMessageConsolePersister. -->
-        <binding persisterName="textMessageConsolePersister">
-            <severity>*</severity>
-            <source>*</source>
-            <message>*</message>
-        </binding>
+        <binding persisterName="textMessageConsolePersister" severity="*" source="*" message="*" />
     </bindings>
 </octalforty.brushie.instrumentation>
