@@ -8,29 +8,28 @@ namespace octalforty.Brushie.Instrumentation.Core.Binders
     public class MessageTypeBinder : BinderBase
     {
         #region Private Member Variables
-        private Type[] messageTypes;
+        private string[] messageTypeNames;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets or sets a reference to the array of <see cref="Type"/> objects
-        /// with types of messages.
+        /// Gets or sets a reference to the array of strings with names of types of messages.
         /// </summary>
-        public Type[] MessageTypes
+        public string[] MessageTypeNames
         {
-            get { return messageTypes; }
-            set { messageTypes = value; }
+            get { return messageTypeNames; }
+            set { messageTypeNames = value; }
         }
         #endregion
 
         /// <summary>
         /// Initializes a new instance of <see cref="MessageTypeBinder"/> class
-        /// with a given array of message types.
+        /// with a given array of message type names.
         /// </summary>
-        /// <param name="messageTypes"></param>
-        public MessageTypeBinder(Type[] messageTypes)
+        /// <param name="messageTypeNames"></param>
+        public MessageTypeBinder(string[] messageTypeNames)
         {
-            this.messageTypes = messageTypes;
+            this.messageTypeNames = messageTypeNames;
         }
 
         #region BinderBase Members
@@ -45,15 +44,20 @@ namespace octalforty.Brushie.Instrumentation.Core.Binders
         {
             //
             // Move on to the next binder on no message types.
-            if(MessageTypes == null || MessageTypes.GetLength(0) == 0)
+            if(MessageTypeNames == null || MessageTypeNames.GetLength(0) == 0)
                 return true;
             
             //
             // Check each type in turn.
             Type targetType = message.GetType();
-            foreach(Type messageType in MessageTypes)
+            foreach(string messageTypeName in MessageTypeNames)
             {
-                if(messageType == targetType)
+                //
+                // Checking for an asterisk
+                if(messageTypeName == "*")
+                    return true;
+                
+                if(Type.GetType(messageTypeName) == targetType)
                     return true;
             } // foreach
             

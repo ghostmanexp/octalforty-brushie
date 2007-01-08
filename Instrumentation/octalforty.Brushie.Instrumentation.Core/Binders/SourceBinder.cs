@@ -50,6 +50,11 @@
             // Now check each source individually.
             foreach(string source in Sources)
             {
+                //
+                // Check for an asterisk
+                if(source == "*")
+                    return true;
+                
                 if(source == message.Source)
                     return true;
             } // foreach

@@ -10,6 +10,18 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
     public sealed class MessageElementCollection :
         ConfigurationElementCollectionBase<MessageElement>
     {
+        #region Public Properties
+        /// <summary>
+        /// Gets a reference to the <see cref="MessageElement"/> with a given name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public new MessageElement this[string name]
+        {
+            get { return BaseGet(name) as MessageElement; }
+        }
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of <see cref="MessageElementCollection"/> class.
         /// </summary>

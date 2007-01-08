@@ -29,6 +29,7 @@ namespace octalforty.Brushie.Configuration
         /// </summary>
         protected ConfigurationElementCollectionBase()
         {
+            AddElementName = "add";
         }
         
         /// <summary>
