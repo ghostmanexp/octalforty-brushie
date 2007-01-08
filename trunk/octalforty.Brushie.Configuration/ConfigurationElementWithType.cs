@@ -30,5 +30,14 @@ namespace octalforty.Brushie.Configuration
         public ConfigurationElementWithType()
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="ConfigurationElementWithType"/> class
+        /// with the given type
+        /// </summary>
+        public ConfigurationElementWithType(string type)
+        {
+            Type = type;
+        }
     }
 }

@@ -32,5 +32,21 @@ namespace octalforty.Brushie.UnitTests.Instrumentation.Core.Binders
                 string.Empty, DateTime.Now, string.Empty)));
             Assert.IsFalse(binder.CanBind(new Message(MessageSeverity.CriticalError, string.Empty)));
         }
+        
+        [Test()]
+        public void CanBind()
+        {
+            IBinder binder = new MessageTypeBinder(null);
+
+            Assert.IsTrue(binder.CanBind(new TextMessage(MessageSeverity.Debug,
+                string.Empty, DateTime.Now, string.Empty)));
+            Assert.IsTrue(binder.CanBind(new Message()));
+
+            binder = new MessageTypeBinder(new string[] {} );
+
+            Assert.IsTrue(binder.CanBind(new TextMessage(MessageSeverity.Debug,
+                string.Empty, DateTime.Now, string.Empty)));
+            Assert.IsTrue(binder.CanBind(new Message()));
+        }
     }
 }
