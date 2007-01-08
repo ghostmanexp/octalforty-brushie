@@ -35,6 +35,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationElementCollectionBase.cs" />
+    <Compile Include="ConfigurationElementWithNameAndType.cs" />
+    <Compile Include="ConfigurationElementWithType.cs" />
+    <Compile Include="ConfigurationSectionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyElement.cs" />
     <Compile Include="PropertyElementCollection.cs" />

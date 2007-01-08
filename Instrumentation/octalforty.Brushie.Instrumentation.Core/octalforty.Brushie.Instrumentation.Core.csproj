@@ -42,8 +42,6 @@
     <Compile Include="Binders\SourceBinder.cs" />
     <Compile Include="Configuration\BindingElement.cs" />
     <Compile Include="Configuration\BindingElementCollection.cs" />
-    <Compile Include="Configuration\ConfigurationElementWithNameAndType.cs" />
-    <Compile Include="Configuration\ConfigurationElementWithType.cs" />
     <Compile Include="Configuration\ConfigurationManager.cs" />
     <Compile Include="Configuration\FormatterElement.cs" />
     <Compile Include="Configuration\FormatterElementCollection.cs" />

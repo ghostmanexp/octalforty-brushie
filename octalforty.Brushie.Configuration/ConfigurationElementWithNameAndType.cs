@@ -1,6 +1,6 @@
-using System.Configuration;
+﻿using System.Configuration;
 
-namespace octalforty.Brushie.Instrumentation.Core.Configuration
+namespace octalforty.Brushie.Configuration
 {
     /// <summary>
     /// Provides a base class for configuration elements with <see cref="Name"/> and
@@ -26,7 +26,7 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         public ConfigurationElementWithNameAndType()
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of <see cref="ConfigurationElementWithNameAndType"/> class with
         /// a given name and type.

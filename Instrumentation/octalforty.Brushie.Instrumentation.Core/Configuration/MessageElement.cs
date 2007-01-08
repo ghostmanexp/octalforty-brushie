@@ -1,4 +1,6 @@
-﻿namespace octalforty.Brushie.Instrumentation.Core.Configuration
+﻿using octalforty.Brushie.Configuration;
+
+namespace octalforty.Brushie.Instrumentation.Core.Configuration
 {
     /// <summary>
     /// Represents a configuration element for a message.
