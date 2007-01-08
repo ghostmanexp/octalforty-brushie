@@ -34,6 +34,24 @@ namespace octalforty.Brushie.Instrumentation.Core
             get { return instance; }
         }
         #endregion
+        
+        #region Private Properties
+        private IDictionary<string, IPersister> Persisters
+        {
+            get { return persisters; }
+        }
+
+        private IDictionary<string, IBinder> Binders
+        {
+            get { return binders; }
+        }
+
+        private bool IsInstrumentationEnabled
+        {
+            get { return isInstrumentationEnabled; }
+            set { isInstrumentationEnabled = value; }
+        }
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of <see cref="InstrumentationManager"/> class.
@@ -53,7 +71,7 @@ namespace octalforty.Brushie.Instrumentation.Core
                         ObjectFactory.CreatePersister(persister);
                     persisterInstance.Configure(persister.CustomProperties.ToStringDictionary());
                     
-                    persisters.Add(persister.Name, persisterInstance);
+                    Persisters.Add(persister.Name, persisterInstance);
                 } // foreach
                 
                 //
@@ -67,9 +85,9 @@ namespace octalforty.Brushie.Instrumentation.Core
                 //
                 // Creating binders.
                 foreach(BindingElement binding in ConfigurationManager.ConfigurationSection.Bindings)
-                    binders.Add(binding.PersisterName, CreateBinder(binding));
+                    Binders.Add(binding.PersisterName, CreateBinder(binding));
                 
-                isInstrumentationEnabled = true;
+                IsInstrumentationEnabled = true;
             } // if
         }
 
@@ -186,7 +204,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         {
             lock(syncRoot)
             {
-                if(!isInstrumentationEnabled)
+                if(!IsInstrumentationEnabled)
                     return;
                 
                 //
@@ -203,12 +221,12 @@ namespace octalforty.Brushie.Instrumentation.Core
                 // Persisting message.
                 foreach(string persisterName in persisterNames)
                 {
-                    if(!persisters.ContainsKey(persisterName))
+                    if(!Persisters.ContainsKey(persisterName))
                         throw new InstrumentationException(string.Format(
                             Strings.InstrumentationManager_InternalInstrument_NoPersistersWithGivenNameRegistered,
                             persisterName));
 
-                    IPersister persister = persisters[persisterName];
+                    IPersister persister = Persisters[persisterName];
                     persister.Persist(message);
                 } // foreach              
             } // lock
@@ -222,7 +240,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         private string[] ResolvePersisterNames(IMessage message)
         {
             List<string> resolvedPersisters = new List<string>();
-            foreach(KeyValuePair<string, IBinder> binder in binders)
+            foreach(KeyValuePair<string, IBinder> binder in Binders)
             {
                 if(binder.Value.CanBind(message))
                     resolvedPersisters.Add(binder.Key);

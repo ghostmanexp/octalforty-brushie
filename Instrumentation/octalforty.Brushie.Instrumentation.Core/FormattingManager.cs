@@ -25,6 +25,17 @@ namespace octalforty.Brushie.Instrumentation.Core
         }
         #endregion
 
+        #region Private Properties
+        /// <summary>
+        /// Gets or sets a reference to the root <see cref="IFormatter"/>.
+        /// </summary>
+        private IFormatter RootFormatter
+        {
+            get { return rootFormatter; }
+            set { rootFormatter = value; }
+        }
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of <see cref="FormattingManager"/> class.
         /// </summary>
@@ -67,7 +78,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// <param name="formatter">Formatter.</param>
         private void InternalAddFormatter(IFormatter formatter)
         {
-            InternalAddFormatterRecursive(rootFormatter, formatter);
+            InternalAddFormatterRecursive(RootFormatter, formatter);
         }
 
         /// <summary>
@@ -75,7 +86,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         private void InternalRemoveFormatters()
         {
-            rootFormatter = new NullFormatter();
+            RootFormatter = new NullFormatter();
         }
 
         /// <summary>
@@ -100,7 +111,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// <returns></returns>
         private string IternalFormat(object value, string formatString)
         {
-            return rootFormatter.Format(value, formatString);
+            return RootFormatter.Format(value, formatString);
         }
     }
 }
