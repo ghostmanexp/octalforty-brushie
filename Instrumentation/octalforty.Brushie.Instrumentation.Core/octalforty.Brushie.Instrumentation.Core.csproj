@@ -96,6 +96,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Core.cd" />
     <None Include="octalforty.Brushie.Instrumentation.xsd">
       <SubType>Designer</SubType>
     </None>

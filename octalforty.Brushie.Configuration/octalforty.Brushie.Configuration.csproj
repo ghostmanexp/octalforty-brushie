@@ -34,6 +34,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationElementBase.cs" />
     <Compile Include="ConfigurationElementCollectionBase.cs" />
     <Compile Include="ConfigurationElementWithNameAndType.cs" />
     <Compile Include="ConfigurationElementWithType.cs" />
