@@ -1,11 +1,13 @@
 ﻿using System.Configuration;
 
+using octalforty.Brushie.Configuration;
+
 namespace octalforty.Brushie.Instrumentation.Core.Configuration
 {
     /// <summary>
     /// <c>octalforty.brushie.instrumentation</c> configuration section.
     /// </summary>
-    public sealed class InstrumentationSection : ConfigurationSection
+    public sealed class InstrumentationSection : ConfigurationSectionBase
     {
         #region Public Properties
         /// <summary>
@@ -46,15 +48,6 @@ namespace octalforty.Brushie.Instrumentation.Core.Configuration
         public BindingElementCollection Bindings
         {
             get { return this["bindings"] as BindingElementCollection; }
-        }
-
-        /// <summary>
-        /// Gets a string with the XML namespace of the configuration section.
-        /// </summary>
-        [ConfigurationProperty("xmlns", IsRequired = true)]
-        public string XmlNamespace
-        {
-            get { return this["xmlns"] as string; }
         }
         #endregion
 
