@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using NUnit.Framework;
 
 using octalforty.Brushie.Instrumentation.Core;
 using octalforty.Brushie.Instrumentation.Core.Binders;
@@ -32,6 +34,22 @@ namespace octalforty.Brushie.UnitTests.Instrumentation.Core.Binders
             Assert.IsTrue(binder.CanBind(new Message(MessageSeverity.CriticalError, "Source 1")));
             Assert.IsFalse(binder.CanBind(new Message(MessageSeverity.CriticalError, null)));
             Assert.IsTrue(binder.CanBind(new Message(MessageSeverity.CriticalError, "Source 2")));
+        }
+
+        [Test()]
+        public void CanBind()
+        {
+            IBinder binder = new SourceBinder(null);
+
+            Assert.IsTrue(binder.CanBind(new TextMessage(MessageSeverity.Debug,
+                string.Empty, DateTime.Now, string.Empty)));
+            Assert.IsTrue(binder.CanBind(new Message()));
+
+            binder = new SourceBinder(new string[] {} );
+
+            Assert.IsTrue(binder.CanBind(new TextMessage(MessageSeverity.Debug,
+                string.Empty, DateTime.Now, string.Empty)));
+            Assert.IsTrue(binder.CanBind(new Message()));
         }
     }
 }
