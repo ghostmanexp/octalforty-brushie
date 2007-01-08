@@ -63,11 +63,10 @@
     <Compile Include="IMessage.cs" />
     <Compile Include="InstrumentationManager.cs" />
     <Compile Include="Configuration\InstrumentationSection.cs" />
-    <Compile Include="Internal\Binding.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
-    <Compile Include="Internal\PersisterResolver.cs" />
     <Compile Include="IPersister.cs" />
     <Compile Include="MessageSeverity.cs" />
+    <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\MessageBase.cs" />
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Persisters\ConsolePersister.cs" />

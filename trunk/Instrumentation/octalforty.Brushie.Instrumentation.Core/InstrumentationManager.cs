@@ -80,7 +80,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// <returns></returns>
         private IBinder CreateBinder(BindingElement binding)
         {
-            IBinder rootBinder = new MessageTypeBinder(GetMessageTypes(binding));
+            IBinder rootBinder = new MessageTypeBinder(GetMessageTypeNames(binding));
             
             IBinder sourceBinder = new SourceBinder(GetSources(binding));
             rootBinder.NextBinder = sourceBinder;
@@ -92,25 +92,33 @@ namespace octalforty.Brushie.Instrumentation.Core
         }
 
         /// <summary>
-        /// Gets an array of message types.
+        /// Gets an array of message type names.
         /// </summary>
         /// <param name="binding"></param>
         /// <returns></returns>
-        private Type[] GetMessageTypes(BindingElement binding)
+        private string[] GetMessageTypeNames(BindingElement binding)
         {
-            List<Type> effectiveTypes = new List<Type>();
-            string[] types = binding.Message.Split(',');
+            List<string> effectiveTypeNames = new List<string>();
+            string[] typeNames = binding.Message.Split(',');
 
-            foreach(string type in types)
+            foreach(string typeName in typeNames)
             {
-                string typeToAdd = type.Trim();
-                if(typeToAdd == string.Empty)
+                string typeNameToAdd = typeName.Trim();
+                if(typeNameToAdd == string.Empty)
                     continue;
+                
+                //
+                // We either add an asterisk or the assembly-qualified name of the 
+                // message type.
+                if(typeNameToAdd == "*")
+                    effectiveTypeNames.Add(typeNameToAdd);
+                else
+                    effectiveTypeNames.Add(ConfigurationManager.ConfigurationSection.Messages[typeNameToAdd].Type);
 
-                effectiveTypes.Add(Type.GetType(typeToAdd));
+                effectiveTypeNames.Add(typeNameToAdd);
             } // foreach
             
-            return effectiveTypes.ToArray();
+            return effectiveTypeNames.ToArray();
         }
 
         /// <summary>
@@ -184,7 +192,7 @@ namespace octalforty.Brushie.Instrumentation.Core
                 //
                 // Resolving persister names.
                 string[] persisterNames;
-                persisterNames = ResolverPersisterNames(message);
+                persisterNames = ResolvePersisterNames(message);
 
                 if(persisterNames == null || persisterNames.GetLength(0) == 0)
                     throw new InstrumentationException(string.Format(
@@ -211,7 +219,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private string[] ResolverPersisterNames(IMessage message)
+        private string[] ResolvePersisterNames(IMessage message)
         {
             List<string> resolvedPersisters = new List<string>();
             foreach(KeyValuePair<string, IBinder> binder in binders)
