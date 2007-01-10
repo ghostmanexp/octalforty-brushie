@@ -7,6 +7,13 @@ namespace octalforty.Brushie.Instrumentation.Core.Formatters
     /// </summary>
     public class DateTimeFormatter : FormatterBase
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="DateTimeFormatter"/> class.
+        /// </summary>
+        public DateTimeFormatter()
+        {
+        }
+
         #region FormatterBase Members
         /// <summary>
         /// Internal method, invoked from <see cref="FormatterBase.Format"/> implementation.<para />

@@ -6,6 +6,13 @@ namespace octalforty.Brushie.Instrumentation.Core.Formatters
     /// </summary>
     public class GenericFormatter : FormatterBase
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="GenericFormatter"/> class.
+        /// </summary>
+        public GenericFormatter()
+        {
+        }
+
         #region FormatterBase Members
         /// <summary>
         /// Internal method, invoked from <see cref="FormatterBase.Format"/> implementation.<para />
