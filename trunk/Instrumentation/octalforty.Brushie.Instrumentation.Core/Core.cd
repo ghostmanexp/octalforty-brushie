@@ -2,7 +2,7 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Font Name="Tahoma" Size="8.25" />
   <Class Name="octalforty.Brushie.Instrumentation.Core.Binders.BinderBase">
-    <Position X="21.75" Y="0.5" Width="2.75" />
+    <Position X="21.75" Y="13.5" Width="2.75" />
     <TypeIdentifier>
       <FileName>Binders\BinderBase.cs</FileName>
       <HashCode>AAAAAAAAAIAAAAAAAAAAgAAAAIAAAgAAAAAAAAAAAAA=</HashCode>
@@ -13,7 +13,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Binders.MessageTypeBinder">
-    <Position X="17.75" Y="3.25" Width="3.25" />
+    <Position X="17.75" Y="16.25" Width="3.25" />
     <TypeIdentifier>
       <FileName>Binders\MessageTypeBinder.cs</FileName>
       <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAggAAAAAAAAAAAA=</HashCode>
@@ -23,7 +23,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Binders.SeverityBinder">
-    <Position X="21.75" Y="3.25" Width="3" />
+    <Position X="21.75" Y="16.25" Width="3" />
     <TypeIdentifier>
       <FileName>Binders\SeverityBinder.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAIAAAACAAAAAAAgAAAAAAAAAAAAA=</HashCode>
@@ -33,7 +33,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Binders.SourceBinder">
-    <Position X="25.5" Y="3.25" Width="2.75" />
+    <Position X="25.5" Y="16.25" Width="2.75" />
     <TypeIdentifier>
       <FileName>Binders\SourceBinder.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAQAgAAAAAAAAAAAAA=</HashCode>
@@ -42,12 +42,15 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
   </Class>
-  <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.BindingElement" Collapsed="true">
-    <Position X="29.25" Y="0.5" Width="1.5" />
+  <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.BindingElement">
+    <Position X="1" Y="15" Width="5" />
     <TypeIdentifier>
       <FileName>Configuration\BindingElement.cs</FileName>
       <HashCode>gAAAAAAQAgAAAAAACAAAAAAAAAAAAAAAAAAgIEQAAAA=</HashCode>
     </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.BindingElementCollection">
     <Position X="5.75" Y="10.5" Width="3.75" />
@@ -57,14 +60,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.ConfigurationManager" Collapsed="true">
-    <Position X="31" Y="0.5" Width="1.5" />
+    <Position X="29.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Configuration\ConfigurationManager.cs</FileName>
       <HashCode>AAAECQAIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.FormatterElement">
-    <Position X="8.5" Y="16" Width="1.75" />
+    <Position X="14.5" Y="17.25" Width="1.75" />
     <TypeIdentifier>
       <FileName>Configuration\FormatterElement.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -78,14 +81,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.InstrumentationSection">
-    <Position X="19.5" Y="7.75" Width="3.25" />
+    <Position X="0.5" Y="20.75" Width="3.25" />
     <TypeIdentifier>
       <FileName>Configuration\InstrumentationSection.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIACEAAAQAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.MessageElement">
-    <Position X="0.75" Y="18.25" Width="2.75" />
+    <Position X="6.75" Y="19.75" Width="2.75" />
     <TypeIdentifier>
       <FileName>Configuration\MessageElement.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -99,7 +102,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Configuration.PersisterElement">
-    <Position X="4.25" Y="18.25" Width="3.5" />
+    <Position X="10.25" Y="19.75" Width="3.5" />
     <TypeIdentifier>
       <FileName>Configuration\PersisterElement.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -113,28 +116,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Exceptions.ConfigurationException">
-    <Position X="0.75" Y="22.75" Width="5.5" />
+    <Position X="5.75" Y="24.75" Width="5.5" />
     <TypeIdentifier>
       <FileName>Exceptions\ConfigurationException.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Exceptions.InstrumentationException">
-    <Position X="0.5" Y="20.5" Width="5.75" />
+    <Position X="5.5" Y="22.5" Width="5.75" />
     <TypeIdentifier>
       <FileName>Exceptions\InstrumentationException.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Formatters.DateTimeFormatter">
-    <Position X="12" Y="16.25" Width="3.5" />
+    <Position X="15" Y="7.25" Width="3.5" />
     <TypeIdentifier>
       <FileName>Formatters\DateTimeFormatter.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Formatters.FormatterBase">
-    <Position X="16.25" Y="13.5" Width="3.5" />
+    <Position X="19.25" Y="4.5" Width="3.5" />
     <TypeIdentifier>
       <FileName>Formatters\FormatterBase.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAEAAAAggAAAAAAAAAAAAAAA=</HashCode>
@@ -145,31 +148,31 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Formatters.GenericFormatter">
-    <Position X="16.25" Y="16.25" Width="3.5" />
+    <Position X="19.25" Y="7.25" Width="3.5" />
     <TypeIdentifier>
       <FileName>Formatters\GenericFormatter.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Formatters.NullFormatter">
-    <Position X="20.5" Y="16.25" Width="3.5" />
+    <Position X="23.5" Y="7.25" Width="3.5" />
     <TypeIdentifier>
       <FileName>Formatters\NullFormatter.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.FormattingManager" Collapsed="true">
-    <Position X="32.75" Y="0.5" Width="1.5" />
+    <Position X="31" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>FormattingManager.cs</FileName>
-      <HashCode>CAAAAAEAAAABAAAAICQAAQAAAAhAAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>CAAAAAEAAAABAAAAISQAAQAAAAhAAAAAQAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.InstrumentationManager" Collapsed="true">
-    <Position X="34.5" Y="0.5" Width="1.5" />
+    <Position X="32.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>InstrumentationManager.cs</FileName>
-      <HashCode>AAAAAAASAACAMAAQAAAIQAgACABIAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAASAACAMAAQiAAIQAgACABIAAAASAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Internal.ObjectFactory" Collapsed="true">
@@ -180,14 +183,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Messages.Message">
-    <Position X="9.75" Y="21.5" Width="3.25" />
+    <Position X="17.75" Y="21.5" Width="3.25" />
     <TypeIdentifier>
       <FileName>Messages\Message.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Messages.MessageBase">
-    <Position X="12.25" Y="18.5" Width="4.25" />
+    <Position X="20.25" Y="18.5" Width="4.25" />
     <TypeIdentifier>
       <FileName>Messages\MessageBase.cs</FileName>
       <HashCode>BAABAAAAAgAgAAIAAAAAAAAAAAAgAAAAAAAAAAQAAQA=</HashCode>
@@ -198,7 +201,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Messages.TextMessage">
-    <Position X="13.75" Y="21.5" Width="5" />
+    <Position X="21.75" Y="21.5" Width="5" />
     <TypeIdentifier>
       <FileName>Messages\TextMessage.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACA=</HashCode>
@@ -264,7 +267,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Resources.Strings" Collapsed="true">
-    <Position X="29.25" Y="2.5" Width="1.5" />
+    <Position X="31" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAABEAAAAQAAAAAgAAAAAAAgAIA=</HashCode>
     </TypeIdentifier>
@@ -284,25 +287,25 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Util.PerformanceCounter" Collapsed="true">
-    <Position X="34.5" Y="1.5" Width="1.5" />
+    <Position X="29.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Util\PerformanceCounter.cs</FileName>
       <HashCode>AAAAAAAAACAAAAAAAAAgAAAAIAAAAAAAAAAQAAAAAAg=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Instrumentation.Core.Util.TextMessageInstrumentationAdapter" Collapsed="true">
-    <Position X="31" Y="2.5" Width="1.5" />
+    <Position X="32.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Util\TextMessageInstrumentationAdapter.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAEAAAABBAAAAEQAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Configuration.ConfigurationElementWithType">
-    <Position X="4.25" Y="13.5" Width="2.75" />
+    <Position X="10.25" Y="15" Width="2.75" />
     <TypeIdentifier />
   </Class>
   <Class Name="octalforty.Brushie.Configuration.ConfigurationElementWithNameAndType">
-    <Position X="2.25" Y="16" Width="4" />
+    <Position X="8.25" Y="17.25" Width="4" />
     <TypeIdentifier />
   </Class>
   <Class Name="octalforty.Brushie.Configuration.ConfigurationElementCollectionBase&lt;TConfigurationElement&gt;">
@@ -310,7 +313,11 @@
     <TypeIdentifier />
   </Class>
   <Class Name="octalforty.Brushie.Configuration.ConfigurationSectionBase">
-    <Position X="20" Y="5.5" Width="2.25" />
+    <Position X="1" Y="18.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.ConfigurationElementBase" Collapsed="true">
+    <Position X="7.75" Y="13.5" Width="2" />
     <TypeIdentifier />
   </Class>
   <Interface Name="octalforty.Brushie.Instrumentation.Core.IBinder" Collapsed="true">
@@ -335,14 +342,14 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="octalforty.Brushie.Instrumentation.Core.IPersister" Collapsed="true">
-    <Position X="34.5" Y="3.75" Width="1.5" />
+    <Position X="29.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>IPersister.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAABAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Enum Name="octalforty.Brushie.Instrumentation.Core.MessageSeverity" Collapsed="true">
-    <Position X="29.25" Y="4.75" Width="1.5" />
+    <Position X="29.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>MessageSeverity.cs</FileName>
       <HashCode>AAAAEAAAAAAAAYACAAAAABAAAAAAAAAAAABAAAAACBA=</HashCode>

@@ -6,7 +6,7 @@ namespace octalforty.Brushie.Configuration
     /// Provides a base class for configuration elements with 
     /// <see cref="Type"/> property.
     /// </summary>
-    public class ConfigurationElementWithType : ConfigurationElement
+    public class ConfigurationElementWithType : ConfigurationElementBase
     {
         #region Private Constants
         private const string TypePropertyName = "type";

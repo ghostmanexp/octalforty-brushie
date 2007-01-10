@@ -1,11 +1,13 @@
 ﻿using System.Configuration;
 
+using octalforty.Brushie.Configuration;
+
 namespace octalforty.Brushie.Instrumentation.Core.Configuration
 {
     /// <summary>
     /// Represents a configuration element for a binging.
     /// </summary>
-    public sealed class BindingElement : ConfigurationElement
+    public sealed class BindingElement : ConfigurationElementBase
     {
         #region Private Constants
         private const string PersisterNamePropertyName = "persisterName";
