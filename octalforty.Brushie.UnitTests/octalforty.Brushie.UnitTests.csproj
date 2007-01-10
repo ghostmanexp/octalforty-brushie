@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diff\DifferenceTestFixture.cs" />
+    <Compile Include="Diff\DiffEngineTestFixture.cs" />
+    <Compile Include="Diff\RangeTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Binders\MessageTypeBinderTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Binders\SeverityBinderTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Binders\SourceBinderTestFixture.cs" />
@@ -67,6 +70,10 @@
     <ProjectReference Include="..\octalforty.Brushie.Configuration\octalforty.Brushie.Configuration.csproj">
       <Project>{64CCF4C6-F4BF-4DED-A08A-DC544E671C12}</Project>
       <Name>octalforty.Brushie.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\octalforty.Brushie.Diff\octalforty.Brushie.Diff.csproj">
+      <Project>{2A09FED0-EC79-444E-A955-A4F70FD440D4}</Project>
+      <Name>octalforty.Brushie.Diff</Name>
     </ProjectReference>
     <ProjectReference Include="..\octalforty.Brushie.Text\octalforty.Brushie.Text.csproj">
       <Project>{6D115D49-63E6-40D6-833D-A2CD399395FE}</Project>
