@@ -8,7 +8,7 @@ namespace octalforty.Brushie.Diff
     public interface IDataProvider<T>
     {
         /// <summary>
-        /// Gets an instance of <typeparam name="T"/> with the given <paramref name="index"/>.
+        /// Gets a value with the given <paramref name="index"/>.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>

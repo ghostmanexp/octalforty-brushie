@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace octalforty.Brushie.Diff
 {
     /// <summary>
-    /// Compares two collections, returning a list of the additions, changes, and
+    /// Compares two collections, returning a list of the additions and
     /// deletions between them.
     /// </summary>
     public sealed class DiffEngine<T>
