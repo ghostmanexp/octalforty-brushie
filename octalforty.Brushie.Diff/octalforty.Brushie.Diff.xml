@@ -16,7 +16,7 @@
         </member>
         <member name="T:octalforty.Brushie.Diff.DiffEngine`1">
             <summary>
-            Compares two collections, returning a list of the additions, changes, and
+            Compares two collections, returning a list of the additions and
             deletions between them.
             </summary>
         </member>
@@ -364,7 +364,7 @@
         </member>
         <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Item(System.Int32)">
             <summary>
-            Gets an instance of <typeparam name="T"/> with the given <paramref name="index"/>.
+            Gets a value with the given <paramref name="index"/>.
             </summary>
             <param name="index"></param>
             <returns></returns>
@@ -390,7 +390,7 @@
         </member>
         <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Item(System.Int32)">
             <summary>
-            Gets an instance of <typeparam name="T"/> with the given <paramref name="index"/>.
+            Gets a value with the given <paramref name="index"/>.
             </summary>
             <param name="index"></param>
             <returns></returns>
