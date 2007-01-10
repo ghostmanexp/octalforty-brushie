@@ -43,6 +43,7 @@
         }
         #endregion
 
+        #region Overridables
         /// <summary>
         /// Internal method, invoked from implementation of <see cref="CanBind"/>.<para />
         /// Determines whether the <paramref name="message"/> can be bound to the
@@ -51,5 +52,6 @@
         /// <param name="message"></param>
         /// <returns></returns>
         protected abstract bool InternalCanBind(IMessage message);
+        #endregion
     }
 }

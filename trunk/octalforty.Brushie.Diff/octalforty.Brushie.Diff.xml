@@ -1,0 +1,404 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>octalforty.Brushie.Diff</name>
+    </assembly>
+    <members>
+        <member name="T:octalforty.Brushie.Diff.DifferenceCollection">
+            <summary>
+            Represents a collection of <see cref="T:octalforty.Brushie.Diff.Difference"/> objects.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DifferenceCollection.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.DifferenceCollection"/> class.
+            </summary>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.DiffEngine`1">
+            <summary>
+            Compares two collections, returning a list of the additions, changes, and
+            deletions between them.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.#ctor(`0[],`0[])">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> class
+            with two arrays to compare.
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.#ctor(`0[],`0[],System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> class
+            with two arrays to compare and an instance of <see cref="T:System.Collections.IComparer"/>.
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+            <param name="comparer"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.#ctor(octalforty.Brushie.Diff.IDataProvider{`0},octalforty.Brushie.Diff.IDataProvider{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> class
+            with two data providers.
+            </summary>
+            <param name="sourceDataProvider"></param>
+            <param name="targetDataProvider"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.#ctor(octalforty.Brushie.Diff.IDataProvider{`0},octalforty.Brushie.Diff.IDataProvider{`0},System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> class
+            with two data providers and a reference to the comparer.
+            </summary>
+            <param name="sourceDataProvider"></param>
+            <param name="targetDataProvider"></param>
+            <param name="comparer"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.GetDifferences">
+            <summary>
+            Runs the diff and returns a collection of <see cref="T:octalforty.Brushie.Diff.Difference"/> objects
+            which describe the differences.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.InternalGetDifferences">
+            <summary>
+            Runs the diff.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.CommitPendingDifferences">
+            <summary>
+            Commits pending difference objects.
+            </summary>
+            <remarks>
+            Note that addition difference is committed first, followed by an
+            deletion difference.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.TraverseSequences">
+            <summary>
+            Traverses the sequences, seeking the longest common subsequences, invoking the methods 
+            <code>finishedA</code>, <code>finishedB</code>, <code>onANotB</code>, and 
+            <code>onBNotA</code>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.BeginDifferencing(System.Int32@)">
+            <summary>
+            Begins the differencing process.
+            </summary>
+            <param name="targetIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.CompleteDifferencing(System.Int32,System.Int32)">
+            <summary>
+            Completes the differencing process.
+            </summary>
+            <param name="sourceIndex"></param>
+            <param name="targetIndex"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.GetLongestCommonSubsequences">
+            <summary>
+            Returns an array of the longest common subsequences.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.IsNonzero(System.Nullable{System.Int32})">
+            <summary>
+            Returns a value which indicates whether <paramref name="value"/> is not zero 
+            (including if it is not null).
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.IsGreaterThan(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Returns a value which indicates whether the value in the <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.thresholds"/>
+            dictionary with the key <paramref name="thresholdsKey"/> is greater than the 
+            given <paramref name="value"/>.
+            </summary>
+            <param name="thresholdsKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.IsLessThan(System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Returns a value which indicates whether the value in the <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.thresholds"/>
+            dictionary with the key <paramref name="thresholdsKey"/> is greater than the 
+            given <paramref name="value"/>.
+            </summary>
+            <param name="thresholdsKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.GetLastThresholdValue">
+            <summary>
+            Returns the value for the greatest key in the <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.thresholds"/> dictionary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.Insert(System.Nullable{System.Int32},System.Int32)">
+            <summary>
+            Inserts <paramref name="value"/> keyed with <paramref name="key"/> into the 
+            <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.thresholds"/> dictionary.
+            </summary>
+            <param name="value"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.Append(System.Int32)">
+            <summary>
+            Adds the given <paramref name="value"/> to the end of the <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.thresholds"/> map, 
+            that is, with the greatest index/key.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.AreEqual(`0,`0)">
+            <summary>
+            Compares the two objects, using the comparer provided, if any.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.ToArray(System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            Converts <paramref name="dictionary"/> to array.
+            </summary>
+            <param name="dictionary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.GetHighestKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Gets the largest key in the <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.thresholds"/> dictionary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.SourceNotInTarget(System.Int32,System.Int32)">
+            <summary>
+            Invoked for elements in <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.sourceDataProvider"/> and not in 
+            <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.targetDataProvider"/>.
+            </summary>
+            <param name="sourceIndex"></param>
+            <param name="targetIndex"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.InTargetNotInSource(System.Int32,System.Int32)">
+            <summary>
+            Invoked for elements in <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.targetDataProvider"/> and not in 
+            <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.sourceDataProvider"/>.
+            </summary>
+            <param name="sourceIndex"></param>
+            <param name="targetIndex"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.Match(System.Int32,System.Int32)">
+            <summary>
+            Invoked for elements matching in <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.sourceDataProvider"/> and 
+            <see cref="F:octalforty.Brushie.Diff.DiffEngine`1.targetDataProvider"/>.
+            </summary>
+            <param name="sourceIndex"></param>
+            <param name="targetIndex"></param>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.Difference">
+            <summary>
+            Defines a single difference returned by the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.#ctor(octalforty.Brushie.Diff.DifferenceType,octalforty.Brushie.Diff.Range{System.Int64},octalforty.Brushie.Diff.Range{System.Int64})">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> class with
+            the given type and addition and deletion ranges.
+            </summary>
+            <param name="type"></param>
+            <param name="addition"></param>
+            <param name="deletion"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CheckType(octalforty.Brushie.Diff.DifferenceType)">
+            <summary>
+            Ensures that <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is equal to <paramref name="requiredType"/>.
+            </summary>
+            <param name="requiredType"></param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(octalforty.Brushie.Diff.Range{System.Int64})">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
+            deletion for the <paramref name="range"/>.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(System.Int64,System.Int64)">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
+            deletion for the range from <paramref name="start"/> to <paramref name="end"/>.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(octalforty.Brushie.Diff.Range{System.Int64})">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
+            addition for the <paramref name="range"/>.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(System.Int64,System.Int64)">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
+            addition for the range from <paramref name="start"/> to <paramref name="end"/>.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the 
+            current object.
+            </summary>
+            <param name="obj"></param>
+            <returns>
+            <see langword="true"/> if the specified object is equal to the current Object; 
+            otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            <see cref="M:octalforty.Brushie.Diff.Difference.GetHashCode"/> is suitable for use in hashing algorithms and data structures 
+            like a hash table.
+            </summary>
+            <returns>A hash code for the current object.</returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.Difference.Type">
+            <summary>
+            Gets the <see cref="T:octalforty.Brushie.Diff.DifferenceType"/> which defines the
+            type of the current object.
+            </summary>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.Difference.Addition">
+            <summary>
+            Gets the <see cref="T:octalforty.Brushie.Diff.Range`1"/>, which defines the addition range for
+            the current difference.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Addition</c>.
+            </exception>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.Difference.Deletion">
+            <summary>
+            Gets the <see cref="T:octalforty.Brushie.Diff.Range`1"/>, which defines the deletion range for
+            the current difference.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Deletion</c>.
+            </exception>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.DifferenceType">
+            <summary>
+            Defines the type of the <see cref="T:octalforty.Brushie.Diff.Difference"/>.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.DifferenceType.Unknown">
+            <summary>
+            Type is unknown.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.DifferenceType.Addition">
+            <summary>
+            Addition.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.DifferenceType.Deletion">
+            <summary>
+            Deletion.
+            </summary>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.Range`1">
+            <summary>
+            Defines a simple range between two points, <see cref="P:octalforty.Brushie.Diff.Range`1.Start"/> and <see cref="P:octalforty.Brushie.Diff.Range`1.End"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Range`1.#ctor(`0,`0)">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.Range`1"/> structure with the
+            given starting and end ending points.
+            </summary>
+            <param name="start">Starting point.</param>
+            <param name="end">Ending point.</param>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Range`1.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the 
+            current object.
+            </summary>
+            <param name="obj"></param>
+            <returns>
+            <see langword="true"/> if the specified object is equal to the current Object; 
+            otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Range`1.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            <see cref="M:octalforty.Brushie.Diff.Range`1.GetHashCode"/> is suitable for use in hashing algorithms and data structures 
+            like a hash table.
+            </summary>
+            <returns>A hash code for the current object.</returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.Range`1.Start">
+            <summary>
+            Gets the starting point of the range.
+            </summary>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.Range`1.End">
+            <summary>
+            Gets the ending point of the range.
+            </summary>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.IDataProvider`1">
+            <summary>
+            Defines the contract used by <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> to retrieve data
+            to be compared.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Item(System.Int32)">
+            <summary>
+            Gets an instance of <typeparam name="T"/> with the given <paramref name="index"/>.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Count">
+            <summary>
+            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
+            </summary>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.ArrayDataProvider`1">
+            <summary>
+            Represents a data provider which wraps standard array for consumption by
+            the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.ArrayDataProvider`1.#ctor(`0[])">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.ArrayDataProvider`1"/>
+            with a reference to the given array to wrap.
+            </summary>
+            <param name="wrappedArray"></param>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Item(System.Int32)">
+            <summary>
+            Gets an instance of <typeparam name="T"/> with the given <paramref name="index"/>.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Count">
+            <summary>
+            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
+            </summary>
+        </member>
+    </members>
+</doc>
