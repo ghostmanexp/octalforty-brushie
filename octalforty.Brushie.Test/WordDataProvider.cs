@@ -57,7 +57,7 @@ namespace octalforty.Brushie.Test
         /// <returns></returns>
         public string this[int index]
         {
-            get { return words[index]; }
+            get { return matches[index].Value; }
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace octalforty.Brushie.Test
         /// </summary>
         public int Count
         {
-            get { return/* matches.Count*/ words.GetLength(0); }
+            get { return matches.Count; }
         }
         #endregion
     }
