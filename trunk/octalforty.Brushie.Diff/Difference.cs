@@ -86,6 +86,22 @@ namespace octalforty.Brushie.Diff
                 copy = value;
             }
         }
+
+        /// <summary>
+        /// Gets a reference to the <see cref="Range{T}"/> valid at the current point.
+        /// </summary>
+        public Range<int> Range
+        {
+            get
+            {
+                if(Type == DifferenceType.Addition)
+                    return Addition;
+                else if(Type == DifferenceType.Copy)
+                    return Copy;
+                else
+                    return Deletion;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -211,6 +227,9 @@ namespace octalforty.Brushie.Diff
             if(Type == DifferenceType.Deletion)
                 return Equals(Deletion, difference.Deletion);
 
+            if(Type == DifferenceType.Copy)
+                return Equals(Copy, difference.Copy);
+
             return false;
         }
 
@@ -225,12 +244,26 @@ namespace octalforty.Brushie.Diff
             int result = Type.GetHashCode();
 
             if(Type == DifferenceType.Addition)
-                result = 29 * result + addition.GetHashCode();
+                result = 29 * result + Addition.GetHashCode();
             
             if(Type == DifferenceType.Deletion)
-                result = 29 * result + deletion.GetHashCode();
+                result = 29 * result + Deletion.GetHashCode();
+
+            if(Type == DifferenceType.Copy)
+                result = 29 * result + Copy.GetHashCode();
 
             return result;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format("{0}: [{1},{2}]", Type, Range.Start, Range.End);
         }
         #endregion
     }

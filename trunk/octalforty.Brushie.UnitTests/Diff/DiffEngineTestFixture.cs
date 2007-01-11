@@ -21,10 +21,14 @@ namespace octalforty.Brushie.UnitTests.Diff
             Difference[] expectedDifferences = 
                 new Difference[] { 
                     Difference.CreateDeletion(0, 0),
+                    Difference.CreateCopy(1, 2),
                     Difference.CreateAddition(2, 2),
+                    Difference.CreateCopy(3, 3),
                     Difference.CreateAddition(4, 4),
                     Difference.CreateDeletion(4, 4),
+                    Difference.CreateCopy(5, 5),
                     Difference.CreateAddition(6, 6),
+                    Difference.CreateCopy(6, 7),
                     Difference.CreateAddition(9, 11),
                     Difference.CreateDeletion(8, 9) };
 
@@ -56,6 +60,7 @@ namespace octalforty.Brushie.UnitTests.Diff
             Difference[] expectedDifferences =
                 new Difference[] {
                     Difference.CreateDeletion(0, 1),
+                    Difference.CreateCopy(2, 3),
                     Difference.CreateDeletion(4, 6) };
 
             AssertDifferences(diffEngine, expectedDifferences);
@@ -71,7 +76,9 @@ namespace octalforty.Brushie.UnitTests.Diff
 
             Difference[] expectedDifferences =
                 new Difference[] {
+                    Difference.CreateCopy(0, 0),
                     Difference.CreateAddition(1, 2),
+                    Difference.CreateCopy(1, 2),
                     Difference.CreateAddition(5, 5),
                     Difference.CreateDeletion(3, 3) };
 
@@ -102,7 +109,9 @@ namespace octalforty.Brushie.UnitTests.Diff
 
             Difference[] expectedDifferences =
                 new Difference[] {
+                    Difference.CreateCopy(0, 1),
                     Difference.CreateAddition(2, 6),
+                    Difference.CreateCopy(2, 9),
                     Difference.CreateAddition(15, 15),
                     Difference.CreateDeletion(10, 10) };
 
@@ -122,7 +131,9 @@ namespace octalforty.Brushie.UnitTests.Diff
 
             Difference[] expectedDifferences =
                 new Difference[] {
+                    Difference.CreateCopy(0, 7),
                     Difference.CreateDeletion(8, 10),
+                    Difference.CreateCopy(11, 17),
                     Difference.CreateDeletion(18, 27) };
 
             AssertDifferences(diffEngine, expectedDifferences);
@@ -154,7 +165,9 @@ namespace octalforty.Brushie.UnitTests.Diff
 
             Difference[] expectedDifferences =
                 new Difference[] {
+                    Difference.CreateCopy(0, 2),
                     Difference.CreateAddition(3, 10), 
+                    Difference.CreateCopy(3, 87),
                     Difference.CreateAddition(96, 96) };
 
             AssertDifferences(diffEngine, expectedDifferences);
@@ -171,6 +184,7 @@ namespace octalforty.Brushie.UnitTests.Diff
             Difference[] expectedDifferences =
                 new Difference[] {
                     Difference.CreateAddition(0, 1),
+                    Difference.CreateCopy(0, 4),
                     Difference.CreateDeletion(5, 7) };
 
             AssertDifferences(diffEngine, expectedDifferences);
@@ -187,9 +201,11 @@ namespace octalforty.Brushie.UnitTests.Diff
                     //0    1       2    3     4      5      6           7  8   9   10 11   12  13   14      15        16         17   18   19       20 21     22   
 
             Difference[] expectedDifferences = 
-                new Difference[] {  
+                new Difference[] {
+                    Difference.CreateCopy(0, 2),
                     Difference.CreateAddition(3, 3),
                     Difference.CreateDeletion(3, 3),
+                    Difference.CreateCopy(4, 14),
                     Difference.CreateAddition(15, 19),
                     Difference.CreateDeletion(15, 15) };
 

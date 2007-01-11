@@ -307,6 +307,14 @@
             </summary>
             <returns>A hash code for the current object.</returns>
         </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
+            </returns>
+        </member>
         <member name="P:octalforty.Brushie.Diff.Difference.Type">
             <summary>
             Gets the <see cref="T:octalforty.Brushie.Diff.DifferenceType"/> which defines the
@@ -315,7 +323,7 @@
         </member>
         <member name="P:octalforty.Brushie.Diff.Difference.Addition">
             <summary>
-            Gets the <see cref="T:octalforty.Brushie.Diff.Range`1"/>, which defines the addition range for
+            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the addition range for
             the current difference.
             </summary>
             <exception cref="T:System.InvalidOperationException">
@@ -324,7 +332,7 @@
         </member>
         <member name="P:octalforty.Brushie.Diff.Difference.Deletion">
             <summary>
-            Gets the <see cref="T:octalforty.Brushie.Diff.Range`1"/>, which defines the deletion range for
+            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the deletion range for
             the current difference.
             </summary>
             <exception cref="T:System.InvalidOperationException">
@@ -333,12 +341,17 @@
         </member>
         <member name="P:octalforty.Brushie.Diff.Difference.Copy">
             <summary>
-            Gets the <see cref="T:octalforty.Brushie.Diff.Range`1"/>, which defines the copy range for
+            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the copy range for
             the current difference.
             </summary>
             <exception cref="T:System.InvalidOperationException">
             When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Copy</c>.
             </exception>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.Difference.Range">
+            <summary>
+            Gets a reference to the <see cref="!:Range&lt;T&gt;"/> valid at the current point.
+            </summary>
         </member>
         <member name="T:octalforty.Brushie.Diff.ArrayDataProvider`1">
             <summary>
