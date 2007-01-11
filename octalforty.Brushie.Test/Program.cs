@@ -33,8 +33,8 @@ namespace octalforty.Brushie.Test
 
         static void Main()
         {
-            string source = "Hi! The metrics for obfuscation are more-or-well understood. " +
-                "Do you have a game plan to become cross-media? Think interactive. True. Really.";
+            string source = "The metrics for obfuscation are more-or-well understood. " +
+                "Do you have a game plan to become cross-media? Think interactive. True. Really. ";
             string target = "The metrics for clarity are more-well understood. " +
                 "Do you have a game plan to become peerlessly synergetic across all platforms? " +
                 "Think interactive. Really. Astonishing.";
@@ -52,37 +52,46 @@ namespace octalforty.Brushie.Test
                 switch(difference.Type)
                 {
                     case DifferenceType.Deletion:
-                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Range<int> deletionRange = GetRange(difference, sourceDataProvider);
+                        Console.ForegroundColor = ConsoleColor.Red;
 
                         Console.Write("-");
-                        
-                        for(int deletion = difference.Deletion.Start; deletion <= difference.Deletion.End;
-                            ++deletion)
-                            Console.Write(sourceDataProvider[deletion]);
-
+                        Console.Write(source.Substring(deletionRange.Start, 
+                            deletionRange.End  - deletionRange.Start));
                         Console.Write("-");
                         break;
                     case DifferenceType.Addition:
+                        Range<int> additionRange = GetRange(difference, targetDataProvider);
                         Console.ForegroundColor = ConsoleColor.Green;
                         
                         Console.Write("+");
-                        
-                        for(int addition = difference.Addition.Start; addition <= difference.Addition.End;
-                            ++addition)
-                            Console.Write(targetDataProvider[addition]);
+                        Console.Write(target.Substring(additionRange.Start,
+                            additionRange.End - additionRange.Start));
                         Console.Write("+");
                         break;
                     case DifferenceType.Copy:
+                        Range<int> copyRange = GetRange(difference, sourceDataProvider);
                         Console.ForegroundColor = ConsoleColor.White;
 
-                        for(int copy = difference.Copy.Start; copy <= difference.Copy.End;
-                            ++copy)
-                            Console.Write(sourceDataProvider[copy]);
+                        Console.Write(source.Substring(copyRange.Start,
+                            copyRange.End - copyRange.Start));
                         break;
                 } // swich
             } // foreach
 
             Console.WriteLine();
+        }
+
+        private static Range<int> GetRange(Difference difference, WordDataProvider dataProvider)
+        {
+            int start = dataProvider.Matches[difference.Range.Start].Index;
+            int end = 0;
+
+            for(int match = difference.Range.Start; match <= difference.Range.End; ++match)
+                end = Math.Max(end, 
+                    dataProvider.Matches[match].Index + dataProvider.Matches[match].Length);
+
+            return new Range<int>(start, end);
         }
 
         private static Range<int>[] GetChangeRanges(string source, 
