@@ -445,5 +445,40 @@
             Gets the ending point of the range.
             </summary>
         </member>
+        <member name="T:octalforty.Brushie.Diff.WordDataProvider">
+            <summary>
+            Allows <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> to work on a word-by-word basis.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.WordDataProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.WordDataProvider"/> with
+            a given source string.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Matches">
+            <summary>
+            Gets a reference to the collection of <see cref="T:System.Text.RegularExpressions.Match"/> objects
+            for the current provider.
+            </summary>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Words">
+            <summary>
+            Gets a reference to an array of strings with words from the source text.
+            </summary>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Item(System.Int32)">
+            <summary>
+            Gets an value with the given <paramref name="index"/>.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Count">
+            <summary>
+            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
+            </summary>
+        </member>
     </members>
 </doc>
