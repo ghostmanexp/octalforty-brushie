@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Diff;
 
-namespace octalforty.Brushie.Test
+namespace octalforty.Brushie.Diff
 {
     /// <summary>
     /// Allows <see cref="DiffEngine{T}"/> to work on a word-by-word basis.

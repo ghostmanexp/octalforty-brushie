@@ -35,7 +35,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WordDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Instrumentation\octalforty.Brushie.Instrumentation.Core\octalforty.Brushie.Instrumentation.Core.csproj">
