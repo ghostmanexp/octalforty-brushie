@@ -9,8 +9,9 @@ namespace octalforty.Brushie.Diff
     {
         #region Private Member Variables
         private DifferenceType type;
-        private Range<long> addition;
-        private Range<long> deletion;
+        private Range<int> addition;
+        private Range<int> deletion;
+        private Range<int> copy;
         #endregion
 
         #region Public Properties
@@ -30,7 +31,7 @@ namespace octalforty.Brushie.Diff
         /// <exception cref="InvalidOperationException">
         /// When <see cref="Type"/> is not equal to <c>DifferenceType.Addition</c>.
         /// </exception>
-        public Range<long> Addition
+        public Range<int> Addition
         {
             get
             {
@@ -51,7 +52,7 @@ namespace octalforty.Brushie.Diff
         /// <exception cref="InvalidOperationException">
         /// When <see cref="Type"/> is not equal to <c>DifferenceType.Deletion</c>.
         /// </exception>
-        public Range<long> Deletion
+        public Range<int> Deletion
         {
             get
             {
@@ -64,6 +65,27 @@ namespace octalforty.Brushie.Diff
                 deletion = value;
             }
         }
+
+        /// <summary>
+        /// Gets the <see cref="Range{T}"/>, which defines the copy range for
+        /// the current difference.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// When <see cref="Type"/> is not equal to <c>DifferenceType.Copy</c>.
+        /// </exception>
+        public Range<int> Copy
+        {
+            get
+            {
+                CheckType(DifferenceType.Copy);
+                return copy;
+            }
+            set
+            {
+                CheckType(DifferenceType.Copy);
+                copy = value;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -73,11 +95,14 @@ namespace octalforty.Brushie.Diff
         /// <param name="type"></param>
         /// <param name="addition"></param>
         /// <param name="deletion"></param>
-        private Difference(DifferenceType type, Range<long> addition, Range<long> deletion)
+        /// <param name="copy"></param>
+        private Difference(DifferenceType type, Range<int> addition, Range<int> deletion, 
+            Range<int> copy)
         {
             this.type = type;
             this.addition = addition;
             this.deletion = deletion;
+            this.copy = copy;
         }
 
         /// <summary>
@@ -96,9 +121,9 @@ namespace octalforty.Brushie.Diff
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public static Difference CreateDeletion(Range<long> range)
+        public static Difference CreateDeletion(Range<int> range)
         {
-            return new Difference(DifferenceType.Deletion, new Range<long>(), range);
+            return new Difference(DifferenceType.Deletion, new Range<int>(), range, new Range<int>());
         }
 
         /// <summary>
@@ -108,9 +133,9 @@ namespace octalforty.Brushie.Diff
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Difference CreateDeletion(long start, long end)
+        public static Difference CreateDeletion(int start, int end)
         {
-            return CreateDeletion(new Range<long>(start, end));
+            return CreateDeletion(new Range<int>(start, end));
         }
 
         /// <summary>
@@ -119,9 +144,9 @@ namespace octalforty.Brushie.Diff
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public static Difference CreateAddition(Range<long> range)
+        public static Difference CreateAddition(Range<int> range)
         {
-            return new Difference(DifferenceType.Addition, range, new Range<long>());
+            return new Difference(DifferenceType.Addition, range, new Range<int>(), new Range<int>());
         }
 
         /// <summary>
@@ -131,9 +156,32 @@ namespace octalforty.Brushie.Diff
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Difference CreateAddition(long start, long end)
+        public static Difference CreateAddition(int start, int end)
         {
-            return CreateAddition(new Range<long>(start, end));
+            return CreateAddition(new Range<int>(start, end));
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// copy for the <paramref name="range"/>.
+        /// </summary>
+        /// <param name="range"></param>
+        /// <returns></returns>
+        public static Difference CreateCopy(Range<int> range)
+        {
+            return new Difference(DifferenceType.Copy, new Range<int>(), new Range<int>(), range);
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// copy for the range from <paramref name="start"/> to <paramref name="end"/>.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static Difference CreateCopy(int start, int end)
+        {
+            return CreateCopy(new Range<int>(start, end));
         }
 
         #region Object Members

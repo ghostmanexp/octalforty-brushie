@@ -45,11 +45,15 @@ namespace octalforty.Brushie.Instrumentation.Core
         {
             get { return binders; }
         }
+        #endregion
 
-        private bool IsInstrumentationEnabled
+        #region Public Properties
+        /// <summary>
+        /// Gets a value which indicates whether instrumentation is enabled or not.
+        /// </summary>
+        public bool IsInstrumentationEnabled
         {
             get { return isInstrumentationEnabled; }
-            set { isInstrumentationEnabled = value; }
         }
         #endregion
 
@@ -87,7 +91,7 @@ namespace octalforty.Brushie.Instrumentation.Core
                 foreach(BindingElement binding in ConfigurationManager.ConfigurationSection.Bindings)
                     Binders.Add(binding.PersisterName, CreateBinder(binding));
                 
-                IsInstrumentationEnabled = true;
+                isInstrumentationEnabled = true;
             } // if
         }
 
@@ -114,7 +118,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         /// <param name="binding"></param>
         /// <returns></returns>
-        private string[] GetMessageTypeNames(BindingElement binding)
+        private static string[] GetMessageTypeNames(BindingElement binding)
         {
             List<string> effectiveTypeNames = new List<string>();
             string[] typeNames = binding.Message.Split(',');
@@ -144,7 +148,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         /// <param name="binding"></param>
         /// <returns></returns>
-        private string[] GetSources(BindingElement binding)
+        private static string[] GetSources(BindingElement binding)
         {
             List<string> effectiveSources = new List<string>();
             string[] sources = binding.Source.Split(',');
@@ -166,7 +170,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         /// <param name="binding"></param>
         /// <returns></returns>
-        private MessageSeverity[] GetSeverities(BindingElement binding)
+        private static MessageSeverity[] GetSeverities(BindingElement binding)
         {
             List<MessageSeverity> effectiveSeverities = new List<MessageSeverity>();
             string[] severities = binding.Severity.Split(',');

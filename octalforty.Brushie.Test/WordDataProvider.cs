@@ -10,11 +10,13 @@ namespace octalforty.Brushie.Test
     public class WordDataProvider : IDataProvider<string>
     {
         #region Private Constants
-        private static readonly Regex wordRegex = new Regex(@"\b\w+?\b", RegexOptions.Multiline);
+        private static readonly Regex wordRegex = new Regex(@"(?<=(^|\s))\S+?(?=($|\s))", 
+            RegexOptions.Multiline);
         #endregion
 
         #region Private Member Variables
         private MatchCollection matches;
+        private string[] words;
         #endregion
 
         #region Public Properties
@@ -26,6 +28,14 @@ namespace octalforty.Brushie.Test
         {
             get { return matches; }
         }
+
+        /// <summary>
+        /// Gets a reference to an array of strings with words from the source text.
+        /// </summary>
+        public string[] Words
+        {
+            get { return words; }
+        }
         #endregion
 
         /// <summary>
@@ -36,6 +46,7 @@ namespace octalforty.Brushie.Test
         public WordDataProvider(string source)
         {
             matches = wordRegex.Matches(source);
+            words = source.Split(' ');
         }
 
         #region IDataProvider<string> Members
@@ -46,7 +57,7 @@ namespace octalforty.Brushie.Test
         /// <returns></returns>
         public string this[int index]
         {
-            get { return matches[index].Value; }
+            get { return words[index]; }
         }
 
         /// <summary>
@@ -54,7 +65,7 @@ namespace octalforty.Brushie.Test
         /// </summary>
         public int Count
         {
-            get { return matches.Count; }
+            get { return/* matches.Count*/ words.GetLength(0); }
         }
         #endregion
     }

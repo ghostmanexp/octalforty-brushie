@@ -11,13 +11,18 @@ namespace octalforty.Brushie.Diff
         Unknown = 0,
 
         /// <summary>
+        /// Simple copy content.
+        /// </summary>
+        Copy = 1,
+
+        /// <summary>
         /// Addition.
         /// </summary>
-        Addition = 1,
+        Addition = 2,
 
         /// <summary>
         /// Deletion.
         /// </summary>
-        Deletion = 2
+        Deletion = 3
     }
 }

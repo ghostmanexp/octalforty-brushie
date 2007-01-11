@@ -198,12 +198,31 @@
             <param name="sourceIndex"></param>
             <param name="targetIndex"></param>
         </member>
+        <member name="T:octalforty.Brushie.Diff.IDataProvider`1">
+            <summary>
+            Defines the contract used by <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> to retrieve data
+            to be compared.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Item(System.Int32)">
+            <summary>
+            Gets a value with the given <paramref name="index"/>.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Count">
+            <summary>
+            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
+            </summary>
+        </member>
         <member name="T:octalforty.Brushie.Diff.Difference">
             <summary>
             Defines a single difference returned by the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
             </summary>
         </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.#ctor(octalforty.Brushie.Diff.DifferenceType,octalforty.Brushie.Diff.Range{System.Int64},octalforty.Brushie.Diff.Range{System.Int64})">
+        <member name="M:octalforty.Brushie.Diff.Difference.#ctor(octalforty.Brushie.Diff.DifferenceType,octalforty.Brushie.Diff.Range{System.Int32},octalforty.Brushie.Diff.Range{System.Int32},octalforty.Brushie.Diff.Range{System.Int32})">
             <summary>
             Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> class with
             the given type and addition and deletion ranges.
@@ -211,6 +230,7 @@
             <param name="type"></param>
             <param name="addition"></param>
             <param name="deletion"></param>
+            <param name="copy"></param>
         </member>
         <member name="M:octalforty.Brushie.Diff.Difference.CheckType(octalforty.Brushie.Diff.DifferenceType)">
             <summary>
@@ -218,7 +238,7 @@
             </summary>
             <param name="requiredType"></param>
         </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(octalforty.Brushie.Diff.Range{System.Int64})">
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(octalforty.Brushie.Diff.Range{System.Int32})">
             <summary>
             Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
             deletion for the <paramref name="range"/>.
@@ -226,7 +246,7 @@
             <param name="range"></param>
             <returns></returns>
         </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(System.Int64,System.Int64)">
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(System.Int32,System.Int32)">
             <summary>
             Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
             deletion for the range from <paramref name="start"/> to <paramref name="end"/>.
@@ -235,7 +255,7 @@
             <param name="end"></param>
             <returns></returns>
         </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(octalforty.Brushie.Diff.Range{System.Int64})">
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(octalforty.Brushie.Diff.Range{System.Int32})">
             <summary>
             Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
             addition for the <paramref name="range"/>.
@@ -243,10 +263,27 @@
             <param name="range"></param>
             <returns></returns>
         </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(System.Int64,System.Int64)">
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(System.Int32,System.Int32)">
             <summary>
             Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
             addition for the range from <paramref name="start"/> to <paramref name="end"/>.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateCopy(octalforty.Brushie.Diff.Range{System.Int32})">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
+            copy for the <paramref name="range"/>.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.Difference.CreateCopy(System.Int32,System.Int32)">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
+            copy for the range from <paramref name="start"/> to <paramref name="end"/>.
             </summary>
             <param name="start"></param>
             <param name="end"></param>
@@ -294,6 +331,41 @@
             When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Deletion</c>.
             </exception>
         </member>
+        <member name="P:octalforty.Brushie.Diff.Difference.Copy">
+            <summary>
+            Gets the <see cref="T:octalforty.Brushie.Diff.Range`1"/>, which defines the copy range for
+            the current difference.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Copy</c>.
+            </exception>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.ArrayDataProvider`1">
+            <summary>
+            Represents a data provider which wraps standard array for consumption by
+            the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.ArrayDataProvider`1.#ctor(`0[])">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.ArrayDataProvider`1"/>
+            with a reference to the given array to wrap.
+            </summary>
+            <param name="wrappedArray"></param>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Item(System.Int32)">
+            <summary>
+            Gets a value with the given <paramref name="index"/>.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Count">
+            <summary>
+            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
+            </summary>
+        </member>
         <member name="T:octalforty.Brushie.Diff.DifferenceType">
             <summary>
             Defines the type of the <see cref="T:octalforty.Brushie.Diff.Difference"/>.
@@ -302,6 +374,11 @@
         <member name="F:octalforty.Brushie.Diff.DifferenceType.Unknown">
             <summary>
             Type is unknown.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.DifferenceType.Copy">
+            <summary>
+            Simple copy content.
             </summary>
         </member>
         <member name="F:octalforty.Brushie.Diff.DifferenceType.Addition">
@@ -353,51 +430,6 @@
         <member name="P:octalforty.Brushie.Diff.Range`1.End">
             <summary>
             Gets the ending point of the range.
-            </summary>
-        </member>
-        <member name="T:octalforty.Brushie.Diff.IDataProvider`1">
-            <summary>
-            Defines the contract used by <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> to retrieve data
-            to be compared.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Item(System.Int32)">
-            <summary>
-            Gets a value with the given <paramref name="index"/>.
-            </summary>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.IDataProvider`1.Count">
-            <summary>
-            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
-            </summary>
-        </member>
-        <member name="T:octalforty.Brushie.Diff.ArrayDataProvider`1">
-            <summary>
-            Represents a data provider which wraps standard array for consumption by
-            the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.ArrayDataProvider`1.#ctor(`0[])">
-            <summary>
-            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.ArrayDataProvider`1"/>
-            with a reference to the given array to wrap.
-            </summary>
-            <param name="wrappedArray"></param>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Item(System.Int32)">
-            <summary>
-            Gets a value with the given <paramref name="index"/>.
-            </summary>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.ArrayDataProvider`1.Count">
-            <summary>
-            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
             </summary>
         </member>
     </members>
