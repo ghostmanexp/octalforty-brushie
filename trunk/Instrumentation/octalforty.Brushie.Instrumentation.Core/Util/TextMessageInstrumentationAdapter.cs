@@ -60,7 +60,8 @@ namespace octalforty.Brushie.Instrumentation.Core.Util
         /// <param name="args"></param>
         public void InstrumentFormat(string messageFormat, params object[] args)
         {
-            Instrument(string.Format(messageFormat, args));
+            if(InstrumentationManager.Instance.IsInstrumentationEnabled)
+                Instrument(string.Format(messageFormat, args));
         }
 
         /// <summary>
@@ -83,7 +84,8 @@ namespace octalforty.Brushie.Instrumentation.Core.Util
         public void InstrumentFormat(MessageSeverity severity, string messageFormat, 
             params object[] args)
         {
-            Instrument(severity, string.Format(messageFormat, args));
+            if(InstrumentationManager.Instance.IsInstrumentationEnabled)
+                Instrument(severity, string.Format(messageFormat, args));
         }
     }
 }

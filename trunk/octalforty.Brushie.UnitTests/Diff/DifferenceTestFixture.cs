@@ -15,51 +15,51 @@ namespace octalforty.Brushie.UnitTests.Diff
         [Test()]
         public void CreateAddition()
         {
-            Difference difference = Difference.CreateAddition(new Range<long>(10, 15));
+            Difference difference = Difference.CreateAddition(new Range<int>(10, 15));
 
             Assert.AreEqual(DifferenceType.Addition, difference.Type);
-            Assert.AreEqual(new Range<long>(10, 15), difference.Addition);
+            Assert.AreEqual(new Range<int>(10, 15), difference.Addition);
         }
 
         [Test()]
         public void CreateDeletion()
         {
-            Difference difference = Difference.CreateDeletion(new Range<long>(10, 15));
+            Difference difference = Difference.CreateDeletion(new Range<int>(10, 15));
 
             Assert.AreEqual(DifferenceType.Deletion, difference.Type);
-            Assert.AreEqual(new Range<long>(10, 15), difference.Deletion);
+            Assert.AreEqual(new Range<int>(10, 15), difference.Deletion);
         }
 
         [Test()]
         [ExpectedException(typeof(InvalidOperationException))]
         public void AdditionDifferenceDoesNotAllowGetDeletionProperty()
         {
-            Difference difference = Difference.CreateAddition(new Range<long>(10, 15));
-            Range<long> range = difference.Deletion;
+            Difference difference = Difference.CreateAddition(new Range<int>(10, 15));
+            Range<int> range = difference.Deletion;
         }
 
         [Test()]
         [ExpectedException(typeof(InvalidOperationException))]
         public void DeletionDifferenceDoesNotAllowGetAdditionProperty()
         {
-            Difference difference = Difference.CreateDeletion(new Range<long>(10, 15));
-            Range<long> range = difference.Addition;
+            Difference difference = Difference.CreateDeletion(new Range<int>(10, 15));
+            Range<int> range = difference.Addition;
         }
 
         [Test()]
         [ExpectedException(typeof(InvalidOperationException))]
         public void AdditionDifferenceDoesNotAllowSetDeletionProperty()
         {
-            Difference difference = Difference.CreateAddition(new Range<long>(10, 15));
-            difference.Deletion = new Range<long>();
+            Difference difference = Difference.CreateAddition(new Range<int>(10, 15));
+            difference.Deletion = new Range<int>();
         }
 
         [Test()]
         [ExpectedException(typeof(InvalidOperationException))]
         public void DeletionDifferenceDoesNotAllowSetAdditionProperty()
         {
-            Difference difference = Difference.CreateDeletion(new Range<long>(10, 15));
-            difference.Addition = new Range<long>();
+            Difference difference = Difference.CreateDeletion(new Range<int>(10, 15));
+            difference.Addition = new Range<int>();
         }
 
         [Test()]

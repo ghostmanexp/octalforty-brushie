@@ -15,6 +15,7 @@ namespace octalforty.Brushie.Diff
         private IDataProvider<T> targetDataProvider;
         private Dictionary<int, int?> thresholds;
         private IComparer<T> comparer;
+        private Difference pendingCopyDifference;
         private Difference pendingAdditionDifference;
         private Difference pendingDeletionDifference;
         private DifferenceCollection differences = new DifferenceCollection();
@@ -68,6 +69,7 @@ namespace octalforty.Brushie.Diff
         {
             this.sourceDataProvider = sourceDataProvider;
             this.targetDataProvider = targetDataProvider;
+
             this.comparer = comparer;
         }
 
@@ -180,7 +182,7 @@ namespace octalforty.Brushie.Diff
                 {
                     while(sourceIndex <= lastSource)
                         SourceNotInTarget(sourceIndex++, targetIndex);
-                }
+                } // if
 
                 if(sourceIndex <= lastSource)
                     SourceNotInTarget(sourceIndex++, targetIndex);
@@ -476,17 +478,28 @@ namespace octalforty.Brushie.Diff
         /// <param name="targetIndex"></param>
         private void SourceNotInTarget(int sourceIndex, int targetIndex)
         {
+            CommitMatch();
+
             if(pendingDeletionDifference == null)
             {
                 pendingDeletionDifference =
-                    Difference.CreateDeletion(new Range<long>(sourceIndex, sourceIndex));
+                    Difference.CreateDeletion(new Range<int>(sourceIndex, sourceIndex));
             } // if
             else
             {
                 pendingDeletionDifference.Deletion =
-                    new Range<long>(Math.Min(pendingDeletionDifference.Deletion.Start, sourceIndex),
+                    new Range<int>(Math.Min(pendingDeletionDifference.Deletion.Start, sourceIndex),
                         Math.Max(pendingDeletionDifference.Deletion.Start, sourceIndex));
             } // else
+        }
+
+        private void CommitMatch()
+        {
+            if(pendingCopyDifference != null)
+            {
+                differences.Add(pendingCopyDifference);
+                pendingCopyDifference = null;
+            } // if
         }
 
         /// <summary>
@@ -497,15 +510,17 @@ namespace octalforty.Brushie.Diff
         /// <param name="targetIndex"></param>
         private void InTargetNotInSource(int sourceIndex, int targetIndex)
         {
+            CommitMatch();
+
             if(pendingAdditionDifference == null)
             {
-                pendingAdditionDifference = 
-                    Difference.CreateAddition(new Range<long>(targetIndex, targetIndex));
+                pendingAdditionDifference =
+                    Difference.CreateAddition(new Range<int>(targetIndex, targetIndex));
             } // if
             else
             {
                 pendingAdditionDifference.Addition =
-                    new Range<long>(Math.Min(pendingAdditionDifference.Addition.Start, targetIndex),
+                    new Range<int>(Math.Min(pendingAdditionDifference.Addition.Start, targetIndex),
                         Math.Max(pendingAdditionDifference.Addition.Start, targetIndex));
             } // else
         }
@@ -519,6 +534,17 @@ namespace octalforty.Brushie.Diff
         /// <param name="targetIndex"></param>
         private void Match(int sourceIndex, int targetIndex)
         {
+            if(pendingCopyDifference == null)
+            {
+                pendingCopyDifference = Difference.CreateCopy(sourceIndex, sourceIndex);
+            } // if
+            else
+            {
+                pendingCopyDifference.Copy =
+                    new Range<int>(Math.Min(pendingCopyDifference.Copy.Start, sourceIndex),
+                        Math.Max(pendingCopyDifference.Copy.Start, sourceIndex));
+            } // else
+
             CommitPendingDifferences();
         }
     }
