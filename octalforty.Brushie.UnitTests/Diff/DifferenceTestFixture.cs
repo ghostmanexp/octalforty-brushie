@@ -97,10 +97,42 @@ namespace octalforty.Brushie.UnitTests.Diff
 
         [Test()]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void DeletionDifferenceDoesNotAllowSetCopyroperty()
+        public void DeletionDifferenceDoesNotAllowSetCopyProperty()
         {
             Difference difference = Difference.CreateDeletion(new Range<int>(10, 15));
             difference.Copy = new Range<int>();
+        }
+
+        [Test()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CopyDifferenceDoesNotAllowSetAdditionProperty()
+        {
+            Difference difference = Difference.CreateCopy(new Range<int>(10, 15));
+            difference.Addition = new Range<int>();
+        }
+
+        [Test()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CopyDifferenceDoesNotAllowSetDeletionProperty()
+        {
+            Difference difference = Difference.CreateCopy(new Range<int>(10, 15));
+            difference.Deletion = new Range<int>();
+        }
+
+        [Test()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CopyDifferenceDoesNotAllowGetAdditionProperty()
+        {
+            Difference difference = Difference.CreateCopy(new Range<int>(10, 15));
+            Range<int> range = difference.Addition;
+        }
+
+        [Test()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CopyDifferenceDoesNotAllowGetDeletionProperty()
+        {
+            Difference difference = Difference.CreateCopy(new Range<int>(10, 15));
+            Range<int> range = difference.Deletion;
         }
 
         [Test()]
