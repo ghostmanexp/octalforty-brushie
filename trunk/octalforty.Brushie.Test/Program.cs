@@ -20,13 +20,13 @@ namespace octalforty.Brushie.Test
             DiffEngine<string> diffEngine = new DiffEngine<string>(
                 sourceDataProvider, targetDataProvider);
 
-            DifferenceCollection differences = diffEngine.GetDifferences();
+            PatchOperationCollection differences = diffEngine.GetPatchOperations();
 
-            foreach(Difference difference in differences)
+            foreach(PatchOperation difference in differences)
             {
                 switch(difference.Type)
                 {
-                    case DifferenceType.Deletion:
+                    case PatchOperationType.Deletion:
                         Range<int> deletionRange = GetRange(difference, sourceDataProvider);
                         Console.ForegroundColor = ConsoleColor.Red;
 
@@ -35,7 +35,7 @@ namespace octalforty.Brushie.Test
                             deletionRange.End  - deletionRange.Start));
                         Console.Write("-");
                         break;
-                    case DifferenceType.Addition:
+                    case PatchOperationType.Addition:
                         Range<int> additionRange = GetRange(difference, targetDataProvider);
                         Console.ForegroundColor = ConsoleColor.Green;
                         
@@ -44,7 +44,7 @@ namespace octalforty.Brushie.Test
                             additionRange.End - additionRange.Start));
                         Console.Write("+");
                         break;
-                    case DifferenceType.Copy:
+                    case PatchOperationType.Copy:
                         Range<int> copyRange = GetRange(difference, sourceDataProvider);
                         Console.ForegroundColor = ConsoleColor.White;
 
@@ -57,7 +57,7 @@ namespace octalforty.Brushie.Test
             Console.WriteLine();
         }
 
-        private static Range<int> GetRange(Difference difference, WordDataProvider dataProvider)
+        private static Range<int> GetRange(PatchOperation difference, WordDataProvider dataProvider)
         {
             int start = dataProvider.Matches[difference.Range.Start].Index;
             int end = 0;

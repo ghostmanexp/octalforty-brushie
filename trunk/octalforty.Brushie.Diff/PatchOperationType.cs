@@ -1,9 +1,9 @@
 namespace octalforty.Brushie.Diff
 {
     /// <summary>
-    /// Defines the type of the <see cref="Difference"/>.
+    /// Defines the type of the <see cref="PatchOperation"/>.
     /// </summary>
-    public enum DifferenceType
+    public enum PatchOperationType
     {
         /// <summary>
         /// Type is unknown.

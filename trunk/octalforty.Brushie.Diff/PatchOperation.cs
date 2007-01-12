@@ -3,12 +3,12 @@ using System;
 namespace octalforty.Brushie.Diff
 {
     /// <summary>
-    /// Defines a single difference returned by the <see cref="DiffEngine{T}"/>.
+    /// Defines a single patch operation returned by the <see cref="DiffEngine{T}"/>.
     /// </summary>
-    public class Difference
+    public class PatchOperation
     {
         #region Private Member Variables
-        private DifferenceType type;
+        private PatchOperationType type;
         private Range<int> addition;
         private Range<int> deletion;
         private Range<int> copy;
@@ -16,10 +16,10 @@ namespace octalforty.Brushie.Diff
 
         #region Public Properties
         /// <summary>
-        /// Gets the <see cref="DifferenceType"/> which defines the
+        /// Gets the <see cref="PatchOperationType"/> which defines the
         /// type of the current object.
         /// </summary>
-        public DifferenceType Type
+        public PatchOperationType Type
         {
             get { return type; }
         }
@@ -29,18 +29,18 @@ namespace octalforty.Brushie.Diff
         /// the current difference.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// When <see cref="Type"/> is not equal to <c>DifferenceType.Addition</c>.
+        /// When <see cref="Type"/> is not equal to <c>PatchOperationType.Addition</c>.
         /// </exception>
         public Range<int> Addition
         {
             get
             {
-                CheckType(DifferenceType.Addition);
+                CheckType(PatchOperationType.Addition);
                 return addition;
             }
             set
             {
-                CheckType(DifferenceType.Addition);
+                CheckType(PatchOperationType.Addition);
                 addition = value;
             }
         }
@@ -50,18 +50,18 @@ namespace octalforty.Brushie.Diff
         /// the current difference.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// When <see cref="Type"/> is not equal to <c>DifferenceType.Deletion</c>.
+        /// When <see cref="Type"/> is not equal to <c>PatchOperationType.Deletion</c>.
         /// </exception>
         public Range<int> Deletion
         {
             get
             {
-                CheckType(DifferenceType.Deletion);
+                CheckType(PatchOperationType.Deletion);
                 return deletion;
             }
             set
             {
-                CheckType(DifferenceType.Deletion);
+                CheckType(PatchOperationType.Deletion);
                 deletion = value;
             }
         }
@@ -71,18 +71,18 @@ namespace octalforty.Brushie.Diff
         /// the current difference.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// When <see cref="Type"/> is not equal to <c>DifferenceType.Copy</c>.
+        /// When <see cref="Type"/> is not equal to <c>PatchOperationType.Copy</c>.
         /// </exception>
         public Range<int> Copy
         {
             get
             {
-                CheckType(DifferenceType.Copy);
+                CheckType(PatchOperationType.Copy);
                 return copy;
             }
             set
             {
-                CheckType(DifferenceType.Copy);
+                CheckType(PatchOperationType.Copy);
                 copy = value;
             }
         }
@@ -94,9 +94,9 @@ namespace octalforty.Brushie.Diff
         {
             get
             {
-                if(Type == DifferenceType.Addition)
+                if(Type == PatchOperationType.Addition)
                     return Addition;
-                else if(Type == DifferenceType.Copy)
+                else if(Type == PatchOperationType.Copy)
                     return Copy;
                 else
                     return Deletion;
@@ -105,14 +105,14 @@ namespace octalforty.Brushie.Diff
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Difference"/> class with
+        /// Initializes a new instance of <see cref="PatchOperation"/> class with
         /// the given type and addition and deletion ranges.
         /// </summary>
         /// <param name="type"></param>
         /// <param name="addition"></param>
         /// <param name="deletion"></param>
         /// <param name="copy"></param>
-        private Difference(DifferenceType type, Range<int> addition, Range<int> deletion, 
+        private PatchOperation(PatchOperationType type, Range<int> addition, Range<int> deletion, 
             Range<int> copy)
         {
             this.type = type;
@@ -125,77 +125,77 @@ namespace octalforty.Brushie.Diff
         /// Ensures that <see cref="Type"/> is equal to <paramref name="requiredType"/>.
         /// </summary>
         /// <param name="requiredType"></param>
-        private void CheckType(DifferenceType requiredType)
+        private void CheckType(PatchOperationType requiredType)
         {
             if(Type != requiredType)
                 throw new InvalidOperationException();
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// Creates an instance of <see cref="PatchOperation"/> which describes a single
         /// deletion for the <paramref name="range"/>.
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public static Difference CreateDeletion(Range<int> range)
+        public static PatchOperation CreateDeletion(Range<int> range)
         {
-            return new Difference(DifferenceType.Deletion, new Range<int>(), range, new Range<int>());
+            return new PatchOperation(PatchOperationType.Deletion, new Range<int>(), range, new Range<int>());
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// Creates an instance of <see cref="PatchOperation"/> which describes a single
         /// deletion for the range from <paramref name="start"/> to <paramref name="end"/>.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Difference CreateDeletion(int start, int end)
+        public static PatchOperation CreateDeletion(int start, int end)
         {
             return CreateDeletion(new Range<int>(start, end));
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// Creates an instance of <see cref="PatchOperation"/> which describes a single
         /// addition for the <paramref name="range"/>.
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public static Difference CreateAddition(Range<int> range)
+        public static PatchOperation CreateAddition(Range<int> range)
         {
-            return new Difference(DifferenceType.Addition, range, new Range<int>(), new Range<int>());
+            return new PatchOperation(PatchOperationType.Addition, range, new Range<int>(), new Range<int>());
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// Creates an instance of <see cref="PatchOperation"/> which describes a single
         /// addition for the range from <paramref name="start"/> to <paramref name="end"/>.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Difference CreateAddition(int start, int end)
+        public static PatchOperation CreateAddition(int start, int end)
         {
             return CreateAddition(new Range<int>(start, end));
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// Creates an instance of <see cref="PatchOperation"/> which describes a single
         /// copy for the <paramref name="range"/>.
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public static Difference CreateCopy(Range<int> range)
+        public static PatchOperation CreateCopy(Range<int> range)
         {
-            return new Difference(DifferenceType.Copy, new Range<int>(), new Range<int>(), range);
+            return new PatchOperation(PatchOperationType.Copy, new Range<int>(), new Range<int>(), range);
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Difference"/> which describes a single
+        /// Creates an instance of <see cref="PatchOperation"/> which describes a single
         /// copy for the range from <paramref name="start"/> to <paramref name="end"/>.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Difference CreateCopy(int start, int end)
+        public static PatchOperation CreateCopy(int start, int end)
         {
             return CreateCopy(new Range<int>(start, end));
         }
@@ -214,20 +214,20 @@ namespace octalforty.Brushie.Diff
             if(this == obj) 
                 return true;
 
-            Difference difference = obj as Difference;
+            PatchOperation difference = obj as PatchOperation;
             if(difference == null) 
                 return false;
 
             if(!Equals(Type, difference.Type)) 
                 return false;
 
-            if(Type == DifferenceType.Addition)
+            if(Type == PatchOperationType.Addition)
                 return Equals(Addition, difference.Addition);
 
-            if(Type == DifferenceType.Deletion)
+            if(Type == PatchOperationType.Deletion)
                 return Equals(Deletion, difference.Deletion);
 
-            if(Type == DifferenceType.Copy)
+            if(Type == PatchOperationType.Copy)
                 return Equals(Copy, difference.Copy);
 
             return false;
@@ -243,13 +243,13 @@ namespace octalforty.Brushie.Diff
         {
             int result = Type.GetHashCode();
 
-            if(Type == DifferenceType.Addition)
+            if(Type == PatchOperationType.Addition)
                 result = 29 * result + Addition.GetHashCode();
             
-            if(Type == DifferenceType.Deletion)
+            if(Type == PatchOperationType.Deletion)
                 result = 29 * result + Deletion.GetHashCode();
 
-            if(Type == DifferenceType.Copy)
+            if(Type == PatchOperationType.Copy)
                 result = 29 * result + Copy.GetHashCode();
 
             return result;

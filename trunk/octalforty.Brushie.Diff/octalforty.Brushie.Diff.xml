@@ -4,16 +4,6 @@
         <name>octalforty.Brushie.Diff</name>
     </assembly>
     <members>
-        <member name="T:octalforty.Brushie.Diff.DifferenceCollection">
-            <summary>
-            Represents a collection of <see cref="T:octalforty.Brushie.Diff.Difference"/> objects.
-            </summary>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.DifferenceCollection.#ctor">
-            <summary>
-            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.DifferenceCollection"/> class.
-            </summary>
-        </member>
         <member name="T:octalforty.Brushie.Diff.DiffEngine`1">
             <summary>
             Compares two collections, returning a list of the additions and
@@ -54,26 +44,26 @@
             <param name="targetDataProvider"></param>
             <param name="comparer"></param>
         </member>
-        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.GetDifferences">
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.GetPatchOperations">
             <summary>
-            Runs the diff and returns a collection of <see cref="T:octalforty.Brushie.Diff.Difference"/> objects
+            Runs the diff and returns a collection of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> objects
             which describe the differences.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.InternalGetDifferences">
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.InternalGetPatchOperations">
             <summary>
             Runs the diff.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.CommitPendingDifferences">
+        <member name="M:octalforty.Brushie.Diff.DiffEngine`1.CommitPendingPatchOperations">
             <summary>
-            Commits pending difference objects.
+            Commits pending patch operations.
             </summary>
             <remarks>
-            Note that addition difference is committed first, followed by an
-            deletion difference.
+            Note that addition patch operation is committed first, followed by an
+            deletion patch operation.
             </remarks>
         </member>
         <member name="M:octalforty.Brushie.Diff.DiffEngine`1.TraverseSequences">
@@ -217,142 +207,6 @@
             Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
             </summary>
         </member>
-        <member name="T:octalforty.Brushie.Diff.Difference">
-            <summary>
-            Defines a single difference returned by the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
-            </summary>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.#ctor(octalforty.Brushie.Diff.DifferenceType,octalforty.Brushie.Diff.Range{System.Int32},octalforty.Brushie.Diff.Range{System.Int32},octalforty.Brushie.Diff.Range{System.Int32})">
-            <summary>
-            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> class with
-            the given type and addition and deletion ranges.
-            </summary>
-            <param name="type"></param>
-            <param name="addition"></param>
-            <param name="deletion"></param>
-            <param name="copy"></param>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CheckType(octalforty.Brushie.Diff.DifferenceType)">
-            <summary>
-            Ensures that <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is equal to <paramref name="requiredType"/>.
-            </summary>
-            <param name="requiredType"></param>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(octalforty.Brushie.Diff.Range{System.Int32})">
-            <summary>
-            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
-            deletion for the <paramref name="range"/>.
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateDeletion(System.Int32,System.Int32)">
-            <summary>
-            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
-            deletion for the range from <paramref name="start"/> to <paramref name="end"/>.
-            </summary>
-            <param name="start"></param>
-            <param name="end"></param>
-            <returns></returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(octalforty.Brushie.Diff.Range{System.Int32})">
-            <summary>
-            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
-            addition for the <paramref name="range"/>.
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateAddition(System.Int32,System.Int32)">
-            <summary>
-            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
-            addition for the range from <paramref name="start"/> to <paramref name="end"/>.
-            </summary>
-            <param name="start"></param>
-            <param name="end"></param>
-            <returns></returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateCopy(octalforty.Brushie.Diff.Range{System.Int32})">
-            <summary>
-            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
-            copy for the <paramref name="range"/>.
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.CreateCopy(System.Int32,System.Int32)">
-            <summary>
-            Creates an instance of <see cref="T:octalforty.Brushie.Diff.Difference"/> which describes a single
-            copy for the range from <paramref name="start"/> to <paramref name="end"/>.
-            </summary>
-            <param name="start"></param>
-            <param name="end"></param>
-            <returns></returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to the 
-            current object.
-            </summary>
-            <param name="obj"></param>
-            <returns>
-            <see langword="true"/> if the specified object is equal to the current Object; 
-            otherwise, <see langword="false"/>.</returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.GetHashCode">
-            <summary>
-            Serves as a hash function for a particular type. 
-            <see cref="M:octalforty.Brushie.Diff.Difference.GetHashCode"/> is suitable for use in hashing algorithms and data structures 
-            like a hash table.
-            </summary>
-            <returns>A hash code for the current object.</returns>
-        </member>
-        <member name="M:octalforty.Brushie.Diff.Difference.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
-            </summary>
-            <returns>
-            A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
-            </returns>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.Difference.Type">
-            <summary>
-            Gets the <see cref="T:octalforty.Brushie.Diff.DifferenceType"/> which defines the
-            type of the current object.
-            </summary>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.Difference.Addition">
-            <summary>
-            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the addition range for
-            the current difference.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">
-            When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Addition</c>.
-            </exception>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.Difference.Deletion">
-            <summary>
-            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the deletion range for
-            the current difference.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">
-            When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Deletion</c>.
-            </exception>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.Difference.Copy">
-            <summary>
-            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the copy range for
-            the current difference.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">
-            When <see cref="P:octalforty.Brushie.Diff.Difference.Type"/> is not equal to <c>DifferenceType.Copy</c>.
-            </exception>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.Difference.Range">
-            <summary>
-            Gets a reference to the <see cref="!:Range&lt;T&gt;"/> valid at the current point.
-            </summary>
-        </member>
         <member name="T:octalforty.Brushie.Diff.ArrayDataProvider`1">
             <summary>
             Represents a data provider which wraps standard array for consumption by
@@ -379,29 +233,39 @@
             Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
             </summary>
         </member>
-        <member name="T:octalforty.Brushie.Diff.DifferenceType">
+        <member name="T:octalforty.Brushie.Diff.WordDataProvider">
             <summary>
-            Defines the type of the <see cref="T:octalforty.Brushie.Diff.Difference"/>.
+            Allows <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> to work on a word-by-word basis.
             </summary>
         </member>
-        <member name="F:octalforty.Brushie.Diff.DifferenceType.Unknown">
+        <member name="M:octalforty.Brushie.Diff.WordDataProvider.#ctor(System.String)">
             <summary>
-            Type is unknown.
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.WordDataProvider"/> with
+            a given source string.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Matches">
+            <summary>
+            Gets a reference to the collection of <see cref="T:System.Text.RegularExpressions.Match"/> objects
+            for the current provider.
             </summary>
         </member>
-        <member name="F:octalforty.Brushie.Diff.DifferenceType.Copy">
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Words">
             <summary>
-            Simple copy content.
+            Gets a reference to an array of strings with words from the source text.
             </summary>
         </member>
-        <member name="F:octalforty.Brushie.Diff.DifferenceType.Addition">
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Item(System.Int32)">
             <summary>
-            Addition.
+            Gets an value with the given <paramref name="index"/>.
             </summary>
+            <param name="index"></param>
+            <returns></returns>
         </member>
-        <member name="F:octalforty.Brushie.Diff.DifferenceType.Deletion">
+        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Count">
             <summary>
-            Deletion.
+            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
             </summary>
         </member>
         <member name="T:octalforty.Brushie.Diff.Range`1">
@@ -445,39 +309,175 @@
             Gets the ending point of the range.
             </summary>
         </member>
-        <member name="T:octalforty.Brushie.Diff.WordDataProvider">
+        <member name="T:octalforty.Brushie.Diff.PatchOperation">
             <summary>
-            Allows <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/> to work on a word-by-word basis.
+            Defines a single patch operation returned by the <see cref="T:octalforty.Brushie.Diff.DiffEngine`1"/>.
             </summary>
         </member>
-        <member name="M:octalforty.Brushie.Diff.WordDataProvider.#ctor(System.String)">
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.#ctor(octalforty.Brushie.Diff.PatchOperationType,octalforty.Brushie.Diff.Range{System.Int32},octalforty.Brushie.Diff.Range{System.Int32},octalforty.Brushie.Diff.Range{System.Int32})">
             <summary>
-            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.WordDataProvider"/> with
-            a given source string.
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> class with
+            the given type and addition and deletion ranges.
             </summary>
-            <param name="source"></param>
+            <param name="type"></param>
+            <param name="addition"></param>
+            <param name="deletion"></param>
+            <param name="copy"></param>
         </member>
-        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Matches">
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CheckType(octalforty.Brushie.Diff.PatchOperationType)">
             <summary>
-            Gets a reference to the collection of <see cref="T:System.Text.RegularExpressions.Match"/> objects
-            for the current provider.
+            Ensures that <see cref="P:octalforty.Brushie.Diff.PatchOperation.Type"/> is equal to <paramref name="requiredType"/>.
             </summary>
+            <param name="requiredType"></param>
         </member>
-        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Words">
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CreateDeletion(octalforty.Brushie.Diff.Range{System.Int32})">
             <summary>
-            Gets a reference to an array of strings with words from the source text.
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> which describes a single
+            deletion for the <paramref name="range"/>.
             </summary>
-        </member>
-        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Item(System.Int32)">
-            <summary>
-            Gets an value with the given <paramref name="index"/>.
-            </summary>
-            <param name="index"></param>
+            <param name="range"></param>
             <returns></returns>
         </member>
-        <member name="P:octalforty.Brushie.Diff.WordDataProvider.Count">
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CreateDeletion(System.Int32,System.Int32)">
             <summary>
-            Gets the number of items this <see cref="T:octalforty.Brushie.Diff.IDataProvider`1"/> can supply.
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> which describes a single
+            deletion for the range from <paramref name="start"/> to <paramref name="end"/>.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CreateAddition(octalforty.Brushie.Diff.Range{System.Int32})">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> which describes a single
+            addition for the <paramref name="range"/>.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CreateAddition(System.Int32,System.Int32)">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> which describes a single
+            addition for the range from <paramref name="start"/> to <paramref name="end"/>.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CreateCopy(octalforty.Brushie.Diff.Range{System.Int32})">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> which describes a single
+            copy for the <paramref name="range"/>.
+            </summary>
+            <param name="range"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.CreateCopy(System.Int32,System.Int32)">
+            <summary>
+            Creates an instance of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> which describes a single
+            copy for the range from <paramref name="start"/> to <paramref name="end"/>.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the 
+            current object.
+            </summary>
+            <param name="obj"></param>
+            <returns>
+            <see langword="true"/> if the specified object is equal to the current Object; 
+            otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            <see cref="M:octalforty.Brushie.Diff.PatchOperation.GetHashCode"/> is suitable for use in hashing algorithms and data structures 
+            like a hash table.
+            </summary>
+            <returns>A hash code for the current object.</returns>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperation.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
+            </returns>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.PatchOperation.Type">
+            <summary>
+            Gets the <see cref="T:octalforty.Brushie.Diff.PatchOperationType"/> which defines the
+            type of the current object.
+            </summary>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.PatchOperation.Addition">
+            <summary>
+            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the addition range for
+            the current difference.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            When <see cref="P:octalforty.Brushie.Diff.PatchOperation.Type"/> is not equal to <c>PatchOperationType.Addition</c>.
+            </exception>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.PatchOperation.Deletion">
+            <summary>
+            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the deletion range for
+            the current difference.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            When <see cref="P:octalforty.Brushie.Diff.PatchOperation.Type"/> is not equal to <c>PatchOperationType.Deletion</c>.
+            </exception>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.PatchOperation.Copy">
+            <summary>
+            Gets the <see cref="!:Range&lt;T&gt;"/>, which defines the copy range for
+            the current difference.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">
+            When <see cref="P:octalforty.Brushie.Diff.PatchOperation.Type"/> is not equal to <c>PatchOperationType.Copy</c>.
+            </exception>
+        </member>
+        <member name="P:octalforty.Brushie.Diff.PatchOperation.Range">
+            <summary>
+            Gets a reference to the <see cref="!:Range&lt;T&gt;"/> valid at the current point.
+            </summary>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.PatchOperationType">
+            <summary>
+            Defines the type of the <see cref="T:octalforty.Brushie.Diff.PatchOperation"/>.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.PatchOperationType.Unknown">
+            <summary>
+            Type is unknown.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.PatchOperationType.Copy">
+            <summary>
+            Simple copy content.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.PatchOperationType.Addition">
+            <summary>
+            Addition.
+            </summary>
+        </member>
+        <member name="F:octalforty.Brushie.Diff.PatchOperationType.Deletion">
+            <summary>
+            Deletion.
+            </summary>
+        </member>
+        <member name="T:octalforty.Brushie.Diff.PatchOperationCollection">
+            <summary>
+            Represents a collection of <see cref="T:octalforty.Brushie.Diff.PatchOperation"/> objects.
+            </summary>
+        </member>
+        <member name="M:octalforty.Brushie.Diff.PatchOperationCollection.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Brushie.Diff.PatchOperationCollection"/> class.
             </summary>
         </member>
     </members>

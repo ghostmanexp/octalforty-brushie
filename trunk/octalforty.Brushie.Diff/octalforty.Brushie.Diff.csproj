@@ -35,10 +35,10 @@
   <ItemGroup>
     <Compile Include="ArrayDataProvider.cs" />
     <Compile Include="DiffEngine.cs" />
-    <Compile Include="Difference.cs" />
-    <Compile Include="DifferenceCollection.cs" />
-    <Compile Include="DifferenceType.cs" />
     <Compile Include="IDataProvider.cs" />
+    <Compile Include="PatchOperation.cs" />
+    <Compile Include="PatchOperationCollection.cs" />
+    <Compile Include="PatchOperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="WordDataProvider.cs" />

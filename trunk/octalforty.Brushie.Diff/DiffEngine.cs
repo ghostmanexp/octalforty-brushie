@@ -15,10 +15,10 @@ namespace octalforty.Brushie.Diff
         private IDataProvider<T> targetDataProvider;
         private Dictionary<int, int?> thresholds;
         private IComparer<T> comparer;
-        private Difference pendingCopyDifference;
-        private Difference pendingAdditionDifference;
-        private Difference pendingDeletionDifference;
-        private DifferenceCollection differences = new DifferenceCollection();
+        private PatchOperation pendingCopy;
+        private PatchOperation pendingAddition;
+        private PatchOperation pendingDeletion;
+        private PatchOperationCollection patchOperations = new PatchOperationCollection();
         #endregion
 
         /// <summary>
@@ -74,46 +74,46 @@ namespace octalforty.Brushie.Diff
         }
 
         /// <summary>
-        /// Runs the diff and returns a collection of <see cref="Difference"/> objects
+        /// Runs the diff and returns a collection of <see cref="PatchOperation"/> objects
         /// which describe the differences.
         /// </summary>
         /// <returns></returns>
-        public DifferenceCollection GetDifferences()
+        public PatchOperationCollection GetPatchOperations()
         {
-            return InternalGetDifferences();
+            return InternalGetPatchOperations();
         }
 
         /// <summary>
         /// Runs the diff.
         /// </summary>
         /// <returns></returns>
-        private DifferenceCollection InternalGetDifferences()
+        private PatchOperationCollection InternalGetPatchOperations()
         {
             TraverseSequences();
-            CommitPendingDifferences();
+            CommitPendingPatchOperations();
 
-            return differences;
+            return patchOperations;
         }
 
         /// <summary>
-        /// Commits pending difference objects.
+        /// Commits pending patch operations.
         /// </summary>
         /// <remarks>
-        /// Note that addition difference is committed first, followed by an
-        /// deletion difference.
+        /// Note that addition patch operation is committed first, followed by an
+        /// deletion patch operation.
         /// </remarks>
-        private void CommitPendingDifferences()
+        private void CommitPendingPatchOperations()
         {
-            if(pendingAdditionDifference != null)
+            if(pendingAddition != null)
             {
-                differences.Add(pendingAdditionDifference);
-                pendingAdditionDifference = null;
+                patchOperations.Add(pendingAddition);
+                pendingAddition = null;
             } // if
 
-            if(pendingDeletionDifference != null)
+            if(pendingDeletion != null)
             {
-                differences.Add(pendingDeletionDifference);
-                pendingDeletionDifference = null;
+                patchOperations.Add(pendingDeletion);
+                pendingDeletion = null;
             } // if
         }
 
@@ -478,27 +478,27 @@ namespace octalforty.Brushie.Diff
         /// <param name="targetIndex"></param>
         private void SourceNotInTarget(int sourceIndex, int targetIndex)
         {
-            CommitMatch();
+            CommitCopy();
 
-            if(pendingDeletionDifference == null)
+            if(pendingDeletion == null)
             {
-                pendingDeletionDifference =
-                    Difference.CreateDeletion(new Range<int>(sourceIndex, sourceIndex));
+                pendingDeletion =
+                    PatchOperation.CreateDeletion(new Range<int>(sourceIndex, sourceIndex));
             } // if
             else
             {
-                pendingDeletionDifference.Deletion =
-                    new Range<int>(Math.Min(pendingDeletionDifference.Deletion.Start, sourceIndex),
-                        Math.Max(pendingDeletionDifference.Deletion.Start, sourceIndex));
+                pendingDeletion.Deletion =
+                    new Range<int>(Math.Min(pendingDeletion.Deletion.Start, sourceIndex),
+                        Math.Max(pendingDeletion.Deletion.Start, sourceIndex));
             } // else
         }
 
-        private void CommitMatch()
+        private void CommitCopy()
         {
-            if(pendingCopyDifference != null)
+            if(pendingCopy != null)
             {
-                differences.Add(pendingCopyDifference);
-                pendingCopyDifference = null;
+                patchOperations.Add(pendingCopy);
+                pendingCopy = null;
             } // if
         }
 
@@ -510,18 +510,18 @@ namespace octalforty.Brushie.Diff
         /// <param name="targetIndex"></param>
         private void InTargetNotInSource(int sourceIndex, int targetIndex)
         {
-            CommitMatch();
+            CommitCopy();
 
-            if(pendingAdditionDifference == null)
+            if(pendingAddition == null)
             {
-                pendingAdditionDifference =
-                    Difference.CreateAddition(new Range<int>(targetIndex, targetIndex));
+                pendingAddition =
+                    PatchOperation.CreateAddition(new Range<int>(targetIndex, targetIndex));
             } // if
             else
             {
-                pendingAdditionDifference.Addition =
-                    new Range<int>(Math.Min(pendingAdditionDifference.Addition.Start, targetIndex),
-                        Math.Max(pendingAdditionDifference.Addition.Start, targetIndex));
+                pendingAddition.Addition =
+                    new Range<int>(Math.Min(pendingAddition.Addition.Start, targetIndex),
+                        Math.Max(pendingAddition.Addition.Start, targetIndex));
             } // else
         }
         
@@ -534,18 +534,18 @@ namespace octalforty.Brushie.Diff
         /// <param name="targetIndex"></param>
         private void Match(int sourceIndex, int targetIndex)
         {
-            if(pendingCopyDifference == null)
+            if(pendingCopy == null)
             {
-                pendingCopyDifference = Difference.CreateCopy(sourceIndex, sourceIndex);
+                pendingCopy = PatchOperation.CreateCopy(sourceIndex, sourceIndex);
             } // if
             else
             {
-                pendingCopyDifference.Copy =
-                    new Range<int>(Math.Min(pendingCopyDifference.Copy.Start, sourceIndex),
-                        Math.Max(pendingCopyDifference.Copy.Start, sourceIndex));
+                pendingCopy.Copy =
+                    new Range<int>(Math.Min(pendingCopy.Copy.Start, sourceIndex),
+                        Math.Max(pendingCopy.Copy.Start, sourceIndex));
             } // else
 
-            CommitPendingDifferences();
+            CommitPendingPatchOperations();
         }
     }
 }
