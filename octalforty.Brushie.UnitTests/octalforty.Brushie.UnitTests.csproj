@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Diff\DifferenceTestFixture.cs" />
     <Compile Include="Diff\DiffEngineTestFixture.cs" />
+    <Compile Include="Diff\PatchOperationTestFixture.cs" />
     <Compile Include="Diff\RangeTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Binders\MessageTypeBinderTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Binders\SeverityBinderTestFixture.cs" />
