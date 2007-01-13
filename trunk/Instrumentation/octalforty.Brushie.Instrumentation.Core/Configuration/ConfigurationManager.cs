@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Provides access to the configuration information of octalforty Brushie Instrumentation
-    /// framework.
+    /// Framework.
     /// </summary>
     public static class ConfigurationManager
     {

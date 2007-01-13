@@ -4,7 +4,7 @@ namespace octalforty.Brushie.Instrumentation.Core
 {
     /// <summary>
     /// Interface, which must be implemented by all message classes, used
-    /// in octalforty Brushie Instrumentation framework.
+    /// in octalforty Brushie Instrumentation Framework.
     /// </summary>
     public interface IMessage
     {
