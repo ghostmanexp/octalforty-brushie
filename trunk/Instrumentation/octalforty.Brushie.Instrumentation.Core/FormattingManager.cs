@@ -37,6 +37,14 @@ namespace octalforty.Brushie.Instrumentation.Core
         #endregion
 
         /// <summary>
+        /// Explicit static constructor to tell C# compiler not to mark the type as 
+        /// <c>beforefieldinit</c>.
+        /// </summary>
+        static FormattingManager()
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of <see cref="FormattingManager"/> class.
         /// </summary>
         private FormattingManager()
