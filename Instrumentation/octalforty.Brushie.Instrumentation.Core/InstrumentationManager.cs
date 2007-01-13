@@ -10,7 +10,7 @@ using octalforty.Brushie.Instrumentation.Core.Resources;
 namespace octalforty.Brushie.Instrumentation.Core
 {
     /// <summary>
-    /// Core class of octalforty Brushie Instrumentation framework.
+    /// Core class of octalforty Brushie Instrumentation Framework.
     /// </summary>
     public sealed class InstrumentationManager
     {

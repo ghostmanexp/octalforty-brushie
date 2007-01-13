@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <octalforty.brushie.instrumentation xmlns="http://schemas.octalfortystudios.com/brushie/1.0/instrumentation">
-    <!-- Defines all persister classes used in octalforty Brushie Instrumentation framework -->
+    <!-- Defines all persister classes used in octalforty Brushie Instrumentation Framework -->
     <persisters>
         <!-- A single persister. Required attributes are type and name. -->
         <persister type="octalforty.Brushie.Instrumentation.Core.Persisters.ConsolePersister, octalforty.Brushie.Instrumentation.Core"
@@ -11,14 +11,14 @@
         </persister>        
     </persisters>
 
-    <!-- Optionally lists messages used in octalforty Brushie Instrumentation framework. -->
+    <!-- Optionally lists messages used in octalforty Brushie Instrumentation Framework. -->
     <messages>
         <!-- A single message. -->
         <message type="octalforty.Brushie.Instrumentation.Core.Messages.TextMessage, octalforty.Brushie.Instrumentation.Core"
             name="textMessage" />        
     </messages>
 
-    <!-- Lists formatters used in octalforty Brushie Instrumentation framework. -->
+    <!-- Lists formatters used in octalforty Brushie Instrumentation Framework. -->
     <formatters>
         <formatter type="octalforty.Brushie.Instrumentation.Core.Formatters.DateTimeFormatter, octalforty.Brushie.Instrumentation.Core" />
         <formatter type="octalforty.Brushie.Instrumentation.Core.Formatters.GenericFormatter, octalforty.Brushie.Instrumentation.Core" />        

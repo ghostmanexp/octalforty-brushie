@@ -8,15 +8,19 @@ namespace octalforty.Brushie.Configuration
     /// </summary>
     public class ConfigurationElementWithNameAndType : ConfigurationElementWithType
     {
+        #region Private Constants
+        private const string NamePropertyName = "name";
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// Gets or sets a string with the name.
         /// </summary>
-        [ConfigurationProperty("name", IsKey = true, IsRequired = true)]
+        [ConfigurationProperty(NamePropertyName, IsKey = true, IsRequired = true)]
         public string Name
         {
-            get { return this["name"] as string; }
-            set { this["name"] = value; }
+            get { return this[NamePropertyName] as string; }
+            set { this[NamePropertyName] = value; }
         }
         #endregion
 

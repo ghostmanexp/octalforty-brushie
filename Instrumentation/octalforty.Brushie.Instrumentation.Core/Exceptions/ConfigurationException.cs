@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace octalforty.Brushie.Instrumentation.Core.Exceptions
 {
     /// <summary>
-    /// octalforty Brushie Instrumentation framework configuration exception.
+    /// octalforty Brushie Instrumentation Framework configuration exception.
     /// </summary>
     [Serializable()]
     public class ConfigurationException : InstrumentationException

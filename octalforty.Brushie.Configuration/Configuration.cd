@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="octalforty.Brushie.Configuration.ConfigurationElementBase">
+    <Position X="1.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>ConfigurationElementBase.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.ConfigurationElementCollectionBase&lt;TConfigurationElement&gt;">
+    <Position X="5.5" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <FileName>ConfigurationElementCollectionBase.cs</FileName>
+      <HashCode>AAICAAAAAAAAAAAACAAAAAAAAAABAAAAAAAAAEAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.ConfigurationElementWithNameAndType">
+    <Position X="0.5" Y="5" Width="3.5" />
+    <TypeIdentifier>
+      <FileName>ConfigurationElementWithNameAndType.cs</FileName>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.ConfigurationElementWithType">
+    <Position X="0.75" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <FileName>ConfigurationElementWithType.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.ConfigurationSectionBase" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ConfigurationSectionBase.cs</FileName>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.PropertyElement" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>PropertyElement.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Configuration.PropertyElementCollection">
+    <Position X="6" Y="3.5" Width="3" />
+    <TypeIdentifier>
+      <FileName>PropertyElementCollection.cs</FileName>
+      <HashCode>AAAAAAAAAAAAIAAACAAAAAAAAAAAAAAAAAIAAEAAAgA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

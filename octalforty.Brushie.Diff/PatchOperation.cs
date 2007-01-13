@@ -26,7 +26,8 @@ namespace octalforty.Brushie.Diff
 
         /// <summary>
         /// Gets the <see cref="Range{T}"/>, which defines the addition range for
-        /// the current difference.
+        /// the current difference. Please note that this property defines
+        /// a range within the target data source.
         /// </summary>
         /// <exception cref="InvalidOperationException">
         /// When <see cref="Type"/> is not equal to <c>PatchOperationType.Addition</c>.

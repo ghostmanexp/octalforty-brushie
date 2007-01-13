@@ -19,7 +19,13 @@ namespace octalforty.Brushie.Configuration
         /// <returns></returns>
         public TConfigurationElement this[int index]
         {
-            get { return BaseGet(index) as TConfigurationElement; }
+            get
+            {
+                if(index < 0 || index > Count - 1)
+                    throw new ArgumentOutOfRangeException("index");
+
+                return BaseGet(index) as TConfigurationElement;
+            }
         }
         #endregion
         
