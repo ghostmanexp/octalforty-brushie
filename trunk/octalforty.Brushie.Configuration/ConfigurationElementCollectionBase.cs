@@ -13,7 +13,7 @@ namespace octalforty.Brushie.Configuration
     {
         #region Public Properties
         /// <summary>
-        /// Gets a reference to the <see cref="TConfigurationElement"/> with a given index.
+        /// Gets a reference to the <typeparamref name="TConfigurationElement"/> with a given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
