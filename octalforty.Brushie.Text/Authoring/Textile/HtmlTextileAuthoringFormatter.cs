@@ -26,7 +26,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public string FormatHeading(Int32 level, String text, BlockElementAttributes attributes)
         {
             String tag = String.Format("h{0}", level);
-            return String.Format("{0}{1}</{0}>", GetStartTag(tag, attributes), text);
+            return String.Format("{0}{1}</{2}>", GetStartTag(tag, attributes), text, tag);
         }
         #endregion
 
@@ -87,6 +87,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 tagBuilder.AppendFormat(" style=\"{0}\"", style);
             } // if
 
+            tagBuilder.Append(">");
             return tagBuilder.ToString();
         }
     }
