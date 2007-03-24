@@ -46,6 +46,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if(!String.IsNullOrEmpty(attributes.CssClass))
                 tagBuilder.AppendFormat(" class=\"{0}\"", attributes.CssClass);
 
+            if(!String.IsNullOrEmpty(attributes.ID))
+                tagBuilder.AppendFormat(" id=\"{0}\"", attributes.ID);
+
             if(!String.IsNullOrEmpty(attributes.Language))
                 tagBuilder.AppendFormat(" lang=\"{0}\"", attributes.Language);
 
@@ -74,13 +77,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
                 if(attributes.LeftIndent != 0)
                 {
-                    style += String.Format("padding-left: {0};",
+                    style += String.Format("padding-left: {0}em;",
                         attributes.LeftIndent);
                 } // if
 
                 if(attributes.RightIndent != 0)
                 {
-                    style += String.Format("padding-right: {0};",
+                    style += String.Format("padding-right: {0}em;",
                         attributes.RightIndent);
                 } // if
                 
