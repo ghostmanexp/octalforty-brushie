@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
@@ -55,11 +56,71 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         ///  
         ///  
         /// </summary>
-        public static readonly Regex HeadingRegex = new Regex(
-            @"(?<Heading>^h(?<Level>[1-6])(\((?<CssClass>.+?)\))?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>(\(*\)*))?\.\s(?<Text>.*)\r\n\r\n)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | 
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        public static readonly Regex HeadingRegex =
+            new Regex(
+                @"(?<Heading>^h(?<Level>[1-6])(\((?<CssClass>.+?)\))?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>(\(*\)*))?\.\s(?<Text>.*)\r\n\r\n)",
+                RegexOptions.IgnoreCase | RegexOptions.Multiline |
+                RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace |
+                RegexOptions.Compiled);
         #endregion
 
+        #region Private Member Variables
+        private ITextileAuthoringFormatter authoringFormatter;
+        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="TextileAuthoringEngine"/> with
+        /// a reference to the <see cref="ITextileAuthoringFormatter"/>.
+        /// </summary>
+        /// <param name="authoringFormatter">Authoring formatter.</param>
+        public TextileAuthoringEngine(ITextileAuthoringFormatter authoringFormatter)
+        {
+            this.authoringFormatter = authoringFormatter;
+        }
+
+        /// <summary>
+        /// Authors <paramref name="text"/> according to the <paramref name="authoringScope"/>.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="authoringScope"></param>
+        public String Author(String text, AuthoringScope authoringScope)
+        {
+            if((authoringScope & AuthoringScope.Headings) == AuthoringScope.Headings)
+                text = AuthorHeadings(text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors headings.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorHeadings(String text)
+        {
+            Match match = HeadingRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Heading"].Value;
+                String headingText = match.Groups["Text"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+            } // while
+
+            return text;
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="BlockElementAttributes"/> class from the
+        /// given <paramref name="match"/>, provided that <paramref name="match"/>
+        /// has required groups (<c>CssClass</c>, <c>Alignment</c>, <c>Indentation</c>).
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        private BlockElementAttributes CreateBlockElementAttributes(Match match)
+        {
+            return null;
+            //return new BlockElementAttributes();
+        }
     }
 }
