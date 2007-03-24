@@ -39,12 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authoring\AuthoringScope.cs" />
+    <Compile Include="Authoring\Enclosure.cs" />
+    <Compile Include="Authoring\HtmlTagEnclosure.cs" />
     <Compile Include="Authoring\Textile.cs" />
     <Compile Include="LuceneNet\DocumentAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapterReadOnlyCollection.cs" />
     <Compile Include="LuceneNet\IndexWriterAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Authoring\Textile\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
