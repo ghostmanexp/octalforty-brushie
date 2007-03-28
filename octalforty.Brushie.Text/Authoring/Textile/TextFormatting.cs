@@ -16,8 +16,18 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         StrongEmphasis = 1,
 
         /// <summary>
-        /// Bold text (design element).
+        /// Bold text (design element, as opposed to <see cref="StrongEmphasis"/>).
         /// </summary>
-        Bold = 2
+        Bold = 2,
+
+        /// <summary>
+        /// Structural emphasis.
+        /// </summary>
+        Emphasis = 3,
+
+        /// <summary>
+        /// Italicized text (design element, as opposed to <see cref="Emphasis"/>).
+        /// </summary>
+        Italics = 4
     }
 }

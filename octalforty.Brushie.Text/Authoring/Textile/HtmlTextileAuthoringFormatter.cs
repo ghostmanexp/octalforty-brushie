@@ -83,6 +83,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 case TextFormatting.Bold:
                     tag = "b";
                     break;
+                case TextFormatting.Emphasis:
+                    tag = "em";
+                    break;
+                case TextFormatting.Italics:
+                    tag = "i";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("formatting");
             } // switch

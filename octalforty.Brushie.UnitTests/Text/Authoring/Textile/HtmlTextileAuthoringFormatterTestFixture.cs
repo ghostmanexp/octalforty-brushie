@@ -110,5 +110,43 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 authoringFormatter.FormatTextFormatting(TextFormatting.StrongEmphasis, " Link ",
                     new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
         }
+
+        [Test()]
+        public void FormatTextFormattingItalics()
+        {
+            ITextileAuthoringFormatter authoringFormatter =
+                new HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual("<i>Link</i>",
+                authoringFormatter.FormatTextFormatting(TextFormatting.Italics, " Link ",
+                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
+
+            Assert.AreEqual("<i class=\"a\" style=\"font-weight: bold;\">Link</i>",
+                authoringFormatter.FormatTextFormatting(TextFormatting.Italics, " Link ",
+                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
+
+            Assert.AreEqual("<i id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Link</i>",
+                authoringFormatter.FormatTextFormatting(TextFormatting.Italics, " Link ",
+                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+        }
+
+        [Test()]
+        public void FormatTextFormattingEmphasis()
+        {
+            ITextileAuthoringFormatter authoringFormatter =
+                new HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual("<em>Link</em>",
+                authoringFormatter.FormatTextFormatting(TextFormatting.Emphasis, " Link ",
+                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
+
+            Assert.AreEqual("<em class=\"a\" style=\"font-weight: bold;\">Link</em>",
+                authoringFormatter.FormatTextFormatting(TextFormatting.Emphasis, " Link ",
+                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
+
+            Assert.AreEqual("<em id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Link</em>",
+                authoringFormatter.FormatTextFormatting(TextFormatting.Emphasis, " Link ",
+                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+        }
     }
 }
