@@ -46,13 +46,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// Initializes a new instance of <see cref="BlockElementAttributes"/> class
         /// with a given set of attributes.
         /// </summary>
-        /// <param name="cssClass"></param>
-        /// <param name="id"></param>
-        /// <param name="style"></param>
-        /// <param name="language"></param>
-        /// <param name="alignment"></param>
-        /// <param name="leftIndent"></param>
-        /// <param name="rightIndent"></param>
+        /// <param name="cssClass">Element CSS class.</param>
+        /// <param name="id">Element ID.</param>
+        /// <param name="style">Inline element style.</param>
+        /// <param name="language">Element language specification.</param>
+        /// <param name="alignment">Element alignment.</param>
+        /// <param name="leftIndent">Element left indent (in <c>em</c>s).</param>
+        /// <param name="rightIndent">Element right indent (in <c>em</c>s).</param>
         public BlockElementAttributes(string cssClass, string id, string style, string language,
             BlockElementAlignment alignment, Int32 leftIndent, Int32 rightIndent) : 
             base(cssClass, id, style, language)

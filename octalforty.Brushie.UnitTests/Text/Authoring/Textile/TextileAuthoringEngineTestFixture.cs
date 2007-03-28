@@ -14,7 +14,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
     public class TextileAuthoringEngineTestFixture
     {
         #region Private Constants
-        private const String WikiMarkup = "h2{color:green}. This is a title\n\n" +
+        private const String WikiMarkup = "h2(head#h2){color:green}[en-US]<>(). This is a title\n\n" +
                                           "h3. This is a subhead\n\n" +
                                           "p{color:red}. This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\n\n" +
                                           @"bq[fr]. This is a block quote. I'll admit it's not the most exciting block quote ever devised.\n\n" +
@@ -76,8 +76,8 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
             TextileAuthoringEngine authoringEngine = 
                 new TextileAuthoringEngine(new HtmlTextileAuthoringFormatter());
 
-            Assert.AreEqual("<h2 style=\"color:green;\">This is a title</h2>" +
-                "<h3>This is a subhead</h3>" +
+            Assert.AreEqual("<h2 class=\"head\" id=\"h2\" lang=\"en-US\" style=\"color:green;text-align: justify;padding-left: 1em;padding-right: 1em;\">This is a title</h2>\n" +
+                "<h3>This is a subhead</h3>\n" +
                 "p{color:red}. This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\n\n" +
                 @"bq[fr]. This is a block quote. I'll admit it's not the most exciting block quote ever devised.\n\n" +
                 "Simple list:\n\n" +
@@ -115,7 +115,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "# But you knew that\n\n" +
                 "Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to _emphasize_.\n" +
                 "That was a linebreak. And something to indicate *strength*. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\n\n" +
-                "<h3>Coding</h3>" +
+                "<h3>Coding</h3>\n" +
                 "This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:\n\n" +
                 "<pre>\n" +
                 "<code>\n" +
