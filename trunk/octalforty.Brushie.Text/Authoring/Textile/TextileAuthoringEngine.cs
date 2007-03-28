@@ -92,6 +92,22 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"[^\\](?<Expression>\*\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*\*)",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>_(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)_)
+        /// </summary>
+        private static readonly Regex EmphasisRegex = new Regex(
+            @"[^\\](?<Expression>_(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)_)",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>__(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)__)
+        /// </summary>
+        private static readonly Regex ItalicsRegex = new Regex(
+            @"[^\\](?<Expression>__(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)__)",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -139,6 +155,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         {
             text = AuthorTextFormatting(TextFormatting.Bold, BoldRegex, text);
             text = AuthorTextFormatting(TextFormatting.StrongEmphasis, StrongEmphasisRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Italics, ItalicsRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Emphasis, EmphasisRegex, text);
 
             return text;
         }
