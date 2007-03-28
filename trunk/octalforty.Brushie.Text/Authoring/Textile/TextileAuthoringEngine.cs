@@ -11,57 +11,34 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     {
         #region Private Constants
         /// <summary>
-        ///  Regular expression built for C# on: Сб, мар 24, 2007, 07:22:12 
-        ///  Using Expresso Version: 2.1.2150, http://www.ultrapico.com
-        ///  
-        ///  A description of the regular expression:
-        ///  
-        ///  [Heading]: A named capture group. [^h(?<Level>[1-6])(\((?<CssClass>.+?)\))?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>(\(*\)*))?\.\s(?<Text>.*)\r\n\r\n]
-        ///      ^h(?<Level>[1-6])(\((?<CssClass>.+?)\))?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>(\(*\)*))?\.\s(?<Text>.*)\r\n\r\n
-        ///          Beginning of line or string
-        ///          h
-        ///          [Level]: A named capture group. [[1-6]]
-        ///              Any character in this class: [1-6]
-        ///          [1]: A numbered capture group. [\((?<CssClass>.+?)\)], zero or one repetitions
-        ///              \((?<CssClass>.+?)\)
-        ///                  (
-        ///                  [CssClass]: A named capture group. [.+?]
-        ///                      Any character, one or more repetitions, as few as possible
-        ///                  )
-        ///          [Alignment]: A named capture group. [(=)|(\<\>)|(\<)|(\>)], zero or one repetitions
-        ///              Select from 4 alternatives
-        ///                  [2]: A numbered capture group. [=]
-        ///                      =
-        ///                  [3]: A numbered capture group. [\<\>]
-        ///                      \<\>
-        ///                          <
-        ///                          >
-        ///                  [4]: A numbered capture group. [\<]
-        ///                      <
-        ///                  [5]: A numbered capture group. [\>]
-        ///                      >
-        ///          [Indentation]: A named capture group. [(\(*\)*)], zero or one repetitions
-        ///              [6]: A numbered capture group. [\(*\)*]
-        ///                  \(*\)*
-        ///                      (, any number of repetitions
-        ///                      ), any number of repetitions
-        ///          .
-        ///          Whitespace
-        ///          [Text]: A named capture group. [.*]
-        ///              Any character, any number of repetitions
-        ///          Carriage return
-        ///          New line
-        ///          Carriage return
-        ///          New line
-        ///  
-        ///  
+        /// (?<Heading>
+        /// ^h
+        ///  (?<Level>[1-6]) # Heading level
+        ///  (
+        ///    \( 
+        ///      ( 
+        ///        (\#(?<ID>.+?)) | 
+        ///        ((?<CssClass>.+?)\#(?<ID>.+?)) | 
+        ///        (?<CssClass>.+?) 
+        ///       ) 
+        ///     \)
+        ///  )? # ID, CSS class and ID or simply CSS class
+        ///  (\{(?<Style>.+?)\})? # Style
+        ///  (\[(?<Language>.+?)\])? # Language
+        ///  (?<Alignment>
+        ///    (=) |
+        ///    (\<\>) |
+        ///    (\<) |
+        ///    (\>)
+        ///  )?
+        ///  (?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?
+        /// \.\s
+        /// (?<Text>.*)\n\n)
         /// </summary>
-        public static readonly Regex HeadingRegex =
-            new Regex(
-                @"(?<Heading>^h(?<Level>[1-6])(\((?<CssClass>.+?)\))?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>(\(*\)*))?\.\s(?<Text>.*)\r\n\r\n)",
-                RegexOptions.IgnoreCase | RegexOptions.Multiline |
-                RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace |
-                RegexOptions.Compiled);
+        public static readonly Regex HeadingRegex = new Regex(
+            @"(?<Expression>^h(?<Level>[1-6])(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\n)\n",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | 
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -101,10 +78,16 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             Match match = HeadingRegex.Match(text);
             while(match.Success)
             {
-                String expression = match.Groups["Heading"].Value;
+                String expression = match.Groups["Expression"].Value;
                 String headingText = match.Groups["Text"].Value;
+                Int32 level = Convert.ToInt32(match.Groups["Level"].Value);
 
                 BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                text = text.Replace(expression, authoringFormatter.FormatHeading(level, 
+                    headingText, attributes));
+
+                match = HeadingRegex.Match(text);
             } // while
 
             return text;
@@ -113,14 +96,81 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <summary>
         /// Creates an instance of <see cref="BlockElementAttributes"/> class from the
         /// given <paramref name="match"/>, provided that <paramref name="match"/>
-        /// has required groups (<c>CssClass</c>, <c>Alignment</c>, <c>Indentation</c>).
+        /// has required groups (<c>CssClass</c>, <c>ID</c>, <c>Style</c>, <c>Language</c>, 
+        /// <c>Alignment</c>, <c>LeftIndent</c> and <c>RightIndent</c>).
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
         private BlockElementAttributes CreateBlockElementAttributes(Match match)
         {
-            return null;
-            //return new BlockElementAttributes();
+            PhraseElementAttributes phraseElementAttributes =
+                CreatePhraseElementAttributes(match);
+
+            //
+            // Fetching values
+            String alignment = match.Groups["Alignment"].Value;
+            String leftIndent = match.Groups["LeftIndent"].Value;
+            String rightIndent = match.Groups["RightIndent"].Value;
+
+            //
+            // Determining block element alignment
+            BlockElementAlignment elementAlignment = BlockElementAlignment.Unknown;
+            if(!String.IsNullOrEmpty(alignment))
+            {
+                switch(alignment.ToUpper())
+                {
+                    case "<":
+                        elementAlignment = BlockElementAlignment.Left;
+                        break;
+                    case ">":
+                        elementAlignment = BlockElementAlignment.Right;
+                        break;
+                    case "=":
+                        elementAlignment = BlockElementAlignment.Center;
+                        break;
+                    case "<>":
+                        elementAlignment = BlockElementAlignment.Justify;
+                        break;
+                } // switch
+            } // if
+
+            //
+            // Determining indentation values
+            Int32 leftIndentValue = 0;
+            Int32 rightIndentValue = 0;
+
+            //
+            // Left indent.
+            if(!String.IsNullOrEmpty(leftIndent))
+                leftIndentValue = leftIndent.Length;
+
+            //
+            // Right indent.
+            if(!String.IsNullOrEmpty(rightIndent))
+                rightIndentValue = rightIndent.Length;
+
+            return new BlockElementAttributes(phraseElementAttributes.CssClass,
+                phraseElementAttributes.ID, phraseElementAttributes.Style, phraseElementAttributes.Language,
+                elementAlignment, leftIndentValue, rightIndentValue);
+        }
+
+        /// <summary>
+        /// Creates an instance of <see cref="PhraseElementAttributes"/> class from the
+        /// given <paramref name="match"/>, provided that <paramref name="match"/>
+        /// has required groups (<c>CssClass</c>, <c>ID</c>, <c>Style</c> and <c>Language</c> ).
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        private PhraseElementAttributes CreatePhraseElementAttributes(Match match)
+        {
+            //
+            // Fetching values.
+            String cssClass = match.Groups["CssClass"].Value;
+            String id = match.Groups["ID"].Value;
+            String style = match.Groups["Style"].Value;
+            String language = match.Groups["Language"].Value;
+
+            return new PhraseElementAttributes(cssClass, id, style, language);
         }
     }
 }

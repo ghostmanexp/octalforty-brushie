@@ -55,10 +55,10 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// Initializes a new instance of <see cref="PhraseElementAttributes"/> class with
         /// given values of attributes.
         /// </summary>
-        /// <param name="cssClass"></param>
-        /// <param name="id"></param>
-        /// <param name="style"></param>
-        /// <param name="language"></param>
+        /// <param name="cssClass">Element CSS class.</param>
+        /// <param name="id">Element ID.</param>
+        /// <param name="style">Inline element style.</param>
+        /// <param name="language">Element language specification.</param>
         public PhraseElementAttributes(string cssClass, string id, string style, string language)
         {
             this.cssClass = cssClass;
