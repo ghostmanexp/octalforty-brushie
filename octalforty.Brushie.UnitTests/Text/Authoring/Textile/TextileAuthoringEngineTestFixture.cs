@@ -17,7 +17,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
         private const String WikiMarkup = "h2(head#h2){color:green}[en-US]<>(). This is a title\n\n" +
                                           "h3. This is a subhead\n\n" +
                                           "p{color:red}. This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\n\n" +
-                                          @"bq[fr]. This is a block quote. I'll admit it's not the most exciting block quote ever devised.\n\n" +
+                                          "bq[fr]. This is a block quote. I'll admit it's not the most exciting block quote ever devised.\n\n" +
                                           "Simple list:\n\n" +
                                           "#{color:blue} one\n" +
                                           "# two\n" +
@@ -71,7 +71,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
         #endregion
 
         [Test()]
-        public void AuthorHeadings()
+        public void Author()
         {
             TextileAuthoringEngine authoringEngine = 
                 new TextileAuthoringEngine(new HtmlTextileAuthoringFormatter());
@@ -79,7 +79,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
             Assert.AreEqual("<h2 class=\"head\" id=\"h2\" lang=\"en-US\" style=\"color:green;text-align: justify;padding-left: 1em;padding-right: 1em;\">This is a title</h2>\n" +
                 "<h3>This is a subhead</h3>\n" +
                 "p{color:red}. This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\n\n" +
-                @"bq[fr]. This is a block quote. I'll admit it's not the most exciting block quote ever devised.\n\n" +
+                "<blockquote lang=\"fr\">This is a block quote. I'll admit it's not the most exciting block quote ever devised.</blockquote>\n" +
                 "Simple list:\n\n" +
                 "#{color:blue} one\n" +
                 "# two\n" +
@@ -130,7 +130,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "* The time is not later\n" +
                 "* The time is not yesterday\n" +
                 "* We must act\n", 
-                authoringEngine.Author(WikiMarkup, AuthoringScope.Headings));
+                authoringEngine.Author(WikiMarkup, AuthoringScope.All));
         }
     }
 }
