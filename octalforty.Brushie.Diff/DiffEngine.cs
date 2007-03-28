@@ -145,13 +145,13 @@ namespace octalforty.Brushie.Diff
                 int? targetLineIndex = matches[sourceIndex];
 
                 if(!targetLineIndex.HasValue)
-                    SourceNotInTarget(sourceIndex);
+                    SourceNotInTarget(sourceIndex, targetIndex);
                 else
                 {
                     while(targetIndex < targetLineIndex.Value)
-                        InTargetNotInSource(targetIndex++);
+                        InTargetNotInSource(sourceIndex, targetIndex++);
 
-                    Match(sourceIndex);
+                    Match(sourceIndex, targetIndex++);
                 } // else
             } // for
 
@@ -174,21 +174,21 @@ namespace octalforty.Brushie.Diff
                 if(sourceIndex == lastSource + 1 && targetIndex <= lastTarget)
                 {
                     while(targetIndex <= lastTarget)
-                        InTargetNotInSource(targetIndex++);
+                        InTargetNotInSource(sourceIndex, targetIndex++);
                 } // if
 
                 // last B?
                 if(targetIndex == lastTarget + 1 && sourceIndex <= lastSource)
                 {
                     while(sourceIndex <= lastSource)
-                        SourceNotInTarget(sourceIndex++);
+                        SourceNotInTarget(sourceIndex++, targetIndex);
                 } // if
 
                 if(sourceIndex <= lastSource)
-                    SourceNotInTarget(sourceIndex++);
+                    SourceNotInTarget(sourceIndex++, targetIndex);
 
                 if(targetIndex <= lastTarget)
-                    InTargetNotInSource(targetIndex++);
+                    InTargetNotInSource(sourceIndex, targetIndex++);
             }
         }
 
@@ -475,7 +475,8 @@ namespace octalforty.Brushie.Diff
         /// <see cref="targetDataProvider"/>.
         /// </summary>
         /// <param name="sourceIndex"></param>
-        private void SourceNotInTarget(int sourceIndex)
+        /// <param name="targetIndex"></param>
+        private void SourceNotInTarget(int sourceIndex, int targetIndex)
         {
             CommitCopy();
 
@@ -505,8 +506,9 @@ namespace octalforty.Brushie.Diff
         /// Invoked for elements in <see cref="targetDataProvider"/> and not in 
         /// <see cref="sourceDataProvider"/>.
         /// </summary>
+        /// <param name="sourceIndex"></param>
         /// <param name="targetIndex"></param>
-        private void InTargetNotInSource(int targetIndex)
+        private void InTargetNotInSource(int sourceIndex, int targetIndex)
         {
             CommitCopy();
 
@@ -529,7 +531,8 @@ namespace octalforty.Brushie.Diff
         /// <see cref="targetDataProvider"/>.
         /// </summary>
         /// <param name="sourceIndex"></param>
-        private void Match(int sourceIndex)
+        /// <param name="targetIndex"></param>
+        private void Match(int sourceIndex, int targetIndex)
         {
             if(pendingCopy == null)
             {
