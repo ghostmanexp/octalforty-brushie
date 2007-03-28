@@ -103,7 +103,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "** Sub point 1\n" +
                 "** Sub point 2\n\n\n" +
                 "Well, that went well. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
-                "\"This is a link (optional title)\":http://www.textism.com\n\n" +
+                "<a title=\"optional title\" href=\"http://www.textism.com\">This is a link</a>\n\n" +
                 "table{border:1px solid black}.\n" +
                 "|_. this|_. is|_. a|_. header|\n" +
                 "<{background:gray}. |\\2. this is|{background:red;width:200px}. a|^<>{height:200px}. row|\n" +

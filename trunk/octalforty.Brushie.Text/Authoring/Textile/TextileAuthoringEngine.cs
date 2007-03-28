@@ -68,6 +68,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"(?<Expression>^bq(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\n)\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>"(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>[^"(]*)(\((?<Title>.+?)\))?":(?<Url>\S*))
+        /// </summary>
+        private static readonly Regex LinkRegex = new Regex(
+            "[^\\\\](?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))");
         #endregion
 
         #region Private Member Variables
@@ -96,6 +102,35 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
                 text = AuthorBlockquotes(text);
+
+            if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
+                text = AuthorLinks(text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors links.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorLinks(String text)
+        {
+            Match match = LinkRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                String linkText = match.Groups["Text"].Value;
+                String linkTitle = match.Groups["Title"].Value;
+                String linkUrl = match.Groups["Url"].Value;
+
+                PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
+
+                text = text.Replace(expression, authoringFormatter.FormatHyperlink(linkText, 
+                    linkTitle, linkUrl, attributes));
+
+                match = LinkRegex.Match(text);
+            } // while
 
             return text;
         }
@@ -156,7 +191,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
-        private BlockElementAttributes CreateBlockElementAttributes(Match match)
+        private static BlockElementAttributes CreateBlockElementAttributes(Match match)
         {
             PhraseElementAttributes phraseElementAttributes =
                 CreatePhraseElementAttributes(match);
@@ -216,7 +251,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
-        private PhraseElementAttributes CreatePhraseElementAttributes(Match match)
+        private static PhraseElementAttributes CreatePhraseElementAttributes(Match match)
         {
             //
             // Fetching values.
