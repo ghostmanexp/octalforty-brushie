@@ -52,7 +52,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "# Yes they do\n" +
                                           "# But you knew that\n\n" +
                                           "Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to _emphasize_.\n" +
-                                          "That was a linebreak. And something to indicate *strength*. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\n\n" +
+                                          "That was a **[en-US]linebreak**. And something to indicate *strength*. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\n\n" +
                                           "h3. Coding\n\n" +
                                           "This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:\n\n" +
                                           "<pre>\n" +
@@ -114,7 +114,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "# Yes they do\n" +
                 "# But you knew that\n\n" +
                 "Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to _emphasize_.\n" +
-                "That was a linebreak. And something to indicate *strength*. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\n\n" +
+                "That was a <b lang=\"en-US\">linebreak</b>. And something to indicate <strong>strength</strong>. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\n\n" +
                 "<h3>Coding</h3>\n" +
                 "This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:\n\n" +
                 "<pre>\n" +

@@ -73,7 +73,25 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// [^\\](?<Expression>"(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>[^"(]*)(\((?<Title>.+?)\))?":(?<Url>\S*))
         /// </summary>
         private static readonly Regex LinkRegex = new Regex(
-            "[^\\\\](?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))");
+            "[^\\\\](?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*)
+        /// </summary>
+        private static readonly Regex StrongEmphasisRegex = new Regex(
+            @"[^\\](?<Expression>\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*)",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>\*\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*\*)
+        /// </summary>
+        private static readonly Regex BoldRegex = new Regex(
+            @"[^\\](?<Expression>\*\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*\*)",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -97,6 +115,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="authoringScope"></param>
         public String Author(String text, AuthoringScope authoringScope)
         {
+            if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
+                text = AuthorTextFormatting(text);
+
             if((authoringScope & AuthoringScope.Headings) == AuthoringScope.Headings)
                 text = AuthorHeadings(text);
 
@@ -105,6 +126,46 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
                 text = AuthorLinks(text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors text formatting.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorTextFormatting(String text)
+        {
+            text = AuthorTextFormatting(TextFormatting.Bold, BoldRegex, text);
+            text = AuthorTextFormatting(TextFormatting.StrongEmphasis, StrongEmphasisRegex, text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors text formatting which is accessed via <paramref name="regex"/>. It is required
+        /// that the <paramref name="regex"/> produces two groups - <c>Expression</c> and <c>Text</c>.
+        /// </summary>
+        /// <param name="formatting"></param>
+        /// <param name="regex"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorTextFormatting(TextFormatting formatting, Regex regex, String text)
+        {
+            Match match = regex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                String textToFormat = match.Groups["Text"].Value;
+
+                PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
+
+                text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
+                    textToFormat, attributes));
+
+                match = regex.Match(text);
+            } // while
 
             return text;
         }
