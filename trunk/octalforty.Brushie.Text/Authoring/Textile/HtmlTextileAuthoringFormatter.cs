@@ -23,9 +23,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text">Heading text.</param>
         /// <param name="attributes">Attributes of the heading block element.</param>
         /// <returns></returns>
-        public string FormatHeading(Int32 level, String text, BlockElementAttributes attributes)
+        public String FormatHeading(Int32 level, String text, BlockElementAttributes attributes)
         {
             String tag = String.Format("h{0}", level);
+            return String.Format("{0}{1}</{2}>", GetStartTag(tag, attributes), text, tag);
+        }
+
+        /// <summary>
+        /// Formats a blockquote with provided attribute.
+        /// </summary>
+        /// <param name="text">Blockquote text.</param>
+        /// <param name="attributes">Attributes of the blockquote block element.</param>
+        /// <returns></returns>
+        public String FormatBlockquote(string text, BlockElementAttributes attributes)
+        {
+            const String tag = "blockquote";
             return String.Format("{0}{1}</{2}>", GetStartTag(tag, attributes), text, tag);
         }
         #endregion

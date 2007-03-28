@@ -51,6 +51,11 @@ namespace octalforty.Brushie.Text.Authoring
         /// <summary>
         /// Authors images.
         /// </summary>
-        Images = 128
+        Images = 128,
+
+        /// <summary>
+        /// Author all elements.
+        /// </summary>
+        All = TextFormatting | Headings | Blockquotes | Footnotes | Lists | Tables | Links | Images
     }
 }

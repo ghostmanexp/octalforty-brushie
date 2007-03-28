@@ -11,7 +11,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     {
         #region Private Constants
         /// <summary>
-        /// (?<Heading>
+        /// (?<Expression>
         /// ^h
         ///  (?<Level>[1-6]) # Heading level
         ///  (
@@ -33,11 +33,40 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         ///  )?
         ///  (?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?
         /// \.\s
-        /// (?<Text>.*)\n\n)
+        /// (?<Text>.*)\n)\n
         /// </summary>
-        public static readonly Regex HeadingRegex = new Regex(
+        private static readonly Regex HeadingRegex = new Regex(
             @"(?<Expression>^h(?<Level>[1-6])(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\n)\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | 
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// (?<Expression>
+        /// ^bq
+        ///  (
+        ///    \( 
+        ///      ( 
+        ///        (\#(?<ID>.+?)) | 
+        ///        ((?<CssClass>.+?)\#(?<ID>.+?)) | 
+        ///        (?<CssClass>.+?) 
+        ///       ) 
+        ///     \)
+        ///  )? # ID, CSS class and ID or simply CSS class
+        ///  (\{(?<Style>.+?)\})? # Style
+        ///  (\[(?<Language>.+?)\])? # Language
+        ///  (?<Alignment>
+        ///    (=) |
+        ///    (\<\>) |
+        ///    (\<) |
+        ///    (\>)
+        ///  )?
+        ///  (?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?
+        /// \.\s
+        /// (?<Text>.*)\n)\n
+        /// </summary>
+        private static readonly Regex BlockquoteRegex = new Regex(
+            @"(?<Expression>^bq(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\n)\n",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
@@ -64,6 +93,32 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         {
             if((authoringScope & AuthoringScope.Headings) == AuthoringScope.Headings)
                 text = AuthorHeadings(text);
+
+            if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
+                text = AuthorBlockquotes(text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors blockquotes.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorBlockquotes(String text)
+        {
+            Match match = BlockquoteRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                String blockquoteText = match.Groups["Text"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                text = text.Replace(expression, authoringFormatter.FormatBlockquote(blockquoteText, attributes));
+
+                match = BlockquoteRegex.Match(text);
+            } // while
 
             return text;
         }
