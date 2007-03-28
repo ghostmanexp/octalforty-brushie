@@ -26,7 +26,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public String FormatHeading(Int32 level, String text, BlockElementAttributes attributes)
         {
             String tag = String.Format("h{0}", level);
-            return String.Format("{0}{1}</{2}>", GetStartTag(tag, attributes), text, tag);
+            return String.Format("{0}{1}</{2}>", GetFullBlockStartTag(tag, attributes), text.Trim(), tag);
         }
 
         /// <summary>
@@ -38,31 +38,43 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public String FormatBlockquote(string text, BlockElementAttributes attributes)
         {
             const String tag = "blockquote";
-            return String.Format("{0}{1}</{2}>", GetStartTag(tag, attributes), text, tag);
+            return String.Format("{0}{1}</{2}>", GetFullBlockStartTag(tag, attributes), text.Trim(), tag);
+        }
+
+        /// <summary>
+        /// Formats a hyperlink with given text, title, URL and attributes.
+        /// </summary>
+        /// <param name="text">
+        /// Hyperlink text (the text that appears between <c>&lta></c> tags.
+        /// </param>
+        /// <param name="title">
+        /// Hyperlink title (the text that appears in <c>title</c> attribute).
+        /// </param>
+        /// <param name="url">
+        /// Hyperlink URL (the text that appears in <c>href</c> attribute).
+        /// </param>
+        /// <param name="attributes">Attributes of the hyperlink.</param>
+        /// <returns></returns>
+        public String FormatHyperlink(string text, string title, string url, PhraseElementAttributes attributes)
+        {
+            const String tag = "a";
+            return String.Format("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>", 
+                GetPartialPhraseStartTag(tag, attributes),
+                title.Trim(), url.Trim(), text.Trim(), tag);
         }
         #endregion
 
         /// <summary>
-        /// Creates a start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
+        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
         /// class="<see cref="BlockElementAttributes.CssClass"/>" style="<see cref="BlockElementAttributes.Style"/>"
         /// lang="<see cref="BlockElementAttributes.Language"/>">".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        protected static String GetStartTag(String tag, BlockElementAttributes attributes)
+        protected static String GetFullBlockStartTag(String tag, BlockElementAttributes attributes)
         {
-            StringBuilder tagBuilder = new StringBuilder();
-            tagBuilder.AppendFormat("<{0}", tag);
-
-            if(!String.IsNullOrEmpty(attributes.CssClass))
-                tagBuilder.AppendFormat(" class=\"{0}\"", attributes.CssClass);
-
-            if(!String.IsNullOrEmpty(attributes.ID))
-                tagBuilder.AppendFormat(" id=\"{0}\"", attributes.ID);
-
-            if(!String.IsNullOrEmpty(attributes.Language))
-                tagBuilder.AppendFormat(" lang=\"{0}\"", attributes.Language);
+            StringBuilder tagBuilder = new StringBuilder(GetPartialPhraseStartTagWithoutStyle(tag, attributes));
 
             //
             // Now we need to construct a new "style" attribute since values
@@ -103,6 +115,57 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             } // if
 
             tagBuilder.Append(">");
+            return tagBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
+        /// class="<see cref="PhraseElementAttributes.CssClass"/>" lang="<see cref="PhraseElementAttributes.Language"/>"
+        /// style="<see cref="PhraseElementAttributes.Style"/>"".
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        private static String GetPartialPhraseStartTag(String tag, PhraseElementAttributes attributes)
+        {
+            StringBuilder tagBuilder = new StringBuilder(GetPartialPhraseStartTagWithoutStyle(tag, attributes));
+
+            if(!String.IsNullOrEmpty(attributes.Style))
+            {
+                tagBuilder.AppendFormat(" style=\"{0}", attributes.Style);
+
+                if(!attributes.Style.EndsWith(";"))
+                    tagBuilder.Append(";\"");
+                else
+                    tagBuilder.Append("\"");
+            } // if
+
+            return tagBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
+        /// class="<see cref="BlockElementAttributes.CssClass"/>" lang="<see cref="BlockElementAttributes.Language"/>"".
+        /// <para />
+        /// Note that <c>style</c> attribute is missing.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        private static String GetPartialPhraseStartTagWithoutStyle(String tag, PhraseElementAttributes attributes)
+        {
+            StringBuilder tagBuilder = new StringBuilder();
+            tagBuilder.AppendFormat("<{0}", tag);
+
+            if(!String.IsNullOrEmpty(attributes.CssClass))
+                tagBuilder.AppendFormat(" class=\"{0}\"", attributes.CssClass);
+
+            if(!String.IsNullOrEmpty(attributes.ID))
+                tagBuilder.AppendFormat(" id=\"{0}\"", attributes.ID);
+
+            if(!String.IsNullOrEmpty(attributes.Language))
+                tagBuilder.AppendFormat(" lang=\"{0}\"", attributes.Language);
+            
             return tagBuilder.ToString();
         }
     }
