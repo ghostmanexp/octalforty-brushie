@@ -45,6 +45,7 @@
     <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\PhraseElementAttributes.cs" />
+    <Compile Include="Authoring\Textile\TextFormatting.cs" />
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs" />
     <Compile Include="LuceneNet\DocumentAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapter.cs" />

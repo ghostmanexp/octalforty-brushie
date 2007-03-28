@@ -45,7 +45,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// Formats a hyperlink with given text, title, URL and attributes.
         /// </summary>
         /// <param name="text">
-        /// Hyperlink text (the text that appears between <c>&lta></c> tags.
+        /// Hyperlink text (the text that appears between <c>a</c> tags.
         /// </param>
         /// <param name="title">
         /// Hyperlink title (the text that appears in <c>title</c> attribute).
@@ -61,6 +61,33 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             return String.Format("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>", 
                 GetPartialPhraseStartTag(tag, attributes),
                 title.Trim(), url.Trim(), text.Trim(), tag);
+        }
+
+        /// <summary>
+        /// Formats a text formatting block, as defined by <paramref name="formatting"/>.
+        /// </summary>
+        /// <param name="formatting">Text formatting.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="attributes">Attributes of the phrase element.</param>
+        /// <returns></returns>
+        public string FormatTextFormatting(TextFormatting formatting, string text, PhraseElementAttributes attributes)
+        {
+            //
+            // Determine tag
+            String tag = String.Empty;
+            switch(formatting)
+            {
+                case TextFormatting.StrongEmphasis:
+                    tag = "strong";
+                    break;
+                case TextFormatting.Bold:
+                    tag = "b";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("formatting");
+            } // switch
+
+            return String.Format("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, attributes), text.Trim(), tag);
         }
         #endregion
 

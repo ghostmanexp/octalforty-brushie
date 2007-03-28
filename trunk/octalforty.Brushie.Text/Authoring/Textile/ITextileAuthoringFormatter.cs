@@ -28,17 +28,20 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <summary>
         /// Formats a hyperlink with given text, title, URL and attributes.
         /// </summary>
-        /// <param name="text">
-        /// Hyperlink text (the text that appears between <c>&lta></c> tags.
-        /// </param>
-        /// <param name="title">
-        /// Hyperlink title (the text that appears in <c>title</c> attribute).
-        /// </param>
-        /// <param name="url">
-        /// Hyperlink URL (the text that appears in <c>href</c> attribute).
-        /// </param>
+        /// <param name="text">Hyperlink text (the text that appears between <c>a</c> tags.</param>
+        /// <param name="title">Hyperlink title (the text that appears in <c>title</c> attribute).</param>
+        /// <param name="url">Hyperlink URL (the text that appears in <c>href</c> attribute).</param>
         /// <param name="attributes">Attributes of the hyperlink.</param>
         /// <returns></returns>
         String FormatHyperlink(String text, String title, String url, PhraseElementAttributes attributes);
+
+        /// <summary>
+        /// Formats a text formatting block, as defined by <paramref name="formatting"/>.
+        /// </summary>
+        /// <param name="formatting">Text formatting.</param>
+        /// <param name="text">The text.</param>
+        /// <param name="attributes">Attributes of the phrase element.</param>
+        /// <returns></returns>
+        String FormatTextFormatting(TextFormatting formatting, String text, PhraseElementAttributes attributes);
     }
 }
