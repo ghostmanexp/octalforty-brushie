@@ -108,7 +108,7 @@ namespace octalforty.Brushie.Instrumentation.Core
         /// </summary>
         /// <param name="binding"></param>
         /// <returns></returns>
-        private IBinder CreateBinder(BindingElement binding)
+        private static IBinder CreateBinder(BindingElement binding)
         {
             IBinder rootBinder = new MessageTypeBinder(GetMessageTypeNames(binding));
             
