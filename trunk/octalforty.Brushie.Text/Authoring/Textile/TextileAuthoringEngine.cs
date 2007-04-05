@@ -160,6 +160,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"[^\\](?<Expression>%(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)%)",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// (?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)
+        /// </summary>
+        private static readonly Regex ListRegex = new Regex(
+            @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -194,6 +202,41 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
                 text = AuthorLinks(text);
+
+            /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
+                text = AuthorLists(text);*/
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors lists.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorLists(String text)
+        {
+            Match match = ListRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+               /* String textToFormat = match.Groups["Text"].Value;
+
+                //
+                // We need to ensure that current expression is not inside <pre> tags.
+                if(!IsMatchBetweenTags(text, match, "pre"))
+                {
+                    PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
+
+                    text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
+                        textToFormat, attributes));
+                    match = regex.Match(text);
+                } // if
+                else
+                {*/
+                    match = match.NextMatch();
+                //} // else
+            } // while
 
             return text;
         }
