@@ -89,6 +89,24 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 case TextFormatting.Italics:
                     tag = "i";
                     break;
+                case TextFormatting.Citation:
+                    tag = "cite";
+                    break;
+                case TextFormatting.Deleted:
+                    tag = "del";
+                    break;
+                case TextFormatting.Inserted:
+                    tag = "ins";
+                    break;
+                case TextFormatting.Superscript:
+                    tag = "sup";
+                    break;
+                case TextFormatting.Subscript:
+                    tag = "sub";
+                    break;
+                case TextFormatting.Span:
+                    tag = "span";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("formatting");
             } // switch
