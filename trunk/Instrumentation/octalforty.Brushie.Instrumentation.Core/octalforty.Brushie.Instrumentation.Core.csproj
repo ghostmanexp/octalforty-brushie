@@ -95,12 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Core.cd" />
-    <None Include="octalforty.Brushie.Instrumentation.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="octalforty.Brushie.Instrumentation.xsx">
-      <DependentUpon>octalforty.Brushie.Instrumentation.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\octalforty.Brushie.Configuration\octalforty.Brushie.Configuration.csproj">
