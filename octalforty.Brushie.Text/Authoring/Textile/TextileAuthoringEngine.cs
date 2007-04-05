@@ -209,6 +209,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             text = AuthorTextFormatting(TextFormatting.StrongEmphasis, StrongEmphasisRegex, text);
             text = AuthorTextFormatting(TextFormatting.Italics, ItalicsRegex, text);
             text = AuthorTextFormatting(TextFormatting.Emphasis, EmphasisRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Citation, CitationRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Inserted, InsertedRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Deleted, DeletedRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Superscript, SuperscriptRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Subscript, SubscriptRegex, text);
+            text = AuthorTextFormatting(TextFormatting.Span, SpanRegex, text);
 
             return text;
         }
@@ -229,15 +235,54 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 String expression = match.Groups["Expression"].Value;
                 String textToFormat = match.Groups["Text"].Value;
 
-                PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
+                //
+                // We need to ensure that current expression is not inside <pre> tags.
+                if(!IsMatchBetweenTags(text, match, "pre"))
+                {
+                    PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
 
-                text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
-                    textToFormat, attributes));
-
-                match = regex.Match(text);
+                    text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
+                        textToFormat, attributes));
+                    match = regex.Match(text);
+                } // if
+                else
+                {
+                    match = match.NextMatch();
+                } // else
             } // while
 
             return text;
+        }
+
+        private static Boolean IsMatchBetweenTags(String text, Match match, String tag)
+        {
+            String startTag = String.Format("<{0}", tag.ToUpper());
+            String endTag = String.Format("</{0}>", tag.ToUpper());
+
+            text = text.ToUpper();
+
+            String beforeMatch = text.Substring(0, match.Index).ToUpper();
+            String afterMatch = text.Substring(match.Index + match.Length);
+
+            Int32 startTagBeforeMatch = beforeMatch.LastIndexOf(startTag);
+            Int32 endTagBeforeMatch = beforeMatch.LastIndexOf(endTag);
+            Int32 startTagAfterMatch = afterMatch.IndexOf(startTag);
+            Int32 endTagAfterMatch = afterMatch.IndexOf(endTag);
+
+            //
+            // Shortcuts
+            if(startTagBeforeMatch == -1 || endTagAfterMatch == -1)
+                return false;
+
+            //
+            // If the tag starts before match (which is in case when end tag before match is either missing
+            // or is positioned even before the start tag) and ends after the match (that is, ends
+            // before start tag in after match, if one exists), we're inside those tags.
+            if(((endTagBeforeMatch == -1 && startTagBeforeMatch != -1) || (endTagBeforeMatch < startTagBeforeMatch)) &&
+                (endTagAfterMatch != -1 && startTagAfterMatch == -1) || (endTagAfterMatch > startTagAfterMatch))
+                return true;
+            
+            return false;
         }
 
         /// <summary>
