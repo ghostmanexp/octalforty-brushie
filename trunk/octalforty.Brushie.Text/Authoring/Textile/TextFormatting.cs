@@ -28,6 +28,36 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <summary>
         /// Italicized text (design element, as opposed to <see cref="Emphasis"/>).
         /// </summary>
-        Italics = 4
+        Italics = 4,
+        
+        /// <summary>
+        /// Cited text (for example, the title of a work being cited).
+        /// </summary>
+        Citation = 5,
+
+        /// <summary>
+        /// Inserted text.
+        /// </summary>
+        Inserted = 6,
+
+        /// <summary>
+        /// Deleted text.
+        /// </summary>
+        Deleted = 7,
+
+        /// <summary>
+        /// Superscript.
+        /// </summary>
+        Superscript = 8,
+
+        /// <summary>
+        /// Subscript.
+        /// </summary>
+        Subscript = 9,
+
+        /// <summary>
+        /// Generic span.
+        /// </summary>
+        Span = 10
     }
 }

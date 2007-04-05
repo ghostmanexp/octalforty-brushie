@@ -73,80 +73,82 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                     new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
         }
 
+        private static void FormatTextFormatting(TextFormatting textFormatting, string tag)
+        {
+            ITextileAuthoringFormatter authoringFormatter = new
+                HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual(string.Format("<{0}>Inner Text</{0}>", tag),
+                authoringFormatter.FormatTextFormatting(textFormatting, " Inner Text ",
+                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
+
+            Assert.AreEqual(string.Format("<{0} class=\"a\" style=\"font-weight: bold;\">Inner Text</{0}>", tag),
+                authoringFormatter.FormatTextFormatting(textFormatting, " Inner Text ",
+                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
+
+            Assert.AreEqual(string.Format("<{0} id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Inner Text</{0}>", tag),
+                authoringFormatter.FormatTextFormatting(textFormatting, " Inner Text ",
+                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+        }
+
         [Test()]
         public void FormatTextFormattingBold()
         {
-            ITextileAuthoringFormatter authoringFormatter =
-                new HtmlTextileAuthoringFormatter();
-
-            Assert.AreEqual("<b>Link</b>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Bold, " Link ",
-                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
-
-            Assert.AreEqual("<b class=\"a\" style=\"font-weight: bold;\">Link</b>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Bold, " Link ",
-                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
-
-            Assert.AreEqual("<b id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Link</b>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Bold, " Link ",
-                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+            FormatTextFormatting(TextFormatting.Bold, "b");
         }
 
         [Test()]
         public void FormatTextFormattingStrongEmphasis()
         {
-            ITextileAuthoringFormatter authoringFormatter =
-                new HtmlTextileAuthoringFormatter();
-
-            Assert.AreEqual("<strong>Link</strong>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.StrongEmphasis, " Link ",
-                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
-
-            Assert.AreEqual("<strong class=\"a\" style=\"font-weight: bold;\">Link</strong>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.StrongEmphasis, " Link ",
-                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
-
-            Assert.AreEqual("<strong id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Link</strong>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.StrongEmphasis, " Link ",
-                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+            FormatTextFormatting(TextFormatting.StrongEmphasis, "strong");
         }
 
         [Test()]
         public void FormatTextFormattingItalics()
         {
-            ITextileAuthoringFormatter authoringFormatter =
-                new HtmlTextileAuthoringFormatter();
-
-            Assert.AreEqual("<i>Link</i>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Italics, " Link ",
-                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
-
-            Assert.AreEqual("<i class=\"a\" style=\"font-weight: bold;\">Link</i>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Italics, " Link ",
-                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
-
-            Assert.AreEqual("<i id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Link</i>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Italics, " Link ",
-                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+            FormatTextFormatting(TextFormatting.Italics, "i");
         }
 
         [Test()]
         public void FormatTextFormattingEmphasis()
         {
-            ITextileAuthoringFormatter authoringFormatter =
-                new HtmlTextileAuthoringFormatter();
+            FormatTextFormatting(TextFormatting.Emphasis, "em");
+        }
 
-            Assert.AreEqual("<em>Link</em>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Emphasis, " Link ",
-                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
+        [Test()]
+        public void FormatTextFormattingCitation()
+        {
+            FormatTextFormatting(TextFormatting.Citation, "cite");
+        }
 
-            Assert.AreEqual("<em class=\"a\" style=\"font-weight: bold;\">Link</em>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Emphasis, " Link ",
-                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
+        [Test()]
+        public void FormatTextFormattingInserted()
+        {
+            FormatTextFormatting(TextFormatting.Inserted, "ins");
+        }
 
-            Assert.AreEqual("<em id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Link</em>",
-                authoringFormatter.FormatTextFormatting(TextFormatting.Emphasis, " Link ",
-                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+        [Test()]
+        public void FormatTextFormattingDeleted()
+        {
+            FormatTextFormatting(TextFormatting.Deleted, "del");
+        }
+
+        [Test()]
+        public void FormatTextFormattingSuperscript()
+        {
+            FormatTextFormatting(TextFormatting.Superscript, "sup");
+        }
+
+        [Test()]
+        public void FormatTextFormattingSubscript()
+        {
+            FormatTextFormatting(TextFormatting.Subscript, "sub");
+        }
+
+        [Test()]
+        public void FormatTextFormattingSpan()
+        {
+            FormatTextFormatting(TextFormatting.Span, "span");
         }
     }
 }
