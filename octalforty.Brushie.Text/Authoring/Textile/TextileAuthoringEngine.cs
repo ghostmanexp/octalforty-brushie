@@ -272,7 +272,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             Match match = ImplicitParagraphRegex.Match(text);
             while(match.Success)
             {
-                text = text.Replace(match.Value, "p. " + match.Groups["Text"].Value);
+                text = text.Replace(match.Groups["Text"].Value, "p. " + match.Groups["Text"].Value);
                 match = ImplicitParagraphRegex.Match(text);
             } // match
 
