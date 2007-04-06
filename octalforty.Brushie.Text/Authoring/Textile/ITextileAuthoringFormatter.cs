@@ -43,5 +43,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="attributes">Attributes of the phrase element.</param>
         /// <returns></returns>
         String FormatTextFormatting(TextFormatting formatting, String text, PhraseElementAttributes attributes);
+
+        /// <summary>
+        /// Formats a paragraph with provided attributes.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        String FormatParagraph(string text, BlockElementAttributes attributes);
     }
 }

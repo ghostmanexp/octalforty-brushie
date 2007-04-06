@@ -150,5 +150,27 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
         {
             FormatTextFormatting(TextFormatting.Span, "span");
         }
+
+        [Test()]
+        public void FormatParagraph()
+        {
+            ITextileAuthoringFormatter authoringFormatter =
+                new HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual("<p>Inner Text</p>",
+                authoringFormatter.FormatParagraph(" Inner Text ",
+                    new BlockElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty,
+                        BlockElementAlignment.Unknown, 0, 0)));
+
+            Assert.AreEqual("<p class=\"heading\" style=\"font-weight: bold;text-align: center;padding-left: 2em;\">Inner Text</p>",
+                authoringFormatter.FormatParagraph(" Inner Text ",
+                    new BlockElementAttributes("heading", string.Empty, "font-weight: bold", string.Empty,
+                        BlockElementAlignment.Center, 2, 0)));
+
+            Assert.AreEqual("<p id=\"id\" lang=\"en-US\" style=\"font-weight: bold;text-align: center;padding-left: 2em;padding-right: 3em;\">Inner Text</p>",
+                authoringFormatter.FormatParagraph(" Inner Text ",
+                    new BlockElementAttributes(null, "id", "font-weight: bold;", "en-US",
+                        BlockElementAlignment.Center, 2, 3)));
+        }
     }
 }

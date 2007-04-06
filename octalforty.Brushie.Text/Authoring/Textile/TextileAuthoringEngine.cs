@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
+using octalforty.Brushie.Text.Authoring.Textile.Internal;
+
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
@@ -168,6 +170,22 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// ^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>.+)\r\n
+        /// </summary>
+        private static readonly Regex ImplicitParagraphRegex = new Regex(
+            @"^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>.+)\r\n",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// (?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\r\n)\r\n
+        /// </summary>
+        private static readonly Regex ParagraphRegex = new Regex(
+            @"(?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\r\n)\r\n",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -201,7 +219,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 text = AuthorBlockquotes(text);
 
             if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
-                text = AuthorLinks(text);
+                text = AuthorHyperlinks(text);
 
             /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
                 text = AuthorLists(text);*/
@@ -248,6 +266,18 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <returns></returns>
         private String AuthorTextFormatting(String text)
         {
+            //
+            // Preparing paragraphs not directly specified with the "p." modifier and
+            // then authoring them all in one sweep.
+            Match match = ImplicitParagraphRegex.Match(text);
+            while(match.Success)
+            {
+                text = text.Replace(match.Value, "p. " + match.Groups["Text"].Value);
+                match = ImplicitParagraphRegex.Match(text);
+            } // match
+
+            text = AuthorParagraphs(text);
+
             text = AuthorTextFormatting(TextFormatting.Bold, BoldRegex, text);
             text = AuthorTextFormatting(TextFormatting.StrongEmphasis, StrongEmphasisRegex, text);
             text = AuthorTextFormatting(TextFormatting.Italics, ItalicsRegex, text);
@@ -258,6 +288,29 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             text = AuthorTextFormatting(TextFormatting.Superscript, SuperscriptRegex, text);
             text = AuthorTextFormatting(TextFormatting.Subscript, SubscriptRegex, text);
             text = AuthorTextFormatting(TextFormatting.Span, SpanRegex, text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors paragraphs.
+        /// </summary>
+        /// <param name="text"></param>
+        private String AuthorParagraphs(String text)
+        {
+            Match match = ParagraphRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                String paragraphText = match.Groups["Text"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                text = text.Replace(expression, authoringFormatter.FormatParagraph(paragraphText,
+                    attributes));
+
+                match = ParagraphRegex.Match(text);
+            } // while
 
             return text;
         }
@@ -329,24 +382,20 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Authors links.
+        /// Authors hyperlinks.
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        private String AuthorLinks(String text)
+        private String AuthorHyperlinks(String text)
         {
             Match match = LinkRegex.Match(text);
             while(match.Success)
             {
-                String expression = match.Groups["Expression"].Value;
-                String linkText = match.Groups["Text"].Value;
-                String linkTitle = match.Groups["Title"].Value;
-                String linkUrl = match.Groups["Url"].Value;
-
+                Hyperlink hyperlink = new Hyperlink(match);
                 PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
 
-                text = text.Replace(expression, authoringFormatter.FormatHyperlink(linkText, 
-                    linkTitle, linkUrl, attributes));
+                text = text.Replace(hyperlink.Expression, authoringFormatter.FormatHyperlink(hyperlink.Text, 
+                    hyperlink.Title, hyperlink.Url, attributes));
 
                 match = LinkRegex.Match(text);
             } // while
