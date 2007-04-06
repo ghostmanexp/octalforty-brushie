@@ -23,7 +23,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text">Heading text.</param>
         /// <param name="attributes">Attributes of the heading block element.</param>
         /// <returns></returns>
-        public String FormatHeading(Int32 level, String text, BlockElementAttributes attributes)
+        public virtual String FormatHeading(Int32 level, String text, BlockElementAttributes attributes)
         {
             String tag = String.Format("h{0}", level);
             return String.Format("{0}{1}</{2}>", GetFullBlockStartTag(tag, attributes), text.Trim(), tag);
@@ -35,7 +35,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text">Blockquote text.</param>
         /// <param name="attributes">Attributes of the blockquote block element.</param>
         /// <returns></returns>
-        public String FormatBlockquote(string text, BlockElementAttributes attributes)
+        public virtual String FormatBlockquote(string text, BlockElementAttributes attributes)
         {
             const String tag = "blockquote";
             return String.Format("{0}{1}</{2}>", GetFullBlockStartTag(tag, attributes), text.Trim(), tag);
@@ -55,7 +55,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </param>
         /// <param name="attributes">Attributes of the hyperlink.</param>
         /// <returns></returns>
-        public String FormatHyperlink(string text, string title, string url, PhraseElementAttributes attributes)
+        public virtual String FormatHyperlink(string text, string title, string url, PhraseElementAttributes attributes)
         {
             const String tag = "a";
             return String.Format("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>", 
@@ -70,11 +70,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text">The text.</param>
         /// <param name="attributes">Attributes of the phrase element.</param>
         /// <returns></returns>
-        public string FormatTextFormatting(TextFormatting formatting, string text, PhraseElementAttributes attributes)
+        public virtual String FormatTextFormatting(TextFormatting formatting, string text, PhraseElementAttributes attributes)
         {
             //
             // Determine tag
-            String tag = String.Empty;
+            String tag;
             switch(formatting)
             {
                 case TextFormatting.StrongEmphasis:
@@ -112,6 +112,18 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             } // switch
 
             return String.Format("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, attributes), text.Trim(), tag);
+        }
+
+        /// <summary>
+        /// Formats a paragraph with provided attributes.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        public virtual String FormatParagraph(string text, BlockElementAttributes attributes)
+        {
+            const String tag = "p";
+            return String.Format("{0}{1}</{2}>", GetFullBlockStartTag(tag, attributes), text.Trim(), tag);
         }
         #endregion
 
@@ -177,7 +189,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        private static String GetPartialPhraseStartTag(String tag, PhraseElementAttributes attributes)
+        protected static String GetPartialPhraseStartTag(String tag, PhraseElementAttributes attributes)
         {
             StringBuilder tagBuilder = new StringBuilder(GetPartialPhraseStartTagWithoutStyle(tag, attributes));
 
@@ -203,7 +215,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        private static String GetPartialPhraseStartTagWithoutStyle(String tag, PhraseElementAttributes attributes)
+        protected static String GetPartialPhraseStartTagWithoutStyle(String tag, PhraseElementAttributes attributes)
         {
             StringBuilder tagBuilder = new StringBuilder();
             tagBuilder.AppendFormat("<{0}", tag);

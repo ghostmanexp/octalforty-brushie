@@ -78,13 +78,13 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 
             Assert.AreEqual("<h2 class=\"head\" id=\"h2\" lang=\"en-US\" style=\"color:green;text-align: justify;padding-left: 1em;padding-right: 1em;\">This is a title</h2>\r\n" +
                 "<h3>This is a subhead</h3>\r\n" +
-                "p{color:red}. This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\r\n\r\n" +
+                "<p style=\"color:red;\">This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.</p>\r\n" +
                 "<blockquote lang=\"fr\">This is a block quote. I'll admit it's not the most exciting block quote ever devised.</blockquote>\r\n" +
-                "Simple list:\r\n\r\n" +
+                "<p>Simple list:</p>\r\n" +
                 "#{color:blue} one\r\n" +
                 "# two\r\n" +
                 "# three\r\n\r\n" +
-                "Multi-level list:\r\n\r\n" +
+                "<p>Multi-level list:</p>\r\n" +
                 "# one\r\n" +
                 "## aye\r\n" +    
                 "## bee\r\n" +
