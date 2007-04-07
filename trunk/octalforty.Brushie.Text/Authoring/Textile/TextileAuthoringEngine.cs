@@ -172,18 +172,18 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
         /// <summary>
-        /// ^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>.+)\r\n
+        /// ^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n
         /// </summary>
         private static readonly Regex ImplicitParagraphRegex = new Regex(
-            @"^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>.+)\r\n\r\n",
+            @"^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
         /// <summary>
-        /// (?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*)\r\n)\r\n
+        /// (?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n
         /// </summary>
         private static readonly Regex ParagraphRegex = new Regex(
-            @"(?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
+            @"(?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
@@ -209,6 +209,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="authoringScope"></param>
         public String Author(String text, AuthoringScope authoringScope)
         {
+            if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
+                text = AuthorHyperlinks(text);
+
             if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
                 text = AuthorTextFormatting(text);
 
@@ -217,9 +220,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
                 text = AuthorBlockquotes(text);
-
-            if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
-                text = AuthorHyperlinks(text);
 
             /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
                 text = AuthorLists(text);*/
