@@ -108,15 +108,15 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "|_. this|_. is|_. a|_. header|\r\n" +
                 "<{background:gray}. |\\2. this is|{background:red;width:200px}. a|^<>{height:200px}. row|\r\n" +
                 "|this|<>{padding:10px}. is|^. another|(bob#bob). row|\r\n\r\n" +*/
-                "An image:\r\n\r\n" +
-                "!/common/textist.gif(optional alt text)!\r\n\r\n" +
+                "<p>An image:</p>\r\n\r\n" +
+                "<p>!/common/textist.gif(optional alt text)!</p>\r\n\r\n" +
                 "# Librarians rule\r\n" +
                 "# Yes they do\r\n" +
                 "# But you knew that\r\n\r\n" +
-                "Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to <em>emphasize</em>.\r\n" +
-                "That was a <b lang=\"en-US\">linebreak</b>. And something to indicate <strong>strength</strong>. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\r\n\r\n" +
+                "<p>Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to <em>emphasize</em>.\r\n" +
+                "That was a <b lang=\"en-US\">linebreak</b>. And something to indicate <strong>strength</strong>. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.</p>\r\n\r\n" +
                 "<h3>Coding</h3>\r\n" +
-                "This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:\r\n\r\n" +
+                "<p>This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:</p>\r\n\r\n" +
                 "<pre>\r\n" +
                 "<code>\r\n" +
 	            "$text = str_replace(\"<p>%::%</p>\",\"\",$text);\r\n" +
