@@ -64,6 +64,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
+        /// Formats a hyperlink with given text, title, URL and attributes.
+        /// </summary>
+        /// <param name="alternateText">Image alternate text.</param>
+        /// <param name="url">Hyperlink URL (the text that appears in <c>href</c> attribute).</param>
+        /// <param name="attributes">Attributes of the hyperlink.</param>
+        /// <returns></returns>
+        public string FormatImage(string alternateText, string url,
+            BlockElementAttributes attributes)
+        {
+            const String tag = "img";
+            return string.Format("{0} alt=\"{1}\" src=\"{2}\" />", GetPartialBlockStartTag(tag, attributes),
+                alternateText.Trim(), url.Trim());
+        }
+
+        /// <summary>
         /// Formats a text formatting block, as defined by <paramref name="formatting"/>.
         /// </summary>
         /// <param name="formatting">Text formatting.</param>
@@ -128,14 +143,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         #endregion
 
         /// <summary>
-        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
+        /// Creates partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
         /// class="<see cref="BlockElementAttributes.CssClass"/>" style="<see cref="BlockElementAttributes.Style"/>"
-        /// lang="<see cref="BlockElementAttributes.Language"/>">".
+        /// lang="<see cref="BlockElementAttributes.Language"/>".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        protected static String GetFullBlockStartTag(String tag, BlockElementAttributes attributes)
+        protected static String GetPartialBlockStartTag(String tag, BlockElementAttributes attributes)
         {
             StringBuilder tagBuilder = new StringBuilder(GetPartialPhraseStartTagWithoutStyle(tag, attributes));
 
@@ -173,12 +188,24 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                     style += String.Format("padding-right: {0}em;",
                         attributes.RightIndent);
                 } // if
-                
+
                 tagBuilder.AppendFormat(" style=\"{0}\"", style);
             } // if
 
-            tagBuilder.Append(">");
             return tagBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
+        /// class="<see cref="BlockElementAttributes.CssClass"/>" style="<see cref="BlockElementAttributes.Style"/>"
+        /// lang="<see cref="BlockElementAttributes.Language"/>">".
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        protected static String GetFullBlockStartTag(String tag, BlockElementAttributes attributes)
+        {
+            return GetPartialBlockStartTag(tag, attributes) + ">";
         }
 
         /// <summary>

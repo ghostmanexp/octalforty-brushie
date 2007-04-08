@@ -47,7 +47,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "<{background:gray}. |\\2. this is|{background:red;width:200px}. a|^<>{height:200px}. row|\r\n" +
                                           "|this|<>{padding:10px}. is|^. another|(bob#bob). row|\r\n\r\n" +*/
                                           "An image:\r\n\r\n" +
-                                          "!/common/textist.gif(optional alt text)!\r\n\r\n" +
+                                          "!http://www.google.com/intl/en_ALL/images/logo.gif(Google)!\r\n\r\n" +
                                           "# Librarians rule\r\n" +
                                           "# Yes they do\r\n" +
                                           "# But you knew that\r\n\r\n" +
@@ -109,7 +109,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "<{background:gray}. |\\2. this is|{background:red;width:200px}. a|^<>{height:200px}. row|\r\n" +
                 "|this|<>{padding:10px}. is|^. another|(bob#bob). row|\r\n\r\n" +*/
                 "<p>An image:</p>\r\n\r\n" +
-                "<p>!/common/textist.gif(optional alt text)!</p>\r\n\r\n" +
+                "<p><img alt=\"Google\" src=\"http://www.google.com/intl/en_ALL/images/logo.gif\" /></p>\r\n\r\n" +
                 "# Librarians rule" +
                 "# Yes they do" +
                 "# But you knew that\r\n\r\n" +

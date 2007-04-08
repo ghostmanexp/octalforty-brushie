@@ -73,6 +73,28 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                     new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
         }
 
+        [Test()]
+        public void FormatImage()
+        {
+            ITextileAuthoringFormatter authoringFormatter =
+                new HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual("<img alt=\"Alternate\" src=\"http://www.domain.com/image.png\" />",
+                authoringFormatter.FormatImage(" Alternate ", " http://www.domain.com/image.png ",
+                    new BlockElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty,
+                        BlockElementAlignment.Unknown, 0, 0)));
+
+            Assert.AreEqual("<img class=\"heading\" style=\"font-weight: bold;text-align: center;padding-left: 2em;\" alt=\"Alternate\" src=\"http://www.domain.com/image.png\" />",
+                authoringFormatter.FormatImage(" Alternate ", " http://www.domain.com/image.png ",
+                    new BlockElementAttributes("heading", string.Empty, "font-weight: bold", string.Empty,
+                        BlockElementAlignment.Center, 2, 0)));
+
+            Assert.AreEqual("<img id=\"id\" lang=\"en-US\" style=\"font-weight: bold;text-align: center;padding-left: 2em;padding-right: 3em;\" alt=\"Alternate\" src=\"http://www.domain.com/image.png\" />",
+                authoringFormatter.FormatImage(" Alternate ", " http://www.domain.com/image.png ",
+                    new BlockElementAttributes(null, "id", "font-weight: bold;", "en-US",
+                        BlockElementAlignment.Center, 2, 3)));
+        }
+
         private static void FormatTextFormatting(TextFormatting textFormatting, string tag)
         {
             ITextileAuthoringFormatter authoringFormatter = new

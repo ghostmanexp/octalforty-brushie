@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Textile.Internal;
@@ -187,6 +186,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"(?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)\!)
+        /// </summary>
+        private static readonly Regex ImageRegex = new Regex(
+            @"[^\\](?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)\!)",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -242,6 +249,34 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
                 text = AuthorBlockquotes(text);
+
+            if((authoringScope & AuthoringScope.Images) == AuthoringScope.Images)
+                text = AuthorImages(text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors images.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorImages(String text)
+        {
+            Match match = ImageRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                String url = match.Groups["Url"].Value;
+                String alternateText = match.Groups["AlternateText"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                text = text.Replace(expression, 
+                    authoringFormatter.FormatImage(alternateText, url, attributes));
+
+                match = ImageRegex.Match(text);
+            } // while
 
             return text;
         }
