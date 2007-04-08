@@ -194,6 +194,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"[^\\](?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)\!)",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        /// <summary>
+        /// [^\\](?<Expression>\[(?<FootnoteID>\d+)\])
+        /// </summary>
+        private static readonly Regex FootnoteReferenceRegex = new Regex(
+            @"[^\\](?<Expression>\[(?<FootnoteID>\d+)\])",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+
+        private static readonly Regex FootnoteRegex = new Regex(
+            @"(?<Expression>^fn(?<FootnoteID>\d+)\.\s(?<Text>.*))\r\n\r\n",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         #region Private Member Variables
@@ -253,6 +266,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if((authoringScope & AuthoringScope.Images) == AuthoringScope.Images)
                 text = AuthorImages(text);
 
+            if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
+                text = AuthorFootnotes(text);
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors footnotes and footnote references.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorFootnotes(String text)
+        {
             return text;
         }
 
