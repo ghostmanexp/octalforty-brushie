@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Textile.Internal;
@@ -209,9 +210,30 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="authoringScope"></param>
         public String Author(String text, AuthoringScope authoringScope)
         {
+            /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
+                text = AuthorLists(text);*/
+            // Lists, tables and possibly something else should be authored prior
+            // to removing linebreaks.
             if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
                 text = AuthorHyperlinks(text);
 
+            //
+            // Get rid of \t characters, since we'd need them later on.
+            text = text.Replace("\t", "");
+
+            //
+            // Replacing triplets of linebreaks with two linebreaks.
+            while(text.Contains("\r\n\r\n\r\n"))
+                text = text.Replace("\r\n\r\n\r\n", "\r\n\r\n");
+
+            //
+            // Now we need to replace two consecutive linebreaks with one \t character,
+            // then eliminate all single linebreaks and only then restore original
+            // double linebreaks.
+            text = text.Replace("\r\n\r\n", "\t");
+            text = text.Replace("\r\n", "");
+            text = text.Replace("\t", "\r\n\r\n");
+            
             if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
                 text = AuthorTextFormatting(text);
 
@@ -220,9 +242,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
                 text = AuthorBlockquotes(text);
-
-            /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
-                text = AuthorLists(text);*/
 
             return text;
         }
