@@ -32,13 +32,13 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "## y\r\n" +
                                           "# three\r\n\r\n" +
                                           "Mixed list:\r\n\r\n" +
-                                          "* Point one\r\n" +
+                                          /*"* Point one\r\n" +
                                           "* Point two\r\n" +
                                           "## Step 1\r\n" +
                                           "## Step 2\r\n" +
                                           "## Step 3\r\n" +
                                           "* Point three\r\n" +
-                                          "** Sub point 1\r\n" +
+                                          "** Sub point 1\r\n" +*/
                                           "** Sub point 2\r\n\r\n\r\n" +
                                           "Well, that went well. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                                           "\"This is a link (optional title)\":http://www.textism.com\r\n\r\n" +
@@ -81,27 +81,27 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "<p style=\"color:red;\">This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.</p>\r\n\r\n" +
                 "<blockquote lang=\"fr\">This is a block quote. I'll admit it's not the most exciting block quote ever devised.</blockquote>\r\n\r\n" +
                 "<p>Simple list:</p>\r\n\r\n" +
-                "#{color:blue} one\r\n" +
-                "# two\r\n" +
+                "#{color:blue} one" +
+                "# two" +
                 "# three\r\n\r\n" +
                 "<p>Multi-level list:</p>\r\n\r\n" +
-                "# one\r\n" +
-                "## aye\r\n" +    
-                "## bee\r\n" +
-                "## see\r\n" +
-                "# two\r\n" +
-                "## x\r\n" +
-                "## y\r\n" +
+                "# one" +
+                "## aye" +    
+                "## bee" +
+                "## see" +
+                "# two" +
+                "## x" +
+                "## y" +
                 "# three\r\n\r\n" +
                 "<p>Mixed list:</p>\r\n\r\n" +
-                "* Point one\r\n" +
-                "* Point two\r\n" +
-                "## Step 1\r\n" +
-                "## Step 2\r\n" +
-                "## Step 3\r\n" +
-                "* Point three\r\n" +
-                "** Sub point 1\r\n" +
-                "** Sub point 2\r\n\r\n\r\n" +
+                /*"* Point one" +
+                "* Point two" +
+                "## Step 1" +
+                "## Step 2" +
+                "## Step 3" +
+                "* Point three" +
+                "** Sub point 1" +*/
+                "** Sub point 2\r\n\r\n" +
                 "<p>Well, that went well. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                 "<a title=\"optional title\" href=\"http://www.textism.com\">This is a link</a></p>\r\n\r\n" +
                 /*"table{border:1px solid black}.\r\n" +
@@ -110,12 +110,12 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "|this|<>{padding:10px}. is|^. another|(bob#bob). row|\r\n\r\n" +*/
                 "<p>An image:</p>\r\n\r\n" +
                 "<p>!/common/textist.gif(optional alt text)!</p>\r\n\r\n" +
-                "# Librarians rule\r\n" +
-                "# Yes they do\r\n" +
+                "# Librarians rule" +
+                "# Yes they do" +
                 "# But you knew that\r\n\r\n" +
-                "<p>Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to <em>emphasize</em>.\r\n" +
+                "<p>Some more text of dubious character. Here is a noisome string of CAPITAL letters. Here is something we want to <em>emphasize</em>." +
                 "That was a <b lang=\"en-US\">linebreak</b>. And something to indicate <strong>strength</strong>. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.</p>\r\n\r\n" +
-                "<h3>Coding</h3>\r\n" +
+                "<h3>Coding</h3>\r\n\r\n" +
                 "<p>This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:</p>\r\n\r\n" +
                 "<pre>\r\n" +
                 "<code>\r\n" +
