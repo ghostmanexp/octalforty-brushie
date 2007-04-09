@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -169,7 +170,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// (?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)
         /// </summary>
         private static readonly Regex ListRegex = new Regex(
-            @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)",
+            @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*))+)",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
@@ -260,11 +261,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                         Author(afterPre, authoringScope);
                 } // if
             } // if
-
-            /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
-                text = AuthorLists(text);*/
-            // Lists, tables and possibly something else should be authored prior
-            // to removing linebreaks.
+            
             if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
                 text = AuthorHyperlinks(text);
 
@@ -276,6 +273,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
                 text = AuthorFootnoteReferences(text);
+
+            /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
+                text = AuthorLists(text);*/
 
             //
             // Prior to authoring block stuff, we need to perform some conversions of the source text.
@@ -403,7 +403,42 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             Match match = ListRegex.Match(text);
             while(match.Success)
             {
+                List list = new List(match);
                 String expression = match.Groups["Expression"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                Stack<string> tags = new Stack<string>();
+                StringBuilder listBuilder = new StringBuilder();
+                string currentQualifier = string.Empty;
+
+                foreach(ListItem item in list.Items)
+                {
+                    if(item.Qualifiers != currentQualifier)
+                    {
+                        while(!item.Qualifiers.StartsWith(currentQualifier))
+                        {
+                            currentQualifier = currentQualifier.Remove(currentQualifier.Length - 1);
+                            listBuilder.AppendFormat("</{0}>", tags.Pop());
+                        } // while
+                    } // if
+
+                    //
+                    // Now add up to current item's qualifiers
+                    while(item.Qualifiers != currentQualifier)
+                    {
+                        char qualifier = item.Qualifiers[currentQualifier.Length];
+                        tags.Push(qualifier == '#' ? "ol" : "ul");
+                        listBuilder.AppendFormat("<{0}>", tags.Peek());
+
+                        currentQualifier = currentQualifier + qualifier;
+                    } // while
+
+                    listBuilder.AppendFormat("<li>{0}</li>", item.Title);
+                } // foreach
+
+                text = text.Replace(expression, listBuilder.ToString());
+                 
                /* String textToFormat = match.Groups["Text"].Value;
 
                 //
@@ -418,7 +453,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 } // if
                 else
                 {*/
-                    match = match.NextMatch();
+                match = ListRegex.Match(text);
                 //} // else
             } // while
 
@@ -458,17 +493,17 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text"></param>
         private String AuthorParagraphs(String text)
         {
-            //
-            // Preparing paragraphs not directly specified with the "p." modifier and
-            // then authoring them all in one sweep.
-            Match implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
-            while(implicitParagraphMatch.Success)
-            {
-                text = text.Replace(implicitParagraphMatch.Groups["Text"].Value, "p. " + 
-                    implicitParagraphMatch.Groups["Text"].Value);
-                implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
-            } // match
+            text = AuthorImplicitParagraphs(text);
+            return AuthorExplicitParagraphs(text);
+        }
 
+        /// <summary>
+        /// Authors explicit paragraphs.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private string AuthorExplicitParagraphs(string text)
+        {
             //
             // Now do all the paragraphs remaining
             Match paragraphMatch = ParagraphRegex.Match(text);
@@ -485,6 +520,26 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 paragraphMatch = ParagraphRegex.Match(text);
             } // while
 
+            return text;
+        }
+
+        /// <summary>
+        /// Authors implicit paragraphs.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private static string AuthorImplicitParagraphs(string text)
+        {
+            //
+            // Preparing paragraphs not directly specified with the "p." modifier and
+            // then authoring them all in one sweep.
+            Match implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
+            while(implicitParagraphMatch.Success)
+            {
+                text = text.Replace(implicitParagraphMatch.Groups["Text"].Value, "p. " + 
+                    implicitParagraphMatch.Groups["Text"].Value);
+                implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
+            } // match
             return text;
         }
 
