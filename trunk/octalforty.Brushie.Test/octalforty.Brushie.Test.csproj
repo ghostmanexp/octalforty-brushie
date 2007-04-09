@@ -45,6 +45,10 @@
       <Project>{2A09FED0-EC79-444E-A955-A4F70FD440D4}</Project>
       <Name>octalforty.Brushie.Diff</Name>
     </ProjectReference>
+    <ProjectReference Include="..\octalforty.Brushie.Text\octalforty.Brushie.Text.csproj">
+      <Project>{6D115D49-63E6-40D6-833D-A2CD399395FE}</Project>
+      <Name>octalforty.Brushie.Text</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,6 +1,9 @@
 using System;
+using System.Text;
 
 using octalforty.Brushie.Diff;
+using octalforty.Brushie.Text.Authoring;
+using octalforty.Brushie.Text.Authoring.Textile;
 
 namespace octalforty.Brushie.Test
 {
@@ -8,9 +11,9 @@ namespace octalforty.Brushie.Test
     {
         static void Main()
         {
-            string source = "The metrics for obfuscation are more-or-well understood. " +
+            string source = "The metrics for obfuscation are more\\-or\\-well understood. " +
                 "Do you have a game plan to become cross-media? Think interactive. True. Really. ";
-            string target = "The metrics for clarity are more-well understood. " +
+            string target = "The metrics for clarity are more\\-well understood. " +
                 "Do you have a game plan to become peerlessly synergetic across all platforms? " +
                 "Think interactive. Really. Astonishing.";
 
@@ -22,37 +25,33 @@ namespace octalforty.Brushie.Test
 
             PatchOperationCollection differences = diffEngine.GetPatchOperations();
 
+            StringBuilder text = new StringBuilder();
+
             foreach(PatchOperation difference in differences)
             {
                 switch(difference.Type)
                 {
                     case PatchOperationType.Deletion:
                         Range<int> deletionRange = GetRange(difference, sourceDataProvider);
-                        Console.ForegroundColor = ConsoleColor.Red;
-
-                        Console.Write("-");
-                        Console.Write(source.Substring(deletionRange.Start, 
-                            deletionRange.End  - deletionRange.Start));
-                        Console.Write("-");
+                        text.AppendFormat("-{{color:red;}}{0}-", source.Substring(deletionRange.Start,
+                            deletionRange.End - deletionRange.Start));
                         break;
                     case PatchOperationType.Addition:
                         Range<int> additionRange = GetRange(difference, targetDataProvider);
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        
-                        Console.Write("+");
-                        Console.Write(target.Substring(additionRange.Start,
+                        text.AppendFormat("+{{color:green;}}{0}+", target.Substring(additionRange.Start,
                             additionRange.End - additionRange.Start));
-                        Console.Write("+");
                         break;
                     case PatchOperationType.Copy:
                         Range<int> copyRange = GetRange(difference, sourceDataProvider);
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        Console.Write(source.Substring(copyRange.Start,
+                        text.Append(source.Substring(copyRange.Start,
                             copyRange.End - copyRange.Start));
                         break;
                 } // swich
             } // foreach
+
+            TextileAuthoringEngine textileAuthoringEngine = 
+                new TextileAuthoringEngine(new HtmlTextileAuthoringFormatter());
+            string html = textileAuthoringEngine.Author(text.ToString(), AuthoringScope.All);
 
             Console.WriteLine();
         }
