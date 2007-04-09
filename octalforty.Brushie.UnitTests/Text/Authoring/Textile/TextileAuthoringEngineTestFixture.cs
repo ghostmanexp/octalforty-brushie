@@ -134,9 +134,16 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
         public void Author2()
         {
             const String WikiMarkup =
-                "The metrics for+{color:green;}clarity+-{color:red;}obfuscation-are+{color:green;}more\\-well+-{color:red;}more\\-or\\-well-understood. Do you have a game plan to become+{color:green;}peerlessly synergetic across all platforms?+-{color:red;}cross\\-media?-Think interactive.-{color:red;}True.-Really.+{color:green;}Astonishing.+";
+                "The metrics for+{color:green;}clarity+-{color:red;}obfuscation-are+{color:green;}more\\-well+" +
+                "-{color:red;}more\\-or\\-well-understood. Do you have a game plan to become" +
+                "+{color:green;}peerlessly synergetic across all platforms?+-{color:red;}cross\\-media?-Think interactive." +
+                "-{color:red;}True.-Really.+{color:green;}Astonishing.+";
             const String HtmlMarkup =
-                "The metrics for<ins style=\"color:green;\">clarity</ins><del style=\"color:red;\">obfuscation</del>are<ins style=\"color:green;\">more-well</ins><del style=\"color:red;\">more-or-well</del>understood. Do you have a game plan to become<ins style=\"color:green;\">peerlessly synergetic across all platforms?</ins><del style=\"color:red;\">cross-media?</del>Think interactive.<del style=\"color:red;\">True.</del>Really.<ins style=\"color:green;\">Astonishing.</ins>";
+                "The metrics for<ins style=\"color:green;\">clarity</ins><del style=\"color:red;\">obfuscation</del>are" +
+                "<ins style=\"color:green;\">more-well</ins><del style=\"color:red;\">more-or-well</del>" +
+                "understood. Do you have a game plan to become<ins style=\"color:green;\">peerlessly synergetic across all platforms?</ins>" +
+                "<del style=\"color:red;\">cross-media?</del>Think interactive.<del style=\"color:red;\">True.</del>" +
+                "Really.<ins style=\"color:green;\">Astonishing.</ins>";
 
             TextileAuthoringEngine authoringEngine =
                 new TextileAuthoringEngine(new HtmlTextileAuthoringFormatter());
