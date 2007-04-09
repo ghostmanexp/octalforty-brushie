@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Textile.Internal;
@@ -403,7 +404,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             text = AuthorTextFormatting(TextFormatting.Subscript, SubscriptRegex, text);
             text = AuthorTextFormatting(TextFormatting.Span, SpanRegex, text);
 
-            return text;
+            //
+            // Unescaping stuff
+            StringBuilder textBuilder = new StringBuilder(text);
+            textBuilder = textBuilder.Replace(@"\*", "*").Replace(@"\_", "_").Replace(@"\?", "?").Replace(@"\-", "-").
+                Replace(@"\+", "+").Replace(@"\~", "~").Replace(@"\^", "^").Replace(@"\%", "%");
+
+            return textBuilder.ToString();
         }
 
         /// <summary>
