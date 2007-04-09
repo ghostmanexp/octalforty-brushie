@@ -56,11 +56,9 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "h3. Coding\r\n\r\n" +
                                           "This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:\r\n\r\n" +
                                           "<pre>\r\n" +
-                                          "<code>\r\n" +
                                           "$text = str_replace(\"<p>%::%</p>\",\"\",$text);\r\n" +
                                           "$text = str_replace(\"%::%</p>\",\"\",$text);\r\n" +
                                           "$text = str_replace(\"%::%\",\"\",$text);\r\n" +
-                                          "</code>\r\n" +
                                           "</pre>\r\n\r\n" +
                                           "This isn't code.\r\n\r\n" +
                                           "So you see, my friends:\r\n\r\n" +
@@ -119,11 +117,9 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "<h3>Coding</h3>\r\n\r\n" +
                 "<p>This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:</p>\r\n\r\n" +
                 "<pre>\r\n" +
-                "<code>\r\n" +
                 "$text = str_replace(\"&lt;p&gt;%::%&lt;/p&gt;\",\"\",$text);\r\n" +
                 "$text = str_replace(\"%::%&lt;/p&gt;\",\"\",$text);\r\n" +
 	            "$text = str_replace(\"%::%\",\"\",$text);\r\n" +
-                "</code>\r\n" +
                 "</pre>\r\n\r\n" +
                 "<p>This isn't code.</p>\r\n\r\n" +
                 "<p>So you see, my friends:</p>\r\n\r\n" +
