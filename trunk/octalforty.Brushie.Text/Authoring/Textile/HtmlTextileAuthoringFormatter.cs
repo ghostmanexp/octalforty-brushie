@@ -161,7 +161,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <returns></returns>
         public virtual String FormatFootnote(Int32 footnoteID, String text, BlockElementAttributes attributes)
         {
-            return String.Empty;
+            return FormatParagraph(
+                String.Format("<a name=\"#{0}\" /><sup>{1}</sup> {2}", GetFoonoteAnchorName(footnoteID), 
+                footnoteID, text.Trim()), attributes);
         }
         #endregion
 

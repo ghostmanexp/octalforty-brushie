@@ -204,5 +204,27 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
             Assert.AreEqual("<sup>[<a href=\"#__footnote1234\">1234</a>]</sup>",
                 authoringFormatter.FormatFootnoteReference(1234));
         }
+
+        [Test()]
+        public void FormatFootnote()
+        {
+            ITextileAuthoringFormatter authoringFormatter =
+                new HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual("<p><a name=\"#__footnote1\" /><sup>1</sup> Footnote</p>",
+                authoringFormatter.FormatFootnote(1, " Footnote ",
+                    new BlockElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty,
+                        BlockElementAlignment.Unknown, 0, 0)));
+
+            Assert.AreEqual("<p class=\"heading\" style=\"font-weight: bold;text-align: center;padding-left: 2em;\"><a name=\"#__footnote2\" /><sup>2</sup> Footnote</p>",
+                authoringFormatter.FormatFootnote(2, " Footnote ",
+                    new BlockElementAttributes("heading", string.Empty, "font-weight: bold", string.Empty,
+                        BlockElementAlignment.Center, 2, 0)));
+
+            Assert.AreEqual("<p id=\"id\" lang=\"en-US\" style=\"font-weight: bold;text-align: center;padding-left: 2em;padding-right: 3em;\"><a name=\"#__footnote3\" /><sup>3</sup> Footnote</p>",
+                authoringFormatter.FormatFootnote(3, " Footnote ",
+                    new BlockElementAttributes(null, "id", "font-weight: bold;", "en-US",
+                        BlockElementAlignment.Center, 2, 3)));
+        }
     }
 }

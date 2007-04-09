@@ -177,7 +177,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// ^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n
         /// </summary>
         private static readonly Regex ImplicitParagraphRegex = new Regex(
-            @"^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n",
+            @"^(?!h[1-6]|fn|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
@@ -350,6 +350,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <returns></returns>
         private String AuthorFootnotes(String text)
         {
+            Match match = FootnoteRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                Int32 footnoteID = Convert.ToInt32(match.Groups["FootnoteID"].Value);
+                String footnoteText = match.Groups["Text"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                text = text.Replace(expression,
+                    authoringFormatter.FormatFootnote(footnoteID, footnoteText, attributes));
+
+                match = FootnoteRegex.Match(text);
+            } // while
+
             return text;
         }
 
