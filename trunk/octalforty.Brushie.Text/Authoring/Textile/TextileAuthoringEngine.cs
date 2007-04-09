@@ -242,11 +242,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
                 if(preStartTagIndex < preEndTagIndex)
                 {
+                    //
+                    // This is where the start <pre> tag ends.
+                    int preStartTagEndIndex = uppercaseText.IndexOf(">", preStartTagIndex);
+
                     String beforePre = text.Substring(0, preStartTagIndex);
                     String afterPre = text.Substring(preEndTagIndex + 6);
-                    String preMarkup = text.Substring(preStartTagIndex, preEndTagIndex - preStartTagIndex + 6);
+                    String preMarkup = text.Substring(preStartTagEndIndex + 1, preEndTagIndex - preStartTagIndex - 5);
 
-                    return Author(beforePre, authoringScope) + AuthorPre(preMarkup) + Author(afterPre, authoringScope);
+                    //
+                    // Authoring two outside "<pre>" parts separately.
+                    return Author(beforePre, authoringScope) + 
+                        text.Substring(preStartTagIndex, preStartTagEndIndex - preStartTagIndex + 1) + 
+                        AuthorPre(preMarkup) + 
+                        "</pre>" + 
+                        Author(afterPre, authoringScope);
                 } // if
             } // if
 
