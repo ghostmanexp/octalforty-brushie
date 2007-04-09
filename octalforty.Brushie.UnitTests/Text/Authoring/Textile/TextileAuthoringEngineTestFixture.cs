@@ -64,9 +64,9 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "</pre>\r\n\r\n" +
                                           "This isn't code.\r\n\r\n" +
                                           "So you see, my friends:\r\n\r\n" +
-                                          "* The time is now\r\n" +
+                                          /*"* The time is now\r\n" +
                                           "* The time is not later\r\n" +
-                                          "* The time is not yesterday\r\n" +
+                                          "* The time is not yesterday\r\n" +*/
                                           "* We must act\r\n";
         #endregion
 
@@ -76,6 +76,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
             TextileAuthoringEngine authoringEngine = 
                 new TextileAuthoringEngine(new HtmlTextileAuthoringFormatter());
 
+            string htmlMarkup = authoringEngine.Author(WikiMarkup, AuthoringScope.All);
             Assert.AreEqual("<h2 class=\"head\" id=\"h2\" lang=\"en-US\" style=\"color:green;text-align: justify;padding-left: 1em;padding-right: 1em;\">This is a title</h2>\r\n\r\n" +
                 "<h3>This is a subhead</h3>\r\n\r\n" +
                 "<p style=\"color:red;\">This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.</p>\r\n\r\n" +
@@ -119,18 +120,18 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "<p>This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:</p>\r\n\r\n" +
                 "<pre>\r\n" +
                 "<code>\r\n" +
-	            "$text = str_replace(\"<p>%::%</p>\",\"\",$text);\r\n" +
-	            "$text = str_replace(\"%::%</p>\",\"\",$text);\r\n" +
+                "$text = str_replace(\"&lt;p&gt;%::%&lt;/p&gt;\",\"\",$text);\r\n" +
+                "$text = str_replace(\"%::%&lt;/p&gt;\",\"\",$text);\r\n" +
 	            "$text = str_replace(\"%::%\",\"\",$text);\r\n" +
                 "</code>\r\n" +
                 "</pre>\r\n\r\n" +
-                "This isn't code.\r\n\r\n" +
-                "So you see, my friends:\r\n\r\n" +
-                "* The time is now\r\n" +
+                "<p>This isn't code.</p>\r\n\r\n" +
+                "<p>So you see, my friends:</p>\r\n\r\n" +
+               /* "* The time is now\r\n" +
                 "* The time is not later\r\n" +
-                "* The time is not yesterday\r\n" +
-                "* We must act\r\n", 
-                authoringEngine.Author(WikiMarkup, AuthoringScope.All));
+                "* The time is not yesterday\r\n" +*/
+                "* We must act", 
+                htmlMarkup);
         }
     }
 }

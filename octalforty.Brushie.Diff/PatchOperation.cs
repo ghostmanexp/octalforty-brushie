@@ -25,7 +25,7 @@ namespace octalforty.Brushie.Diff
         }
 
         /// <summary>
-        /// Gets the <see cref="Range{T}"/>, which defines the addition range for
+        /// Gets the <see cref="octalforty.Brushie.Diff.Range{T}"/>, which defines the addition range for
         /// the current difference. Please note that this property defines
         /// a range within the target data source.
         /// </summary>
@@ -47,7 +47,7 @@ namespace octalforty.Brushie.Diff
         }
 
         /// <summary>
-        /// Gets the <see cref="Range{T}"/>, which defines the deletion range for
+        /// Gets the <see cref="octalforty.Brushie.Diff.Range{T}"/>, which defines the deletion range for
         /// the current difference.
         /// </summary>
         /// <exception cref="InvalidOperationException">
@@ -68,7 +68,7 @@ namespace octalforty.Brushie.Diff
         }
 
         /// <summary>
-        /// Gets the <see cref="Range{T}"/>, which defines the copy range for
+        /// Gets the <see cref="octalforty.Brushie.Diff.Range{T}"/>, which defines the copy range for
         /// the current difference.
         /// </summary>
         /// <exception cref="InvalidOperationException">
@@ -89,7 +89,7 @@ namespace octalforty.Brushie.Diff
         }
 
         /// <summary>
-        /// Gets a reference to the <see cref="Range{T}"/> valid at the current point.
+        /// Gets a reference to the <see cref="octalforty.Brushie.Diff.Range{T}"/> valid at the current point.
         /// </summary>
         public Range<int> Range
         {

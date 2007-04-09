@@ -60,5 +60,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="attributes"></param>
         /// <returns></returns>
         String FormatParagraph(string text, BlockElementAttributes attributes);
+
+        /// <summary>
+        /// Formats a reference to a footnote with the given identifier.
+        /// </summary>
+        /// <param name="footnoteID"></param>
+        /// <returns></returns>
+        String FormatFootnoteReference(Int32 footnoteID);
+        
+        /// <summary>
+        /// Formats a footnote with provided attribute.
+        /// </summary>
+        /// <param name="footnoteID">Footnote identifier.</param>
+        /// <param name="text">Footnote text.</param>
+        /// <param name="attributes">Attributes of the footnote block element.</param>
+        /// <returns></returns>
+        String FormatFootnote(Int32 footnoteID, String text, BlockElementAttributes attributes);
     }
 }

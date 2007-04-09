@@ -194,5 +194,15 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                     new BlockElementAttributes(null, "id", "font-weight: bold;", "en-US",
                         BlockElementAlignment.Center, 2, 3)));
         }
+
+        [Test()]
+        public void FormatFootnoteReference()
+        {
+            ITextileAuthoringFormatter authoringFormatter =
+                new HtmlTextileAuthoringFormatter();
+
+            Assert.AreEqual("<sup>[<a href=\"#__footnote1234\">1234</a>]</sup>",
+                authoringFormatter.FormatFootnoteReference(1234));
+        }
     }
 }
