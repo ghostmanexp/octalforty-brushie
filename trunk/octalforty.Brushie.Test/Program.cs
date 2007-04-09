@@ -2,6 +2,7 @@ using System;
 using System.Text;
 
 using octalforty.Brushie.Diff;
+
 using octalforty.Brushie.Text.Authoring;
 using octalforty.Brushie.Text.Authoring.Textile;
 
@@ -12,7 +13,7 @@ namespace octalforty.Brushie.Test
         static void Main()
         {
             string source = "The metrics for obfuscation are more\\-or\\-well understood. " +
-                "Do you have a game plan to become cross-media? Think interactive. True. Really. ";
+                "Do you have a game plan to become cross\\-media? Think interactive. True. Really. ";
             string target = "The metrics for clarity are more\\-well understood. " +
                 "Do you have a game plan to become peerlessly synergetic across all platforms? " +
                 "Think interactive. Really. Astonishing.";
@@ -33,12 +34,12 @@ namespace octalforty.Brushie.Test
                 {
                     case PatchOperationType.Deletion:
                         Range<int> deletionRange = GetRange(difference, sourceDataProvider);
-                        text.AppendFormat("-{{color:red;}}{0}-", source.Substring(deletionRange.Start,
+                        text.AppendFormat(" -{{background:#FC2F2F;}}{0}- ", source.Substring(deletionRange.Start,
                             deletionRange.End - deletionRange.Start));
                         break;
                     case PatchOperationType.Addition:
                         Range<int> additionRange = GetRange(difference, targetDataProvider);
-                        text.AppendFormat("+{{color:green;}}{0}+", target.Substring(additionRange.Start,
+                        text.AppendFormat(" +{{background:#B1D58B;}}{0}+ ", target.Substring(additionRange.Start,
                             additionRange.End - additionRange.Start));
                         break;
                     case PatchOperationType.Copy:
