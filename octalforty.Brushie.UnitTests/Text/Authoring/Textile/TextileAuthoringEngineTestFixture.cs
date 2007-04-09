@@ -69,7 +69,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "* The time is not later\r\n" +
                                           "* The time is not yesterday\r\n" +*/
                                           "* We must act\r\n\r\n" +
-                                          "fn1. Footnote.\r\n";
+                                          "fn1. Footnote.\r\n\r\n";
             #endregion
 
             TextileAuthoringEngine authoringEngine = 
@@ -128,7 +128,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "* The time is not later\r\n" +
                 "* The time is not yesterday\r\n" +*/
                 "* We must act\r\n\r\n" +
-                "fn1. Footnote.", 
+                "<p><a name=\"#__footnote1\" /><sup>1</sup> Footnote.</p>\r\n\r\n", 
                 htmlMarkup);
         }
 
