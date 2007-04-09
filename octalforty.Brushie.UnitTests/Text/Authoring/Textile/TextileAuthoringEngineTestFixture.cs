@@ -35,13 +35,13 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "## y\r\n" +
                                           "# three\r\n\r\n" +
                                           "Mixed list:\r\n\r\n" +
-                                          /*"* Point one\r\n" +
+                                          "* Point one\r\n" +
                                           "* Point two\r\n" +
                                           "## Step 1\r\n" +
                                           "## Step 2\r\n" +
                                           "## Step 3\r\n" +
                                           "* Point three\r\n" +
-                                          "** Sub point 1\r\n" +*/
+                                          "** Sub point 1\r\n" +
                                           "** Sub point 2\r\n\r\n\r\n" +
                                           "Well, that went well[1]. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                                           "\"This is a link (optional title)\":http://www.textism.com\r\n\r\n" +
@@ -81,9 +81,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "<p style=\"color:red;\">This is some text of dubious character. Isn't the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.</p>\r\n\r\n" +
                 "<blockquote lang=\"fr\">This is a block quote. I'll admit it's not the most exciting block quote ever devised.</blockquote>\r\n\r\n" +
                 "<p>Simple list:</p>\r\n\r\n" +
-                "#{color:blue} one" +
-                "# two" +
-                "# three\r\n\r\n" +
+                "<ol><li>one</li><li>two</li><li>three</li>\r\n\r\n" +
                 "<p>Multi-level list:</p>\r\n\r\n" +
                 "# one" +
                 "## aye" +    
@@ -94,13 +92,13 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "## y" +
                 "# three\r\n\r\n" +
                 "<p>Mixed list:</p>\r\n\r\n" +
-                /*"* Point one" +
+                "* Point one" +
                 "* Point two" +
                 "## Step 1" +
                 "## Step 2" +
                 "## Step 3" +
                 "* Point three" +
-                "** Sub point 1" +*/
+                "** Sub point 1" +
                 "** Sub point 2\r\n\r\n" +
                 "<p>Well, that went well<sup>[<a href=\"#__footnote1\">1</a>]</sup>. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                 "<a title=\"optional title\" href=\"http://www.textism.com\">This is a link</a></p>\r\n\r\n" +

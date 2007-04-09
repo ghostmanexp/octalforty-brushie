@@ -45,6 +45,8 @@
     <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\Internal\Element.cs" />
     <Compile Include="Authoring\Textile\Internal\Hyperlink.cs" />
+    <Compile Include="Authoring\Textile\Internal\List.cs" />
+    <Compile Include="Authoring\Textile\Internal\ListItem.cs" />
     <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\PhraseElementAttributes.cs" />
     <Compile Include="Authoring\Textile\TextFormatting.cs" />
