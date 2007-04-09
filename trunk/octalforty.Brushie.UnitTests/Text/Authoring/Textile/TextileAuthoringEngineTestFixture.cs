@@ -43,7 +43,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "* Point three\r\n" +
                                           "** Sub point 1\r\n" +*/
                                           "** Sub point 2\r\n\r\n\r\n" +
-                                          "Well, that went well. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
+                                          "Well, that went well[1]. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                                           "\"This is a link (optional title)\":http://www.textism.com\r\n\r\n" +
                                           /*"table{border:1px solid black}.\r\n" +
                                           "|_. this|_. is|_. a|_. header|\r\n" +
@@ -68,7 +68,8 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           /*"* The time is now\r\n" +
                                           "* The time is not later\r\n" +
                                           "* The time is not yesterday\r\n" +*/
-                                          "* We must act\r\n";
+                                          "* We must act\r\n\r\n" +
+                                          "fn1. Footnote.\r\n";
             #endregion
 
             TextileAuthoringEngine authoringEngine = 
@@ -101,7 +102,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "* Point three" +
                 "** Sub point 1" +*/
                 "** Sub point 2\r\n\r\n" +
-                "<p>Well, that went well. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
+                "<p>Well, that went well<sup>[<a href=\"#__footnote1\">1</a>]</sup>. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                 "<a title=\"optional title\" href=\"http://www.textism.com\">This is a link</a></p>\r\n\r\n" +
                 /*"table{border:1px solid black}.\r\n" +
                 "|_. this|_. is|_. a|_. header|\r\n" +
@@ -126,7 +127,8 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                /* "* The time is now\r\n" +
                 "* The time is not later\r\n" +
                 "* The time is not yesterday\r\n" +*/
-                "* We must act", 
+                "* We must act\r\n\r\n" +
+                "fn1. Footnote.", 
                 htmlMarkup);
         }
 

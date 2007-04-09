@@ -274,6 +274,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
                 text = AuthorTextFormatting(text);
 
+            if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
+                text = AuthorFootnoteReferences(text);
+
             //
             // Prior to authoring block stuff, we need to perform some conversions of the source text.
             // Get rid of \t characters, since we'd need them later on.
@@ -320,7 +323,28 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Authors footnotes and footnote references.
+        /// Authors footnote references.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private String AuthorFootnoteReferences(String text)
+        {
+            Match match = FootnoteReferenceRegex.Match(text);
+            while(match.Success)
+            {
+                String expression = match.Groups["Expression"].Value;
+                Int32 footnoteID = Convert.ToInt32(match.Groups["FootnoteID"].Value);
+
+                text = text.Replace(expression, authoringFormatter.FormatFootnoteReference(footnoteID));
+
+                match = FootnoteReferenceRegex.Match(text);
+            } // while
+
+            return text;
+        }
+
+        /// <summary>
+        /// Authors footnotes.
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
