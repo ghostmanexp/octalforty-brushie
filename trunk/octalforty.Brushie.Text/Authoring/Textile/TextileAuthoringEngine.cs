@@ -16,6 +16,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     public sealed class TextileAuthoringEngine
     {
         #region Private Constants
+#pragma warning disable 1570
         /// <summary>
         /// (?<Expression>
         /// ^h
@@ -207,6 +208,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             @"(?<Expression>^fn(?<FootnoteID>\d+)\.\s(?<Text>.*))\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+#pragma warning restore 1570
         #endregion
 
         #region Private Member Variables
@@ -230,6 +232,24 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="authoringScope"></param>
         public String Author(String text, AuthoringScope authoringScope)
         {
+            //
+            // Skipping markup inside <pre> tags.
+            string uppercaseText = text.ToUpper();
+            if(uppercaseText.Contains("<PRE") && uppercaseText.Contains("</PRE>"))
+            {
+                int preStartTagIndex = uppercaseText.IndexOf("<PRE");
+                int preEndTagIndex = uppercaseText.IndexOf("</PRE>", preStartTagIndex);
+
+                if(preStartTagIndex < preEndTagIndex)
+                {
+                    String beforePre = text.Substring(0, preStartTagIndex);
+                    String afterPre = text.Substring(preEndTagIndex + 6);
+                    String preMarkup = text.Substring(preStartTagIndex, preEndTagIndex - preStartTagIndex + 6);
+
+                    return Author(beforePre, authoringScope) + AuthorPre(preMarkup) + Author(afterPre, authoringScope);
+                } // if
+            } // if
+
             /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
                 text = AuthorLists(text);*/
             // Lists, tables and possibly something else should be authored prior
@@ -237,7 +257,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
                 text = AuthorHyperlinks(text);
 
+            if((authoringScope & AuthoringScope.Images) == AuthoringScope.Images)
+                text = AuthorImages(text);
+
+            if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
+                text = AuthorTextFormatting(text);
+
             //
+            // Prior to authoring block stuff, we need to perform some conversions of the source text.
             // Get rid of \t characters, since we'd need them later on.
             text = text.Replace("\t", "");
 
@@ -253,9 +280,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             text = text.Replace("\r\n\r\n", "\t");
             text = text.Replace("\r\n", "");
             text = text.Replace("\t", "\r\n\r\n");
-            
-            if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
-                text = AuthorTextFormatting(text);
+
+            text = AuthorParagraphs(text);
 
             if((authoringScope & AuthoringScope.Headings) == AuthoringScope.Headings)
                 text = AuthorHeadings(text);
@@ -263,13 +289,23 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
                 text = AuthorBlockquotes(text);
 
-            if((authoringScope & AuthoringScope.Images) == AuthoringScope.Images)
-                text = AuthorImages(text);
-
             if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
                 text = AuthorFootnotes(text);
 
             return text;
+        }
+
+        /// <summary>
+        /// Authors "pre" markup.
+        /// </summary>
+        /// <param name="preMarkup"></param>
+        /// <returns></returns>
+        private static String AuthorPre(string preMarkup)
+        {
+            preMarkup = preMarkup.Replace("<", "&lt;");
+            preMarkup = preMarkup.Replace(">", "&gt;");
+
+            return preMarkup;
         }
 
         /// <summary>
@@ -346,18 +382,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <returns></returns>
         private String AuthorTextFormatting(String text)
         {
-            //
-            // Preparing paragraphs not directly specified with the "p." modifier and
-            // then authoring them all in one sweep.
-            Match match = ImplicitParagraphRegex.Match(text);
-            while(match.Success)
-            {
-                text = text.Replace(match.Groups["Text"].Value, "p. " + match.Groups["Text"].Value);
-                match = ImplicitParagraphRegex.Match(text);
-            } // match
-
-            text = AuthorParagraphs(text);
-
             text = AuthorTextFormatting(TextFormatting.Bold, BoldRegex, text);
             text = AuthorTextFormatting(TextFormatting.StrongEmphasis, StrongEmphasisRegex, text);
             text = AuthorTextFormatting(TextFormatting.Italics, ItalicsRegex, text);
@@ -378,18 +402,31 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text"></param>
         private String AuthorParagraphs(String text)
         {
-            Match match = ParagraphRegex.Match(text);
-            while(match.Success)
+            //
+            // Preparing paragraphs not directly specified with the "p." modifier and
+            // then authoring them all in one sweep.
+            Match implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
+            while(implicitParagraphMatch.Success)
             {
-                String expression = match.Groups["Expression"].Value;
-                String paragraphText = match.Groups["Text"].Value;
+                text = text.Replace(implicitParagraphMatch.Groups["Text"].Value, "p. " + 
+                    implicitParagraphMatch.Groups["Text"].Value);
+                implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
+            } // match
 
-                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+            //
+            // Now do all the paragraphs remaining
+            Match paragraphMatch = ParagraphRegex.Match(text);
+            while(paragraphMatch.Success)
+            {
+                String expression = paragraphMatch.Groups["Expression"].Value;
+                String paragraphText = paragraphMatch.Groups["Text"].Value;
+
+                BlockElementAttributes attributes = CreateBlockElementAttributes(paragraphMatch);
 
                 text = text.Replace(expression, authoringFormatter.FormatParagraph(paragraphText,
                     attributes));
 
-                match = ParagraphRegex.Match(text);
+                paragraphMatch = ParagraphRegex.Match(text);
             } // while
 
             return text;

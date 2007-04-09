@@ -140,12 +140,46 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             const String tag = "p";
             return String.Format("{0}{1}</{2}>", GetFullBlockStartTag(tag, attributes), text.Trim(), tag);
         }
+
+        /// <summary>
+        /// Formats a reference to a footnote with the given identifier.
+        /// </summary>
+        /// <param name="footnoteID"></param>
+        /// <returns></returns>
+        public virtual String FormatFootnoteReference(Int32 footnoteID)
+        {
+            return String.Format("<sup>[<a href=\"#{0}\">{1}</a>]</sup>", 
+                GetFoonoteAnchorName(footnoteID), footnoteID);
+        }
+
+        /// <summary>
+        /// Formats a footnote with provided attribute.
+        /// </summary>
+        /// <param name="footnoteID">Footnote identifier.</param>
+        /// <param name="text">Footnote text.</param>
+        /// <param name="attributes">Attributes of the footnote block element.</param>
+        /// <returns></returns>
+        public virtual String FormatFootnote(Int32 footnoteID, String text, BlockElementAttributes attributes)
+        {
+            return String.Empty;
+        }
         #endregion
 
         /// <summary>
-        /// Creates partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
-        /// class="<see cref="BlockElementAttributes.CssClass"/>" style="<see cref="BlockElementAttributes.Style"/>"
-        /// lang="<see cref="BlockElementAttributes.Language"/>".
+        /// Gets a string with the name of the HTML anchor (without leading #) which corresponds to the
+        /// footnote with identifer <paramref name="footnoteID"/>
+        /// </summary>
+        /// <param name="footnoteID"></param>
+        /// <returns></returns>
+        protected virtual String GetFoonoteAnchorName(Int32 footnoteID)
+        {
+            return String.Format("__footnote{0}", footnoteID);
+        }
+
+        /// <summary>
+        /// Creates partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
+        /// class="<see cref="PhraseElementAttributes.CssClass"/>" style="<see cref="PhraseElementAttributes.Style"/>"
+        /// lang="<see cref="PhraseElementAttributes.Language"/>".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
@@ -196,9 +230,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
-        /// class="<see cref="BlockElementAttributes.CssClass"/>" style="<see cref="BlockElementAttributes.Style"/>"
-        /// lang="<see cref="BlockElementAttributes.Language"/>">".
+        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
+        /// class="<see cref="PhraseElementAttributes.CssClass"/>" style="<see cref="PhraseElementAttributes.Style"/>"
+        /// lang="<see cref="PhraseElementAttributes.Language"/>">".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
@@ -234,8 +268,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="BlockElementAttributes.ID"/>"
-        /// class="<see cref="BlockElementAttributes.CssClass"/>" lang="<see cref="BlockElementAttributes.Language"/>"".
+        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
+        /// class="<see cref="PhraseElementAttributes.CssClass"/>" lang="<see cref="PhraseElementAttributes.Language"/>"".
         /// <para />
         /// Note that <c>style</c> attribute is missing.
         /// </summary>
