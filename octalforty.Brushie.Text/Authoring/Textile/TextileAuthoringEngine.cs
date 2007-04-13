@@ -167,13 +167,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
         /// <summary>
-        /// (?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)
+        /// ^(?<!\\)(?<Expression>([#*]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s.*((?<!\\)[#*]+\s.*)+)
         /// </summary>
         private static readonly Regex ListRegex = new Regex(
-            @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*))+)",
+            @"^(?<!\\)(?<Expression>([#*]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s.*((?<!\\)[#*]+\s.*)+)",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
+        /// <summary>
+        /// (?<Expression>((?<Qualifier>([#*]+))(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>[^#*]*)))
+        /// </summary>
+        private static readonly Regex ListItemRegex = new Regex(
+            @"(?<Expression>((?<Qualifier>([#*]+))(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>[^#*]*)))",
+            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        
         /// <summary>
         /// ^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n
         /// </summary>
@@ -274,9 +282,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
                 text = AuthorFootnoteReferences(text);
 
-            /*if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
-                text = AuthorLists(text);*/
-
             //
             // Prior to authoring block stuff, we need to perform some conversions of the source text.
             // Get rid of \t characters, since we'd need them later on.
@@ -305,6 +310,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
                 text = AuthorFootnotes(text);
+            
+            if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
+                text = AuthorLists(text);
 
             return text;
         }
@@ -403,20 +411,34 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             Match match = ListRegex.Match(text);
             while(match.Success)
             {
-                List list = new List(match);
+                //List list = new List(match);
                 String expression = match.Groups["Expression"].Value;
 
                 BlockElementAttributes attributes = CreateBlockElementAttributes(match);
+
+                //
+                // Here we have a whole string which has to be split up
+                // into separate list items.
+                Match listItemMatch = ListItemRegex.Match(expression);
+                List<ListItem> listItems = new List<ListItem>();
+
+                while(listItemMatch.Success)
+                {
+                    listItems.Add(new ListItem(listItemMatch.Groups["Qualifier"].Value,
+                        listItemMatch.Groups["Title"].Value));
+
+                    listItemMatch = listItemMatch.NextMatch();
+                } // while
 
                 Stack<string> tags = new Stack<string>();
                 StringBuilder listBuilder = new StringBuilder();
                 string currentQualifier = string.Empty;
 
-                foreach(ListItem item in list.Items)
+                foreach(ListItem item in listItems)
                 {
-                    if(item.Qualifiers != currentQualifier)
+                    if(item.Qualifier != currentQualifier)
                     {
-                        while(!item.Qualifiers.StartsWith(currentQualifier))
+                        while(!item.Qualifier.StartsWith(currentQualifier))
                         {
                             currentQualifier = currentQualifier.Remove(currentQualifier.Length - 1);
                             listBuilder.AppendFormat("</{0}>", tags.Pop());
@@ -425,9 +447,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
                     //
                     // Now add up to current item's qualifiers
-                    while(item.Qualifiers != currentQualifier)
+                    while(item.Qualifier != currentQualifier)
                     {
-                        char qualifier = item.Qualifiers[currentQualifier.Length];
+                        char qualifier = item.Qualifier[currentQualifier.Length];
                         tags.Push(qualifier == '#' ? "ol" : "ul");
                         listBuilder.AppendFormat("<{0}>", tags.Peek());
 
