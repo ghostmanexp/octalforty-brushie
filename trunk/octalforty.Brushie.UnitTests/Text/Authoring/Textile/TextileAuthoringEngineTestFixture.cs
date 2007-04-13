@@ -58,7 +58,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                                           "That was a **[en-US]linebreak**. And something to indicate *strength*. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.\r\n\r\n" +
                                           "h3. Coding\r\n\r\n" +
                                           "This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:\r\n\r\n" +
-                                          "<pre>\r\n" +
+                                          "<pre class=\"test\">\r\n" +
                                           "$text = str_replace(\"<p>%::%</p>\",\"\",$text);\r\n" +
                                           "$text = str_replace(\"%::%</p>\",\"\",$text);\r\n" +
                                           "$text = str_replace(\"%::%\",\"\",$text);\r\n" +
@@ -115,7 +115,7 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
                 "That was a <b lang=\"en-US\">linebreak</b>. And something to indicate <strong>strength</strong>. Of course I could use <em>my own HTML tags</em> if I <strong>felt</strong> like it.</p>\r\n\r\n" +
                 "<h3>Coding</h3>\r\n\r\n" +
                 "<p>This <code>is some code, \"isn't it\"</code>. Watch those quote marks! Now for some preformatted text:</p>\r\n\r\n" +
-                "<pre>\r\n" +
+                "<pre class=\"test\">\r\n" +
                 "$text = str_replace(\"&lt;p&gt;%::%&lt;/p&gt;\",\"\",$text);\r\n" +
                 "$text = str_replace(\"%::%&lt;/p&gt;\",\"\",$text);\r\n" +
 	            "$text = str_replace(\"%::%\",\"\",$text);\r\n" +

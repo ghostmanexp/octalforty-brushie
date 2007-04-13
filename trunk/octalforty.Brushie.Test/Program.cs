@@ -34,12 +34,12 @@ namespace octalforty.Brushie.Test
                 {
                     case PatchOperationType.Deletion:
                         Range<int> deletionRange = GetRange(difference, sourceDataProvider);
-                        text.AppendFormat(" -{{background:#FC2F2F;}}{0}- ", source.Substring(deletionRange.Start,
+                        text.AppendFormat(" %{{background:#FC2F2F;}}{0}% ", source.Substring(deletionRange.Start,
                             deletionRange.End - deletionRange.Start));
                         break;
                     case PatchOperationType.Addition:
                         Range<int> additionRange = GetRange(difference, targetDataProvider);
-                        text.AppendFormat(" +{{background:#B1D58B;}}{0}+ ", target.Substring(additionRange.Start,
+                        text.AppendFormat(" %{{background:#B1D58B;}}{0}% ", target.Substring(additionRange.Start,
                             additionRange.End - additionRange.Start));
                         break;
                     case PatchOperationType.Copy:

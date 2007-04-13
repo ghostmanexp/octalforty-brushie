@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace octalforty.Brushie.Text.Authoring.Textile.Internal
 {
     /// <summary>
@@ -8,17 +6,17 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Internal
     internal sealed class ListItem
     {
         #region Private Member Variables
-        private string qualifiers;
+        private string qualifier;
         private string title;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a <see cref="string"/> which contains list item qualifiers.
+        /// Gets a <see cref="string"/> which contains list item qualifier.
         /// </summary>
-        public string Qualifiers
+        public string Qualifier
         {
-            get { return qualifiers; }
+            get { return qualifier; }
         }
 
         /// <summary>
@@ -40,11 +38,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Internal
         /// <summary>
         /// Initializes a new instance of <see cref="ListItem"/> class.
         /// </summary>
-        /// <param name="qualifiers"></param>
+        /// <param name="qualifier"></param>
         /// <param name="title"></param>
-        public ListItem(string qualifiers, string title)
+        public ListItem(string qualifier, string title)
         {
-            this.qualifiers = qualifiers;
+            this.qualifier = qualifier;
             this.title = title;
         }
     }
