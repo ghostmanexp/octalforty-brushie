@@ -69,8 +69,12 @@ namespace octalforty.Brushie.Test
 
         static void Main()
         {
-            TextileParser textileParser = new TextileParser();
-            Document document = textileParser.Parse(WikiMarkup);
+            TextileParser.AddElementParser(new ParagraphParser());
+            TextileParser.AddElementParser(new HeadingParser());
+            TextileParser.AddElementParser(new BlockquoteParser());
+            TextileParser.AddElementParser(new TextParser());
+
+            Document document = TextileParser.Parse(AuthoringScope.All, WikiMarkup);
 
             string source = "The metrics for obfuscation are more\\-or\\-well understood. " +
                 "Do you have a game plan to become cross\\-media? Think interactive. True. Really. ";

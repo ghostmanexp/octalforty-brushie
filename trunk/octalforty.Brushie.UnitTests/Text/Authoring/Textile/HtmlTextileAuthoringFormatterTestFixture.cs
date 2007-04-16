@@ -63,15 +63,15 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 
             Assert.AreEqual("<a title=\"Title\" href=\"http://www.google.com\">Link</a>",
                 authoringFormatter.FormatHyperlink(" Link ", " Title ", " http://www.google.com ",
-                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
+                    new InlineElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
 
             Assert.AreEqual("<a class=\"a\" style=\"font-weight: bold;\" title=\"Title\" href=\"http://www.google.com\">Link</a>",
                 authoringFormatter.FormatHyperlink(" Link ", " Title ", " http://www.google.com ",
-                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
+                    new InlineElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
 
             Assert.AreEqual("<a id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\" title=\"Title\" href=\"http://www.google.com\">Link</a>",
                 authoringFormatter.FormatHyperlink(" Link ", " Title ", " http://www.google.com ",
-                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+                    new InlineElementAttributes(null, "id", "font-weight: bold;", "en-US")));
         }
 
         [Test()]
@@ -103,15 +103,15 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 
             Assert.AreEqual(string.Format("<{0}>Inner Text</{0}>", tag),
                 authoringFormatter.FormatTextFormatting(textFormatting, " Inner Text ",
-                    new PhraseElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
+                    new InlineElementAttributes(string.Empty, string.Empty, string.Empty, string.Empty)));
 
             Assert.AreEqual(string.Format("<{0} class=\"a\" style=\"font-weight: bold;\">Inner Text</{0}>", tag),
                 authoringFormatter.FormatTextFormatting(textFormatting, " Inner Text ",
-                    new PhraseElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
+                    new InlineElementAttributes("a", string.Empty, "font-weight: bold", string.Empty)));
 
             Assert.AreEqual(string.Format("<{0} id=\"id\" lang=\"en-US\" style=\"font-weight: bold;\">Inner Text</{0}>", tag),
                 authoringFormatter.FormatTextFormatting(textFormatting, " Inner Text ",
-                    new PhraseElementAttributes(null, "id", "font-weight: bold;", "en-US")));
+                    new InlineElementAttributes(null, "id", "font-weight: bold;", "en-US")));
         }
 
         [Test()]

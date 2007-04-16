@@ -8,16 +8,16 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     public abstract class InlineElement : DomElement
     {
         #region Private Member Variables
-        private PhraseElementAttributes attributes;
+        private InlineElementAttributes attributes;
         private String innerText;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a reference to the <see cref="PhraseElementAttributes"/> which contains
+        /// Gets a reference to the <see cref="InlineElementAttributes"/> which contains
         /// the attributes for this <see cref="InlineElement"/>.
         /// </summary>
-        public virtual PhraseElementAttributes Attributes
+        public virtual InlineElementAttributes Attributes
         {
             get { return attributes; }
         }

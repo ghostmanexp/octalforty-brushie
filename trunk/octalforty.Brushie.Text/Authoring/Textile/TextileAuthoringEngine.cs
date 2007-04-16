@@ -586,7 +586,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 // We need to ensure that current expression is not inside <pre> tags.
                 if(!IsMatchBetweenTags(text, match, "pre"))
                 {
-                    PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
+                    InlineElementAttributes attributes = CreatePhraseElementAttributes(match);
 
                     text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
                         textToFormat, attributes));
@@ -643,7 +643,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             while(match.Success)
             {
                 Hyperlink hyperlink = new Hyperlink(match);
-                PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
+                InlineElementAttributes attributes = CreatePhraseElementAttributes(match);
 
                 text = text.Replace(hyperlink.Expression, authoringFormatter.FormatHyperlink(hyperlink.Text, 
                     hyperlink.Title, hyperlink.Url, attributes));
@@ -712,7 +712,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <returns></returns>
         private static BlockElementAttributes CreateBlockElementAttributes(Match match)
         {
-            PhraseElementAttributes phraseElementAttributes =
+            InlineElementAttributes inlineElementAttributes =
                 CreatePhraseElementAttributes(match);
 
             //
@@ -758,19 +758,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if(!String.IsNullOrEmpty(rightIndent))
                 rightIndentValue = rightIndent.Length;
 
-            return new BlockElementAttributes(phraseElementAttributes.CssClass,
-                phraseElementAttributes.ID, phraseElementAttributes.Style, phraseElementAttributes.Language,
+            return new BlockElementAttributes(inlineElementAttributes.CssClass,
+                inlineElementAttributes.ID, inlineElementAttributes.Style, inlineElementAttributes.Language,
                 elementAlignment, leftIndentValue, rightIndentValue);
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="PhraseElementAttributes"/> class from the
+        /// Creates an instance of <see cref="InlineElementAttributes"/> class from the
         /// given <paramref name="match"/>, provided that <paramref name="match"/>
         /// has required groups (<c>CssClass</c>, <c>ID</c>, <c>Style</c> and <c>Language</c> ).
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
-        private static PhraseElementAttributes CreatePhraseElementAttributes(Match match)
+        private static InlineElementAttributes CreatePhraseElementAttributes(Match match)
         {
             //
             // Fetching values.
@@ -779,7 +779,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             String style = match.Groups["Style"].Value;
             String language = match.Groups["Language"].Value;
 
-            return new PhraseElementAttributes(cssClass, id, style, language);
+            return new InlineElementAttributes(cssClass, id, style, language);
         }
     }
 }
