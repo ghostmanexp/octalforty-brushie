@@ -6,7 +6,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     /// Defines block-level Textile elements attributes.
     /// <seealso cref="BlockElement"/>
     /// </summary>
-    public class BlockElementAttributes : PhraseElementAttributes
+    public class BlockElementAttributes : InlineElementAttributes
     {
         #region Private Member Variables
         private BlockElementAlignment alignment;

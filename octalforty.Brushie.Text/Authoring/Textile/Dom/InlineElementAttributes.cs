@@ -3,9 +3,10 @@
 namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 {
     /// <summary>
-    /// Defines attributes for a phrase Textile element.
+    /// Defines attributes for an inline Textile element.
+    /// <seealso cref="InlineElement"/>
     /// </summary>
-    public class PhraseElementAttributes
+    public class InlineElementAttributes
     {
         #region Private Member Variables
         private String cssClass;
@@ -52,14 +53,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="PhraseElementAttributes"/> class with
+        /// Initializes a new instance of <see cref="InlineElementAttributes"/> class with
         /// given values of attributes.
         /// </summary>
         /// <param name="cssClass">Element CSS class.</param>
         /// <param name="id">Element ID.</param>
         /// <param name="style">Inline element style.</param>
         /// <param name="language">Element language specification.</param>
-        public PhraseElementAttributes(string cssClass, string id, string style, string language)
+        public InlineElementAttributes(string cssClass, string id, string style, string language)
         {
             this.cssClass = cssClass;
             this.id = id;

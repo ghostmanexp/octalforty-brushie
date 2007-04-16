@@ -18,6 +18,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         void Visit(Heading heading);
 
         /// <summary>
+        /// Visits the <paramref name="blockquote"/> element.
+        /// </summary>
+        /// <param name="blockquote"></param>
+        void Visit(Blockquote blockquote);
+
+        /// <summary>
         /// Visits the <paramref name="paragraph"/> element.
         /// <seealso cref="Paragraph"/>
         /// </summary>

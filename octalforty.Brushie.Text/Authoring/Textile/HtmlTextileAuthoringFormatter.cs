@@ -57,7 +57,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </param>
         /// <param name="attributes">Attributes of the hyperlink.</param>
         /// <returns></returns>
-        public virtual String FormatHyperlink(string text, string title, string url, PhraseElementAttributes attributes)
+        public virtual String FormatHyperlink(string text, string title, string url, InlineElementAttributes attributes)
         {
             const String tag = "a";
             return String.Format("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>", 
@@ -87,7 +87,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text">The text.</param>
         /// <param name="attributes">Attributes of the phrase element.</param>
         /// <returns></returns>
-        public virtual String FormatTextFormatting(TextFormatting formatting, string text, PhraseElementAttributes attributes)
+        public virtual String FormatTextFormatting(TextFormatting formatting, string text, InlineElementAttributes attributes)
         {
             //
             // Determine tag
@@ -181,9 +181,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Creates partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
-        /// class="<see cref="PhraseElementAttributes.CssClass"/>" style="<see cref="PhraseElementAttributes.Style"/>"
-        /// lang="<see cref="PhraseElementAttributes.Language"/>".
+        /// Creates partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="InlineElementAttributes.ID"/>"
+        /// class="<see cref="InlineElementAttributes.CssClass"/>" style="<see cref="InlineElementAttributes.Style"/>"
+        /// lang="<see cref="InlineElementAttributes.Language"/>".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
@@ -234,9 +234,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
-        /// class="<see cref="PhraseElementAttributes.CssClass"/>" style="<see cref="PhraseElementAttributes.Style"/>"
-        /// lang="<see cref="PhraseElementAttributes.Language"/>">".
+        /// Creates a full start tag of a form "&lt;<paramref name="tag"/> id="<see cref="InlineElementAttributes.ID"/>"
+        /// class="<see cref="InlineElementAttributes.CssClass"/>" style="<see cref="InlineElementAttributes.Style"/>"
+        /// lang="<see cref="InlineElementAttributes.Language"/>">".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
@@ -247,14 +247,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
-        /// class="<see cref="PhraseElementAttributes.CssClass"/>" lang="<see cref="PhraseElementAttributes.Language"/>"
-        /// style="<see cref="PhraseElementAttributes.Style"/>"".
+        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="InlineElementAttributes.ID"/>"
+        /// class="<see cref="InlineElementAttributes.CssClass"/>" lang="<see cref="InlineElementAttributes.Language"/>"
+        /// style="<see cref="InlineElementAttributes.Style"/>"".
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        protected static String GetPartialPhraseStartTag(String tag, PhraseElementAttributes attributes)
+        protected static String GetPartialPhraseStartTag(String tag, InlineElementAttributes attributes)
         {
             StringBuilder tagBuilder = new StringBuilder(GetPartialPhraseStartTagWithoutStyle(tag, attributes));
 
@@ -272,15 +272,15 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="PhraseElementAttributes.ID"/>"
-        /// class="<see cref="PhraseElementAttributes.CssClass"/>" lang="<see cref="PhraseElementAttributes.Language"/>"".
+        /// Creates a partial start tag of a form "&lt;<paramref name="tag"/> id="<see cref="InlineElementAttributes.ID"/>"
+        /// class="<see cref="InlineElementAttributes.CssClass"/>" lang="<see cref="InlineElementAttributes.Language"/>"".
         /// <para />
         /// Note that <c>style</c> attribute is missing.
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        protected static String GetPartialPhraseStartTagWithoutStyle(String tag, PhraseElementAttributes attributes)
+        protected static String GetPartialPhraseStartTagWithoutStyle(String tag, InlineElementAttributes attributes)
         {
             StringBuilder tagBuilder = new StringBuilder();
             tagBuilder.AppendFormat("<{0}", tag);

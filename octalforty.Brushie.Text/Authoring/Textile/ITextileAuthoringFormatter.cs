@@ -35,7 +35,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="url">Hyperlink URL (the text that appears in <c>href</c> attribute).</param>
         /// <param name="attributes">Attributes of the hyperlink.</param>
         /// <returns></returns>
-        String FormatHyperlink(String text, String title, String url, PhraseElementAttributes attributes);
+        String FormatHyperlink(String text, String title, String url, InlineElementAttributes attributes);
 
         /// <summary>
         /// Formats a hyperlink with given text, title, URL and attributes.
@@ -53,7 +53,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text">The text.</param>
         /// <param name="attributes">Attributes of the phrase element.</param>
         /// <returns></returns>
-        String FormatTextFormatting(TextFormatting formatting, String text, PhraseElementAttributes attributes);
+        String FormatTextFormatting(TextFormatting formatting, String text, InlineElementAttributes attributes);
 
         /// <summary>
         /// Formats a paragraph with provided attributes.
