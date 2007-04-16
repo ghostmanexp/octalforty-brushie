@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using octalforty.Brushie.Text.Authoring.Textile.Dom;
 using octalforty.Brushie.Text.Authoring.Textile.Internal;
 
 namespace octalforty.Brushie.Text.Authoring.Textile

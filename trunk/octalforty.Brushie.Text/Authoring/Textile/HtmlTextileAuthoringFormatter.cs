@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 
+using octalforty.Brushie.Text.Authoring.Textile.Dom;
+
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>

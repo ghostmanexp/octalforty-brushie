@@ -40,17 +40,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authoring\AuthoringScope.cs" />
-    <Compile Include="Authoring\Textile\BlockElementAlignment.cs" />
-    <Compile Include="Authoring\Textile\BlockElementAttributes.cs" />
+    <Compile Include="Authoring\Textile\Dom\BlockElement.cs" />
+    <Compile Include="Authoring\Textile\Dom\BlockElementAlignment.cs" />
+    <Compile Include="Authoring\Textile\Dom\BlockElementAttributes.cs" />
+    <Compile Include="Authoring\Textile\Dom\Document.cs" />
+    <Compile Include="Authoring\Textile\Dom\DomElement.cs" />
+    <Compile Include="Authoring\Textile\Dom\DomElementCollection.cs" />
+    <Compile Include="Authoring\Textile\Dom\Heading.cs" />
+    <Compile Include="Authoring\Textile\Dom\IDomElementVisitor.cs" />
+    <Compile Include="Authoring\Textile\Dom\InlineElement.cs" />
+    <Compile Include="Authoring\Textile\Dom\Paragraph.cs" />
+    <Compile Include="Authoring\Textile\Dom\PhraseElementAttributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Authoring\Textile\Dom\Text.cs" />
     <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\Internal\Element.cs" />
     <Compile Include="Authoring\Textile\Internal\Hyperlink.cs" />
     <Compile Include="Authoring\Textile\Internal\List.cs" />
     <Compile Include="Authoring\Textile\Internal\ListItem.cs" />
     <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
-    <Compile Include="Authoring\Textile\PhraseElementAttributes.cs" />
     <Compile Include="Authoring\Textile\TextFormatting.cs" />
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs" />
+    <Compile Include="Authoring\Textile\TextileParser.cs" />
     <Compile Include="LuceneNet\DocumentAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapterReadOnlyCollection.cs" />

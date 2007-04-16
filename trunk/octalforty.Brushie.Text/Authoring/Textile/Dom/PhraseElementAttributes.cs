@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile
+namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 {
     /// <summary>
     /// Defines attributes for a phrase Textile element.

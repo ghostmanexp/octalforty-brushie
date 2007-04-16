@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 
 using octalforty.Brushie.Text.Authoring.Textile;
+using octalforty.Brushie.Text.Authoring.Textile.Dom;
 
 namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 {
