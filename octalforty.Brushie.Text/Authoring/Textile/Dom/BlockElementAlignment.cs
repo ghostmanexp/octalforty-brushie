@@ -1,7 +1,9 @@
-﻿namespace octalforty.Brushie.Text.Authoring.Textile
+﻿namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 {
     /// <summary>
     /// Defines the alignment of a block-level Textile element.
+    /// <seealso cref="BlockElement"/>
+    /// <seealso cref="BlockElementAttributes"/>
     /// </summary>
     public enum BlockElementAlignment
     {

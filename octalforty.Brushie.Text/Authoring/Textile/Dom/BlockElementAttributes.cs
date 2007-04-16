@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile
+namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 {
     /// <summary>
     /// Defines block-level Textile elements attributes.
+    /// <seealso cref="BlockElement"/>
     /// </summary>
     public class BlockElementAttributes : PhraseElementAttributes
     {
