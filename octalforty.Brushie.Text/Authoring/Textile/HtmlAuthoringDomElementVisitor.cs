@@ -102,7 +102,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="orderedList"></param>
         public void Visit(OrderedList orderedList)
         {
-            throw new NotImplementedException();
+            htmlBuilder.Append("<ol>");
+            VisitChildElements(orderedList);
+            htmlBuilder.Append("</ol>");
         }
 
         /// <summary>
@@ -111,7 +113,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="unorderedList"></param>
         public void Visit(UnorderedList unorderedList)
         {
-            throw new NotImplementedException();
+            htmlBuilder.Append("<ul>");
+            VisitChildElements(unorderedList);
+            htmlBuilder.Append("</ul>");
         }
 
         /// <summary>
@@ -120,7 +124,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="listItem"></param>
         public void Visit(ListItem listItem)
         {
-            throw new NotImplementedException();
+            htmlBuilder.Append("<li>");
+            VisitChildElements(listItem);
+            htmlBuilder.Append("</li>");
         }
         #endregion
 

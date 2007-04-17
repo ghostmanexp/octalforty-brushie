@@ -436,6 +436,7 @@ namespace octalforty.Brushie.Test
             TextileParser.AddElementParser(new ParagraphParser());
             TextileParser.AddElementParser(new HeadingParser());
             TextileParser.AddElementParser(new BlockquoteParser());
+            TextileParser.AddElementParser(new ListParser());
             TextileParser.AddElementParser(new TextParser());
 
             Document document = TextileParser.Parse(AuthoringScope.All, WikiMarkup);

@@ -14,6 +14,15 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         private Int32 rightIndent;
         #endregion
 
+        #region Public Static Member Variables
+        /// <summary>
+        /// An empty <see cref="BlockElementAttributes"/>.
+        /// </summary>
+        public static readonly BlockElementAttributes Empty = 
+            new BlockElementAttributes(string.Empty, string.Empty, string.Empty, 
+            String.Empty, BlockElementAlignment.Unknown, 0, 0);
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// Gets the <see cref="BlockElementAlignment"/> member, which defines the
