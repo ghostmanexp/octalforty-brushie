@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Textile.Dom;
@@ -44,7 +43,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 //
                 // ...list itself...
                 Internal.List list = new Internal.List(listMatch);
-                parentElement.AppendChild(CreateList(parentElement, list));
+                BlockElementAttributes attributes = CreateBlockElementAttributes(listMatch);
+
+                parentElement.AppendChild(CreateList(parentElement, list, attributes));
 
                 //
                 // ...and finally parse suffux
@@ -56,23 +57,48 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
         #endregion
 
-        private DomElement CreateList(DomElement parentElement, Internal.List list)
+        /// <summary>
+        /// Creates a list.
+        /// </summary>
+        /// <param name="parentElement"></param>
+        /// <param name="list"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        private static DomElement CreateList(DomElement parentElement, Internal.List list, BlockElementAttributes attributes)
         {
             int index = 0;
-            string previousQualifier = list.Items[index].Qualifier;
-            return CreateListRecursive(parentElement, list, ref index, ref previousQualifier);
+            return CreateListRecursive(parentElement, list, ref index, list.Items[index].Qualifier, attributes);
         }
 
-        private DomElement CreateListRecursive(DomElement parentElement, Internal.List list, ref int index, ref string previousQualifier)
+        /// <summary>
+        /// Recursively creates a list.
+        /// </summary>
+        /// <param name="parentElement"></param>
+        /// <param name="list"></param>
+        /// <param name="index"></param>
+        /// <param name="previousQualifier"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        private static DomElement CreateListRecursive(DomElement parentElement, Internal.List list, 
+            ref int index, string previousQualifier, BlockElementAttributes attributes)
         {
-            List domList = previousQualifier[previousQualifier.Length - 1] == '#' ?
-                   (List)new OrderedList(parentElement, BlockElementAttributes.Empty) :
-                   new UnorderedList(parentElement, BlockElementAttributes.Empty);
+            //
+            // Creating DOM object
+            List domList = 
+                previousQualifier[previousQualifier.Length - 1] == '#' ?
+                   (List)new OrderedList(parentElement, attributes) :
+                   new UnorderedList(parentElement, attributes);
 
+            //
+            // Iterating through items.
             for(; index < list.Items.GetLength(0); ++index)
             {
+                //
+                // Creating DOM list item and adding it to the 
+                // list created above.
                 ListItem listItem = new ListItem(domList, BlockElementAttributes.Empty);
-                listItem.AppendChild(new TextBlock(listItem, list.Items[index].Title));
+                listItem.AppendChild(new TextBlock(listItem, InlineElementAttributes.Empty, 
+                    list.Items[index].Title, TextBlockModifier.Unknown));
 
                 domList.AppendChild(listItem);
 
@@ -85,16 +111,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                         if(nextQualifier.Length > previousQualifier.Length)
                         {
                             ++index;
-                            listItem.AppendChild(CreateListRecursive(listItem, list, ref index, ref nextQualifier));
+                            listItem.AppendChild(CreateListRecursive(listItem, list, ref index, 
+                                nextQualifier, BlockElementAttributes.Empty));
                         } // if
                         else
-                        {
                             break;
-                        } // else
                     } // if
                 } // if
-
-                //previousQualifier = currentQualifier;
             } // for
 
             return domList;

@@ -128,7 +128,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                     throw new ArgumentOutOfRangeException("formatting");
             } // switch
 
-            return String.Format("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, attributes), text.Trim(), tag);
+            return String.Format("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, attributes), text, tag);
         }
 
         /// <summary>

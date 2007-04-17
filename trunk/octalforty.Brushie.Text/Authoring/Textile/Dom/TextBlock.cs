@@ -25,20 +25,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// Initializes a new instance of <see cref="TextBlock"/> class.
         /// </summary>
         /// <param name="parent"></param>
-        /// <param name="innerText"></param>
-        public TextBlock(DomElement parent, string innerText) : 
-            this(parent, innerText, TextBlockModifier.Unknown)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="TextBlock"/> class.
-        /// </summary>
-        /// <param name="parent"></param>
+        /// <param name="attributes"></param>
         /// <param name="innerText"></param>
         /// <param name="modifier"></param>
-        public TextBlock(DomElement parent, string innerText, TextBlockModifier modifier) :
-            base(parent, innerText)
+        public TextBlock(DomElement parent, InlineElementAttributes attributes, string innerText, TextBlockModifier modifier) : 
+            base(parent, attributes, innerText)
         {
             this.modifier = modifier;
         }

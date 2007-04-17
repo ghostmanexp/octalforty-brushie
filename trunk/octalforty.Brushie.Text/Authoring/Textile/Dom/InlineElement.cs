@@ -41,5 +41,18 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         {
             this.innerText = innerText;
         }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="InlineElement"/> class.
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="attributes"></param>
+        /// <param name="innerText"></param>
+        protected InlineElement(DomElement parent, InlineElementAttributes attributes, string innerText) : 
+            base(parent)
+        {
+            this.attributes = attributes;
+            this.innerText = innerText;
+        }
     }
 }
