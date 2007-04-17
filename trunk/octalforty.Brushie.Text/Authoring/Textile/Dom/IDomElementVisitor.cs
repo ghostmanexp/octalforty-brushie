@@ -31,9 +31,15 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         void Visit(Paragraph paragraph);
 
         /// <summary>
-        /// Visits the <paramref name="text"/> element.
+        /// Visits the <paramref name="hyperlink"/> element.
         /// </summary>
-        /// <param name="text"></param>
-        void Visit(Text text);
+        /// <param name="hyperlink"></param>
+        void Visit(Hyperlink hyperlink);
+
+        /// <summary>
+        /// Visits the <paramref name="textBlock"/> element.
+        /// </summary>
+        /// <param name="textBlock"></param>
+        void Visit(TextBlock textBlock);
     }
 }

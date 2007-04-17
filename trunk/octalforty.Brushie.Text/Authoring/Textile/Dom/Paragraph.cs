@@ -5,7 +5,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     /// <summary>
     /// Represents a paragraph.
     /// </summary>
-    public class Paragraph : BlockElement
+    public sealed class Paragraph : BlockElement
     {
         /// <summary>
         /// Initializes a new instance of <see cref="Paragraph"/> class.
