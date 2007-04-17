@@ -14,11 +14,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         private Int32 rightIndent;
         #endregion
 
-        #region Public Static Member Variables
+        #region Public Static Constants
         /// <summary>
         /// An empty <see cref="BlockElementAttributes"/>.
         /// </summary>
-        public static readonly BlockElementAttributes Empty = 
+        public static new readonly BlockElementAttributes Empty = 
             new BlockElementAttributes(string.Empty, string.Empty, string.Empty, 
             String.Empty, BlockElementAlignment.Unknown, 0, 0);
         #endregion

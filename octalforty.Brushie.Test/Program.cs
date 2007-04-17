@@ -14,7 +14,7 @@ namespace octalforty.Brushie.Test
         #region Wiki Markup
         const String WikiMarkup = "h2(head#h2){color:green}[en-US]<>(). This is a title\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
-                                      "p{color:red}. This is some text of *dubious _character_. Isn't* the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\r\n\r\n" +
+                                      "p{color:red;font-family:Tahoma;}. This is some text of *dubious _character_. Isn't* the use of \"quotes\" just lazy writing -- and theft of 'intellectual property' besides? I think the time has come to see a block quote.\r\n\r\n" +
                                       "bq[fr]. This is a block quote. I'll admit it's not the most exciting block quote ever devised.\r\n\r\n" +
                                       "Simple list:\r\n\r\n" +
                                       "#{color:blue} one\r\n" +
@@ -60,9 +60,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -112,9 +112,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -164,9 +164,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -216,9 +216,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -268,9 +268,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -320,9 +320,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -372,9 +372,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n" +
                                       "h3. This is a subhead\r\n\r\n" +
@@ -424,9 +424,9 @@ namespace octalforty.Brushie.Test
                                       "</pre>\r\n\r\n" +
                                       "This isn't code.\r\n\r\n" +
                                       "So you see, my friends:\r\n\r\n" +
-            /*"* The time is now\r\n" +
+            "* The time is now\r\n" +
             "* The time is not later\r\n" +
-            "* The time is not yesterday\r\n" +*/
+            "* The time is not yesterday\r\n" +
                                       "* We must act\r\n\r\n" +
                                       "fn1. Footnote.\r\n\r\n";
         #endregion

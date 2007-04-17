@@ -108,7 +108,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             if(Parse(parentElement, authoringScope, text, SpanRegex, TextBlockModifier.Unknown))
                 return;
 
-            parentElement.AppendChild(new TextBlock(parentElement, text));
+            parentElement.AppendChild(new TextBlock(parentElement, InlineElementAttributes.Empty, 
+                text, TextBlockModifier.Unknown));
         }
         #endregion
 
@@ -124,7 +125,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
                 //
                 // ...text block itself...
-                TextBlock textBlock = new TextBlock(parentElement, match.Groups["Text"].Value, expectedModifier);
+                TextBlock textBlock = new TextBlock(parentElement, CreateInlineElementAttributes(match), 
+                    match.Groups["Text"].Value, expectedModifier);
                 parentElement.AppendChild(textBlock);
 
                 //

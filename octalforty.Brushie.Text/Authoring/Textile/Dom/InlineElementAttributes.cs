@@ -15,6 +15,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         private String language;
         #endregion
 
+        #region Public Static Constants
+        /// <summary>
+        /// An empty <see cref="InlineElementAttributes"/>.
+        /// </summary>
+        public static readonly InlineElementAttributes Empty =
+            new InlineElementAttributes(String.Empty, string.Empty, String.Empty, String.Empty);
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// Gets a <see cref="String"/> which contains the CSS style of
