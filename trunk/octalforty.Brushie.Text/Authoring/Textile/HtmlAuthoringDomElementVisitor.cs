@@ -86,6 +86,42 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         {
             htmlBuilder.AppendFormat("<ins>{0}</ins>", textBlock.InnerText);
         }
+
+        /// <summary>
+        /// Visits the <paramref name="footnote"/> element.
+        /// </summary>
+        /// <param name="footnote"></param>
+        public void Visit(Footnote footnote)
+        {
+            VisitChildElements(footnote);
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="orderedList"/> element.
+        /// </summary>
+        /// <param name="orderedList"></param>
+        public void Visit(OrderedList orderedList)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="unorderedList"/> element.
+        /// </summary>
+        /// <param name="unorderedList"></param>
+        public void Visit(UnorderedList unorderedList)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="listItem"/> element.
+        /// </summary>
+        /// <param name="listItem"></param>
+        public void Visit(ListItem listItem)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         /// <summary>

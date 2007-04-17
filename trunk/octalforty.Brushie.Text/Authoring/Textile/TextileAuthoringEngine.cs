@@ -421,11 +421,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 // Here we have a whole string which has to be split up
                 // into separate list items.
                 Match listItemMatch = ListItemRegex.Match(expression);
-                List<ListItem> listItems = new List<ListItem>();
+                List<Internal.ListItem> listItems = new List<Internal.ListItem>();
 
                 while(listItemMatch.Success)
                 {
-                    listItems.Add(new ListItem(listItemMatch.Groups["Qualifier"].Value,
+                    listItems.Add(new Internal.ListItem(listItemMatch.Groups["Qualifier"].Value,
                         listItemMatch.Groups["Title"].Value));
 
                     listItemMatch = listItemMatch.NextMatch();
@@ -435,7 +435,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 StringBuilder listBuilder = new StringBuilder();
                 string currentQualifier = string.Empty;
 
-                foreach(ListItem item in listItems)
+                foreach(Internal.ListItem item in listItems)
                 {
                     if(item.Qualifier != currentQualifier)
                     {
