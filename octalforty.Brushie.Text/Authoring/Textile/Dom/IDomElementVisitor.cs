@@ -31,6 +31,30 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         void Visit(Paragraph paragraph);
 
         /// <summary>
+        /// Visits the <paramref name="footnote"/> element.
+        /// </summary>
+        /// <param name="footnote"></param>
+        void Visit(Footnote footnote);
+
+        /// <summary>
+        /// Visits the <paramref name="orderedList"/> element.
+        /// </summary>
+        /// <param name="orderedList"></param>
+        void Visit(OrderedList orderedList);
+
+        /// <summary>
+        /// Visits the <paramref name="unorderedList"/> element.
+        /// </summary>
+        /// <param name="unorderedList"></param>
+        void Visit(UnorderedList unorderedList);
+
+        /// <summary>
+        /// Visits the <paramref name="listItem"/> element.
+        /// </summary>
+        /// <param name="listItem"></param>
+        void Visit(ListItem listItem);
+
+        /// <summary>
         /// Visits the <paramref name="hyperlink"/> element.
         /// </summary>
         /// <param name="hyperlink"></param>

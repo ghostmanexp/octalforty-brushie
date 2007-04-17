@@ -48,14 +48,19 @@
     <Compile Include="Authoring\Textile\Dom\Document.cs" />
     <Compile Include="Authoring\Textile\Dom\DomElement.cs" />
     <Compile Include="Authoring\Textile\Dom\DomElementCollection.cs" />
+    <Compile Include="Authoring\Textile\Dom\Footnote.cs" />
     <Compile Include="Authoring\Textile\Dom\Heading.cs" />
     <Compile Include="Authoring\Textile\Dom\IDomElementVisitor.cs" />
     <Compile Include="Authoring\Textile\Dom\InlineElement.cs" />
     <Compile Include="Authoring\Textile\Dom\InlineElementAttributes.cs" />
     <Compile Include="Authoring\Textile\Dom\Hyperlink.cs" />
+    <Compile Include="Authoring\Textile\Dom\List.cs" />
+    <Compile Include="Authoring\Textile\Dom\ListItem.cs" />
+    <Compile Include="Authoring\Textile\Dom\OrderedList.cs" />
     <Compile Include="Authoring\Textile\Dom\Paragraph.cs" />
     <Compile Include="Authoring\Textile\Dom\TextBlock.cs" />
     <Compile Include="Authoring\Textile\Dom\TextBlockModifier.cs" />
+    <Compile Include="Authoring\Textile\Dom\UnorderedList.cs" />
     <Compile Include="Authoring\Textile\HeadingParser.cs" />
     <Compile Include="Authoring\Textile\HtmlAuthoringDomElementVisitor.cs" />
     <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
@@ -67,6 +72,7 @@
     <Compile Include="Authoring\Textile\Internal\ListItem.cs" />
     <Compile Include="Authoring\Textile\Internal\NullElementParser.cs" />
     <Compile Include="Authoring\Textile\HyperlinkParser.cs" />
+    <Compile Include="Authoring\Textile\ListParser.cs" />
     <Compile Include="Authoring\Textile\ParagraphParser.cs" />
     <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\TextFormatting.cs" />
