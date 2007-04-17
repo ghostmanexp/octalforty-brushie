@@ -165,5 +165,5 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 TextileParser.Parse(parentElement, authoringScope, text.Substring(match.Index + match.Length));
             } // if
         }
-    }
+    } 
 }

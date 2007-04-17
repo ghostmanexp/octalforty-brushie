@@ -5,7 +5,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     /// <summary>
     /// Represents a blockquote.
     /// </summary>
-    public class Blockquote : BlockElement
+    public sealed class Blockquote : BlockElement
     {
         /// <summary>
         /// Initializes a new instance of <see cref="Blockquote"/> class.

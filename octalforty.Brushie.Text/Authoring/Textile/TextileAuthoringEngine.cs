@@ -642,7 +642,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             Match match = LinkRegex.Match(text);
             while(match.Success)
             {
-                Hyperlink hyperlink = new Hyperlink(match);
+                Internal.Hyperlink hyperlink = new Internal.Hyperlink(match);
                 InlineElementAttributes attributes = CreatePhraseElementAttributes(match);
 
                 text = text.Replace(hyperlink.Expression, authoringFormatter.FormatHyperlink(hyperlink.Text, 
