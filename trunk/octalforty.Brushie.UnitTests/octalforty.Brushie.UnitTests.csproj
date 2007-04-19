@@ -57,6 +57,8 @@
     <Compile Include="Instrumentation\Core\Formatters\GenericFormatterTestFixture.cs" />
     <Compile Include="Instrumentation\Core\Util\MessageFormatterTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text\Authoring\Textile\ComplexAuthoring.cs" />
+    <Compile Include="Text\Authoring\Textile\HtmlAuthoringDomElementVisitorTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\HtmlTextileAuthoringFormatterTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\TextileAuthoringEngineTestFixture.cs" />
     <Compile Include="Text\LuceneNet\DocumentAdapterTestFixture.cs">
