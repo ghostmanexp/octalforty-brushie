@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Text;
 
 using octalforty.Brushie.Diff;
@@ -441,10 +442,13 @@ namespace octalforty.Brushie.Test
             TextileParser.AddElementParser(new TextParser());
 
             StringBuilder wiki = new StringBuilder();
-            for(int i = 0; i < 2; ++i)
+            for(int i = 0; i < 5; ++i)
                 wiki.Append(WikiMarkup);
 
+            Stopwatch stopwatch = Stopwatch.StartNew();
             Document document = TextileParser.Parse(AuthoringScope.All, wiki.ToString());
+            stopwatch.Stop();
+            Console.WriteLine("{0} bytes in {1} sec.", wiki.ToString().Length, stopwatch.ElapsedMilliseconds / 1000.0);
             HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
             document.Accept(htmlAuthoringDomElementVisitor);
 
