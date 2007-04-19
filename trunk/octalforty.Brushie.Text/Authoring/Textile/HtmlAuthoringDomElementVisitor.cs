@@ -87,6 +87,16 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
+        /// Visits the <paramref name="image"/> elements.
+        /// </summary>
+        /// <param name="image"></param>
+        public void Visit(Image image)
+        {
+            htmlBuilder.AppendFormat("{0} src=\"{1}\" alt=\"{2}\" />",
+                GetPartialPhraseStartTag("img", image.Attributes), image.Url, image.InnerText);
+        }
+
+        /// <summary>
         /// Visits the <paramref name="textBlock"/> element.
         /// </summary>
         /// <param name="textBlock"></param>
@@ -130,7 +140,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             } // switch
 
             htmlBuilder.AppendFormat("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, textBlock.Attributes), 
-                textBlock.InnerText.Trim(), tag);
+                textBlock.InnerText, tag);
         }
 
         /// <summary>

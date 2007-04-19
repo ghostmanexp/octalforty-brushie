@@ -51,6 +51,7 @@
     <Compile Include="Authoring\Textile\Dom\Footnote.cs" />
     <Compile Include="Authoring\Textile\Dom\Heading.cs" />
     <Compile Include="Authoring\Textile\Dom\IDomElementVisitor.cs" />
+    <Compile Include="Authoring\Textile\Dom\Image.cs" />
     <Compile Include="Authoring\Textile\Dom\InlineElement.cs" />
     <Compile Include="Authoring\Textile\Dom\InlineElementAttributes.cs" />
     <Compile Include="Authoring\Textile\Dom\Hyperlink.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Authoring\Textile\HeadingParser.cs" />
     <Compile Include="Authoring\Textile\HtmlAuthoringDomElementVisitor.cs" />
     <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
+    <Compile Include="Authoring\Textile\ImageParser.cs" />
     <Compile Include="Authoring\Textile\Internal\Element.cs" />
     <Compile Include="Authoring\Textile\ElementParserBase.cs" />
     <Compile Include="Authoring\Textile\Internal\Hyperlink.cs" />
