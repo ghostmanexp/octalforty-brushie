@@ -437,9 +437,14 @@ namespace octalforty.Brushie.Test
             TextileParser.AddElementParser(new HeadingParser());
             TextileParser.AddElementParser(new BlockquoteParser());
             TextileParser.AddElementParser(new ListParser());
+            TextileParser.AddElementParser(new ImageParser());
             TextileParser.AddElementParser(new TextParser());
 
-            Document document = TextileParser.Parse(AuthoringScope.All, WikiMarkup);
+            StringBuilder wiki = new StringBuilder();
+            for(int i = 0; i < 2; ++i)
+                wiki.Append(WikiMarkup);
+
+            Document document = TextileParser.Parse(AuthoringScope.All, wiki.ToString());
             HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
             document.Accept(htmlAuthoringDomElementVisitor);
 

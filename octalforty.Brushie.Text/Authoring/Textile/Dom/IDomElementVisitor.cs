@@ -61,6 +61,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         void Visit(Hyperlink hyperlink);
 
         /// <summary>
+        /// Visits the <paramref name="image"/> elements.
+        /// </summary>
+        /// <param name="image"></param>
+        void Visit(Image image);
+
+        /// <summary>
         /// Visits the <paramref name="textBlock"/> element.
         /// </summary>
         /// <param name="textBlock"></param>
