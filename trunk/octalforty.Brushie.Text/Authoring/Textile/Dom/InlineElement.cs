@@ -8,7 +8,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     public abstract class InlineElement : DomElement
     {
         #region Private Member Variables
-        private InlineElementAttributes attributes;
+        private InlineElementAttributes attributes = InlineElementAttributes.Empty;
         private String innerText;
         #endregion
 
@@ -34,10 +34,17 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <summary>
         /// Initializes a new instance of <see cref="InlineElement"/> class.
         /// </summary>
+        protected InlineElement()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="InlineElement"/> class.
+        /// </summary>
         /// <param name="parent"></param>
         /// <param name="innerText"></param>
-        protected InlineElement(DomElement parent, string innerText) : 
-            base(parent)
+        protected InlineElement(DomElement parent, string innerText) :
+            this(parent, InlineElementAttributes.Empty, innerText)
         {
             this.innerText = innerText;
         }

@@ -10,6 +10,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <summary>
         /// Initializes a new instance of <see cref="ListItem"/> class.
         /// </summary>
+        public ListItem()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="ListItem"/> class.
+        /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
         public ListItem(DomElement parent, BlockElementAttributes attributes) : 

@@ -1,3 +1,5 @@
+using System;
+
 namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 {
     /// <summary>

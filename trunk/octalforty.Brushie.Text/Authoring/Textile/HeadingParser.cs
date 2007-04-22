@@ -8,13 +8,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing Textile headings.
     /// </summary>
-    public sealed class HeadingParser : ElementParserBase
+    public sealed class HeadingParser : BlockElementParserBase
     {
         #region Private Constants
-        private static readonly Regex HeadingRegex = new Regex(
-            @"(?<Expression>^h(?<Level>[1-6])(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        private static readonly Regex HeadingRegex =
+            new Regex(
+                @"(?<Expression>^h(?<Level>[1-6])(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
+                RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
@@ -26,37 +27,27 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
         #region ElementParserBase Members
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="ElementParserBase.Parse"/>.
         /// </summary>
-        /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
-        /// <param name="text">The text to be parsed.</param>
-        public override void Parse(DomElement parentElement, AuthoringScope authoringScope, string text)
+        protected override Regex Regex
         {
-            if((authoringScope & AuthoringScope.Headings) == AuthoringScope.Headings)
-            {
-                Match headingMatch = HeadingRegex.Match(text);
-                if(headingMatch.Success)
-                {
-                    //
-                    // Parsing prefix...
-                    ParsePrefix(parentElement, authoringScope, text, headingMatch);
+            get { return HeadingRegex; }
+        }
 
-                    //
-                    // ...heading itself...
-                    Heading heading = new Heading(parentElement, CreateBlockElementAttributes(headingMatch),
-                        Convert.ToInt32(headingMatch.Groups["Level"].Value), headingMatch.Groups["Text"].Value);
-                    parentElement.AppendChild(heading);
-
-                    //
-                    // ...and end with suffix.
-                    ParseSuffix(parentElement, authoringScope, text, headingMatch);
-                    return;
-                } // if
-            } // if
-
-            ParseWithNextElementParser(parentElement, authoringScope, text);
+        /// <summary>
+        /// Template method which is invoked from <see cref="ElementParserBase.Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected override void ProcessMatch(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, Match match)
+        {
+            Heading heading = new Heading(parentElement, CreateBlockElementAttributes(match),
+                    Convert.ToInt32(match.Groups["Level"].Value), match.Groups["Text"].Value);
+            parentElement.AppendChild(heading);
         }
         #endregion
     }

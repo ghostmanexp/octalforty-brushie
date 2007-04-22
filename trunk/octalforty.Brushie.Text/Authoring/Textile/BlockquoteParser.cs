@@ -7,13 +7,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing Textile blockquotes.
     /// </summary>
-    public sealed class BlockquoteParser : ElementParserBase
+    public sealed class BlockquoteParser : BlockElementParserBase
     {
         #region Private Constants
-        private static readonly Regex BlockquoteRegex = new Regex(
-            @"(?<Expression>^bq(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        private static readonly Regex BlockquoteRegex =
+            new Regex(
+                @"(?<Expression>^bq(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
+                RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
@@ -25,37 +26,28 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
         #region ElementParserBase Members
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="ElementParserBase.Parse"/>.
         /// </summary>
-        /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
-        /// <param name="text">The text to be parsed.</param>
-        public override void Parse(DomElement parentElement, AuthoringScope authoringScope, string text)
+        protected override Regex Regex
         {
-            Match blockquoteMatch = BlockquoteRegex.Match(text);
-            if(blockquoteMatch.Success)
-            {
-                //
-                // Parsing prefix...
-                ParsePrefix(parentElement, authoringScope, text, blockquoteMatch);
+            get { return BlockquoteRegex; }
+        }
 
-                //
-                // ...blockquote itself...
-                Blockquote blockquote = new Blockquote(parentElement, CreateBlockElementAttributes(blockquoteMatch));
-                parentElement.AppendChild(blockquote);
-
-                TextileParser.Parse(blockquote, authoringScope, blockquoteMatch.Groups["Text"].Value);
-
-                //
-                // ...and finally parse suffux
-                ParseSuffix(parentElement, authoringScope, text, blockquoteMatch);
-                return;
-            } // if
-
-            //
-            // Proceed.
-            ParseWithNextElementParser(parentElement, authoringScope, text);
+        /// <summary>
+        /// Template method which is invoked from <see cref="ElementParserBase.Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected override void ProcessMatch(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, Match match)
+        {
+            Blockquote blockquote = new Blockquote(parentElement, CreateBlockElementAttributes(match));
+            parentElement.AppendChild(blockquote);
+            
+            ParseWithNextElementParser(authoringEngine, parentElement, match.Groups["Text"].Value);
         }
         #endregion
     }

@@ -49,7 +49,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public void Visit(Heading heading)
         {
             String tag = String.Format("h{0}", heading.Level);
-            htmlBuilder.AppendFormat("{0}{1}</{2}>", GetFullBlockStartTag(tag, heading.Attributes), heading.Text.Trim(), tag);
+            htmlBuilder.AppendFormat("{0}{1}</{2}>", GetFullBlockStartTag(tag, heading.Attributes), heading.Text.Trim(),
+                                     tag);
         }
 
         /// <summary>
@@ -82,8 +83,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public void Visit(Hyperlink hyperlink)
         {
             htmlBuilder.AppendFormat("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>",
-                GetPartialPhraseStartTag("a", hyperlink.Attributes),
-                hyperlink.Title.Trim(), hyperlink.Url.Trim(), hyperlink.InnerText.Trim(), "a");
+                                     GetPartialPhraseStartTag("a", hyperlink.Attributes), hyperlink.Title.Trim(),
+                                     hyperlink.Url.Trim(), hyperlink.InnerText.Trim(), "a");
         }
 
         /// <summary>
@@ -92,8 +93,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="image"></param>
         public void Visit(Image image)
         {
-            htmlBuilder.AppendFormat("{0} src=\"{1}\" alt=\"{2}\" />",
-                GetPartialPhraseStartTag("img", image.Attributes), image.Url, image.InnerText);
+            htmlBuilder.AppendFormat("{0} src=\"{1}\" alt=\"{2}\" />", GetPartialPhraseStartTag("img", image.Attributes),
+                                     image.Url, image.AlternateText);
         }
 
         /// <summary>
@@ -107,40 +108,52 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             String tag;
             switch(textBlock.Modifier)
             {
-                case TextBlockModifier.StrongEmphasis:
-                    tag = "strong";
-                    break;
-                case TextBlockModifier.Bold:
-                    tag = "b";
-                    break;
-                case TextBlockModifier.Emphasis:
-                    tag = "em";
-                    break;
-                case TextBlockModifier.Italics:
-                    tag = "i";
-                    break;
-                case TextBlockModifier.Citation:
-                    tag = "cite";
-                    break;
-                case TextBlockModifier.Deleted:
-                    tag = "del";
-                    break;
-                case TextBlockModifier.Inserted:
-                    tag = "ins";
-                    break;
-                case TextBlockModifier.Superscript:
-                    tag = "sup";
-                    break;
-                case TextBlockModifier.Subscript:
-                    tag = "sub";
-                    break;
-                default:
-                    tag = "span";
-                    break;
+            case TextBlockModifier.StrongEmphasis:
+                tag = "strong";
+                break;
+            case TextBlockModifier.Bold:
+                tag = "b";
+                break;
+            case TextBlockModifier.Emphasis:
+                tag = "em";
+                break;
+            case TextBlockModifier.Italics:
+                tag = "i";
+                break;
+            case TextBlockModifier.Citation:
+                tag = "cite";
+                break;
+            case TextBlockModifier.Deleted:
+                tag = "del";
+                break;
+            case TextBlockModifier.Inserted:
+                tag = "ins";
+                break;
+            case TextBlockModifier.Superscript:
+                tag = "sup";
+                break;
+            case TextBlockModifier.Subscript:
+                tag = "sub";
+                break;
+            case TextBlockModifier.Code:
+                tag = "code";
+                break;
+            default:
+                tag = "span";
+                break;
             } // switch
 
-            htmlBuilder.AppendFormat("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, textBlock.Attributes), 
+            htmlBuilder.AppendFormat("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, textBlock.Attributes),
                 textBlock.InnerText, tag);
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="acronym"/> element.
+        /// </summary>
+        /// <param name="acronym"></param>
+        public void Visit(Acronym acronym)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -149,7 +162,23 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="footnote"></param>
         public void Visit(Footnote footnote)
         {
+            htmlBuilder.AppendFormat(GetFullBlockStartTag("p", footnote.Attributes));
+            
+            htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>",
+                GetFoonoteAnchorName(footnote.Number), footnote.Number);
             VisitChildElements(footnote);
+
+            htmlBuilder.Append("</p>");
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="footnoteReference"/> element.
+        /// </summary>
+        /// <param name="footnoteReference"></param>
+        public void Visit(FootnoteReference footnoteReference)
+        {
+            htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>", 
+                GetFoonoteAnchorName(footnoteReference.Number), footnoteReference.Number);
         }
 
         /// <summary>
@@ -183,6 +212,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             htmlBuilder.AppendFormat(GetFullBlockStartTag("li", listItem.Attributes));
             VisitChildElements(listItem);
             htmlBuilder.Append("</li>");
+        }
+        #endregion
+
+        #region Overridables
+        /// <summary>
+        /// Gets a string with the name of the HTML anchor (without leading #) which corresponds to the
+        /// footnote with identifer <paramref name="footnoteID"/>
+        /// </summary>
+        /// <param name="footnoteID"></param>
+        /// <returns></returns>
+        protected virtual String GetFoonoteAnchorName(Int32 footnoteID)
+        {
+            return String.Format("__footnote{0}", footnoteID);
         }
         #endregion
 

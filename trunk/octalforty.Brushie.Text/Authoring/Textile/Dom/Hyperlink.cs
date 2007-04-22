@@ -33,13 +33,10 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <summary>
         /// Initializes a new instance of <see cref="Hyperlink"/> class.
         /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="innerText"></param>
-        public Hyperlink(DomElement parent, string innerText) : 
-            base(parent, innerText)
+        public Hyperlink()
         {
         }
-
+        
         /// <summary>
         /// Initializes a new instance of <see cref="Hyperlink"/> class.
         /// </summary>

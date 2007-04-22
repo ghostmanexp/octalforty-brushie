@@ -11,21 +11,65 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// </summary>
     public sealed class TextileParser
     {
-        #region Private Static Member Variables
-        private static IElementParser rootElementParser = new NullElementParser();
-        private static object syncRoot = new object();
+        #region Private Member Variables
+        private IBlockElementParser rootBlockElementParser = new NullBlockElementParser();
+        private IInlineElementParser rootInlineElementParser = new NullInlineElementParser();
+        private object syncRoot = new object();
         #endregion
 
         /// <summary>
-        /// Adds <paramref name="elementParser"/> to the end of the parsing chain.
+        /// Initializes a new instance of <see cref="TextileParser"/> class.
         /// </summary>
-        /// <param name="elementParser"></param>
-        public static void AddElementParser(IElementParser elementParser)
+        public TextileParser()
+        {
+        }
+
+        /// <summary>
+        /// Adds <paramref name="blockElementParser"/> to the end of the block elements parsing chain.
+        /// </summary>
+        /// <param name="blockElementParser"></param>
+        public void AddBlockElementParser(IBlockElementParser blockElementParser)
         {
             lock(syncRoot)
             {
-                AddElementParser(rootElementParser, elementParser);
+                AddElementParser(rootBlockElementParser, blockElementParser);
             } // lock
+        }
+
+        /// <summary>
+        /// Adds <paramref name="inlineElementParser"/> to the end of the inline elements parsing chain.
+        /// </summary>
+        /// <param name="inlineElementParser"></param>
+        public void AddInlineElementParser(IInlineElementParser inlineElementParser)
+        {
+            lock(syncRoot)
+            {
+                AddElementParser(rootInlineElementParser, inlineElementParser);
+            } // lock
+        }
+
+        /// <summary>
+        /// Parses <paramref name="text"/> and produces a <see cref="Document"/>.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static Document Parse(String text)
+        {
+            Document document = new Document();
+            Parse(document, text);
+
+            return document;
+        }
+
+        /// <summary>
+        /// Parses <paramref name="text"/>.
+        /// </summary>
+        /// <param name="domElement"></param>
+        /// <param name="text"></param>
+        public void ParseBlockElement(DomElement domElement, String text)
+        {
+            blocke
+            rootElementParser.Parse(domElement, AuthoringScope.All, text);
         }
 
         /// <summary>
@@ -39,31 +83,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 parentElementParser.NextElementParser = elementParser;
             else
                 AddElementParser(parentElementParser.NextElementParser, elementParser);
-        }
-
-        /// <summary>
-        /// Parses <paramref name="text"/> and produces a <see cref="Document"/>.
-        /// </summary>
-        /// <param name="authoringScope"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static Document Parse(AuthoringScope authoringScope, String text)
-        {
-            Document document = new Document();
-            Parse(document, authoringScope, text);
-
-            return document;
-        }
-
-        /// <summary>
-        /// Parses <paramref name="text"/>.
-        /// </summary>
-        /// <param name="domElement"></param>
-        /// <param name="authoringScope"></param>
-        /// <param name="text"></param>
-        public static void Parse(DomElement domElement, AuthoringScope authoringScope, string text)
-        {
-            rootElementParser.Parse(domElement, AuthoringScope.All, text);
         }
     }
 }

@@ -37,6 +37,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         void Visit(Footnote footnote);
 
         /// <summary>
+        /// Visits the <paramref name="footnoteReference"/> element.
+        /// </summary>
+        /// <param name="footnoteReference"></param>
+        void Visit(FootnoteReference footnoteReference);
+
+        /// <summary>
         /// Visits the <paramref name="orderedList"/> element.
         /// </summary>
         /// <param name="orderedList"></param>
@@ -71,5 +77,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// </summary>
         /// <param name="textBlock"></param>
         void Visit(TextBlock textBlock);
+
+        /// <summary>
+        /// Visits the <paramref name="acronym"/> element.
+        /// </summary>
+        /// <param name="acronym"></param>
+        void Visit(Acronym acronym);
     }
 }

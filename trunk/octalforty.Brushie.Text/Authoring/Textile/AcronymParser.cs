@@ -1,25 +1,24 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Textile.Dom;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
-    /// Provides functionality for parsing Textile hyperlinks.
+    /// Provides functionality for parsing acronyms.
     /// </summary>
-    public sealed class HyperlinkParser : InlineElementParserBase
+    public sealed class AcronymParser : InlineElementParserBase
     {
         #region Private Constants
-        private static readonly Regex HyperlinkRegex = new Regex(
-            "[^\\\\](?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        private static readonly Regex AcronymRegex = new Regex(
+            @"(?<Expression>((?<Acronym>\p{Lu}{2,}))\((?<Text>.+)\))",
+            RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="HyperlinkParser"/> class.
+        /// Initializes a new instance of <see cref="AcronymParser"/> class.
         /// </summary>
-        public HyperlinkParser()
+        public AcronymParser()
         {
         }
 
@@ -30,7 +29,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </summary>
         protected override Regex Regex
         {
-            get { return HyperlinkRegex; }
+            get { return AcronymRegex; }
         }
 
         /// <summary>
@@ -42,9 +41,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="match"></param>
         protected override void ProcessMatch(IAuthoringEngine authoringEngine, DomElement parentElement, Match match)
         {
-            Hyperlink hyperlink = new Hyperlink(parentElement, match.Groups["Text"].Value,
-                match.Groups["Title"].Value, match.Groups["Url"].Value);
-            parentElement.AppendChild(hyperlink);
+            Acronym acronym = new Acronym(parentElement, match.Groups["Text"].Value,
+                match.Groups["Acronym"].Value);
+            parentElement.AppendChild(acronym);
         }
         #endregion
     }

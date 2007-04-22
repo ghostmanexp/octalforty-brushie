@@ -7,13 +7,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing Textile images.
     /// </summary>
-    public sealed class ImageParser : ElementParserBase
+    public sealed class ImageParser : BlockElementParserBase
     {
         #region Private Constants
-        private static readonly Regex ImageRegex = new Regex(
-            @"(?<!\\)(?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)(?<!\\)\!)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        private static readonly Regex ImageRegex =
+            new Regex(
+                @"(?<!\\)(?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)(?<!\\)\!)",
+                RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
@@ -25,34 +26,27 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
         #region ElementParserBase Members
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="ElementParserBase.Parse"/>.
         /// </summary>
-        /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
-        /// <param name="text">The text to be parsed.</param>
-        public override void Parse(DomElement parentElement, AuthoringScope authoringScope, string text)
+        protected override Regex Regex
         {
-            Match imageMatch = ImageRegex.Match(text);
-            if(imageMatch.Success)
-            {
-                //
-                // Parsing prefix...
-                ParsePrefix(parentElement, authoringScope, text, imageMatch);
+            get { return ImageRegex; }
+        }
 
-                //
-                // ...paragraph itself...
-                Image image = new Image(parentElement, CreateInlineElementAttributes(imageMatch),
-                    imageMatch.Groups["AlternateText"].Value, imageMatch.Groups["Url"].Value);
-                parentElement.AppendChild(image);
-
-                //
-                // ...and finally parse suffux
-                ParseSuffix(parentElement, authoringScope, text, imageMatch);
-                return;
-            } // if
-
-            ParseWithNextElementParser(parentElement, authoringScope, text);
+        /// <summary>
+        /// Template method which is invoked from <see cref="ElementParserBase.Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected override void ProcessMatch(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, Match match)
+        {
+            Image image = new Image(parentElement, CreateBlockElementAttributes(match),
+                match.Groups["Url"].Value, match.Groups["AlternateText"].Value);
+            parentElement.AppendChild(image);
         }
         #endregion
     }

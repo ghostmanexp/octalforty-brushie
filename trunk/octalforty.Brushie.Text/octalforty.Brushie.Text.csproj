@@ -40,7 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authoring\AuthoringScope.cs" />
-    <Compile Include="Authoring\Textile\BlockquoteParser.cs" />
+    <Compile Include="Authoring\Textile\AcronymParser.cs" />
+    <Compile Include="Authoring\Textile\AuthoringEngineBase.cs" />
+    <Compile Include="Authoring\Textile\BlockElementFallbackParser.cs" />
+    <Compile Include="Authoring\Textile\BlockElementParserBase.cs" />
+    <Compile Include="Authoring\Textile\BlockquoteParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Authoring\Textile\Dom\Acronym.cs" />
     <Compile Include="Authoring\Textile\Dom\BlockElement.cs" />
     <Compile Include="Authoring\Textile\Dom\BlockElementAlignment.cs" />
     <Compile Include="Authoring\Textile\Dom\BlockElementAttributes.cs" />
@@ -49,6 +56,7 @@
     <Compile Include="Authoring\Textile\Dom\DomElement.cs" />
     <Compile Include="Authoring\Textile\Dom\DomElementCollection.cs" />
     <Compile Include="Authoring\Textile\Dom\Footnote.cs" />
+    <Compile Include="Authoring\Textile\Dom\FootnoteReference.cs" />
     <Compile Include="Authoring\Textile\Dom\Heading.cs" />
     <Compile Include="Authoring\Textile\Dom\IDomElementVisitor.cs" />
     <Compile Include="Authoring\Textile\Dom\Image.cs" />
@@ -59,28 +67,46 @@
     <Compile Include="Authoring\Textile\Dom\ListItem.cs" />
     <Compile Include="Authoring\Textile\Dom\OrderedList.cs" />
     <Compile Include="Authoring\Textile\Dom\Paragraph.cs" />
+    <Compile Include="Authoring\Textile\Dom\TableCellAlignment.cs" />
     <Compile Include="Authoring\Textile\Dom\TextBlock.cs" />
     <Compile Include="Authoring\Textile\Dom\TextBlockModifier.cs" />
     <Compile Include="Authoring\Textile\Dom\UnorderedList.cs" />
-    <Compile Include="Authoring\Textile\HeadingParser.cs" />
+    <Compile Include="Authoring\Textile\FootnoteParser.cs" />
+    <Compile Include="Authoring\Textile\FootnoteReferenceParser.cs" />
+    <Compile Include="Authoring\Textile\HeadingParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Authoring\Textile\HtmlAuthoringDomElementVisitor.cs" />
     <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
-    <Compile Include="Authoring\Textile\ImageParser.cs" />
+    <Compile Include="Authoring\Textile\HyperlinkParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Authoring\Textile\IAuthoringEngine.cs" />
+    <Compile Include="Authoring\Textile\IBlockElementParser.cs" />
+    <Compile Include="Authoring\Textile\IInlineElementParser.cs" />
+    <Compile Include="Authoring\Textile\ImageParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Authoring\Textile\InlineElementParserBase.cs" />
     <Compile Include="Authoring\Textile\Internal\Element.cs" />
     <Compile Include="Authoring\Textile\ElementParserBase.cs" />
     <Compile Include="Authoring\Textile\Internal\Hyperlink.cs" />
     <Compile Include="Authoring\Textile\IElementParser.cs" />
     <Compile Include="Authoring\Textile\Internal\List.cs" />
     <Compile Include="Authoring\Textile\Internal\ListItem.cs" />
-    <Compile Include="Authoring\Textile\Internal\NullElementParser.cs" />
-    <Compile Include="Authoring\Textile\HyperlinkParser.cs" />
-    <Compile Include="Authoring\Textile\ListParser.cs" />
+    <Compile Include="Authoring\Textile\Internal\NullBlockElementParser.cs" />
+    <Compile Include="Authoring\Textile\Internal\NullInlineElementParser.cs" />
+    <Compile Include="Authoring\Textile\ListParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Authoring\Textile\NoTextileParser.cs" />
     <Compile Include="Authoring\Textile\ParagraphParser.cs" />
     <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
+    <Compile Include="Authoring\Textile\TableParser.cs" />
     <Compile Include="Authoring\Textile\TextFormatting.cs" />
-    <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs" />
-    <Compile Include="Authoring\Textile\TextileParser.cs" />
-    <Compile Include="Authoring\Textile\TextParser.cs" />
+    <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LuceneNet\DocumentAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapterReadOnlyCollection.cs" />
