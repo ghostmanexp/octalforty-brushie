@@ -7,13 +7,14 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing lists.
     /// </summary>
-    public sealed class ListParser : ElementParserBase
+    public sealed class ListParser : BlockElementParserBase
     {
         #region Private Constants
-        private static readonly Regex ListRegex = new Regex(
-            @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+        private static readonly Regex ListRegex =
+            new Regex(
+                @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)",
+                RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
@@ -25,69 +26,65 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
         #region ElementParserBase Members
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="ElementParserBase.Parse"/>.
         /// </summary>
-        /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
-        /// <param name="text">The text to be parsed.</param>
-        public override void Parse(DomElement parentElement, AuthoringScope authoringScope, string text)
+        protected override Regex Regex
         {
-            Match listMatch = ListRegex.Match(text);
-            if(listMatch.Success)
-            {
-                //
-                // Parsing prefix...
-                ParsePrefix(parentElement, authoringScope, text, listMatch);
+            get { return ListRegex; }
+        }
 
-                //
-                // ...list itself...
-                Internal.List list = new Internal.List(listMatch);
-                BlockElementAttributes attributes = CreateBlockElementAttributes(listMatch);
+        /// <summary>
+        /// Template method which is invoked from <see cref="ElementParserBase.Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected override void ProcessMatch(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, Match match)
+        {
+            Internal.List list = new Internal.List(match);
+            BlockElementAttributes attributes = CreateBlockElementAttributes(match);
 
-                parentElement.AppendChild(CreateList(parentElement, list, attributes));
-
-                //
-                // ...and finally parse suffux
-                ParseSuffix(parentElement, authoringScope, text, listMatch);
-                return;
-            } // if
-
-            ParseWithNextElementParser(parentElement, authoringScope, text);
+            parentElement.AppendChild(CreateList(authoringEngine, parentElement, list, attributes));
         }
         #endregion
 
         /// <summary>
         /// Creates a list.
         /// </summary>
+        /// <param name="authoringEngine"></param>
         /// <param name="parentElement"></param>
         /// <param name="list"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        private static DomElement CreateList(DomElement parentElement, Internal.List list, BlockElementAttributes attributes)
+        private static DomElement CreateList(IAuthoringEngine authoringEngine, DomElement parentElement, 
+            Internal.List list, BlockElementAttributes attributes)
         {
             int index = 0;
-            return CreateListRecursive(parentElement, list, ref index, list.Items[index].Qualifier, attributes);
+            return CreateListRecursive(authoringEngine, parentElement, list, ref index, list.Items[index].Qualifier, attributes);
         }
 
         /// <summary>
         /// Recursively creates a list.
         /// </summary>
+        /// <param name="authoringEngine"></param>
         /// <param name="parentElement"></param>
         /// <param name="list"></param>
         /// <param name="index"></param>
         /// <param name="previousQualifier"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        private static DomElement CreateListRecursive(DomElement parentElement, Internal.List list, 
-            ref int index, string previousQualifier, BlockElementAttributes attributes)
+        private static DomElement CreateListRecursive(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, Internal.List list, ref int index, string previousQualifier, 
+            BlockElementAttributes attributes)
         {
             //
             // Creating DOM object
-            List domList = 
-                previousQualifier[previousQualifier.Length - 1] == '#' ?
-                   (List)new OrderedList(parentElement, attributes) :
-                   new UnorderedList(parentElement, attributes);
+            List domList = previousQualifier[previousQualifier.Length - 1] == '#' ?
+                (List)new OrderedList(parentElement, attributes) :
+                new UnorderedList(parentElement, attributes);
 
             //
             // Iterating through items.
@@ -97,8 +94,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 // Creating DOM list item and adding it to the 
                 // list created above.
                 ListItem listItem = new ListItem(domList, BlockElementAttributes.Empty);
-                listItem.AppendChild(new TextBlock(listItem, InlineElementAttributes.Empty, 
-                    list.Items[index].Title, TextBlockModifier.Unknown));
+                authoringEngine.ParseInlineElements(listItem, list.Items[index].Title);
+                /*listItem.AppendChild(new TextBlock(listItem, InlineElementAttributes.Empty, 
+                    list.Items[index].Title, TextBlockModifier.Unknown));*/
 
                 domList.AppendChild(listItem);
 
@@ -111,8 +109,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                         if(nextQualifier.Length > previousQualifier.Length)
                         {
                             ++index;
-                            listItem.AppendChild(CreateListRecursive(listItem, list, ref index, 
-                                nextQualifier, BlockElementAttributes.Empty));
+                            listItem.AppendChild(CreateListRecursive(authoringEngine, 
+                                listItem, list, ref index, nextQualifier, BlockElementAttributes.Empty));
                         } // if
                         else
                             break;

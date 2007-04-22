@@ -6,7 +6,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     public abstract class BlockElement : DomElement
     {
         #region Private Member Variables
-        private BlockElementAttributes attributes;
+        private BlockElementAttributes attributes = BlockElementAttributes.Empty;
         #endregion
 
         #region Public Properties

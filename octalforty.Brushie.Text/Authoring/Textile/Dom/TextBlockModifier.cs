@@ -59,6 +59,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <summary>
         /// Subscript.
         /// </summary>
-        Subscript = 9
+        Subscript = 9,
+
+        /// <summary>
+        /// Code.
+        /// </summary>
+        Code = 10
     }
 }

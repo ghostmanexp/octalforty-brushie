@@ -1,785 +1,281 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-
-using octalforty.Brushie.Text.Authoring.Textile.Dom;
-using octalforty.Brushie.Text.Authoring.Textile.Internal;
+﻿using octalforty.Brushie.Text.Authoring.Textile.Dom;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
-    /// Represents an authoring engine capable of transforming Textile-formatted text
-    /// into arbitrary markup with the help of <see cref="ITextileAuthoringFormatter"/>.
+    /// Authoring engine which parses Textile markup.
     /// </summary>
     /// <remarks>
     /// Textile Quick Reference is available at http://hobix.com/textile/quick.html. More extensive one
-    /// can be found at http://www.textism.com/tools/textile/
-    /// </remarks>
-    public sealed class TextileAuthoringEngine
+    /// can be found at http://www.textism.com/tools/textile/.<para />
+    /// <b>Block modifier syntax:</b><para />
+    /// <list type="bullet">
+    ///     <item>
+    ///         Heading: <c>h(1-6).</c><br />
+    ///         Paragraphs beginning with <c>'hn. '</c> (where n is 1-6) are parsed into <see cref="Heading"/> objects.<br />
+    ///         Example: <code>h1. Header...</code>
+    ///     </item>
+    ///     <item>
+    ///         Paragraph: <c>p.</c> (also applied by default)<br />
+    ///         Paragraphs are parsed into <see cref="Paragraph"/> objects.<br />
+    ///         Example: <code>p. Text</code>
+    ///     </item>
+    ///     <item>
+    ///         Blockquote: <c>bq.</c><br />
+    ///         Blockquotes are parsed into <see cref="Blockquote"/> objects.<br />
+    ///         Example: <code>Example: bq. Block quotation...</code>
+    ///     </item>
+    ///     <item>
+    ///         Blockquote with citation: <c>bq.:http://citation.url</c><br />
+    ///         Blockquotes with citations are parsed into <see cref="Blockquote"/> objects.<br />
+    ///         Example: <code>bq.:http://textism.com/ Text...</code>
+    ///     </item>
+    ///     <item>
+    ///         Footnote: <c>fn(1-100).</c><br />
+    ///         Footnotes are parsed into <see cref="Footnote"/> objects.<br />
+    ///         Example: <code>fn1. Footnote...</code>
+    ///     </item>
+    ///     <item>
+    ///         Numeric list: <c>#</c>, <c>##</c><br />
+    ///         Consecutive paragraphs beginning with <c>#</c> are parsed into <see cref="OrderedList"/>
+    ///         and <see cref="ListItem"/> objects.<br />
+    ///         Example:
+    ///         <code>
+    ///             # This is
+    ///             # An ordered
+    ///             ## List
+    ///         </code>
+    ///     </item>
+    ///     <item>
+    ///         Bulleted list: <c>*</c>, <c>**</c><br />
+    ///         Consecutive paragraphs beginning with <c>*</c> are parsed into <see cref="UnorderedList"/>
+    ///         and <see cref="ListItem"/> objects.<br />
+    ///         Example:
+    ///         <code>
+    ///             * This is
+    ///             * An unordered
+    ///             ** List
+    ///         </code>
+    ///     </item>
+    /// </list>
+    /// <b>Phrase modifier syntax:</b><br />
+    /// <list type="table">
+    ///     <listheader>
+    ///         <term>Text block of this pattern...</term>
+    ///         <description>
+    ///             ...are parsed into <see cref="TextBlock"/> objects with this <see cref="TextBlockModifier"/>
+    ///         </description>
+    ///     </listheader>
+    ///     <item>
+    ///         <term><c>_emphasis_</c></term>
+    ///         <description><see cref="TextBlockModifier.Emphasis"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>__italic__</c></term>
+    ///         <description><see cref="TextBlockModifier.Italics"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>*strong*</c></term>
+    ///         <description><see cref="TextBlockModifier.StrongEmphasis"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>**bold**</c></term>
+    ///         <description><see cref="TextBlockModifier.Bold"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>??citation??</c></term>
+    ///         <description><see cref="TextBlockModifier.Citation"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>-deleted text-</c></term>
+    ///         <description><see cref="TextBlockModifier.Deleted"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>+inserted text+</c></term>
+    ///         <description><see cref="TextBlockModifier.Inserted"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>^superscript^</c></term>
+    ///         <description><see cref="TextBlockModifier.Superscript"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>~subscript~</c></term>
+    ///         <description><see cref="TextBlockModifier.Subscript"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>@code@</c></term>
+    ///         <description><see cref="TextBlockModifier.Code"/></description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>%(bob)span%</c></term>
+    ///         <description>
+    ///             All styles are applied, but <see cref="TextBlock.Modifier"/> equals 
+    ///             <see cref="TextBlockModifier.Unknown"/>
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>==notextile==</c></term>
+    ///         <description>
+    ///             The text is parsed into <see cref="TextBlock"/> and left without further parsing 
+    ///             with <see cref="TextBlock.Modifier"/> set to <see cref="TextBlockModifier.Unknown"/>
+    ///         </description>
+    ///     </item>
+    /// </list>
+    /// <b>Hyperlinks</b><br />
+    /// Hyperlink: <c>"Hyperlink text(Optional title)":Url</c><br />
+    /// Hyperlinks are parsed into <see cref="Hyperlink"/> objects.<br />
+    /// <b>Images</b><br />
+    /// Image: <c>!ImageUrl(Optional alternate text)!</c><br />
+    /// Images are parsed into <see cref="Image"/> objects.<br />
+    /// <b>Acronyms</b><br />
+    /// Acronym: <c>ABC(Always Be Closing)</c><br />
+    /// Acronyms are parsed into <see cref="Acronym"/> objects.<br />
+    /// <b>Tables</b><br />
+    /// Simple tables:
+    /// <code>
+    ///     |a|simple|table|row|
+    ///     |And|Another|table|row|
+    /// </code>
+    /// <code>
+    ///     |_. A|_. table|_. header|_.row|
+    ///     |A|simple|table|row|
+    /// </code>
+    /// Tables with attributes:
+    /// <code>
+    ///     table{border:1px solid black}.
+    ///     {background:#ddd;color:red}. |{}| | | |
+    /// </code>
+    /// <b>Applying Attributes</b><br />
+    /// Most anywhere Textile code is used, attributes such as arbitrary css style, CSS classes, and ids can be applied. 
+    /// The syntax is fairly consistent.<para />
+    /// The following characters quickly alter the alignment of block elements:
+    /// <list type="table">
+    ///     <item>
+    ///         <term><c>&lt;</c></term>
+    ///         <description>
+    ///             <see cref="BlockElementAlignment.Left"/>.<br />
+    ///             Example: <c>p&lt;. Text</c> - left-aligned paragraph.
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>&gt;</c></term>
+    ///         <description>
+    ///             <see cref="BlockElementAlignment.Right"/>.<br />
+    ///             Example: <c>h3&gt;. Heading</c> - right-aligned heading 3.
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>=</c></term>
+    ///         <description>
+    ///             <see cref="BlockElementAlignment.Center"/>.<br />
+    ///             Example: <c>p=. Text</c> - centered-aligned paragraph.
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>&lt;&gt;</c></term>
+    ///         <description>
+    ///             <see cref="BlockElementAlignment.Justify"/>.<br />
+    ///             Example: <c>p&lt;&gt;. Text</c> - justified paragraph.
+    ///         </description>
+    ///     </item>
+    /// </list>
+    /// These will change vertical alignment in table cells:
+    /// <list type="table">
+    ///     <item>
+    ///         <term><c>^</c></term>
+    ///         <description>
+    ///             <see cref="TableCellAlignment.Top"/>.<br />
+    ///             Example: <c>|^. top-aligned table cell|</c>
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>-</c></term>
+    ///         <description>
+    ///             <see cref="TableCellAlignment.Middle"/>.<br />
+    ///             Example: <c>|-. middle-aligned table cell|</c>
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>~</c></term>
+    ///         <description>
+    ///             <see cref="TableCellAlignment.Bottom"/>.<br />
+    ///             Example: <c>|~. bottom-aligned table cell|</c>
+    ///         </description>
+    ///     </item>
+    /// </list>
+    /// Plain <c>(parentheses)</c> inserted between block syntax and the closing dot-space 
+    /// indicate CSS classes and ids, which are parsed into <see cref="InlineElementAttributes.CssClass"/>
+    /// and <see cref="InlineElementAttributes.ID"/>, respecively.
+    /// <list type="table">
+    ///     <item>
+    ///         <term><c>p(hector). paragraph</c></term>
+    ///         <description>
+    ///             <see cref="Paragraph"/>'s <see cref="InlineElementAttributes.CssClass"/> equals <c>hector</c>.
+    ///         </description>
+    ///     </item>
+    ///     <item>
+    ///         <term><c>p(#fluid). paragraph</c></term>
+    ///         <description>
+    ///             <see cref="Paragraph"/>'s <see cref="InlineElementAttributes.ID"/> equals <c>fluid</c>.
+    ///         </description>
+    ///     </item>
+    ///      <item>
+    ///         <term><c>p(hector#fluid). paragraph</c></term>
+    ///         <description>
+    ///             CSS classes and ids can be combined. In this case, <see cref="Paragraph"/>'s 
+    ///             <see cref="InlineElementAttributes.ID"/> equals <c>fluid</c> and
+    ///             <see cref="InlineElementAttributes.CssClass"/> equals <c>hector</c>.
+    ///         </description>
+    ///     </item>
+    /// </list>
+    /// Curly <c>{brackets}</c> insert arbitrary CSS styles, which are parsed into 
+    /// <see cref="InlineElementAttributes.Style"/>.<br />
+    /// Examples:
+    /// <code>
+    ///     p{line-height:18px}. paragraph
+    ///     h3{color:red}. header 3
+    /// </code>
+    /// Square <c>[brackets]</c> insert language attributes, which are parsed into 
+    /// <see cref="InlineElementAttributes.Language"/>.<br />
+    /// Examples:
+    /// <code>
+    ///     p[no]. paragraph
+    ///     %[fr]phrase%
+    ///</code>
+    /// Usually Textile block element syntax requires a dot and space before the block
+    /// begins, but since lists don't, they can be styled just using braces:
+    /// <code>
+    ///     #{color:blue} one
+    ///     # big
+    ///     # list
+    /// </code>
+    /// Using the <c>%</c> tag to style a phrase:
+    /// <code>
+    ///     It goes like this, %{color:red}the fourth the fifth%.
+    /// </code>              
+    /// </remarks>    
+    public class TextileAuthoringEngine : AuthoringEngineBase
     {
-        #region Private Constants
-#pragma warning disable 1570
         /// <summary>
-        /// (?<Expression>
-        /// ^h
-        ///  (?<Level>[1-6]) # Heading level
-        ///  (
-        ///    \( 
-        ///      ( 
-        ///        (\#(?<ID>.+?)) | 
-        ///        ((?<CssClass>.+?)\#(?<ID>.+?)) | 
-        ///        (?<CssClass>.+?) 
-        ///       ) 
-        ///     \)
-        ///  )? # ID, CSS class and ID or simply CSS class
-        ///  (\{(?<Style>.+?)\})? # Style
-        ///  (\[(?<Language>.+?)\])? # Language
-        ///  (?<Alignment>
-        ///    (=) |
-        ///    (\<\>) |
-        ///    (\<) |
-        ///    (\>)
-        ///  )?
-        ///  (?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?
-        /// \.\s
-        /// (?<Text>.*)\n)\n
+        /// Initializes a new instance of <see cref="TextileAuthoringEngine"/>.
         /// </summary>
-        private static readonly Regex HeadingRegex = new Regex(
-            @"(?<Expression>^h(?<Level>[1-6])(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant | 
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// (?<Expression>
-        /// ^bq
-        ///  (
-        ///    \( 
-        ///      ( 
-        ///        (\#(?<ID>.+?)) | 
-        ///        ((?<CssClass>.+?)\#(?<ID>.+?)) | 
-        ///        (?<CssClass>.+?) 
-        ///       ) 
-        ///     \)
-        ///  )? # ID, CSS class and ID or simply CSS class
-        ///  (\{(?<Style>.+?)\})? # Style
-        ///  (\[(?<Language>.+?)\])? # Language
-        ///  (?<Alignment>
-        ///    (=) |
-        ///    (\<\>) |
-        ///    (\<) |
-        ///    (\>)
-        ///  )?
-        ///  (?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?
-        /// \.\s
-        /// (?<Text>.*)\n)\n
-        /// </summary>
-        private static readonly Regex BlockquoteRegex = new Regex(
-            @"(?<Expression>^bq(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>"(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>[^"(]*)(\((?<Title>.+?)\))?":(?<Url>\S*))
-        /// </summary>
-        private static readonly Regex LinkRegex = new Regex(
-            "[^\\\\](?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*)
-        /// </summary>
-        private static readonly Regex StrongEmphasisRegex = new Regex(
-            @"(?<!\\)(?<Expression>\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)\*)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>\*\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\*\*)
-        /// </summary>
-        private static readonly Regex BoldRegex = new Regex(
-            @"(?<!\\)(?<Expression>\*\*(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)\*\*)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>_(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)_)
-        /// </summary>
-        private static readonly Regex EmphasisRegex = new Regex(
-            @"(?<!\\)(?<Expression>_(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)_)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>__(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)__)
-        /// </summary>
-        private static readonly Regex ItalicsRegex = new Regex(
-            @"(?<!\\)(?<Expression>__(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)__)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>\?\?(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\?\?)
-        /// </summary>
-        private static readonly Regex CitationRegex = new Regex(
-            @"(?<!\\)(?<Expression>\?\?(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)\?\?)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>-(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)-)
-        /// </summary>
-        private static readonly Regex DeletedRegex = new Regex(
-            @"(?<!\\)(?<Expression>-(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)-)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>\+(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\+)
-        /// </summary>
-        private static readonly Regex InsertedRegex = new Regex(
-            @"(?<!\\)(?<Expression>\+(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)\+)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>\^(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)\^)
-        /// </summary>
-        private static readonly Regex SuperscriptRegex = new Regex(
-            @"(?<!\\)(?<Expression>\^(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)\^)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>~(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)~)
-        /// </summary>
-        private static readonly Regex SubscriptRegex = new Regex(
-            @"(?<!\\)(?<Expression>~(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)~)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>%(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)%)
-        /// </summary>
-        private static readonly Regex SpanRegex = new Regex(
-            @"(?<!\\)(?<Expression>%(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)%)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// ^(?<!\\)(?<Expression>([#*]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s.*((?<!\\)[#*]+\s.*)+)
-        /// </summary>
-        private static readonly Regex ListRegex = new Regex(
-            @"^(?<!\\)(?<Expression>([#*]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s.*((?<!\\)[#*]+\s.*)+)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// (?<Expression>((?<Qualifier>([#*]+))(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>[^#*]*)))
-        /// </summary>
-        private static readonly Regex ListItemRegex = new Regex(
-            @"(?<Expression>((?<Qualifier>([#*]+))(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>[^#*]*)))",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-        
-        /// <summary>
-        /// ^(?!h[1-6]|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n
-        /// </summary>
-        private static readonly Regex ImplicitParagraphRegex = new Regex(
-            @"^(?!h[1-6]|fn|bq|p|\#|\*|\|)(?<Text>(.(\r\n)?)+)\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// (?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n
-        /// </summary>
-        private static readonly Regex ParagraphRegex = new Regex(
-            @"(?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)\!)
-        /// </summary>
-        private static readonly Regex ImageRegex = new Regex(
-            @"(?<!\\)(?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)(?<!\\)\!)",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        /// <summary>
-        /// [^\\](?<Expression>\[(?<FootnoteID>\d+)\])
-        /// </summary>
-        private static readonly Regex FootnoteReferenceRegex = new Regex(
-            @"(?<!\\)(?<Expression>\[(?<FootnoteID>\d+)\])",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
-        private static readonly Regex FootnoteRegex = new Regex(
-            @"(?<Expression>^fn(?<FootnoteID>\d+)\.\s(?<Text>.*))\r\n\r\n",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-#pragma warning restore 1570
-        #endregion
-
-        #region Private Member Variables
-        private ITextileAuthoringFormatter authoringFormatter;
-        #endregion
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="TextileAuthoringEngine"/> with
-        /// a reference to the <see cref="ITextileAuthoringFormatter"/>.
-        /// </summary>
-        /// <param name="authoringFormatter">Authoring formatter.</param>
-        public TextileAuthoringEngine(ITextileAuthoringFormatter authoringFormatter)
-        {
-            this.authoringFormatter = authoringFormatter;
-        }
-
-        /// <summary>
-        /// Authors <paramref name="text"/> according to the <paramref name="authoringScope"/>.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="authoringScope"></param>
-        public String Author(String text, AuthoringScope authoringScope)
+        public TextileAuthoringEngine()
         {
             //
-            // Skipping markup inside <pre> tags.
-            string uppercaseText = text.ToUpper();
-            if(uppercaseText.Contains("<PRE") && uppercaseText.Contains("</PRE>"))
-            {
-                int preStartTagIndex = uppercaseText.IndexOf("<PRE");
-                int preEndTagIndex = uppercaseText.IndexOf("</PRE>", preStartTagIndex);
-
-                if(preStartTagIndex < preEndTagIndex)
-                {
-                    //
-                    // This is where the start <pre> tag ends.
-                    int preStartTagEndIndex = uppercaseText.IndexOf(">", preStartTagIndex);
-
-                    String beforePre = text.Substring(0, preStartTagIndex);
-                    String afterPre = text.Substring(preEndTagIndex + 6);
-                    String preMarkup = text.Substring(preStartTagEndIndex + 1, preEndTagIndex - preStartTagIndex - 5);
-
-                    //
-                    // Authoring two outside "<pre>" parts separately.
-                    return Author(beforePre, authoringScope) + 
-                        text.Substring(preStartTagIndex, preStartTagEndIndex - preStartTagIndex + 1) + 
-                        AuthorPre(preMarkup) + 
-                        "</pre>" + 
-                        Author(afterPre, authoringScope);
-                } // if
-            } // if
-            
-            if((authoringScope & AuthoringScope.Links) == AuthoringScope.Links)
-                text = AuthorHyperlinks(text);
-
-            if((authoringScope & AuthoringScope.Images) == AuthoringScope.Images)
-                text = AuthorImages(text);
-
-            if((authoringScope & AuthoringScope.TextFormatting) == AuthoringScope.TextFormatting)
-                text = AuthorTextFormatting(text);
-
-            if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
-                text = AuthorFootnoteReferences(text);
-
-            //
-            // Prior to authoring block stuff, we need to perform some conversions of the source text.
-            // Get rid of \t characters, since we'd need them later on.
-            text = text.Replace("\t", "");
-
-            //
-            // Replacing triplets of linebreaks with two linebreaks.
-            while(text.Contains("\r\n\r\n\r\n"))
-                text = text.Replace("\r\n\r\n\r\n", "\r\n\r\n");
-
-            //
-            // Now we need to replace two consecutive linebreaks with one \t character,
-            // then eliminate all single linebreaks and only then restore original
-            // double linebreaks.
-            text = text.Replace("\r\n\r\n", "\t");
-            text = text.Replace("\r\n", "");
-            text = text.Replace("\t", "\r\n\r\n");
-
-            text = AuthorParagraphs(text);
-
-            if((authoringScope & AuthoringScope.Headings) == AuthoringScope.Headings)
-                text = AuthorHeadings(text);
-
-            if((authoringScope & AuthoringScope.Blockquotes) == AuthoringScope.Blockquotes)
-                text = AuthorBlockquotes(text);
-
-            if((authoringScope & AuthoringScope.Footnotes) == AuthoringScope.Footnotes)
-                text = AuthorFootnotes(text);
-            
-            if((authoringScope & AuthoringScope.Lists) == AuthoringScope.Lists)
-                text = AuthorLists(text);
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors "pre" markup.
-        /// </summary>
-        /// <param name="preMarkup"></param>
-        /// <returns></returns>
-        private static String AuthorPre(string preMarkup)
-        {
-            preMarkup = preMarkup.Replace("<", "&lt;");
-            preMarkup = preMarkup.Replace(">", "&gt;");
-
-            return preMarkup;
-        }
-
-        /// <summary>
-        /// Authors footnote references.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorFootnoteReferences(String text)
-        {
-            Match match = FootnoteReferenceRegex.Match(text);
-            while(match.Success)
-            {
-                String expression = match.Groups["Expression"].Value;
-                Int32 footnoteID = Convert.ToInt32(match.Groups["FootnoteID"].Value);
-
-                text = text.Replace(expression, authoringFormatter.FormatFootnoteReference(footnoteID));
-
-                match = FootnoteReferenceRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors footnotes.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorFootnotes(String text)
-        {
-            Match match = FootnoteRegex.Match(text);
-            while(match.Success)
-            {
-                String expression = match.Groups["Expression"].Value;
-                Int32 footnoteID = Convert.ToInt32(match.Groups["FootnoteID"].Value);
-                String footnoteText = match.Groups["Text"].Value;
-
-                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
-
-                text = text.Replace(expression,
-                    authoringFormatter.FormatFootnote(footnoteID, footnoteText, attributes));
-
-                match = FootnoteRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors images.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorImages(String text)
-        {
-            Match match = ImageRegex.Match(text);
-            while(match.Success)
-            {
-                String expression = match.Groups["Expression"].Value;
-                String url = match.Groups["Url"].Value;
-                String alternateText = match.Groups["AlternateText"].Value;
-
-                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
-
-                text = text.Replace(expression, 
-                    authoringFormatter.FormatImage(alternateText, url, attributes));
-
-                match = ImageRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors lists.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorLists(String text)
-        {
-            Match match = ListRegex.Match(text);
-            while(match.Success)
-            {
-                //List list = new List(match);
-                String expression = match.Groups["Expression"].Value;
-
-                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
-
-                //
-                // Here we have a whole string which has to be split up
-                // into separate list items.
-                Match listItemMatch = ListItemRegex.Match(expression);
-                List<Internal.ListItem> listItems = new List<Internal.ListItem>();
-
-                while(listItemMatch.Success)
-                {
-                    listItems.Add(new Internal.ListItem(listItemMatch.Groups["Qualifier"].Value,
-                        listItemMatch.Groups["Title"].Value));
-
-                    listItemMatch = listItemMatch.NextMatch();
-                } // while
-
-                Stack<string> tags = new Stack<string>();
-                StringBuilder listBuilder = new StringBuilder();
-                string currentQualifier = string.Empty;
-
-                foreach(Internal.ListItem item in listItems)
-                {
-                    if(item.Qualifier != currentQualifier)
-                    {
-                        while(!item.Qualifier.StartsWith(currentQualifier))
-                        {
-                            currentQualifier = currentQualifier.Remove(currentQualifier.Length - 1);
-                            listBuilder.AppendFormat("</{0}>", tags.Pop());
-                        } // while
-                    } // if
-
-                    //
-                    // Now add up to current item's qualifiers
-                    while(item.Qualifier != currentQualifier)
-                    {
-                        char qualifier = item.Qualifier[currentQualifier.Length];
-                        tags.Push(qualifier == '#' ? "ol" : "ul");
-                        listBuilder.AppendFormat("<{0}>", tags.Peek());
-
-                        currentQualifier = currentQualifier + qualifier;
-                    } // while
-
-                    listBuilder.AppendFormat("<li>{0}</li>", item.Title);
-                } // foreach
-
-                text = text.Replace(expression, listBuilder.ToString());
-                 
-               /* String textToFormat = match.Groups["Text"].Value;
-
-                //
-                // We need to ensure that current expression is not inside <pre> tags.
-                if(!IsMatchBetweenTags(text, match, "pre"))
-                {
-                    PhraseElementAttributes attributes = CreatePhraseElementAttributes(match);
-
-                    text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
-                        textToFormat, attributes));
-                    match = regex.Match(text);
-                } // if
-                else
-                {*/
-                match = ListRegex.Match(text);
-                //} // else
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors text formatting.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorTextFormatting(String text)
-        {
-            text = AuthorTextFormatting(TextFormatting.Bold, BoldRegex, text);
-            text = AuthorTextFormatting(TextFormatting.StrongEmphasis, StrongEmphasisRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Italics, ItalicsRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Emphasis, EmphasisRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Citation, CitationRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Inserted, InsertedRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Deleted, DeletedRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Superscript, SuperscriptRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Subscript, SubscriptRegex, text);
-            text = AuthorTextFormatting(TextFormatting.Span, SpanRegex, text);
-
-            //
-            // Unescaping stuff
-            StringBuilder textBuilder = new StringBuilder(text);
-            textBuilder = textBuilder.Replace(@"\*", "*").Replace(@"\_", "_").Replace(@"\?", "?").Replace(@"\-", "-").
-                Replace(@"\+", "+").Replace(@"\~", "~").Replace(@"\^", "^").Replace(@"\%", "%");
-
-            return textBuilder.ToString();
-        }
-
-        /// <summary>
-        /// Authors paragraphs.
-        /// </summary>
-        /// <param name="text"></param>
-        private String AuthorParagraphs(String text)
-        {
-            text = AuthorImplicitParagraphs(text);
-            return AuthorExplicitParagraphs(text);
-        }
-
-        /// <summary>
-        /// Authors explicit paragraphs.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private string AuthorExplicitParagraphs(string text)
-        {
-            //
-            // Now do all the paragraphs remaining
-            Match paragraphMatch = ParagraphRegex.Match(text);
-            while(paragraphMatch.Success)
-            {
-                String expression = paragraphMatch.Groups["Expression"].Value;
-                String paragraphText = paragraphMatch.Groups["Text"].Value;
-
-                BlockElementAttributes attributes = CreateBlockElementAttributes(paragraphMatch);
-
-                text = text.Replace(expression, authoringFormatter.FormatParagraph(paragraphText,
-                    attributes));
-
-                paragraphMatch = ParagraphRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors implicit paragraphs.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private static string AuthorImplicitParagraphs(string text)
-        {
-            //
-            // Preparing paragraphs not directly specified with the "p." modifier and
-            // then authoring them all in one sweep.
-            Match implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
-            while(implicitParagraphMatch.Success)
-            {
-                text = text.Replace(implicitParagraphMatch.Groups["Text"].Value, "p. " + 
-                    implicitParagraphMatch.Groups["Text"].Value);
-                implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
-            } // match
-            return text;
-        }
-
-        /// <summary>
-        /// Authors text formatting which is accessed via <paramref name="regex"/>. It is required
-        /// that the <paramref name="regex"/> produces two groups - <c>Expression</c> and <c>Text</c>.
-        /// </summary>
-        /// <param name="formatting"></param>
-        /// <param name="regex"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorTextFormatting(TextFormatting formatting, Regex regex, String text)
-        {
-            Match match = regex.Match(text);
-            while(match.Success)
-            {
-                String expression = match.Groups["Expression"].Value;
-                String textToFormat = match.Groups["Text"].Value;
-
-                //
-                // We need to ensure that current expression is not inside <pre> tags.
-                if(!IsMatchBetweenTags(text, match, "pre"))
-                {
-                    InlineElementAttributes attributes = CreatePhraseElementAttributes(match);
-
-                    text = text.Replace(expression, authoringFormatter.FormatTextFormatting(formatting,
-                        textToFormat, attributes));
-                    match = regex.Match(text);
-                } // if
-                else
-                {
-                    match = match.NextMatch();
-                } // else
-            } // while
-
-            return text;
-        }
-
-        private static Boolean IsMatchBetweenTags(String text, Match match, String tag)
-        {
-            String startTag = String.Format("<{0}", tag.ToUpper());
-            String endTag = String.Format("</{0}>", tag.ToUpper());
-
-            text = text.ToUpper();
-
-            String beforeMatch = text.Substring(0, match.Index).ToUpper();
-            String afterMatch = text.Substring(match.Index + match.Length);
-
-            Int32 startTagBeforeMatch = beforeMatch.LastIndexOf(startTag);
-            Int32 endTagBeforeMatch = beforeMatch.LastIndexOf(endTag);
-            Int32 startTagAfterMatch = afterMatch.IndexOf(startTag);
-            Int32 endTagAfterMatch = afterMatch.IndexOf(endTag);
-
-            //
-            // Shortcuts
-            if(startTagBeforeMatch == -1 || endTagAfterMatch == -1)
-                return false;
-
-            //
-            // If the tag starts before match (which is in case when end tag before match is either missing
-            // or is positioned even before the start tag) and ends after the match (that is, ends
-            // before start tag in after match, if one exists), we're inside those tags.
-            if(((endTagBeforeMatch == -1 && startTagBeforeMatch != -1) || (endTagBeforeMatch < startTagBeforeMatch)) &&
-                (endTagAfterMatch != -1 && startTagAfterMatch == -1) || (endTagAfterMatch > startTagAfterMatch))
-                return true;
-            
-            return false;
-        }
-
-        /// <summary>
-        /// Authors hyperlinks.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorHyperlinks(String text)
-        {
-            Match match = LinkRegex.Match(text);
-            while(match.Success)
-            {
-                Internal.Hyperlink hyperlink = new Internal.Hyperlink(match);
-                InlineElementAttributes attributes = CreatePhraseElementAttributes(match);
-
-                text = text.Replace(hyperlink.Expression, authoringFormatter.FormatHyperlink(hyperlink.Text, 
-                    hyperlink.Title, hyperlink.Url, attributes));
-
-                match = LinkRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors blockquotes.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorBlockquotes(String text)
-        {
-            Match match = BlockquoteRegex.Match(text);
-            while(match.Success)
-            {
-                String expression = match.Groups["Expression"].Value;
-                String blockquoteText = match.Groups["Text"].Value;
-
-                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
-
-                text = text.Replace(expression, authoringFormatter.FormatBlockquote(blockquoteText, attributes));
-
-                match = BlockquoteRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Authors headings.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private String AuthorHeadings(String text)
-        {
-            Match match = HeadingRegex.Match(text);
-            while(match.Success)
-            {
-                String expression = match.Groups["Expression"].Value;
-                String headingText = match.Groups["Text"].Value;
-                Int32 level = Convert.ToInt32(match.Groups["Level"].Value);
-
-                BlockElementAttributes attributes = CreateBlockElementAttributes(match);
-
-                text = text.Replace(expression, authoringFormatter.FormatHeading(level, 
-                    headingText, attributes));
-
-                match = HeadingRegex.Match(text);
-            } // while
-
-            return text;
-        }
-
-        /// <summary>
-        /// Creates an instance of <see cref="BlockElementAttributes"/> class from the
-        /// given <paramref name="match"/>, provided that <paramref name="match"/>
-        /// has required groups (<c>CssClass</c>, <c>ID</c>, <c>Style</c>, <c>Language</c>, 
-        /// <c>Alignment</c>, <c>LeftIndent</c> and <c>RightIndent</c>).
-        /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
-        private static BlockElementAttributes CreateBlockElementAttributes(Match match)
-        {
-            InlineElementAttributes inlineElementAttributes =
-                CreatePhraseElementAttributes(match);
-
-            //
-            // Fetching values
-            String alignment = match.Groups["Alignment"].Value;
-            String leftIndent = match.Groups["LeftIndent"].Value;
-            String rightIndent = match.Groups["RightIndent"].Value;
-
-            //
-            // Determining block element alignment
-            BlockElementAlignment elementAlignment = BlockElementAlignment.Unknown;
-            if(!String.IsNullOrEmpty(alignment))
-            {
-                switch(alignment.ToUpper())
-                {
-                    case "<":
-                        elementAlignment = BlockElementAlignment.Left;
-                        break;
-                    case ">":
-                        elementAlignment = BlockElementAlignment.Right;
-                        break;
-                    case "=":
-                        elementAlignment = BlockElementAlignment.Center;
-                        break;
-                    case "<>":
-                        elementAlignment = BlockElementAlignment.Justify;
-                        break;
-                } // switch
-            } // if
-
-            //
-            // Determining indentation values
-            Int32 leftIndentValue = 0;
-            Int32 rightIndentValue = 0;
-
-            //
-            // Left indent.
-            if(!String.IsNullOrEmpty(leftIndent))
-                leftIndentValue = leftIndent.Length;
-
-            //
-            // Right indent.
-            if(!String.IsNullOrEmpty(rightIndent))
-                rightIndentValue = rightIndent.Length;
-
-            return new BlockElementAttributes(inlineElementAttributes.CssClass,
-                inlineElementAttributes.ID, inlineElementAttributes.Style, inlineElementAttributes.Language,
-                elementAlignment, leftIndentValue, rightIndentValue);
-        }
-
-        /// <summary>
-        /// Creates an instance of <see cref="InlineElementAttributes"/> class from the
-        /// given <paramref name="match"/>, provided that <paramref name="match"/>
-        /// has required groups (<c>CssClass</c>, <c>ID</c>, <c>Style</c> and <c>Language</c> ).
-        /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
-        private static InlineElementAttributes CreatePhraseElementAttributes(Match match)
-        {
-            //
-            // Fetching values.
-            String cssClass = match.Groups["CssClass"].Value;
-            String id = match.Groups["ID"].Value;
-            String style = match.Groups["Style"].Value;
-            String language = match.Groups["Language"].Value;
-
-            return new InlineElementAttributes(cssClass, id, style, language);
+            // Adding basic Textile parsers.
+            AddBlockElementParser(new NoTextileParser());
+            AddBlockElementParser(new ParagraphParser());
+            AddBlockElementParser(new BlockquoteParser());
+            AddBlockElementParser(new HeadingParser());
+            AddBlockElementParser(new ImageParser());
+            AddBlockElementParser(new ListParser());
+            AddBlockElementParser(new FootnoteParser());
+
+            AddBlockElementParser(new BlockElementFallbackParser());
+
+            AddInlineElementParser(new AcronymParser());
+            AddInlineElementParser(new HyperlinkParser());
+            AddInlineElementParser(new FootnoteReferenceParser());
         }
     }
 }

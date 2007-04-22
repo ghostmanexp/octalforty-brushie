@@ -7,7 +7,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing Textile paragraphs.
     /// </summary>
-    public sealed class ParagraphParser : ElementParserBase
+    public sealed class ParagraphParser : BlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex ImplicitParagraphRegex = new Regex(
@@ -30,45 +30,63 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
         #region ElementParserBase Members
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="ElementParserBase.Parse"/>.
         /// </summary>
+        protected override Regex Regex
+        {
+            get { return ParagraphRegex; }
+        }
+
+        /// <summary>
+        /// Template method which is invoked from <see cref="ElementParserBase.Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected override void ProcessMatch(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, Match match)
+        {
+            //
+            // ...paragraph itself...
+            Paragraph paragraph = new Paragraph(parentElement, CreateBlockElementAttributes(match));
+            parentElement.AppendChild(paragraph);
+
+            ParseWithNextElementParser(authoringEngine, paragraph, match.Groups["Text"].Value);
+        }
+
+        /// <summary>
+        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/>.
+        /// </summary>
+        /// <param name="authoringEngine">
+        /// The <see cref="IAuthoringEngine"/> which initiated the parsing process.
+        /// </param>
         /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
         /// <param name="text">The text to be parsed.</param>
-        public override void Parse(DomElement parentElement, AuthoringScope authoringScope, string text)
+        public override void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, string text)
+        {
+            //
+            // Preparse implicit paragraphs.
+            text = PreparseImplicitParagraphs(text);
+
+            base.Parse(authoringEngine, parentElement, text);
+        }
+        #endregion
+
+        private static string PreparseImplicitParagraphs(string text)
         {
             //
             // First, try to match an implicit paragraph.  If we found one,
             // prepend a "p. " modifier so that it gets matched by the regex below.
             Match implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
-            if(implicitParagraphMatch.Success)
-                text = text.Replace(implicitParagraphMatch.Value, "p. " + implicitParagraphMatch.Value);
-
-            Match paragraphMatch = ParagraphRegex.Match(text);
-            if(paragraphMatch.Success)
+            while(implicitParagraphMatch.Success)
             {
-                //
-                // Parsing prefix...
-                ParsePrefix(parentElement, authoringScope, text, paragraphMatch);
+                text = text.Replace(implicitParagraphMatch.Value, "p. " + implicitParagraphMatch.Value);
+                implicitParagraphMatch = ImplicitParagraphRegex.Match(text);
+            } // while
 
-                //
-                // ...paragraph itself...
-                Paragraph paragraph = new Paragraph(parentElement, CreateBlockElementAttributes(paragraphMatch));
-                parentElement.AppendChild(paragraph);
-
-                TextileParser.Parse(paragraph, authoringScope, paragraphMatch.Groups["Text"].Value);
-
-                //
-                // ...and finally parse suffux
-                ParseSuffix(parentElement, authoringScope, text, paragraphMatch);
-                return;
-            } // if
-
-            //
-            // Proceed.
-            ParseWithNextElementParser(parentElement, authoringScope, text);
+            return text;
         }
-        #endregion
     }
 }

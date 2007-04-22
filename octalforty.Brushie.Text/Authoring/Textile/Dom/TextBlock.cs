@@ -8,7 +8,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     public sealed class TextBlock : InlineElement
     {
         #region Private Member Variables
-        private TextBlockModifier modifier;
+        private TextBlockModifier modifier = TextBlockModifier.Unknown;
         #endregion
 
         #region Public Properties
@@ -24,11 +24,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <summary>
         /// Initializes a new instance of <see cref="TextBlock"/> class.
         /// </summary>
+        public TextBlock()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="TextBlock"/> class.
+        /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
         /// <param name="innerText"></param>
         /// <param name="modifier"></param>
-        public TextBlock(DomElement parent, InlineElementAttributes attributes, string innerText, TextBlockModifier modifier) : 
+        public TextBlock(DomElement parent, InlineElementAttributes attributes, 
+            string innerText, TextBlockModifier modifier) : 
             base(parent, attributes, innerText)
         {
             this.modifier = modifier;

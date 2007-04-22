@@ -15,12 +15,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         { get; set; }
 
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/>.
         /// </summary>
+        /// <param name="authoringEngine">
+        /// The <see cref="IAuthoringEngine"/> which initiated the parsing process.
+        /// </param>
         /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
         /// <param name="text">The text to be parsed.</param>
-        void Parse(DomElement parentElement, AuthoringScope authoringScope, string text);
+        void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, string text);
     }
 }

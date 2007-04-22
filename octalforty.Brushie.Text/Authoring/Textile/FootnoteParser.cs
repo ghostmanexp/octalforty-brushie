@@ -1,3 +1,4 @@
+﻿using System;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Textile.Dom;
@@ -5,21 +6,21 @@ using octalforty.Brushie.Text.Authoring.Textile.Dom;
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
-    /// Provides functionality for parsing Textile hyperlinks.
+    /// Provides functionality for parsing Textile footnotes.
     /// </summary>
-    public sealed class HyperlinkParser : InlineElementParserBase
+    public sealed class FootnoteParser : BlockElementParserBase
     {
         #region Private Constants
-        private static readonly Regex HyperlinkRegex = new Regex(
-            "[^\\\\](?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))",
+        private static readonly Regex FootnoteRegex = new Regex(
+            @"(?<Expression>^fn(?<FootnoteID>\d+)\.\s(?<Text>.*))\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="HyperlinkParser"/> class.
+        /// Initializes a new instance of <see cref="FootnoteParser"/> class.
         /// </summary>
-        public HyperlinkParser()
+        public FootnoteParser()
         {
         }
 
@@ -30,7 +31,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </summary>
         protected override Regex Regex
         {
-            get { return HyperlinkRegex; }
+            get { return FootnoteRegex; }
         }
 
         /// <summary>
@@ -42,9 +43,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="match"></param>
         protected override void ProcessMatch(IAuthoringEngine authoringEngine, DomElement parentElement, Match match)
         {
-            Hyperlink hyperlink = new Hyperlink(parentElement, match.Groups["Text"].Value,
-                match.Groups["Title"].Value, match.Groups["Url"].Value);
-            parentElement.AppendChild(hyperlink);
+            Footnote footnote = new Footnote(parentElement, CreateBlockElementAttributes(match),
+                Convert.ToInt32(match.Groups["FootnoteID"].Value));
+            parentElement.AppendChild(parentElement);
+
+            ParseWithNextElementParser(authoringEngine, footnote, match.Groups["Text"].Value);
         }
         #endregion
     }

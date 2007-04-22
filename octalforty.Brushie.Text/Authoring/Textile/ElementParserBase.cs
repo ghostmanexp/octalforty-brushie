@@ -7,7 +7,7 @@ using octalforty.Brushie.Text.Authoring.Textile.Dom;
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
-    /// Provides a base class for element parsers used in <see cref="TextileParser"/>.
+    /// Provides a base class for element parsers used in <see cref="IAuthoringEngine"/>.
     /// </summary>
     public abstract class ElementParserBase : IElementParser
     {
@@ -34,26 +34,81 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/>.
+        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/>.
         /// </summary>
+        /// <param name="authoringEngine">
+        /// The <see cref="IAuthoringEngine"/> which initiated the parsing process.
+        /// </param>
         /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
         /// <param name="text">The text to be parsed.</param>
-        public abstract void Parse(DomElement parentElement, AuthoringScope authoringScope, string text);
+        public virtual void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, string text)
+        {
+            Match match = Regex.Match(text);
+            if(match.Success)
+            {
+                int startIndex = 0;
+                while(match.Success)
+                {
+                    //
+                    // Parsing prefix...
+                    if(startIndex < match.Index)
+                    {
+                        ParseWithNextElementParser(authoringEngine, parentElement,
+                            text.Substring(startIndex, match.Index - startIndex));
+                    } // if
+
+                    ProcessMatch(authoringEngine, parentElement, match);
+
+                    startIndex = match.Index + match.Length;
+                    match = Regex.Match(text, startIndex);
+                } // while
+            } // if
+            else
+            {
+                //
+                // Proceed.
+                ParseWithNextElementParser(authoringEngine, parentElement, text);
+            } // else
+        }
+        #endregion
+
+        #region Overridables
+        /// <summary>
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="Parse"/>.
+        /// </summary>
+        protected virtual Regex Regex
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        /// <summary>
+        /// Template method which is invoked from <see cref="Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected virtual void ProcessMatch(IAuthoringEngine authoringEngine,
+            DomElement parentElement, Match match)
+        {
+        }
         #endregion
 
         /// <summary>
-        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> in
-        /// accordance with <paramref name="authoringScope"/> with <see cref="NextElementParser"/>, if any.
+        /// Parses <paramref name="text"/> which is the child of <paramref name="parentElement"/> 
+        /// with <see cref="NextElementParser"/>, if any.
         /// </summary>
+        /// <param name="authoringEngine">
+        /// The <see cref="IAuthoringEngine"/> which initiated the parsing process.
+        /// </param>
         /// <param name="parentElement">Parent DOM element.</param>
-        /// <param name="authoringScope">Authoring scope.</param>
         /// <param name="text">The text to be parsed.</param>
-        protected void ParseWithNextElementParser(DomElement parentElement, AuthoringScope authoringScope, string text)
+        protected void ParseWithNextElementParser(IAuthoringEngine authoringEngine, 
+            DomElement parentElement, string text)
         {
             if(NextElementParser != null)
-                NextElementParser.Parse(parentElement, authoringScope, text);
+                NextElementParser.Parse(authoringEngine, parentElement, text);
         }
 
         /// <summary>
@@ -134,36 +189,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             String language = match.Groups["Language"].Value;
 
             return new InlineElementAttributes(cssClass, id, style, language);
-        }
-
-        /// <summary>
-        /// Parses text right before <see cref="Match.Value"/>, if there is any.
-        /// </summary>
-        /// <param name="parentElement"></param>
-        /// <param name="authoringScope"></param>
-        /// <param name="text"></param>
-        /// <param name="match"></param>
-        protected static void ParsePrefix(DomElement parentElement, AuthoringScope authoringScope, string text, Match match)
-        {
-            if(match.Index != 0)
-            {
-                TextileParser.Parse(parentElement, authoringScope, text.Substring(0, match.Index));
-            } // if
-        }
-
-        /// <summary>
-        /// Parses text immediately after <see cref="Match.Value"/>, if there is any.
-        /// </summary>
-        /// <param name="parentElement"></param>
-        /// <param name="authoringScope"></param>
-        /// <param name="text"></param>
-        /// <param name="match"></param>
-        protected static void ParseSuffix(DomElement parentElement, AuthoringScope authoringScope, string text, Match match)
-        {
-            if(match.Index + match.Length < text.Length)
-            {
-                TextileParser.Parse(parentElement, authoringScope, text.Substring(match.Index + match.Length));
-            } // if
         }
     } 
 }

@@ -5,10 +5,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
     /// <summary>
     /// Represents an image.
     /// </summary>
-    public sealed class Image : InlineElement
+    public sealed class Image : BlockElement
     {
         #region Private Member Variables
         private String url;
+        private String alternateText;
         #endregion
 
         #region Public Properties
@@ -19,19 +20,35 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         {
             get { return url; }
         }
+
+        /// <summary>
+        /// Gets a <see cref="String"/> which contains the alternate text for the image.
+        /// </summary>
+        public String AlternateText
+        {
+            get { return alternateText; }
+        }
         #endregion
-        
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="Image"/> class.
+        /// </summary>
+        public Image()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of <see cref="Image"/> class.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
-        /// <param name="innerText"></param>
         /// <param name="url"></param>
-        public Image(DomElement parent, InlineElementAttributes attributes, string innerText, string url) : 
-            base(parent, attributes, innerText)
+        /// <param name="alternateText"></param>
+        public Image(DomElement parent, BlockElementAttributes attributes, string url, string alternateText) : 
+            base(parent, attributes)
         {
             this.url = url;
+            this.alternateText = alternateText;
         }
 
         #region DomElement Members

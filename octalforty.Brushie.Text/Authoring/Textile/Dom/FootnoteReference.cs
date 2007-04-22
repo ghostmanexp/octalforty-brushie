@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 
 namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 {
     /// <summary>
-    /// Represents a footnote.
-    /// <seealso cref="FootnoteReference"/>
+    /// Represents a footnote reference.
+    /// <seealso cref="Footnote"/>
     /// </summary>
     /// <remarks>
-    /// Footnotes are referenced by <see cref="FootnoteReference"/>.
+    /// Footnote references reference <see cref="Footnote"/>.
     /// </remarks>
-    public sealed class Footnote : BlockElement
+    public sealed class FootnoteReference : InlineElement
     {
         #region Private Member Variables
         private Int32 number;
@@ -17,7 +17,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
 
         #region Public Properties
         /// <summary>
-        /// Gets a value which indicates the number of the footnote.
+        /// Gets a value which indicates the number of the referenced footnote.
         /// </summary>
         public Int32 Number
         {
@@ -26,20 +26,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Footnote"/> class.
+        /// Initializes a new instance of <see cref="FootnoteReference"/> class.
         /// </summary>
-        public Footnote()
+        public FootnoteReference()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Footnote"/> class.
+        /// Initializes a new instance of <see cref="FootnoteReference"/> class.
         /// </summary>
         /// <param name="parent"></param>
-        /// <param name="attributes"></param>
         /// <param name="number"></param>
-        public Footnote(DomElement parent, BlockElementAttributes attributes, int number) :
-            base(parent, attributes)
+        public FootnoteReference(DomElement parent, int number) : 
+            base(parent, String.Empty)
         {
             this.number = number;
         }
