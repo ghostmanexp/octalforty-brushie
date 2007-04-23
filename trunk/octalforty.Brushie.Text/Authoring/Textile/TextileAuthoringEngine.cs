@@ -1,4 +1,5 @@
 ﻿using octalforty.Brushie.Text.Authoring.Textile.Dom;
+using octalforty.Brushie.Text_2003.Authoring.Textile;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
@@ -276,6 +277,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             AddInlineElementParser(new AcronymParser());
             AddInlineElementParser(new HyperlinkParser());
             AddInlineElementParser(new FootnoteReferenceParser());
+			AddInlineElementParser(new TextBlockParser());
         }
     }
 }

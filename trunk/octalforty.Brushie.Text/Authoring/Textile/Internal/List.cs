@@ -1,4 +1,9 @@
+#if FW1
+using System.Collections;
+#else
 using System.Collections.Generic;
+#endif
+
 using System.Text.RegularExpressions;
 
 namespace octalforty.Brushie.Text.Authoring.Textile.Internal
@@ -36,6 +41,16 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Internal
         public List(Match match) : 
             base(match)
         {
+#if FW1
+			ArrayList listItems = new ArrayList();
+			for(int capture = 0; capture < match.Groups["Qualifier"].Captures.Count; ++capture)
+			{
+				listItems.Add(new ListItem(match.Groups["Qualifier"].Captures[capture].Value,
+					match.Groups["Title"].Captures[capture].Value));
+			} // for
+
+			items = (ListItem[])listItems.ToArray(typeof(ListItem));
+#else
             //
             // Loading list items.
             List<ListItem> listItems = new List<ListItem>();
@@ -46,6 +61,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Internal
             } // for
 
             items = listItems.ToArray();
+#endif
+
         }
     }
 }

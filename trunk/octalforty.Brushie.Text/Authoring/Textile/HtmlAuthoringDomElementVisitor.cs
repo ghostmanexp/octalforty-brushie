@@ -257,10 +257,10 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             // this should be taken into consideration too.
             if(attributes.Alignment != BlockElementAlignment.Unknown ||
                 attributes.LeftIndent != 0 || attributes.RightIndent != 0 ||
-                !String.IsNullOrEmpty(attributes.Style))
+                !IsNullOrEmpty(attributes.Style))
             {
                 String style = String.Empty;
-                if(!String.IsNullOrEmpty(attributes.Style))
+                if(!IsNullOrEmpty(attributes.Style))
                 {
                     style += attributes.Style;
                     if(!style.EndsWith(";"))
@@ -318,7 +318,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if(attributes != null)
             {
-                if(!String.IsNullOrEmpty(attributes.Style))
+                if(!IsNullOrEmpty(attributes.Style))
                 {
                     tagBuilder.AppendFormat(" style=\"{0}", attributes.Style);
 
@@ -348,17 +348,22 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             if(attributes != null)
             {
-                if(!String.IsNullOrEmpty(attributes.CssClass))
+                if(!IsNullOrEmpty(attributes.CssClass))
                     tagBuilder.AppendFormat(" class=\"{0}\"", attributes.CssClass);
 
-                if(!String.IsNullOrEmpty(attributes.ID))
+                if(!IsNullOrEmpty(attributes.ID))
                     tagBuilder.AppendFormat(" id=\"{0}\"", attributes.ID);
 
-                if(!String.IsNullOrEmpty(attributes.Language))
+                if(!IsNullOrEmpty(attributes.Language))
                     tagBuilder.AppendFormat(" lang=\"{0}\"", attributes.Language);
             } // if
 
             return tagBuilder.ToString();
         }
+
+		protected static bool IsNullOrEmpty(String value)
+		{
+			return value == null || value == string.Empty;
+		}
     }
 }
