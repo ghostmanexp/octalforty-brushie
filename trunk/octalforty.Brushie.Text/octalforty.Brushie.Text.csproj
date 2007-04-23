@@ -103,6 +103,7 @@
     <Compile Include="Authoring\Textile\ParagraphParser.cs" />
     <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\TableParser.cs" />
+    <Compile Include="Authoring\Textile\TextBlockParser.cs" />
     <Compile Include="Authoring\Textile\TextFormatting.cs" />
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs">
       <SubType>Code</SubType>

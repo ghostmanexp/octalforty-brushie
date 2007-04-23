@@ -433,7 +433,14 @@ namespace octalforty.Brushie.Test
 
         static void Main()
         {
-            StringBuilder wiki = new StringBuilder();
+            string w = "ѕосле того, как вам был открыт доступ, войти в систему можно войти следующим образом. ¬ верхней части \"главной страницы\":http://www.bronni.ru в области под названием \"¬ход дл€ клиентов\" наход€тс€ два текстовых пол€, куда необходимо ввести логин и пароль. ѕосле этого нажмите на ссылку \"¬ойти\".\r\n\r\n" +
+                "≈сли все прошло удачно, то название области должно помен€тьс€ на \"¬ход выполнен\". ≈сли такого не происходит, то обратите внимание на область, расположенную немного левее - там вывод€тс€ системные сообщени€. ≈сли вам сообщаетс€ о том, что вы ввели неверный логин или пароль, то вы можете воспользватьс€ формой \"напоминани€ парол€\":http://www.bronni.ru/default.aspx?page=passwordreminderpage.ascx. ≈сли же вам сообщаетс€, что \"ѕользователь с таким именем уже работает с базой данных\", то поставьте галочку на пункте \"¬ойти принудительно\", еще раз введите пароль и нажмите \"¬ойти\".\r\n\r\n" +
+                "Ќу и если ничего не помогает, то \"св€житесь с нами\":http://www.bronni.ru/default.aspx?page=contactspage.ascx";
+
+            TextileAuthoringEngine textileAuthoringEngine = new TextileAuthoringEngine();
+            string h = textileAuthoringEngine.Author(w);
+
+            /*StringBuilder wiki = new StringBuilder();
             for(int i = 0; i < 600; ++i)
                 wiki.Append(WikiMarkup);
 
@@ -446,7 +453,7 @@ namespace octalforty.Brushie.Test
                 stopwatch.ElapsedMilliseconds / 1000.0);
 
             HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
-            document.Accept(htmlAuthoringDomElementVisitor);
+            document.Accept(htmlAuthoringDomElementVisitor);*/
         }
 
         private static Range<int> GetRange(PatchOperation difference, WordDataProvider dataProvider)

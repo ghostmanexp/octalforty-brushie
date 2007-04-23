@@ -1,5 +1,6 @@
-﻿using octalforty.Brushie.Text.Authoring.Textile.Dom;
-using octalforty.Brushie.Text_2003.Authoring.Textile;
+﻿using System;
+
+using octalforty.Brushie.Text.Authoring.Textile.Dom;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
@@ -278,6 +279,21 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             AddInlineElementParser(new HyperlinkParser());
             AddInlineElementParser(new FootnoteReferenceParser());
 			AddInlineElementParser(new TextBlockParser());
+        }
+
+        /// <summary>
+        /// Performs parsing of <paramref name="text"/> and converts it to HTML
+        /// using <see cref="HtmlAuthoringDomElementVisitor"/>.
+        /// </summary>
+        /// <param name="text"></param>
+        public String Author(String text)
+        {
+            Document document = Parse(text);
+
+            HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
+            document.Accept(htmlAuthoringDomElementVisitor);
+
+            return htmlAuthoringDomElementVisitor.Html;
         }
     }
 }
