@@ -12,7 +12,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         #region Private Constants
         private static readonly Regex ImageRegex =
             new Regex(
-                @"(?<!\\)(?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?\((?<AlternateText>.+)\)(?<!\\)\!)",
+                @"(?<!\\)(?<Expression>!(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Url>.+)(\s)?(\((?<AlternateText>.+)\))?(?<!\\)\!)",
                 RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
