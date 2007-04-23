@@ -62,6 +62,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                     startIndex = match.Index + match.Length;
                     match = Regex.Match(text, startIndex);
                 } // while
+
+                ParseWithNextElementParser(authoringEngine, parentElement, text.Substring(startIndex));
             } // if
             else
             {
