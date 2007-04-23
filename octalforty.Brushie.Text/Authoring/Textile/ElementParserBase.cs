@@ -133,7 +133,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             //
             // Determining block element alignment
             BlockElementAlignment elementAlignment = BlockElementAlignment.Unknown;
-            if(!String.IsNullOrEmpty(alignment))
+            if(!IsNullOrEmpty(alignment))
             {
                 switch(alignment.ToUpper())
                 {
@@ -159,12 +159,12 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             //
             // Left indent.
-            if(!String.IsNullOrEmpty(leftIndent))
+            if(!IsNullOrEmpty(leftIndent))
                 leftIndentValue = leftIndent.Length;
 
             //
             // Right indent.
-            if(!String.IsNullOrEmpty(rightIndent))
+            if(!IsNullOrEmpty(rightIndent))
                 rightIndentValue = rightIndent.Length;
 
             return new BlockElementAttributes(inlineElementAttributes.CssClass,
@@ -190,5 +190,10 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 
             return new InlineElementAttributes(cssClass, id, style, language);
         }
+
+		protected static bool IsNullOrEmpty(String value)
+		{
+			return value == null || value == string.Empty;
+		}
     } 
 }
