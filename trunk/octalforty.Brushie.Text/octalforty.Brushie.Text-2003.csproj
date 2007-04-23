@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "octalforty.Brushie.Text-2003"
+                AssemblyName = "octalforty.Brushie.Text"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "octalforty.Brushie.Text_2003"
+                RootNamespace = "octalforty.Brushie.Text"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -373,6 +373,7 @@
                 />
                 <File
                     RelPath = "Properties\AssemblyInfo.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
             </Include>
