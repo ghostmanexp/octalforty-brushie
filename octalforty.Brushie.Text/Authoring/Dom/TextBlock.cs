@@ -10,16 +10,16 @@ namespace octalforty.Brushie.Text.Authoring.Dom
     public sealed class TextBlock : InlineElement
     {
         #region Private Member Variables
-        private TextBlockModifier modifier = TextBlockModifier.Unknown;
+        private TextBlockFormatting formatting = TextBlockFormatting.Unknown;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a value which indicates how the style of the text block is altered.
+        /// Gets a value which indicates how the formatting of the text block is altered.
         /// </summary>
-        public TextBlockModifier Modifier
+        public TextBlockFormatting Formatting
         {
-            get { return modifier; }
+            get { return formatting; }
         }
         #endregion
 
@@ -36,12 +36,12 @@ namespace octalforty.Brushie.Text.Authoring.Dom
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
         /// <param name="innerText"></param>
-        /// <param name="modifier"></param>
+        /// <param name="formatting"></param>
         public TextBlock(DomElement parent, InlineElementAttributes attributes, 
-            string innerText, TextBlockModifier modifier) : 
+            string innerText, TextBlockFormatting formatting) : 
             base(parent, attributes, innerText)
         {
-            this.modifier = modifier;
+            this.formatting = formatting;
         }
 
         #region DomElementMembers

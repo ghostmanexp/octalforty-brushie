@@ -1,7 +1,6 @@
 using System;
 
 using octalforty.Brushie.Text.Authoring.Dom;
-using octalforty.Brushie.Text.Authoring.Textile;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
@@ -29,7 +28,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 		public override void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, String text)
 		{
 			parentElement.AppendChild(new TextBlock(parentElement, InlineElementAttributes.Empty, 
-				text, TextBlockModifier.Unknown));
+				text, TextBlockFormatting.Unknown));
 		}
 		#endregion
 	}

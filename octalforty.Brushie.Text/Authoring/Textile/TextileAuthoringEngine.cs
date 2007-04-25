@@ -65,61 +65,61 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     ///     <listheader>
     ///         <term>Text block of this pattern...</term>
     ///         <description>
-    ///             ...are parsed into <see cref="TextBlock"/> objects with this <see cref="TextBlockModifier"/>
+    ///             ...are parsed into <see cref="TextBlock"/> objects with this <see cref="TextBlockFormatting"/>
     ///         </description>
     ///     </listheader>
     ///     <item>
     ///         <term><c>_emphasis_</c></term>
-    ///         <description><see cref="TextBlockModifier.Emphasis"/></description>
+    ///         <description><see cref="TextBlockFormatting.Emphasis"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>__italic__</c></term>
-    ///         <description><see cref="TextBlockModifier.Italics"/></description>
+    ///         <description><see cref="TextBlockFormatting.Italics"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>*strong*</c></term>
-    ///         <description><see cref="TextBlockModifier.StrongEmphasis"/></description>
+    ///         <description><see cref="TextBlockFormatting.StrongEmphasis"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>**bold**</c></term>
-    ///         <description><see cref="TextBlockModifier.Bold"/></description>
+    ///         <description><see cref="TextBlockFormatting.Bold"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>??citation??</c></term>
-    ///         <description><see cref="TextBlockModifier.Citation"/></description>
+    ///         <description><see cref="TextBlockFormatting.Citation"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>-deleted text-</c></term>
-    ///         <description><see cref="TextBlockModifier.Deleted"/></description>
+    ///         <description><see cref="TextBlockFormatting.Deleted"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>+inserted text+</c></term>
-    ///         <description><see cref="TextBlockModifier.Inserted"/></description>
+    ///         <description><see cref="TextBlockFormatting.Inserted"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>^superscript^</c></term>
-    ///         <description><see cref="TextBlockModifier.Superscript"/></description>
+    ///         <description><see cref="TextBlockFormatting.Superscript"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>~subscript~</c></term>
-    ///         <description><see cref="TextBlockModifier.Subscript"/></description>
+    ///         <description><see cref="TextBlockFormatting.Subscript"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>@code@</c></term>
-    ///         <description><see cref="TextBlockModifier.Code"/></description>
+    ///         <description><see cref="TextBlockFormatting.Code"/></description>
     ///     </item>
     ///     <item>
     ///         <term><c>%(bob)span%</c></term>
     ///         <description>
-    ///             All styles are applied, but <see cref="TextBlock.Modifier"/> equals 
-    ///             <see cref="TextBlockModifier.Unknown"/>
+    ///             All styles are applied, <see cref="TextBlock.Formatting"/> equals 
+    ///             <see cref="TextBlockFormatting.Span"/>
     ///         </description>
     ///     </item>
     ///     <item>
     ///         <term><c>==notextile==</c></term>
     ///         <description>
     ///             The text is parsed into <see cref="TextBlock"/> and left without further parsing 
-    ///             with <see cref="TextBlock.Modifier"/> set to <see cref="TextBlockModifier.Unknown"/>
+    ///             with <see cref="TextBlock.Formatting"/> set to <see cref="TextBlockFormatting.Unknown"/>
     ///         </description>
     ///     </item>
     /// </list>

@@ -49,8 +49,8 @@ namespace octalforty.Brushie.Text.Authoring
         public void Visit(Heading heading)
         {
             String tag = String.Format("h{0}", heading.Level);
-            htmlBuilder.AppendFormat("{0}{1}</{2}>", GetFullBlockStartTag(tag, heading.Attributes), heading.Text.Trim(),
-                                     tag);
+            htmlBuilder.AppendFormat("{0}{1}</{2}>", 
+                GetFullBlockStartTag(tag, heading.Attributes), heading.Text.Trim(), tag);
         }
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace octalforty.Brushie.Text.Authoring
         public void Visit(Hyperlink hyperlink)
         {
             htmlBuilder.AppendFormat("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>",
-                                     GetPartialPhraseStartTag("a", hyperlink.Attributes), hyperlink.Title.Trim(),
-                                     hyperlink.Url.Trim(), hyperlink.InnerText.Trim(), "a");
+                 GetPartialPhraseStartTag("a", hyperlink.Attributes), hyperlink.Title.Trim(),
+                 hyperlink.Url.Trim(), hyperlink.InnerText.Trim(), "a");
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace octalforty.Brushie.Text.Authoring
         public void Visit(Image image)
         {
             htmlBuilder.AppendFormat("{0} src=\"{1}\" alt=\"{2}\" />", GetPartialPhraseStartTag("img", image.Attributes),
-                                     image.Url, image.AlternateText);
+                image.Url, image.AlternateText);
         }
 
         /// <summary>
@@ -106,36 +106,36 @@ namespace octalforty.Brushie.Text.Authoring
             //
             // Determine tag
             String tag;
-            switch(textBlock.Modifier)
+            switch(textBlock.Formatting)
             {
-                case TextBlockModifier.StrongEmphasis:
+                case TextBlockFormatting.StrongEmphasis:
                     tag = "strong";
                     break;
-                case TextBlockModifier.Bold:
+                case TextBlockFormatting.Bold:
                     tag = "b";
                     break;
-                case TextBlockModifier.Emphasis:
+                case TextBlockFormatting.Emphasis:
                     tag = "em";
                     break;
-                case TextBlockModifier.Italics:
+                case TextBlockFormatting.Italics:
                     tag = "i";
                     break;
-                case TextBlockModifier.Citation:
+                case TextBlockFormatting.Citation:
                     tag = "cite";
                     break;
-                case TextBlockModifier.Deleted:
+                case TextBlockFormatting.Deleted:
                     tag = "del";
                     break;
-                case TextBlockModifier.Inserted:
+                case TextBlockFormatting.Inserted:
                     tag = "ins";
                     break;
-                case TextBlockModifier.Superscript:
+                case TextBlockFormatting.Superscript:
                     tag = "sup";
                     break;
-                case TextBlockModifier.Subscript:
+                case TextBlockFormatting.Subscript:
                     tag = "sub";
                     break;
-                case TextBlockModifier.Code:
+                case TextBlockFormatting.Code:
                     tag = "code";
                     break;
                 default:
@@ -144,7 +144,7 @@ namespace octalforty.Brushie.Text.Authoring
             } // switch
 
             htmlBuilder.AppendFormat("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, textBlock.Attributes),
-                                     textBlock.InnerText, tag);
+                textBlock.InnerText, tag);
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace octalforty.Brushie.Text.Authoring
             htmlBuilder.AppendFormat(GetFullBlockStartTag("p", footnote.Attributes));
             
             htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>",
-                                     GetFoonoteAnchorName(footnote.Number), footnote.Number);
+                GetFoonoteAnchorName(footnote.Number), footnote.Number);
             VisitChildElements(footnote);
 
             htmlBuilder.Append("</p>");
@@ -178,7 +178,7 @@ namespace octalforty.Brushie.Text.Authoring
         public void Visit(FootnoteReference footnoteReference)
         {
             htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>", 
-                                     GetFoonoteAnchorName(footnoteReference.Number), footnoteReference.Number);
+                GetFoonoteAnchorName(footnoteReference.Number), footnoteReference.Number);
         }
 
         /// <summary>
