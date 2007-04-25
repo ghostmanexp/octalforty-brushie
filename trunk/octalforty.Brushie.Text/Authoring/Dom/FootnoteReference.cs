@@ -1,6 +1,8 @@
 ﻿using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Represents a footnote reference.
@@ -37,7 +39,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="number"></param>
-        public FootnoteReference(DomElement parent, int number) : 
+        public FootnoteReference(DomElement parent, Int32 number) : 
             base(parent, String.Empty)
         {
             this.number = number;

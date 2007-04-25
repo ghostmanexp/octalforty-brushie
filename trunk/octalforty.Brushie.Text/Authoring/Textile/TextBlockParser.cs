@@ -1,5 +1,7 @@
+using System;
+
+using octalforty.Brushie.Text.Authoring.Dom;
 using octalforty.Brushie.Text.Authoring.Textile;
-using octalforty.Brushie.Text.Authoring.Textile.Dom;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
@@ -24,7 +26,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 		/// </param>
 		/// <param name="parentElement">Parent DOM element.</param>
 		/// <param name="text">The text to be parsed.</param>
-		public override void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, string text)
+		public override void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, String text)
 		{
 			parentElement.AppendChild(new TextBlock(parentElement, InlineElementAttributes.Empty, 
 				text, TextBlockModifier.Unknown));

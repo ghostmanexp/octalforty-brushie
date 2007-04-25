@@ -1,30 +1,32 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents an unordered list.
+    /// Represents a blockquote.
     /// </summary>
-    public sealed class UnorderedList : List
+    public sealed class Blockquote : BlockElement
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="UnorderedList"/> class.
+        /// Initializes a new instance of <see cref="Blockquote"/> class.
         /// </summary>
-        public UnorderedList()
+        public Blockquote()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="UnorderedList"/> class.
+        /// Initializes a new instance of <see cref="Blockquote"/> class.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
-        public UnorderedList(DomElement parent, BlockElementAttributes attributes) : 
+        public Blockquote(DomElement parent, BlockElementAttributes attributes) : 
             base(parent, attributes)
         {
         }
 
-        #region DomElement Members
+        #region BlockElement Members
         /// <summary>
         /// Accepts a <paramref name="domElementVisitor"/>.
         /// </summary>

@@ -1,6 +1,8 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Represents a heading.
@@ -44,7 +46,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <param name="attributes"><see cref="BlockElementAttributes"/> of this <see cref="Heading"/>.</param>
         /// <param name="level">The value which contains the absolute level of this <see cref="Heading"/>.</param>
         /// <param name="text">The text of this <see cref="Heading"/>.</param>
-        public Heading(DomElement parent, BlockElementAttributes attributes, int level, string text) : 
+        public Heading(DomElement parent, BlockElementAttributes attributes, Int32 level, String text) : 
             base(parent, attributes)
         {
             this.level = level;

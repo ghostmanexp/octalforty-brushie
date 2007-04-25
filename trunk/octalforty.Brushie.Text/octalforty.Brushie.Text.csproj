@@ -40,6 +40,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authoring\AuthoringScope.cs" />
+    <Compile Include="Authoring\Dom\Acronym.cs" />
+    <Compile Include="Authoring\Dom\BlockElement.cs" />
+    <Compile Include="Authoring\Dom\BlockElementAlignment.cs" />
+    <Compile Include="Authoring\Dom\BlockElementAttributes.cs" />
+    <Compile Include="Authoring\Dom\Blockquote.cs" />
+    <Compile Include="Authoring\Dom\Document.cs" />
+    <Compile Include="Authoring\Dom\DomElement.cs" />
+    <Compile Include="Authoring\Dom\DomElementCollection.cs" />
+    <Compile Include="Authoring\Dom\Footnote.cs" />
+    <Compile Include="Authoring\Dom\FootnoteReference.cs" />
+    <Compile Include="Authoring\Dom\Heading.cs" />
+    <Compile Include="Authoring\Dom\Hyperlink.cs" />
+    <Compile Include="Authoring\Dom\IDomElementVisitor.cs" />
+    <Compile Include="Authoring\Dom\Image.cs" />
+    <Compile Include="Authoring\Dom\InlineElement.cs" />
+    <Compile Include="Authoring\Dom\InlineElementAttributes.cs" />
+    <Compile Include="Authoring\Dom\List.cs" />
+    <Compile Include="Authoring\Dom\ListItem.cs" />
+    <Compile Include="Authoring\Dom\OrderedList.cs" />
+    <Compile Include="Authoring\Dom\Paragraph.cs" />
+    <Compile Include="Authoring\Dom\TableCellAlignment.cs" />
+    <Compile Include="Authoring\Dom\TextBlock.cs" />
+    <Compile Include="Authoring\Dom\TextBlockModifier.cs" />
+    <Compile Include="Authoring\Dom\UnorderedList.cs" />
     <Compile Include="Authoring\Textile\AcronymParser.cs" />
     <Compile Include="Authoring\Textile\AuthoringEngineBase.cs" />
     <Compile Include="Authoring\Textile\BlockElementFallbackParser.cs" />
@@ -47,30 +71,6 @@
     <Compile Include="Authoring\Textile\BlockquoteParser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Authoring\Textile\Dom\Acronym.cs" />
-    <Compile Include="Authoring\Textile\Dom\BlockElement.cs" />
-    <Compile Include="Authoring\Textile\Dom\BlockElementAlignment.cs" />
-    <Compile Include="Authoring\Textile\Dom\BlockElementAttributes.cs" />
-    <Compile Include="Authoring\Textile\Dom\Blockquote.cs" />
-    <Compile Include="Authoring\Textile\Dom\Document.cs" />
-    <Compile Include="Authoring\Textile\Dom\DomElement.cs" />
-    <Compile Include="Authoring\Textile\Dom\DomElementCollection.cs" />
-    <Compile Include="Authoring\Textile\Dom\Footnote.cs" />
-    <Compile Include="Authoring\Textile\Dom\FootnoteReference.cs" />
-    <Compile Include="Authoring\Textile\Dom\Heading.cs" />
-    <Compile Include="Authoring\Textile\Dom\IDomElementVisitor.cs" />
-    <Compile Include="Authoring\Textile\Dom\Image.cs" />
-    <Compile Include="Authoring\Textile\Dom\InlineElement.cs" />
-    <Compile Include="Authoring\Textile\Dom\InlineElementAttributes.cs" />
-    <Compile Include="Authoring\Textile\Dom\Hyperlink.cs" />
-    <Compile Include="Authoring\Textile\Dom\List.cs" />
-    <Compile Include="Authoring\Textile\Dom\ListItem.cs" />
-    <Compile Include="Authoring\Textile\Dom\OrderedList.cs" />
-    <Compile Include="Authoring\Textile\Dom\Paragraph.cs" />
-    <Compile Include="Authoring\Textile\Dom\TableCellAlignment.cs" />
-    <Compile Include="Authoring\Textile\Dom\TextBlock.cs" />
-    <Compile Include="Authoring\Textile\Dom\TextBlockModifier.cs" />
-    <Compile Include="Authoring\Textile\Dom\UnorderedList.cs" />
     <Compile Include="Authoring\Textile\FootnoteParser.cs" />
     <Compile Include="Authoring\Textile\FootnoteReferenceParser.cs" />
     <Compile Include="Authoring\Textile\HeadingParser.cs">

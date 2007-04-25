@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-using octalforty.Brushie.Text.Authoring.Textile.Dom;
+using octalforty.Brushie.Text.Authoring.Dom;
 
 namespace octalforty.Brushie.Text.Authoring.Textile
 {

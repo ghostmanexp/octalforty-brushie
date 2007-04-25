@@ -1,54 +1,56 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents an image.
+    /// Represents a link.
     /// </summary>
-    public sealed class Image : BlockElement
+    public sealed class Hyperlink : InlineElement
     {
         #region Private Member Variables
+        private String title;
         private String url;
-        private String alternateText;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a <see cref="String"/> which contains the URL of the image.
+        /// Gets a <see cref="String"/> which contains the title of the hyperlink.
+        /// </summary>
+        public String Title
+        {
+            get { return title; }
+        }
+
+        /// <summary>
+        /// Gets a <see cref="String"/> which contains the URL of the hyperlink.
         /// </summary>
         public String Url
         {
             get { return url; }
         }
-
-        /// <summary>
-        /// Gets a <see cref="String"/> which contains the alternate text for the image.
-        /// </summary>
-        public String AlternateText
-        {
-            get { return alternateText; }
-        }
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Image"/> class.
+        /// Initializes a new instance of <see cref="Hyperlink"/> class.
         /// </summary>
-        public Image()
+        public Hyperlink()
         {
         }
-
+        
         /// <summary>
-        /// Initializes a new instance of <see cref="Image"/> class.
+        /// Initializes a new instance of <see cref="Hyperlink"/> class.
         /// </summary>
         /// <param name="parent"></param>
-        /// <param name="attributes"></param>
+        /// <param name="innerText"></param>
+        /// <param name="title"></param>
         /// <param name="url"></param>
-        /// <param name="alternateText"></param>
-        public Image(DomElement parent, BlockElementAttributes attributes, string url, string alternateText) : 
-            base(parent, attributes)
+        public Hyperlink(DomElement parent, String innerText, String title, String url) : 
+            base(parent, innerText)
         {
+            this.title = title;
             this.url = url;
-            this.alternateText = alternateText;
         }
 
         #region DomElement Members

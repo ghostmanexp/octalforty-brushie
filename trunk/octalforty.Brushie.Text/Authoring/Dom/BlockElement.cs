@@ -1,4 +1,4 @@
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Represents a single block-level Textile element, such as paragraph or blockquote.

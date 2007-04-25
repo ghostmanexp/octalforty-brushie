@@ -1,6 +1,6 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Represents a Textile document.
