@@ -59,6 +59,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\Authoring\Textile\AcronymParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\BlockquoteParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\FootnoteParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\FootnoteReferenceParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\HeadingParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\HyperlinkParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\ImageParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\ListParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\NoTextileParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\ParagraphParserTestFixture.cs" />
     <Compile Include="Text\LuceneNet\DocumentAdapterTestFixture.cs">
       <SubType>Code</SubType>
     </Compile>

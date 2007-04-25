@@ -7,6 +7,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
     /// Provides functionality for parsing Textile footnotes.
+    /// <code>
+    /// fn132. Footnote text here
+    /// </code>
     /// </summary>
     public sealed class FootnoteParser : BlockElementParserBase
     {
@@ -45,7 +48,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         {
             Footnote footnote = new Footnote(parentElement, CreateBlockElementAttributes(match),
                 Convert.ToInt32(match.Groups["FootnoteID"].Value));
-            parentElement.AppendChild(parentElement);
+            parentElement.AppendChild(footnote);
 
             ParseWithNextElementParser(authoringEngine, footnote, match.Groups["Text"].Value);
         }

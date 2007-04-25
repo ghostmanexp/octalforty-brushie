@@ -6,6 +6,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
     /// Provides functionality for parsing "notextile" blocks.
+    /// <code>
+    /// ==This text== is left intact
+    /// </code>
     /// </summary>
     public sealed class NoTextileParser : BlockElementParserBase
     {

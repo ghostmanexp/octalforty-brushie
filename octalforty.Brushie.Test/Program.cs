@@ -3,7 +3,8 @@ using System.Diagnostics;
 using System.Text;
 
 using octalforty.Brushie.Diff;
-
+using octalforty.Brushie.Text.Authoring;
+using octalforty.Brushie.Text.Authoring.Dom;
 using octalforty.Brushie.Text.Authoring.Textile;
 
 namespace octalforty.Brushie.Test
@@ -439,20 +440,20 @@ namespace octalforty.Brushie.Test
             TextileAuthoringEngine textileAuthoringEngine = new TextileAuthoringEngine();
             string h = textileAuthoringEngine.Author(w);
 
-            /*StringBuilder wiki = new StringBuilder();
+            StringBuilder wiki = new StringBuilder();
             for(int i = 0; i < 600; ++i)
                 wiki.Append(WikiMarkup);
 
             IAuthoringEngine authoringEngine = new TextileAuthoringEngine();
 
             Stopwatch stopwatch = Stopwatch.StartNew();
-            Document document = authoringEngine.Parse(wiki.ToString());
+            DomDocument document = authoringEngine.Parse(wiki.ToString());
             stopwatch.Stop();
             Console.WriteLine("{0} bytes in {1} sec.", wiki.ToString().Length, 
                 stopwatch.ElapsedMilliseconds / 1000.0);
 
             HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
-            document.Accept(htmlAuthoringDomElementVisitor);*/
+            document.Accept(htmlAuthoringDomElementVisitor);
         }
 
         private static Range<int> GetRange(PatchOperation difference, WordDataProvider dataProvider)
