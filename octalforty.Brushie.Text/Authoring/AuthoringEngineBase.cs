@@ -1,9 +1,9 @@
 ﻿using System;
 
 using octalforty.Brushie.Text.Authoring.Dom;
-using octalforty.Brushie.Text.Authoring.Textile.Internal;
+using octalforty.Brushie.Text.Authoring.Internal;
 
-namespace octalforty.Brushie.Text.Authoring.Textile
+namespace octalforty.Brushie.Text.Authoring
 {
     /// <summary>
     /// Provides a base class for authoring engines and implements core methods of 

@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authoring\AuthoringEngineBase.cs" />
     <Compile Include="Authoring\AuthoringScope.cs" />
+    <Compile Include="Authoring\BlockElementParserBase.cs" />
     <Compile Include="Authoring\Dom\Acronym.cs" />
     <Compile Include="Authoring\Dom\BlockElement.cs" />
     <Compile Include="Authoring\Dom\BlockElementAlignment.cs" />
@@ -64,10 +66,17 @@
     <Compile Include="Authoring\Dom\TextBlock.cs" />
     <Compile Include="Authoring\Dom\TextBlockModifier.cs" />
     <Compile Include="Authoring\Dom\UnorderedList.cs" />
+    <Compile Include="Authoring\ElementParserBase.cs" />
+    <Compile Include="Authoring\HtmlAuthoringDomElementVisitor.cs" />
+    <Compile Include="Authoring\IAuthoringEngine.cs" />
+    <Compile Include="Authoring\IBlockElementParser.cs" />
+    <Compile Include="Authoring\IElementParser.cs" />
+    <Compile Include="Authoring\IInlineElementParser.cs" />
+    <Compile Include="Authoring\InlineElementParserBase.cs" />
+    <Compile Include="Authoring\Internal\NullBlockElementParser.cs" />
+    <Compile Include="Authoring\Internal\NullInlineElementParser.cs" />
     <Compile Include="Authoring\Textile\AcronymParser.cs" />
-    <Compile Include="Authoring\Textile\AuthoringEngineBase.cs" />
     <Compile Include="Authoring\Textile\BlockElementFallbackParser.cs" />
-    <Compile Include="Authoring\Textile\BlockElementParserBase.cs" />
     <Compile Include="Authoring\Textile\BlockquoteParser.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -76,32 +85,21 @@
     <Compile Include="Authoring\Textile\HeadingParser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Authoring\Textile\HtmlAuthoringDomElementVisitor.cs" />
-    <Compile Include="Authoring\Textile\HtmlTextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\HyperlinkParser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Authoring\Textile\IAuthoringEngine.cs" />
-    <Compile Include="Authoring\Textile\IBlockElementParser.cs" />
-    <Compile Include="Authoring\Textile\IInlineElementParser.cs" />
     <Compile Include="Authoring\Textile\ImageParser.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Authoring\Textile\InlineElementParserBase.cs" />
     <Compile Include="Authoring\Textile\Internal\Element.cs" />
-    <Compile Include="Authoring\Textile\ElementParserBase.cs" />
     <Compile Include="Authoring\Textile\Internal\Hyperlink.cs" />
-    <Compile Include="Authoring\Textile\IElementParser.cs" />
     <Compile Include="Authoring\Textile\Internal\List.cs" />
     <Compile Include="Authoring\Textile\Internal\ListItem.cs" />
-    <Compile Include="Authoring\Textile\Internal\NullBlockElementParser.cs" />
-    <Compile Include="Authoring\Textile\Internal\NullInlineElementParser.cs" />
     <Compile Include="Authoring\Textile\ListParser.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Authoring\Textile\NoTextileParser.cs" />
     <Compile Include="Authoring\Textile\ParagraphParser.cs" />
-    <Compile Include="Authoring\Textile\ITextileAuthoringFormatter.cs" />
     <Compile Include="Authoring\Textile\TableParser.cs" />
     <Compile Include="Authoring\Textile\TextBlockParser.cs" />
     <Compile Include="Authoring\Textile\TextFormatting.cs" />

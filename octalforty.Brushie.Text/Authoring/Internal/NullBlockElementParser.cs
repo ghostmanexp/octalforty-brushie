@@ -1,16 +1,16 @@
-﻿using octalforty.Brushie.Text.Authoring.Dom;
+using octalforty.Brushie.Text.Authoring.Dom;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Internal
+namespace octalforty.Brushie.Text.Authoring.Internal
 {
     /// <summary>
-    /// Special-case inline element parser.
+    /// Special-case block element parser.
     /// </summary>
-    internal class NullInlineElementParser : InlineElementParserBase
+    internal sealed class NullBlockElementParser : BlockElementParserBase
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="NullInlineElementParser"/> class.
+        /// Initializes a new instance of <see cref="NullBlockElementParser"/> class.
         /// </summary>
-        public NullInlineElementParser()
+        public NullBlockElementParser()
         {
         }
 
