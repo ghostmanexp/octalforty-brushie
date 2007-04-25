@@ -6,6 +6,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
     /// Provides functionality for parsing Textile blockquotes.
+    /// <code>
+    /// bq. Blockquote...
+    /// </code>
     /// </summary>
     public sealed class BlockquoteParser : BlockElementParserBase
     {

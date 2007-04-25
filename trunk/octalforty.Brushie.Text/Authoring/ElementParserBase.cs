@@ -53,7 +53,7 @@ namespace octalforty.Brushie.Text.Authoring
                     if(startIndex < match.Index)
                     {
                         ParseWithNextElementParser(authoringEngine, parentElement,
-                                                   text.Substring(startIndex, match.Index - startIndex));
+                            text.Substring(startIndex, match.Index - startIndex));
                     } // if
 
                     ProcessMatch(authoringEngine, parentElement, match);
