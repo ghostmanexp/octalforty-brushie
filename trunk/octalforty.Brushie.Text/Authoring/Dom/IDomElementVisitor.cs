@@ -11,7 +11,7 @@ namespace octalforty.Brushie.Text.Authoring.Dom
         /// Visits the <paramref name="document"/> element.
         /// </summary>
         /// <param name="document"></param>
-        void Visit(Document document);
+        void Visit(DomDocument document);
 
         /// <summary>
         /// Visits the <paramref name="heading"/> element.

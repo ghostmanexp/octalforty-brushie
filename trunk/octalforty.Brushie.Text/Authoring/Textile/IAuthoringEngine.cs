@@ -56,10 +56,10 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         void ParseInlineElements(DomElement parentElement, String text);
 
         /// <summary>
-        /// Parses <paramref name="text"/> and produces <see cref="Document"/>.
+        /// Parses <paramref name="text"/> and produces <see cref="DomDocument"/>.
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        Document Parse(String text);
+        DomDocument Parse(String text);
     }
 }

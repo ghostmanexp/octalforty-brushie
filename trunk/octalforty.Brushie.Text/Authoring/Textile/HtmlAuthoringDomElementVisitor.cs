@@ -37,7 +37,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// Visits the <paramref name="document"/> element.
         /// </summary>
         /// <param name="document"></param>
-        public void Visit(Document document)
+        public void Visit(DomDocument document)
         {
             VisitChildElements(document);
         }

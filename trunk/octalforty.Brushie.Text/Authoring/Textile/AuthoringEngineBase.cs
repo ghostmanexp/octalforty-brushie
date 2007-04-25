@@ -112,13 +112,13 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         }
 
         /// <summary>
-        /// Parses <paramref name="text"/> and produces <see cref="Document"/>.
+        /// Parses <paramref name="text"/> and produces <see cref="DomDocument"/>.
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public virtual Document Parse(string text)
+        public virtual DomDocument Parse(string text)
         {
-            Document document = new Document();
+            DomDocument document = new DomDocument();
             ParseBlockElements(document, text);
 
             return document;
