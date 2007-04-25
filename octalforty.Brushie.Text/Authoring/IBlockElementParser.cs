@@ -3,8 +3,7 @@
 namespace octalforty.Brushie.Text.Authoring
 {
     /// <summary>
-    /// Defines a contract for parsers which parse Textile markup and produce
-    /// <see cref="BlockElement"/>.
+    /// Defines a contract for parsers which parse markup and produce <see cref="BlockElement"/>.
     /// </summary>
     public interface IBlockElementParser : IElementParser
     {

@@ -5,14 +5,18 @@ using octalforty.Brushie.Text.Authoring.Dom;
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
-    /// Provides functionality for parsing acronyms.
+    /// Provides functionality for parsing Textile acronyms.
+    /// <code>
+    /// HTML(Hypertext Markup Language)
+    /// </code>
+    /// <seealso cref="Acronym"/>
     /// </summary>
     public sealed class AcronymParser : InlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex AcronymRegex = new Regex(
-            @"(?<Expression>((?<Acronym>\p{Lu}{2,}))\((?<Text>.+)\))",
-            RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            @"(?<Expression>((?<Acronym>\p{Lu}{2,}))\((?<Text>.+?)\))",
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
 
         /// <summary>
