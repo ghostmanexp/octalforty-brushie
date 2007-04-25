@@ -5,12 +5,12 @@ namespace octalforty.Brushie.Text.Authoring.Dom
     /// <summary>
     /// Represents a Textile document.
     /// </summary>
-    public sealed class Document : DomElement
+    public sealed class DomDocument : DomElement
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="Document"/> class.
+        /// Initializes a new instance of <see cref="DomDocument"/> class.
         /// </summary>
-        public Document()
+        public DomDocument()
         {
         }
 

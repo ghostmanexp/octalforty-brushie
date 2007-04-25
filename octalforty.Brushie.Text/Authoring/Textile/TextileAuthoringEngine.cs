@@ -288,7 +288,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// <param name="text"></param>
         public String Author(String text)
         {
-            Document document = Parse(text);
+            DomDocument document = Parse(text);
 
             HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
             document.Accept(htmlAuthoringDomElementVisitor);

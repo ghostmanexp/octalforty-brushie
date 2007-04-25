@@ -45,7 +45,7 @@
     <Compile Include="Authoring\Dom\BlockElementAlignment.cs" />
     <Compile Include="Authoring\Dom\BlockElementAttributes.cs" />
     <Compile Include="Authoring\Dom\Blockquote.cs" />
-    <Compile Include="Authoring\Dom\Document.cs" />
+    <Compile Include="Authoring\Dom\DomDocument.cs" />
     <Compile Include="Authoring\Dom\DomElement.cs" />
     <Compile Include="Authoring\Dom\DomElementCollection.cs" />
     <Compile Include="Authoring\Dom\Footnote.cs" />
