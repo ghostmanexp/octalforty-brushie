@@ -1,30 +1,32 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents a blockquote.
+    /// Represents a paragraph.
     /// </summary>
-    public sealed class Blockquote : BlockElement
+    public sealed class Paragraph : BlockElement
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="Blockquote"/> class.
+        /// Initializes a new instance of <see cref="Paragraph"/> class.
         /// </summary>
-        public Blockquote()
+        public Paragraph()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Blockquote"/> class.
+        /// Initializes a new instance of <see cref="Paragraph"/> class.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
-        public Blockquote(DomElement parent, BlockElementAttributes attributes) : 
+        public Paragraph(DomElement parent, BlockElementAttributes attributes) : 
             base(parent, attributes)
         {
         }
 
-        #region BlockElement Members
+        #region DomElement Members
         /// <summary>
         /// Accepts a <paramref name="domElementVisitor"/>.
         /// </summary>

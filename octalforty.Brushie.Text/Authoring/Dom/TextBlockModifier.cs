@@ -1,4 +1,4 @@
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Defines a style modifier for the <see cref="TextBlock"/>.

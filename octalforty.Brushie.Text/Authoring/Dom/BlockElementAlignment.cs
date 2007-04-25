@@ -1,4 +1,4 @@
-﻿namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+﻿namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Defines the alignment of a block-level Textile element.

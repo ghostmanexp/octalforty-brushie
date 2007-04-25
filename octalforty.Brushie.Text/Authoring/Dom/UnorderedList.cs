@@ -1,25 +1,27 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents a single item of the <see cref="List"/>.
+    /// Represents an unordered list.
     /// </summary>
-    public sealed class ListItem : BlockElement
+    public sealed class UnorderedList : List
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="ListItem"/> class.
+        /// Initializes a new instance of <see cref="UnorderedList"/> class.
         /// </summary>
-        public ListItem()
+        public UnorderedList()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="ListItem"/> class.
+        /// Initializes a new instance of <see cref="UnorderedList"/> class.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
-        public ListItem(DomElement parent, BlockElementAttributes attributes) : 
+        public UnorderedList(DomElement parent, BlockElementAttributes attributes) : 
             base(parent, attributes)
         {
         }

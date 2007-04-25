@@ -5,7 +5,6 @@ using System.Text;
 using octalforty.Brushie.Diff;
 
 using octalforty.Brushie.Text.Authoring.Textile;
-using octalforty.Brushie.Text.Authoring.Textile.Dom;
 
 namespace octalforty.Brushie.Test
 {

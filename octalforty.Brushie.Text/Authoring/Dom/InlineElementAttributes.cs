@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Defines attributes for an inline Textile element.
@@ -68,7 +68,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <param name="id">Element ID.</param>
         /// <param name="style">Inline element style.</param>
         /// <param name="language">Element language specification.</param>
-        public InlineElementAttributes(string cssClass, string id, string style, string language)
+        public InlineElementAttributes(String cssClass, String id, String style, String language)
         {
             this.cssClass = cssClass;
             this.id = id;

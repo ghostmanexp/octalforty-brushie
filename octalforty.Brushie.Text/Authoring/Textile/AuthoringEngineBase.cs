@@ -1,6 +1,6 @@
 ﻿using System;
 
-using octalforty.Brushie.Text.Authoring.Textile.Dom;
+using octalforty.Brushie.Text.Authoring.Dom;
 using octalforty.Brushie.Text.Authoring.Textile.Internal;
 
 namespace octalforty.Brushie.Text.Authoring.Textile

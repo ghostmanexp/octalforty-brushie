@@ -1,6 +1,8 @@
 ﻿using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Defines block-level Textile elements attributes.
@@ -20,7 +22,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// </summary>
         public static new readonly BlockElementAttributes Empty = 
             new BlockElementAttributes(string.Empty, string.Empty, string.Empty, 
-            String.Empty, BlockElementAlignment.Unknown, 0, 0);
+                String.Empty, BlockElementAlignment.Unknown, 0, 0);
         #endregion
 
         #region Public Properties

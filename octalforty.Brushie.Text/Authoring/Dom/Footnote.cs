@@ -1,48 +1,52 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents a block of text.
+    /// Represents a footnote.
+    /// <seealso cref="FootnoteReference"/>
     /// </summary>
-    public sealed class TextBlock : InlineElement
+    /// <remarks>
+    /// Footnotes are referenced by <see cref="FootnoteReference"/>.
+    /// </remarks>
+    public sealed class Footnote : BlockElement
     {
         #region Private Member Variables
-        private TextBlockModifier modifier = TextBlockModifier.Unknown;
+        private Int32 number;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a value which indicates how the style of the text block is altered.
+        /// Gets a value which indicates the number of the footnote.
         /// </summary>
-        public TextBlockModifier Modifier
+        public Int32 Number
         {
-            get { return modifier; }
+            get { return number; }
         }
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="TextBlock"/> class.
+        /// Initializes a new instance of <see cref="Footnote"/> class.
         /// </summary>
-        public TextBlock()
+        public Footnote()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="TextBlock"/> class.
+        /// Initializes a new instance of <see cref="Footnote"/> class.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
-        /// <param name="innerText"></param>
-        /// <param name="modifier"></param>
-        public TextBlock(DomElement parent, InlineElementAttributes attributes, 
-            string innerText, TextBlockModifier modifier) : 
-            base(parent, attributes, innerText)
+        /// <param name="number"></param>
+        public Footnote(DomElement parent, BlockElementAttributes attributes, Int32 number) :
+            base(parent, attributes)
         {
-            this.modifier = modifier;
+            this.number = number;
         }
 
-        #region DomElementMembers
+        #region DomElement Members
         /// <summary>
         /// Accepts a <paramref name="domElementVisitor"/>.
         /// </summary>

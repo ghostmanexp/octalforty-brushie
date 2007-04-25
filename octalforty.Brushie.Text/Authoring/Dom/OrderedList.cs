@@ -1,25 +1,27 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents a paragraph.
+    /// Represents an ordered list.
     /// </summary>
-    public sealed class Paragraph : BlockElement
+    public sealed class OrderedList : List
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="Paragraph"/> class.
+        /// Initializes a new instance of <see cref="OrderedList"/> class.
         /// </summary>
-        public Paragraph()
+        public OrderedList()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Paragraph"/> class.
+        /// Initializes a new instance of <see cref="OrderedList"/> class.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
-        public Paragraph(DomElement parent, BlockElementAttributes attributes) : 
+        public OrderedList(DomElement parent, BlockElementAttributes attributes) : 
             base(parent, attributes)
         {
         }

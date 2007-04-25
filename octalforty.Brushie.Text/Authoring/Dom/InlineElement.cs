@@ -1,6 +1,8 @@
 using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
     /// Represents a single inline Textile element.
@@ -43,7 +45,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="innerText"></param>
-        protected InlineElement(DomElement parent, string innerText) :
+        protected InlineElement(DomElement parent, String innerText) :
             this(parent, InlineElementAttributes.Empty, innerText)
         {
             this.innerText = innerText;
@@ -55,7 +57,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile.Dom
         /// <param name="parent"></param>
         /// <param name="attributes"></param>
         /// <param name="innerText"></param>
-        protected InlineElement(DomElement parent, InlineElementAttributes attributes, string innerText) : 
+        protected InlineElement(DomElement parent, InlineElementAttributes attributes, String innerText) : 
             base(parent)
         {
             this.attributes = attributes;

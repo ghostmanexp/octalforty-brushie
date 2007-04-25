@@ -2,9 +2,11 @@ using System.Collections;
 #if FW1
 #else
 using System.Collections.ObjectModel;
+
+using octalforty.Brushie.Text.Authoring.Dom;
 #endif
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
 #if FW1
 	/// <summary>

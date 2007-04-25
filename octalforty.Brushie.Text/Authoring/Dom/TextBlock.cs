@@ -1,46 +1,50 @@
-﻿using System;
+using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+using octalforty.Brushie.Text.Authoring.Dom;
+
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents an acronym.
+    /// Represents a block of text.
     /// </summary>
-    public sealed class Acronym : InlineElement
+    public sealed class TextBlock : InlineElement
     {
         #region Private Member Variables
-        private String title;
+        private TextBlockModifier modifier = TextBlockModifier.Unknown;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a <see cref="String"/> which contains the title of the <see cref="Acronym"/>.
+        /// Gets a value which indicates how the style of the text block is altered.
         /// </summary>
-        public String Title
+        public TextBlockModifier Modifier
         {
-            get { return title; }
+            get { return modifier; }
         }
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Acronym"/> class.
+        /// Initializes a new instance of <see cref="TextBlock"/> class.
         /// </summary>
-        public Acronym()
+        public TextBlock()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Acronym"/> class.
+        /// Initializes a new instance of <see cref="TextBlock"/> class.
         /// </summary>
         /// <param name="parent"></param>
+        /// <param name="attributes"></param>
         /// <param name="innerText"></param>
-        /// <param name="title"></param>
-        public Acronym(DomElement parent, string innerText, string title) : 
-            base(parent, innerText)
+        /// <param name="modifier"></param>
+        public TextBlock(DomElement parent, InlineElementAttributes attributes, 
+            string innerText, TextBlockModifier modifier) : 
+            base(parent, attributes, innerText)
         {
-            this.title = title;
+            this.modifier = modifier;
         }
 
-        #region DomElement Members
+        #region DomElementMembers
         /// <summary>
         /// Accepts a <paramref name="domElementVisitor"/>.
         /// </summary>

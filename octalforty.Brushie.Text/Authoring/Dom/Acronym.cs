@@ -1,47 +1,43 @@
-using System;
+﻿using System;
 
-namespace octalforty.Brushie.Text.Authoring.Textile.Dom
+namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Represents a footnote.
-    /// <seealso cref="FootnoteReference"/>
+    /// Represents an acronym.
     /// </summary>
-    /// <remarks>
-    /// Footnotes are referenced by <see cref="FootnoteReference"/>.
-    /// </remarks>
-    public sealed class Footnote : BlockElement
+    public sealed class Acronym : InlineElement
     {
         #region Private Member Variables
-        private Int32 number;
+        private String title;
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// Gets a value which indicates the number of the footnote.
+        /// Gets a <see cref="String"/> which contains the title of the <see cref="Acronym"/>.
         /// </summary>
-        public Int32 Number
+        public String Title
         {
-            get { return number; }
+            get { return title; }
         }
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Footnote"/> class.
+        /// Initializes a new instance of <see cref="Acronym"/> class.
         /// </summary>
-        public Footnote()
+        public Acronym()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Footnote"/> class.
+        /// Initializes a new instance of <see cref="Acronym"/> class.
         /// </summary>
         /// <param name="parent"></param>
-        /// <param name="attributes"></param>
-        /// <param name="number"></param>
-        public Footnote(DomElement parent, BlockElementAttributes attributes, int number) :
-            base(parent, attributes)
+        /// <param name="innerText"></param>
+        /// <param name="title"></param>
+        public Acronym(DomElement parent, string innerText, string title) : 
+            base(parent, innerText)
         {
-            this.number = number;
+            this.title = title;
         }
 
         #region DomElement Members
