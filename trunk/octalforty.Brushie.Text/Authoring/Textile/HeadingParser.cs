@@ -7,6 +7,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
     /// Provides functionality for parsing Textile headings.
+    /// <code>
+    /// h1. Heading 1
+    /// </code>
     /// </summary>
     public sealed class HeadingParser : BlockElementParserBase
     {

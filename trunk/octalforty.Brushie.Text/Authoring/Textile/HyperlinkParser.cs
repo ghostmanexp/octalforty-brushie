@@ -6,12 +6,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
     /// Provides functionality for parsing Textile hyperlinks.
+    /// <code>
+    /// "This is a hyperlink(with optional title)":uri
+    /// </code>
     /// </summary>
+    /// <remarks>
+    /// The <c>uri</c> part of the hyperlink (as of current implementation) is parsed as as at least one
+    /// non-whitespace character.
+    /// </remarks>
     public sealed class HyperlinkParser : InlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex HyperlinkRegex = new Regex(
-            "(?<!\\\\)(?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S*))",
+            "(?<!\\\\)(?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S+))",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion

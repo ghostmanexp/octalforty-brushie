@@ -7,14 +7,16 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
     /// Provides functionality for parsing Textile footnote references.
+    /// <code>
+    /// This[1] is a footnote reference, whereas [2] this and\[3] and[this] are not.
+    /// </code>
     /// </summary>
     public sealed class FootnoteReferenceParser : InlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex FootnoteReferenceRegex = new Regex(
-            @"(?<!\\)(?<Expression>\[(?<FootnoteID>\d+)\])",
-            RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+            @"(?<!\\|\s)(?<Expression>\[(?<FootnoteID>\d+)\])", 
+            RegexOptions.Compiled);
         #endregion
 
         /// <summary>
