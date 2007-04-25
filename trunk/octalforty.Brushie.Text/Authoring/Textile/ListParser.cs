@@ -96,7 +96,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 ListItem listItem = new ListItem(domList, BlockElementAttributes.Empty);
                 authoringEngine.ParseInlineElements(listItem, list.Items[index].Title);
                 /*listItem.AppendChild(new TextBlock(listItem, InlineElementAttributes.Empty, 
-                    list.Items[index].Title, TextBlockModifier.Unknown));*/
+                    list.Items[index].Title, TextBlockFormatting.Unknown));*/
 
                 domList.AppendChild(listItem);
 

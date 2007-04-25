@@ -64,7 +64,7 @@
     <Compile Include="Authoring\Dom\Paragraph.cs" />
     <Compile Include="Authoring\Dom\TableCellAlignment.cs" />
     <Compile Include="Authoring\Dom\TextBlock.cs" />
-    <Compile Include="Authoring\Dom\TextBlockModifier.cs" />
+    <Compile Include="Authoring\Dom\TextBlockFormatting.cs" />
     <Compile Include="Authoring\Dom\UnorderedList.cs" />
     <Compile Include="Authoring\ElementParserBase.cs" />
     <Compile Include="Authoring\HtmlAuthoringDomElementVisitor.cs" />
@@ -92,7 +92,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Authoring\Textile\Internal\Element.cs" />
-    <Compile Include="Authoring\Textile\Internal\Hyperlink.cs" />
     <Compile Include="Authoring\Textile\Internal\List.cs" />
     <Compile Include="Authoring\Textile\Internal\ListItem.cs" />
     <Compile Include="Authoring\Textile\ListParser.cs">
@@ -102,7 +101,6 @@
     <Compile Include="Authoring\Textile\ParagraphParser.cs" />
     <Compile Include="Authoring\Textile\TableParser.cs" />
     <Compile Include="Authoring\Textile\TextBlockParser.cs" />
-    <Compile Include="Authoring\Textile\TextFormatting.cs" />
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs">
       <SubType>Code</SubType>
     </Compile>

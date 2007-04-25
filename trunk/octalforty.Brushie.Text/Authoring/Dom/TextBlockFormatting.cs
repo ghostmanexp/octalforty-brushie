@@ -1,12 +1,12 @@
 namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Defines a style modifier for the <see cref="TextBlock"/>.
+    /// Defines formatting for the <see cref="TextBlock"/>.
     /// </summary>
-    public enum TextBlockModifier
+    public enum TextBlockFormatting
     {
         /// <summary>
-        /// Modifier is unknown.
+        /// Formatting is unknown.
         /// </summary>
         Unknown = 0,
 
@@ -64,6 +64,11 @@ namespace octalforty.Brushie.Text.Authoring.Dom
         /// <summary>
         /// Code.
         /// </summary>
-        Code = 10
+        Code = 10,
+
+        /// <summary>
+        /// Span.
+        /// </summary>
+        Span = 11
     }
 }

@@ -46,7 +46,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         protected override void ProcessMatch(IAuthoringEngine authoringEngine, DomElement parentElement, Match match)
         {
             TextBlock textBlock = new TextBlock(parentElement, InlineElementAttributes.Empty, 
-                match.Groups["Text"].Value, TextBlockModifier.Unknown);
+                match.Groups["Text"].Value, TextBlockFormatting.Unknown);
             parentElement.AppendChild(textBlock);
         }
         #endregion

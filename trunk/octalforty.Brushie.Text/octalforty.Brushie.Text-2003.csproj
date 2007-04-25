@@ -84,7 +84,52 @@
         <Files>
             <Include>
                 <File
+                    RelPath = "Authoring\AuthoringEngineBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Authoring\AuthoringScope.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\BlockElementParserBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\ElementParserBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\HtmlAuthoringDomElementVisitor.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\IAuthoringEngine.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\IBlockElementParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\IElementParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\IInlineElementParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\InlineElementParserBase.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -114,7 +159,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Dom\Document.cs"
+                    RelPath = "Authoring\Dom\DomDocument.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -199,7 +244,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Dom\TextBlockModifier.cs"
+                    RelPath = "Authoring\Dom\TextBlockFormatting.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -209,12 +254,17 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\AcronymParser.cs"
+                    RelPath = "Authoring\Internal\NullBlockElementParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\AuthoringEngineBase.cs"
+                    RelPath = "Authoring\Internal\NullInlineElementParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Textile\AcronymParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -224,17 +274,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\BlockElementParserBase.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Authoring\Textile\BlockquoteParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\ElementParserBase.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -254,47 +294,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\HtmlAuthoringDomElementVisitor.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Authoring\Textile\HyperlinkParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\IAuthoringEngine.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\IBlockElementParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\IElementParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\IInlineElementParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Authoring\Textile\ImageParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\InlineElementParserBase.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\ITextileAuthoringFormatter.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -324,11 +329,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\TextFormatting.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Authoring\Textile\Textile.cd"
                     BuildAction = "Content"
                 />
@@ -347,27 +347,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\Internal\Hyperlink.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Authoring\Textile\Internal\List.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "Authoring\Textile\Internal\ListItem.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\Internal\NullBlockElementParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Authoring\Textile\Internal\NullInlineElementParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
