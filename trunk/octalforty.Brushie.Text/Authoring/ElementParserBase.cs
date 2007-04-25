@@ -2,9 +2,8 @@ using System;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Dom;
-using octalforty.Brushie.Text.Authoring.Textile;
 
-namespace octalforty.Brushie.Text.Authoring.Textile
+namespace octalforty.Brushie.Text.Authoring
 {
     /// <summary>
     /// Provides a base class for element parsers used in <see cref="IAuthoringEngine"/>.
@@ -54,7 +53,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                     if(startIndex < match.Index)
                     {
                         ParseWithNextElementParser(authoringEngine, parentElement,
-                            text.Substring(startIndex, match.Index - startIndex));
+                                                   text.Substring(startIndex, match.Index - startIndex));
                     } // if
 
                     ProcessMatch(authoringEngine, parentElement, match);
@@ -193,9 +192,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             return new InlineElementAttributes(cssClass, id, style, language);
         }
 
-		protected static bool IsNullOrEmpty(String value)
-		{
-			return value == null || value == string.Empty;
-		}
-    } 
+        protected static bool IsNullOrEmpty(String value)
+        {
+            return value == null || value == string.Empty;
+        }
+    }
 }

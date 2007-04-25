@@ -1,6 +1,6 @@
 using octalforty.Brushie.Text.Authoring.Dom;
 
-namespace octalforty.Brushie.Text.Authoring.Textile
+namespace octalforty.Brushie.Text.Authoring
 {
     /// <summary>
     /// Defines a contract for an element parser.

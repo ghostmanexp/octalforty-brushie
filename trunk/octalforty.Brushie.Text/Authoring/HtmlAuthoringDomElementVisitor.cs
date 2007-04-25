@@ -3,7 +3,7 @@ using System.Text;
 
 using octalforty.Brushie.Text.Authoring.Dom;
 
-namespace octalforty.Brushie.Text.Authoring.Textile
+namespace octalforty.Brushie.Text.Authoring
 {
     /// <summary>
     /// Defines a <see cref="IDomElementVisitor"/> which is capable of authoring HTML
@@ -108,43 +108,43 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             String tag;
             switch(textBlock.Modifier)
             {
-            case TextBlockModifier.StrongEmphasis:
-                tag = "strong";
-                break;
-            case TextBlockModifier.Bold:
-                tag = "b";
-                break;
-            case TextBlockModifier.Emphasis:
-                tag = "em";
-                break;
-            case TextBlockModifier.Italics:
-                tag = "i";
-                break;
-            case TextBlockModifier.Citation:
-                tag = "cite";
-                break;
-            case TextBlockModifier.Deleted:
-                tag = "del";
-                break;
-            case TextBlockModifier.Inserted:
-                tag = "ins";
-                break;
-            case TextBlockModifier.Superscript:
-                tag = "sup";
-                break;
-            case TextBlockModifier.Subscript:
-                tag = "sub";
-                break;
-            case TextBlockModifier.Code:
-                tag = "code";
-                break;
-            default:
-                tag = "span";
-                break;
+                case TextBlockModifier.StrongEmphasis:
+                    tag = "strong";
+                    break;
+                case TextBlockModifier.Bold:
+                    tag = "b";
+                    break;
+                case TextBlockModifier.Emphasis:
+                    tag = "em";
+                    break;
+                case TextBlockModifier.Italics:
+                    tag = "i";
+                    break;
+                case TextBlockModifier.Citation:
+                    tag = "cite";
+                    break;
+                case TextBlockModifier.Deleted:
+                    tag = "del";
+                    break;
+                case TextBlockModifier.Inserted:
+                    tag = "ins";
+                    break;
+                case TextBlockModifier.Superscript:
+                    tag = "sup";
+                    break;
+                case TextBlockModifier.Subscript:
+                    tag = "sub";
+                    break;
+                case TextBlockModifier.Code:
+                    tag = "code";
+                    break;
+                default:
+                    tag = "span";
+                    break;
             } // switch
 
             htmlBuilder.AppendFormat("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, textBlock.Attributes),
-                textBlock.InnerText, tag);
+                                     textBlock.InnerText, tag);
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             htmlBuilder.AppendFormat(GetFullBlockStartTag("p", footnote.Attributes));
             
             htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>",
-                GetFoonoteAnchorName(footnote.Number), footnote.Number);
+                                     GetFoonoteAnchorName(footnote.Number), footnote.Number);
             VisitChildElements(footnote);
 
             htmlBuilder.Append("</p>");
@@ -178,7 +178,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public void Visit(FootnoteReference footnoteReference)
         {
             htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>", 
-                GetFoonoteAnchorName(footnoteReference.Number), footnoteReference.Number);
+                                     GetFoonoteAnchorName(footnoteReference.Number), footnoteReference.Number);
         }
 
         /// <summary>
@@ -256,8 +256,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             // On the other hand, they may not be specified at all, so
             // this should be taken into consideration too.
             if(attributes.Alignment != BlockElementAlignment.Unknown ||
-                attributes.LeftIndent != 0 || attributes.RightIndent != 0 ||
-                !IsNullOrEmpty(attributes.Style))
+               attributes.LeftIndent != 0 || attributes.RightIndent != 0 ||
+               !IsNullOrEmpty(attributes.Style))
             {
                 String style = String.Empty;
                 if(!IsNullOrEmpty(attributes.Style))
@@ -270,19 +270,19 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 if(attributes.Alignment != BlockElementAlignment.Unknown)
                 {
                     style += String.Format("text-align: {0};",
-                        attributes.Alignment.ToString().ToLower());
+                                           attributes.Alignment.ToString().ToLower());
                 } // if
 
                 if(attributes.LeftIndent != 0)
                 {
                     style += String.Format("padding-left: {0}em;",
-                        attributes.LeftIndent);
+                                           attributes.LeftIndent);
                 } // if
 
                 if(attributes.RightIndent != 0)
                 {
                     style += String.Format("padding-right: {0}em;",
-                        attributes.RightIndent);
+                                           attributes.RightIndent);
                 } // if
 
                 tagBuilder.AppendFormat(" style=\"{0}\"", style);
@@ -361,9 +361,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             return tagBuilder.ToString();
         }
 
-		protected static bool IsNullOrEmpty(String value)
-		{
-			return value == null || value == string.Empty;
-		}
+        protected static bool IsNullOrEmpty(String value)
+        {
+            return value == null || value == string.Empty;
+        }
     }
 }
