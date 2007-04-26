@@ -278,7 +278,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             AddInlineElementParser(new AcronymParser());
             AddInlineElementParser(new HyperlinkParser());
             AddInlineElementParser(new FootnoteReferenceParser());
-			AddInlineElementParser(new TextBlockParser());
+            AddInlineElementParser(new FormattedTextBlockParser());
+            AddInlineElementParser(new UnformattedTextBlockParser());
         }
 
         /// <summary>
