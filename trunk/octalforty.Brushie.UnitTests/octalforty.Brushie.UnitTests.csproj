@@ -67,6 +67,7 @@
     <Compile Include="Text\Authoring\Textile\ListParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\NoTextileParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\ParagraphParserTestFixture.cs" />
+    <Compile Include="Text\Authoring\Textile\TextBlockParserTestFixture.cs" />
     <Compile Include="Text\LuceneNet\DocumentAdapterTestFixture.cs">
       <SubType>Code</SubType>
     </Compile>
