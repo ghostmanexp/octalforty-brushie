@@ -7,7 +7,7 @@ using octalforty.Brushie.Text.Authoring.Textile;
 namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 {
     /// <summary>
-    /// <see cref="TextBlockParser"/> unit tests.
+    /// <see cref="FormattedTextBlockParser"/> unit tests.
     /// </summary>
     [TestFixture()]
     public class TextBlockParserTestFixture
@@ -16,7 +16,8 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
         public void Parse()
         {
             DomDocument document = new DomDocument();
-            IInlineElementParser inlineElementParser = new TextBlockParser();
+            IInlineElementParser inlineElementParser = new FormattedTextBlockParser();
+            inlineElementParser.NextElementParser = new UnformattedTextBlockParser();
 
             inlineElementParser.Parse(null, document, 
                 "This *text* is ??cited??, whereas _that ^one~^ is_ %spanned%.");

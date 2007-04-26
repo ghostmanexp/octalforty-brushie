@@ -6,9 +6,9 @@ using octalforty.Brushie.Text.Authoring.Dom;
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
-    /// Provides functionality for parsing text blocks.
+    /// Provides functionality for parsing formatted text blocks.
     /// </summary>
-    public class TextBlockParser : InlineElementParserBase
+    public sealed class FormattedTextBlockParser : InlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex TextBlockRegex = new Regex(
@@ -17,9 +17,9 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         #endregion
 
 		/// <summary>
-		/// Initializes a new instance of <see cref="TextBlockParser"/> class.
+		/// Initializes a new instance of <see cref="FormattedTextBlockParser"/> class.
 		/// </summary>
-		public TextBlockParser()
+		public FormattedTextBlockParser()
 		{
 		}
 
@@ -34,11 +34,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile
 		/// <param name="text">The text to be parsed.</param>
 		public override void Parse(IAuthoringEngine authoringEngine, DomElement parentElement, String text)
 		{
-            Parse(parentElement, text);
+            InternalParse(authoringEngine, parentElement, text);
 		}
 		#endregion
 
-        private static void Parse(DomElement parentElement, String text)
+        private void InternalParse(IAuthoringEngine authoringEngine, DomElement parentElement, String text)
         {
             Match match = TextBlockRegex.Match(text);
             if(match.Success)
@@ -48,30 +48,39 @@ namespace octalforty.Brushie.Text.Authoring.Textile
                 {
                     //
                     // What we have here is the text without any formatting.
-                    TextBlock prefixTextBlock = new TextBlock(parentElement,
+                    if(startIndex < match.Index)
+                    {
+                        ParseWithNextElementParser(authoringEngine, parentElement,
+                            text.Substring(startIndex, match.Index - startIndex));
+                    }
+                    /*TextBlock prefixTextBlock = new TextBlock(parentElement,
                         InlineElementAttributes.Empty, startIndex < match.Index ?
                             text.Substring(startIndex, match.Index - startIndex) : string.Empty,
                         TextBlockFormatting.Unknown);
-                    parentElement.AppendChild(prefixTextBlock);
+                    parentElement.AppendChild(prefixTextBlock);*/
 
                     //
                     // Parsing match
                     TextBlock textBlock = new TextBlock(parentElement, CreateInlineElementAttributes(match),
                         string.Empty, GetTextBlockFormatting(match.Groups["Tag"].Value));
                     parentElement.AppendChild(textBlock);
-                    Parse(textBlock, match.Groups["Text"].Value);
+                    InternalParse(authoringEngine, textBlock, match.Groups["Text"].Value);
 
                     startIndex = match.Index + match.Length;
                     match = TextBlockRegex.Match(text, startIndex);
                 } // while
-
+                
+                ParseWithNextElementParser(authoringEngine, parentElement,
+                    text.Substring(startIndex));
+                /*
                 parentElement.AppendChild(new TextBlock(parentElement, InlineElementAttributes.Empty,
-                    text.Substring(startIndex), TextBlockFormatting.Unknown));
+                    text.Substring(startIndex), TextBlockFormatting.Unknown));*/
             } // if
             else
             {
-                parentElement.AppendChild(new TextBlock(parentElement, InlineElementAttributes.Empty, 
-                    text, TextBlockFormatting.Unknown));
+                ParseWithNextElementParser(authoringEngine, parentElement, text);
+                /*parentElement.AppendChild(new TextBlock(parentElement, InlineElementAttributes.Empty, 
+                    text, TextBlockFormatting.Unknown));*/
             } // else
         }
 

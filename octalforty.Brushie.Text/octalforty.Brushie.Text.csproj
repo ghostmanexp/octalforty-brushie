@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Authoring\Textile\FootnoteParser.cs" />
     <Compile Include="Authoring\Textile\FootnoteReferenceParser.cs" />
+    <Compile Include="Authoring\Textile\FormattedTextBlockParser.cs" />
     <Compile Include="Authoring\Textile\HeadingParser.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -100,10 +101,10 @@
     <Compile Include="Authoring\Textile\NoTextileParser.cs" />
     <Compile Include="Authoring\Textile\ParagraphParser.cs" />
     <Compile Include="Authoring\Textile\TableParser.cs" />
-    <Compile Include="Authoring\Textile\TextBlockParser.cs" />
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Authoring\Textile\UnformattedTextBlockParser.cs" />
     <Compile Include="LuceneNet\DocumentAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapterReadOnlyCollection.cs" />
