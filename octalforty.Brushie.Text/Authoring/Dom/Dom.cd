@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Acronym">
+    <Position X="25.25" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Acronym.cs</FileName>
+      <HashCode>AIAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Blockquote">
+    <Position X="4.25" Y="7" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Blockquote.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.BlockElement">
+    <Position X="13.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\BlockElement.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.BlockElementAttributes">
+    <Position X="0.5" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\BlockElementAttributes.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAACIAAAAiAAAAAAAAgAAAAIAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.DomDocument">
+    <Position X="2" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\DomDocument.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.UnorderedList">
+    <Position X="12.25" Y="9" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\UnorderedList.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.DomElement">
+    <Position X="18" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\DomElement.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAABAAAAAQAAAAAQAAAAEAAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.DomElementCollection" Collapsed="true">
+    <Position X="36.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\DomElementCollection.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Footnote">
+    <Position X="20.25" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Footnote.cs</FileName>
+      <HashCode>AIAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.FootnoteReference">
+    <Position X="27.75" Y="7.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\FootnoteReference.cs</FileName>
+      <HashCode>AIAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Heading">
+    <Position X="9.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Heading.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAJAAAACAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Hyperlink">
+    <Position X="31" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Hyperlink.cs</FileName>
+      <HashCode>AIAAAAAAQAAAAEAAAAAAAAAAAAAIAAAACAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Image">
+    <Position X="22.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Image.cs</FileName>
+      <HashCode>AIAAAABAAAAAAAAAAAAAAABAAAAIAAAACAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.InlineElement">
+    <Position X="29.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\InlineElement.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAgAAEAIAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.InlineElementAttributes">
+    <Position X="0.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\InlineElementAttributes.cs</FileName>
+      <HashCode>AAAAAAAACAAAgAgAAAIAAAAAAAAEAAAADAAAAAgAAgA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.List">
+    <Position X="14" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\List.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.ListItem">
+    <Position X="17.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\ListItem.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.OrderedList">
+    <Position X="15" Y="9" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\OrderedList.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.Paragraph">
+    <Position X="7" Y="7" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\Paragraph.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octalforty.Brushie.Text.Authoring.Dom.TextBlock">
+    <Position X="33.75" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\TextBlock.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+  </Class>
+  <Interface Name="octalforty.Brushie.Text.Authoring.Dom.IDomElementVisitor" Collapsed="true">
+    <Position X="36.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\IDomElementVisitor.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="octalforty.Brushie.Text.Authoring.Dom.BlockElementAlignment" Collapsed="true">
+    <Position X="36.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\BlockElementAlignment.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAACACAAAAIABA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="octalforty.Brushie.Text.Authoring.Dom.TableCellAlignment" Collapsed="true">
+    <Position X="38.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\TableCellAlignment.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAQAAAAABA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="octalforty.Brushie.Text.Authoring.Dom.TextBlockFormatting" Collapsed="true">
+    <Position X="36.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Authoring\Dom\TextBlockFormatting.cs</FileName>
+      <HashCode>AAAAKAAAAAAIBCAAAAggEAAAAAAAAAAgAAAAAAIQABA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

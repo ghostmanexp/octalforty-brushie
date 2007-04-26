@@ -83,8 +83,8 @@ namespace octalforty.Brushie.Text.Authoring
         public void Visit(Hyperlink hyperlink)
         {
             htmlBuilder.AppendFormat("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>",
-                 GetPartialPhraseStartTag("a", hyperlink.Attributes), hyperlink.Title.Trim(),
-                 hyperlink.Url.Trim(), hyperlink.InnerText.Trim(), "a");
+                GetPartialPhraseStartTag("a", hyperlink.Attributes), hyperlink.Title.Trim(),
+                hyperlink.Url.Trim(), hyperlink.InnerText.Trim(), "a");
         }
 
         /// <summary>
@@ -104,47 +104,63 @@ namespace octalforty.Brushie.Text.Authoring
         public void Visit(TextBlock textBlock)
         {
             //
-            // Determine tag
-            String tag;
-            switch(textBlock.Formatting)
+            // If textBlock.Formatting equals unknown, we don't even render span
+            // tags.
+            if(textBlock.Formatting == TextBlockFormatting.Unknown)
             {
-                case TextBlockFormatting.StrongEmphasis:
-                    tag = "strong";
-                    break;
-                case TextBlockFormatting.Bold:
-                    tag = "b";
-                    break;
-                case TextBlockFormatting.Emphasis:
-                    tag = "em";
-                    break;
-                case TextBlockFormatting.Italics:
-                    tag = "i";
-                    break;
-                case TextBlockFormatting.Citation:
-                    tag = "cite";
-                    break;
-                case TextBlockFormatting.Deleted:
-                    tag = "del";
-                    break;
-                case TextBlockFormatting.Inserted:
-                    tag = "ins";
-                    break;
-                case TextBlockFormatting.Superscript:
-                    tag = "sup";
-                    break;
-                case TextBlockFormatting.Subscript:
-                    tag = "sub";
-                    break;
-                case TextBlockFormatting.Code:
-                    tag = "code";
-                    break;
-                default:
-                    tag = "span";
-                    break;
-            } // switch
+                htmlBuilder.Append(textBlock.InnerText);
+                VisitChildElements(textBlock);
+            } // if
 
-            htmlBuilder.AppendFormat("{0}>{1}</{2}>", GetPartialPhraseStartTag(tag, textBlock.Attributes),
-                textBlock.InnerText, tag);
+            else
+            {
+                //
+                // Determine tag
+                String tag = string.Empty;
+                switch(textBlock.Formatting)
+                {
+                    case TextBlockFormatting.StrongEmphasis:
+                        tag = "strong";
+                        break;
+                    case TextBlockFormatting.Bold:
+                        tag = "b";
+                        break;
+                    case TextBlockFormatting.Emphasis:
+                        tag = "em";
+                        break;
+                    case TextBlockFormatting.Italics:
+                        tag = "i";
+                        break;
+                    case TextBlockFormatting.Citation:
+                        tag = "cite";
+                        break;
+                    case TextBlockFormatting.Deleted:
+                        tag = "del";
+                        break;
+                    case TextBlockFormatting.Inserted:
+                        tag = "ins";
+                        break;
+                    case TextBlockFormatting.Superscript:
+                        tag = "sup";
+                        break;
+                    case TextBlockFormatting.Subscript:
+                        tag = "sub";
+                        break;
+                    case TextBlockFormatting.Code:
+                        tag = "code";
+                        break;
+                    case TextBlockFormatting.Span:
+                        tag = "span";
+                        break;
+                    case TextBlockFormatting.Unknown:
+                        throw new ArgumentOutOfRangeException("textBlock.Formatting");
+                } // switch
+
+                htmlBuilder.AppendFormat("{0}>{1}", GetPartialPhraseStartTag(tag, textBlock.Attributes),
+                    textBlock.InnerText);
+                VisitChildElements(textBlock);
+                htmlBuilder.AppendFormat("</{0}>", tag);
+            } // else
         }
 
         /// <summary>
@@ -270,19 +286,19 @@ namespace octalforty.Brushie.Text.Authoring
                 if(attributes.Alignment != BlockElementAlignment.Unknown)
                 {
                     style += String.Format("text-align: {0};",
-                                           attributes.Alignment.ToString().ToLower());
+                        attributes.Alignment.ToString().ToLower());
                 } // if
 
                 if(attributes.LeftIndent != 0)
                 {
                     style += String.Format("padding-left: {0}em;",
-                                           attributes.LeftIndent);
+                        attributes.LeftIndent);
                 } // if
 
                 if(attributes.RightIndent != 0)
                 {
                     style += String.Format("padding-right: {0}em;",
-                                           attributes.RightIndent);
+                        attributes.RightIndent);
                 } // if
 
                 tagBuilder.AppendFormat(" style=\"{0}\"", style);
