@@ -180,7 +180,7 @@ namespace octalforty.Brushie.Text.Authoring
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("p", footnote.Attributes));
             
-            htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>",
+            htmlBuilder.AppendFormat("<sup>[<a name=\"#{0}\">{1}</a>]</sup>",
                 GetFoonoteAnchorName(footnote.Number), footnote.Number);
             VisitChildElements(footnote);
 
