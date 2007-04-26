@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 using octalforty.Brushie.Text.Authoring.Dom;
@@ -28,6 +29,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// </summary>
         public virtual IElementParser NextElementParser
         {
+            [DebuggerStepThrough()]
             get { return nextElementParser; }
             set { nextElementParser = value; }
         }
