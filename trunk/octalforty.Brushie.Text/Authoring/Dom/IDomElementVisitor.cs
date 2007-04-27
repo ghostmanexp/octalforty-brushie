@@ -85,5 +85,23 @@ namespace octalforty.Brushie.Text.Authoring.Dom
         /// </summary>
         /// <param name="acronym"></param>
         void Visit(Acronym acronym);
+
+        /// <summary>
+        /// Visits the <paramref name="table"/> element.
+        /// </summary>
+        /// <param name="table"></param>
+        void Visit(Table table);
+
+        /// <summary>
+        /// Visits the <paramref name="tableRow"/> element.
+        /// </summary>
+        /// <param name="tableRow"></param>
+        void Visit(TableRow tableRow);
+
+        /// <summary>
+        /// Visits the <paramref name="tableCell"/> element.
+        /// </summary>
+        /// <param name="tableCell"></param>
+        void Visit(TableCell tableCell);
     }
 }

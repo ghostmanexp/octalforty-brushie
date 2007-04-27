@@ -62,7 +62,11 @@
     <Compile Include="Authoring\Dom\ListItem.cs" />
     <Compile Include="Authoring\Dom\OrderedList.cs" />
     <Compile Include="Authoring\Dom\Paragraph.cs" />
+    <Compile Include="Authoring\Dom\Table.cs" />
+    <Compile Include="Authoring\Dom\TableCell.cs" />
     <Compile Include="Authoring\Dom\TableCellAlignment.cs" />
+    <Compile Include="Authoring\Dom\TableHeaderCell.cs" />
+    <Compile Include="Authoring\Dom\TableRow.cs" />
     <Compile Include="Authoring\Dom\TextBlock.cs" />
     <Compile Include="Authoring\Dom\TextBlockFormatting.cs" />
     <Compile Include="Authoring\Dom\UnorderedList.cs" />

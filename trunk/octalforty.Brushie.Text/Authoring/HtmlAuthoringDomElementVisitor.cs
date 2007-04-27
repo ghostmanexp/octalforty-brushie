@@ -173,6 +173,33 @@ namespace octalforty.Brushie.Text.Authoring
         }
 
         /// <summary>
+        /// Visits the <paramref name="table"/> element.
+        /// </summary>
+        /// <param name="table"></param>
+        public void Visit(Table table)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="tableRow"/> element.
+        /// </summary>
+        /// <param name="tableRow"></param>
+        public void Visit(TableRow tableRow)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Visits the <paramref name="tableCell"/> element.
+        /// </summary>
+        /// <param name="tableCell"></param>
+        public void Visit(TableCell tableCell)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Visits the <paramref name="footnote"/> element.
         /// </summary>
         /// <param name="footnote"></param>

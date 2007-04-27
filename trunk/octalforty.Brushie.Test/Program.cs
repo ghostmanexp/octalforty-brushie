@@ -36,10 +36,10 @@ namespace octalforty.Brushie.Test
                                       "** Sub point 2\r\n\r\n\r\n" +
                                       "Well, that went well[1]. How about we insert an <a href=\"/\" title=\"watch out\">old-fashioned hypertext link</a>? Will the quote marks in the tags get messed up? No!" +
                                       "\"This is a link (optional title)\":http://www.textism.com\r\n\r\n" +
-            /*"table{border:1px solid black}.\r\n" +
+            "table{border:1px solid black}.\r\n" +
             "|_. this|_. is|_. a|_. header|\r\n" +
             "<{background:gray}. |\\2. this is|{background:red;width:200px}. a|^<>{height:200px}. row|\r\n" +
-            "|this|<>{padding:10px}. is|^. another|(bob#bob). row|\r\n\r\n" +*/
+            "|this|<>{padding:10px}. is|^. another|(bob#bob). row|\r\n\r\n" +
                                       "An image:\r\n\r\n" +
                                       "!http://www.google.com/intl/en_ALL/images/logo.gif(Google)!\r\n\r\n" +
                                       "# Librarians rule\r\n" +
