@@ -1,5 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
+using octalforty.Brushie.Text.Authoring;
+using octalforty.Brushie.Text.Authoring.Dom;
+
 namespace octalforty.Brushie.Text.Authoring.Textile
 {
     /// <summary>
@@ -8,13 +11,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     public sealed class TableParser : BlockElementParserBase
     {
         #region Private Constants
-        private static readonly Regex ExplicitTableRegex = new Regex(
-            @"(?<Expression>^(table(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?.\r\n))",
-                RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
-                RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
-
         private static readonly Regex TableRegex = new Regex(
-            @"(?<Expression>^((\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\].\s)?\|(.+?\|\r\n)+))",
+            @"(?<Expression>^(table(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?.\r\n^((\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\].\s)?\|(.+?\|\r\n)+)))",
                 RegexOptions.Multiline | RegexOptions.Compiled);
         #endregion
 
@@ -24,5 +22,29 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         public TableParser()
         {
         }
+
+        #region ElementParserBase Members
+        /// <summary>
+        /// Returns a reference to the <see cref="System.Text.RegularExpressions.Regex"/>
+        /// used in <see cref="ElementParserBase.Parse"/>.
+        /// </summary>
+        protected override Regex Regex
+        {
+            get { return TableRegex; }
+        }
+
+        /// <summary>
+        /// Template method which is invoked from <see cref="ElementParserBase.Parse"/> when
+        /// a match is encountered.
+        /// </summary>
+        /// <param name="authoringEngine"></param>
+        /// <param name="parentElement"></param>
+        /// <param name="match"></param>
+        protected override void ProcessMatch(IAuthoringEngine authoringEngine, DomElement parentElement, Match match)
+        {
+            //
+            // Processing the table.
+        }
+        #endregion
     }
 }
