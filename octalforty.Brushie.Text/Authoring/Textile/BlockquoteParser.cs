@@ -15,7 +15,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         #region Private Constants
         private static readonly Regex BlockquoteRegex =
             new Regex(
-                @"(?<Expression>^bq(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
+                @"(?<Expression>^bq" + BlockElementAttributesRegex + @"\.\s(?<Text>.*))\r\n\r\n",
                 RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion

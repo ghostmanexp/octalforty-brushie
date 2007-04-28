@@ -18,7 +18,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     {
         #region Private Constants
         private static readonly Regex HyperlinkRegex = new Regex(
-            "(?<!\\\\)(?<Expression>\"(\\(((\\#(?<ID>.+?))|((?<CssClass>.+?)\\#(?<ID>.+?))|(?<CssClass>.+?))\\))?(\\{(?<Style>.+?)\\})?(\\[(?<Language>.+?)\\])?(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S+))",
+            "(?<!\\\\)(?<Expression>\"" + InlineElementAttributesRegex + "(?<Text>[^\"(]*)(\\((?<Title>.+?)\\))?\":(?<Url>\\S+))",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion

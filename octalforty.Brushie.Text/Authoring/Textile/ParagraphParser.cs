@@ -16,7 +16,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
 
         private static readonly Regex ParagraphRegex = new Regex(
-            @"(?<Expression>^p(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n",
+            @"(?<Expression>^p" + BlockElementAttributesRegex + @"\.\s(?<Text>(.(\r\n)?)*))\r\n\r\n",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
             RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion

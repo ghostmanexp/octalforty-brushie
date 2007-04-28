@@ -16,7 +16,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         #region Private Constants
         private static readonly Regex HeadingRegex =
             new Regex(
-                @"(?<Expression>^h(?<Level>[1-6])(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Alignment>(=)|(\<\>)|(\<)|(\>))?(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))?\.\s(?<Text>.*))\r\n\r\n",
+                @"(?<Expression>^h(?<Level>[1-6])" + BlockElementAttributesRegex + @"\.\s(?<Text>.*))\r\n\r\n",
                 RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
