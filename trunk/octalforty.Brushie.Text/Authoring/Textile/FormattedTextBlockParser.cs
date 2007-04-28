@@ -12,7 +12,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     {
         #region Private Constants
         private static readonly Regex TextBlockRegex = new Regex(
-            @"(?<!\\)(?<Tag>(\*\*|__|\*|_|\?\?|-|\+|\^|~|\%))(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?(?<Text>.+?)(?<!\\)\k<Tag>",
+            @"(?<!\\)(?<Tag>(\*\*|__|\*|_|\?\?|-|\+|\^|~|\%))" +InlineElementAttributesRegex + @"(?<Text>.+?)(?<!\\)\k<Tag>",
             RegexOptions.Compiled);
         #endregion
 

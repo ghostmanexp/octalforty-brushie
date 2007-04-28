@@ -12,7 +12,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         #region Private Constants
         private static readonly Regex ListRegex =
             new Regex(
-                @"(?<Expression>^((?<Qualifier>[*#]+)(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?\s(?<Title>.*)\r\n)+)",
+                @"(?<Expression>^((?<Qualifier>[*#]+)" + BlockElementAttributesRegex + @"\s(?<Title>.*)\r\n)+)",
                 RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant |
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
         #endregion
