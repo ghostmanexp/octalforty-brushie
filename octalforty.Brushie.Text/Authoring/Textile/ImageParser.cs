@@ -10,7 +10,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// !image uri(alternate text)!
     /// </code>
     /// </summary>
-    public sealed class ImageParser : BlockElementParserBase
+    public sealed class ImageParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex ImageRegex =

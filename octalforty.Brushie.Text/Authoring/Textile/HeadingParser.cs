@@ -11,7 +11,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// h1. Heading 1
     /// </code>
     /// </summary>
-    public sealed class HeadingParser : BlockElementParserBase
+    public sealed class HeadingParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex HeadingRegex =

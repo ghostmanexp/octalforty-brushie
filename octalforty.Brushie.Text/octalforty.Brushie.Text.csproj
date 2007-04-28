@@ -79,6 +79,7 @@
     <Compile Include="Authoring\InlineElementParserBase.cs" />
     <Compile Include="Authoring\Internal\NullBlockElementParser.cs" />
     <Compile Include="Authoring\Internal\NullInlineElementParser.cs" />
+    <Compile Include="Authoring\RegexBasedElementParserBase.cs" />
     <Compile Include="Authoring\Textile\AcronymParser.cs" />
     <Compile Include="Authoring\Textile\BlockElementFallbackParser.cs" />
     <Compile Include="Authoring\Textile\BlockquoteParser.cs">
@@ -108,6 +109,9 @@
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Authoring\Textile\TextileRegexBasedBlockElementParserBase.cs" />
+    <Compile Include="Authoring\Textile\TextileRegexBasedElementParserBase.cs" />
+    <Compile Include="Authoring\Textile\TextileRegexBasedInlineElementParserBase.cs" />
     <Compile Include="Authoring\Textile\UnformattedTextBlockParser.cs" />
     <Compile Include="LuceneNet\DocumentAdapter.cs" />
     <Compile Include="LuceneNet\FieldAdapter.cs" />

@@ -1,6 +1,10 @@
 using System;
+using System.Diagnostics;
+using System.Text;
 
 using octalforty.Brushie.Diff;
+using octalforty.Brushie.Text.Authoring;
+using octalforty.Brushie.Text.Authoring.Dom;
 using octalforty.Brushie.Text.Authoring.Textile;
 
 namespace octalforty.Brushie.Test
@@ -65,7 +69,7 @@ namespace octalforty.Brushie.Test
 
         static void Main()
         {
-            string w = "p{font-family:Tahoma}. После того, как вам был открыт (C) *доступ*, войти в _систему_ можно войти следующим образом. В верхней части \"главной страницы\":http://www.bronni.ru в области под названием \"Вход для клиентов\" находятся два текстовых поля, куда необходимо ввести логин и пароль. После этого нажмите на ссылку \"Войти\".\r\n\r\n" +
+            /*string w = "p{font-family:Tahoma}. После того, как вам был открыт (C) *доступ*, войти в _систему_ можно войти следующим образом. В верхней части \"главной страницы\":http://www.bronni.ru в области под названием \"Вход для клиентов\" находятся два текстовых поля, куда необходимо ввести логин и пароль. После этого нажмите на ссылку \"Войти\".\r\n\r\n" +
                 "Если все прошло удачно \\-\\- то %{background:#FFEA77}название ??области?? *должно (C) ^поменяться^ на* \"Вход выполнен\"%. Если такого не происходит, то обратите внимание на область, расположенную немного левее \\- там выводятся системные сообщения. Если вам сообщается о том, что вы ввели неверный логин или пароль, то вы можете воспользваться формой \"напоминания пароля(Напоминания пароля)\":http://www.bronni.ru/default.aspx?page=passwordreminderpage.ascx. Если же вам сообщается, что \"Пользователь с таким именем уже работает с базой данных\", то поставьте галочку на пункте \"Войти принудительно\", еще раз введите пароль и нажмите \"Войти\".\r\n\r\n" +
                 "Ну и если ничего не помогает, то \"свяжитесь с нами\":http://www.bronni.ru/default.aspx?page=contactspage.ascx\r\n\r\n" +
                 "После того, как вам был открыт (C) *доступ*, войти в _систему_ можно войти следующим образом. В верхней части \"главной страницы\":http://www.bronni.ru в области под названием \"Вход для клиентов\" находятся два текстовых поля, куда необходимо ввести логин и пароль. После этого нажмите на ссылку \"Войти\".\r\n\r\n" +
@@ -79,9 +83,9 @@ namespace octalforty.Brushie.Test
                 "Ну и если ничего не помогает, то \"свяжитесь с нами\":http://www.bronni.ru/default.aspx?page=contactspage.ascx\r\n\r\n";
 
             TextileAuthoringEngine textileAuthoringEngine = new TextileAuthoringEngine();
-            string h = textileAuthoringEngine.Author(w);
+            string h = textileAuthoringEngine.Author(w);*/
 
-            /*StringBuilder wiki = new StringBuilder();
+            StringBuilder wiki = new StringBuilder();
             for(int i = 0; i < 1; ++i)
                 wiki.Append(WikiMarkup);
 
@@ -94,7 +98,7 @@ namespace octalforty.Brushie.Test
                 stopwatch.ElapsedMilliseconds / 1000.0);
 
             HtmlAuthoringDomElementVisitor htmlAuthoringDomElementVisitor = new HtmlAuthoringDomElementVisitor();
-            document.Accept(htmlAuthoringDomElementVisitor);*/
+            document.Accept(htmlAuthoringDomElementVisitor);
         }
 
         private static Range<int> GetRange(PatchOperation difference, WordDataProvider dataProvider)

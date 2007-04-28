@@ -8,7 +8,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing Textile tables.
     /// </summary>
-    public sealed class TableParser : BlockElementParserBase
+    public sealed class TableParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex TableRegex = new Regex(

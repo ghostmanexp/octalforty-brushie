@@ -11,7 +11,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// This[1] is a footnote reference, whereas [2] this and\[3] and[this] are not.
     /// </code>
     /// </summary>
-    public sealed class FootnoteReferenceParser : InlineElementParserBase
+    public sealed class FootnoteReferenceParser : TextileRegexBasedInlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex FootnoteReferenceRegex = new Regex(

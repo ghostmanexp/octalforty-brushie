@@ -10,7 +10,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// bq. Blockquote...
     /// </code>
     /// </summary>
-    public sealed class BlockquoteParser : BlockElementParserBase
+    public sealed class BlockquoteParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex BlockquoteRegex =

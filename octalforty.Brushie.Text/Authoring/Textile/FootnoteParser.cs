@@ -11,7 +11,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// fn132. Footnote text here
     /// </code>
     /// </summary>
-    public sealed class FootnoteParser : BlockElementParserBase
+    public sealed class FootnoteParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex FootnoteRegex = new Regex(

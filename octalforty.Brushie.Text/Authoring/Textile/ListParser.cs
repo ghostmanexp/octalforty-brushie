@@ -7,7 +7,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing lists.
     /// </summary>
-    public sealed class ListParser : BlockElementParserBase
+    public sealed class ListParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex ListRegex =
