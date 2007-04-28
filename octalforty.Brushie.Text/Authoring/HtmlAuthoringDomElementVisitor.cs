@@ -169,7 +169,8 @@ namespace octalforty.Brushie.Text.Authoring
         /// <param name="acronym"></param>
         public void Visit(Acronym acronym)
         {
-            throw new NotImplementedException();
+            htmlBuilder.AppendFormat("<acronym title=\"{0}\">{1}</acronym>", 
+                acronym.InnerText, acronym.Title);
         }
 
         /// <summary>
@@ -178,7 +179,9 @@ namespace octalforty.Brushie.Text.Authoring
         /// <param name="table"></param>
         public void Visit(Table table)
         {
-            throw new NotImplementedException();
+            htmlBuilder.AppendFormat("{0}>", GetPartialPhraseStartTag("table", table.Attributes));
+            VisitChildElements(table);
+            htmlBuilder.Append("</table>");
         }
 
         /// <summary>
@@ -187,7 +190,9 @@ namespace octalforty.Brushie.Text.Authoring
         /// <param name="tableRow"></param>
         public void Visit(TableRow tableRow)
         {
-            throw new NotImplementedException();
+            htmlBuilder.AppendFormat("{0}>", GetPartialPhraseStartTag("tr", tableRow.Attributes));
+            VisitChildElements(tableRow);
+            htmlBuilder.Append("</tr>");
         }
 
         /// <summary>
@@ -196,7 +201,9 @@ namespace octalforty.Brushie.Text.Authoring
         /// <param name="tableCell"></param>
         public void Visit(TableCell tableCell)
         {
-            throw new NotImplementedException();
+            htmlBuilder.AppendFormat("{0}>", GetPartialPhraseStartTag("td", tableCell.Attributes));
+            VisitChildElements(tableCell);
+            htmlBuilder.Append("</td>");
         }
 
         /// <summary>

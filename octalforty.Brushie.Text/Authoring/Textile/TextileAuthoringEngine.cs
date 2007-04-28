@@ -268,6 +268,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
             AddBlockElementParser(new NoTextileParser());
             AddBlockElementParser(new ParagraphParser());
             AddBlockElementParser(new BlockquoteParser());
+            //AddBlockElementParser(new TableParser());
             AddBlockElementParser(new HeadingParser());
             AddBlockElementParser(new ImageParser());
             AddBlockElementParser(new ListParser());
