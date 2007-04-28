@@ -11,8 +11,11 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     public sealed class TableParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
+        // (?<Expression>^(table(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?.\r\n^((\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\].\s)?\|(.+?\|\r\n)+)))
+        // (?<Expression>^(table(((\(((\#(?<ID>[^()]+?))|((?<CssClass>[^()]+?)\#(?<ID>[^()]+?))|(?<CssClass>[^()]+?))\))|(?<Indentation>((?<LeftIndent>\(*)(?<RightIndent>\)*)))|(\{(?<Style>.+?)\})|(\[(?<Language>.+?)\])|(?<Alignment>(=)|(\<\>)|(\<)|(\>)))*)?\.\r\n^((((\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))|(\{(?<Style>.+?)\})|(\[(?<Language>.+?)\]))*)\|(.+?\|\r\n)+)))
         private static readonly Regex TableRegex = new Regex(
-            @"(?<Expression>^(table(\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\])?.\r\n^((\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))?(\{(?<Style>.+?)\})?(\[(?<Language>.+?)\].\s)?\|(.+?\|\r\n)+)))",
+            @"(?<Expression>^(table(" + BlockElementAttributesRegex + 
+            @")?\.\r\n^((((\(((\#(?<ID>.+?))|((?<CssClass>.+?)\#(?<ID>.+?))|(?<CssClass>.+?))\))|(\{(?<Style>.+?)\})|(\[(?<Language>.+?)\]))*)\|(.+?\|\r\n)+)))",
                 RegexOptions.Multiline | RegexOptions.Compiled);
         #endregion
 
@@ -44,6 +47,8 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         {
             //
             // Processing the table.
+            Table table = new Table(parentElement, CreateBlockElementAttributes(match));
+            parentElement.AppendChild(table);
         }
         #endregion
     }
