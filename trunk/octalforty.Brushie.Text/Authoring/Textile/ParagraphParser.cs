@@ -7,7 +7,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing Textile paragraphs.
     /// </summary>
-    public sealed class ParagraphParser : BlockElementParserBase
+    public sealed class ParagraphParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex ImplicitParagraphRegex = new Regex(

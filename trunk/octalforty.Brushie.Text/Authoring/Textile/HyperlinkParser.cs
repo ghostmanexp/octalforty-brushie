@@ -14,7 +14,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// The <c>uri</c> part of the hyperlink (as of current implementation) is parsed as as at least one
     /// non-whitespace character.
     /// </remarks>
-    public sealed class HyperlinkParser : InlineElementParserBase
+    public sealed class HyperlinkParser : TextileRegexBasedInlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex HyperlinkRegex = new Regex(

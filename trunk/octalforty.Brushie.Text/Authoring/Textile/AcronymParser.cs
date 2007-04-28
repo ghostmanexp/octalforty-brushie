@@ -11,7 +11,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// </code>
     /// <seealso cref="Acronym"/>
     /// </summary>
-    public sealed class AcronymParser : InlineElementParserBase
+    public sealed class AcronymParser : TextileRegexBasedInlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex AcronymRegex = new Regex(

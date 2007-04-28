@@ -10,7 +10,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// ==This text== is left intact
     /// </code>
     /// </summary>
-    public sealed class NoTextileParser : BlockElementParserBase
+    public sealed class NoTextileParser : TextileRegexBasedBlockElementParserBase
     {
         #region Private Constants
         private static readonly Regex NoTextileRegex = new Regex(

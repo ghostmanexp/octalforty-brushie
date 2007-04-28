@@ -8,7 +8,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
     /// <summary>
     /// Provides functionality for parsing formatted text blocks.
     /// </summary>
-    public sealed class FormattedTextBlockParser : InlineElementParserBase
+    public sealed class FormattedTextBlockParser : TextileRegexBasedInlineElementParserBase
     {
         #region Private Constants
         private static readonly Regex TextBlockRegex = new Regex(
