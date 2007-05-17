@@ -134,6 +134,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Authoring\RegexBasedElementParserBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Authoring\Dom\Acronym.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -234,7 +239,27 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Authoring\Dom\Table.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Dom\TableCell.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Authoring\Dom\TableCellAlignment.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Dom\TableHeaderCell.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Dom\TableRow.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -289,6 +314,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Authoring\Textile\FormattedTextBlockParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Authoring\Textile\HeadingParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -324,11 +354,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Authoring\Textile\TextBlockParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "Authoring\Textile\Textile.cd"
                     BuildAction = "Content"
                 />
@@ -338,6 +363,26 @@
                 />
                 <File
                     RelPath = "Authoring\Textile\TextileAuthoringEngine.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Textile\TextileRegexBasedBlockElementParserBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Textile\TextileRegexBasedElementParserBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Textile\TextileRegexBasedInlineElementParserBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\Textile\UnformattedTextBlockParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
