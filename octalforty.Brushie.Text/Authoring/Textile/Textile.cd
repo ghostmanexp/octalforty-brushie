@@ -2,7 +2,7 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Font Name="Tahoma" Size="8.25" />
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.AcronymParser">
-    <Position X="28.5" Y="10.25" Width="2.5" />
+    <Position X="28.5" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\AcronymParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABAAQAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -29,7 +29,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.BlockquoteParser">
-    <Position X="12.25" Y="10.25" Width="2.5" />
+    <Position X="12.25" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\BlockquoteParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAIACAAAAAAAAAAAAA=</HashCode>
@@ -39,7 +39,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.FootnoteParser">
-    <Position X="22" Y="10.25" Width="2.5" />
+    <Position X="22" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\FootnoteParser.cs</FileName>
       <HashCode>AAAAAAAAABAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -49,7 +49,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.FootnoteReferenceParser">
-    <Position X="31.75" Y="10.25" Width="2.5" />
+    <Position X="31.75" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\FootnoteReferenceParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAABAAAAAAAA=</HashCode>
@@ -59,7 +59,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.FormattedTextBlockParser">
-    <Position X="35" Y="10.25" Width="2.5" />
+    <Position X="35" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\FormattedTextBlockParser.cs</FileName>
       <HashCode>AAAgAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAAAACAAA=</HashCode>
@@ -69,7 +69,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.HeadingParser">
-    <Position X="15.5" Y="10.25" Width="2.5" />
+    <Position X="15.5" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\HeadingParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABAAAAgAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -79,7 +79,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.HyperlinkParser">
-    <Position X="38.25" Y="10.25" Width="2.5" />
+    <Position X="38.25" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\HyperlinkParser.cs</FileName>
       <HashCode>gAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -89,7 +89,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.ImageParser">
-    <Position X="2.5" Y="10.25" Width="2.5" />
+    <Position X="2.5" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\ImageParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABQAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -99,7 +99,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.ListParser">
-    <Position X="9" Y="10.25" Width="2.5" />
+    <Position X="9" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\ListParser.cs</FileName>
       <HashCode>AAAAAAAAAAACBAAAAAAAAACAAAAIAAAABAAAAAAAAAA=</HashCode>
@@ -109,7 +109,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.NoTextileParser">
-    <Position X="18.75" Y="10.25" Width="2.5" />
+    <Position X="18.75" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\NoTextileParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABAAAAAAAgAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -119,7 +119,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.ParagraphParser">
-    <Position X="25.25" Y="10.25" Width="2.5" />
+    <Position X="25.25" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\ParagraphParser.cs</FileName>
       <HashCode>AAAgIAAAABAABAABAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
@@ -129,7 +129,7 @@
     </Compartments>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.TableParser">
-    <Position X="5.75" Y="10.25" Width="2.5" />
+    <Position X="5.75" Y="10.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\TableParser.cs</FileName>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAEA=</HashCode>
@@ -194,11 +194,11 @@
     <Position X="20.25" Y="6" Width="2.75" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\TextileRegexBasedElementParserBase.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACCAAAQAAAAAAAAQAAAAABAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.TextileRegexBasedBlockElementParserBase">
-    <Position X="13.75" Y="8.25" Width="3" />
+    <Position X="13.75" Y="8.75" Width="3" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\TextileRegexBasedBlockElementParserBase.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -206,7 +206,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="octalforty.Brushie.Text.Authoring.Textile.TextileRegexBasedInlineElementParserBase">
-    <Position X="33.25" Y="8.25" Width="3" />
+    <Position X="33.25" Y="8.75" Width="3" />
     <TypeIdentifier>
       <FileName>Authoring\Textile\TextileRegexBasedInlineElementParserBase.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
