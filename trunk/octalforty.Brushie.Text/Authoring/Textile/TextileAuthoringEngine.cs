@@ -263,24 +263,6 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// </summary>
         public TextileAuthoringEngine()
         {
-            //
-            // Adding basic Textile parsers.
-            AddBlockElementParser(new NoTextileParser());
-            AddBlockElementParser(new ParagraphParser());
-            AddBlockElementParser(new BlockquoteParser());
-            //AddBlockElementParser(new TableParser());
-            AddBlockElementParser(new HeadingParser());
-            AddBlockElementParser(new ImageParser());
-            AddBlockElementParser(new ListParser());
-            AddBlockElementParser(new FootnoteParser());
-
-            AddBlockElementParser(new BlockElementFallbackParser());
-
-            AddInlineElementParser(new AcronymParser());
-            AddInlineElementParser(new HyperlinkParser());
-            AddInlineElementParser(new FootnoteReferenceParser());
-            AddInlineElementParser(new FormattedTextBlockParser());
-            AddInlineElementParser(new UnformattedTextBlockParser());
         }
 
         /// <summary>

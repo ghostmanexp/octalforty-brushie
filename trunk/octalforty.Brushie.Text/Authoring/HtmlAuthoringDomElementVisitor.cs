@@ -37,7 +37,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="document"/> element.
         /// </summary>
         /// <param name="document"></param>
-        public void Visit(DomDocument document)
+        public virtual void Visit(DomDocument document)
         {
             VisitChildElements(document);
         }
@@ -46,7 +46,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="heading"/> element.
         /// </summary>
         /// <param name="heading"></param>
-        public void Visit(Heading heading)
+        public virtual void Visit(Heading heading)
         {
             String tag = String.Format("h{0}", heading.Level);
             htmlBuilder.AppendFormat("{0}{1}</{2}>", 
@@ -57,7 +57,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="blockquote"/> element.
         /// </summary>
         /// <param name="blockquote"></param>
-        public void Visit(Blockquote blockquote)
+        public virtual void Visit(Blockquote blockquote)
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("blockquote", blockquote.Attributes));
             VisitChildElements(blockquote);
@@ -69,7 +69,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// <seealso cref="Paragraph"/>
         /// </summary>
         /// <param name="paragraph"></param>
-        public void Visit(Paragraph paragraph)
+        public virtual void Visit(Paragraph paragraph)
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("p", paragraph.Attributes));
             VisitChildElements(paragraph);
@@ -80,7 +80,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="hyperlink"/> element.
         /// </summary>
         /// <param name="hyperlink"></param>
-        public void Visit(Hyperlink hyperlink)
+        public virtual void Visit(Hyperlink hyperlink)
         {
             htmlBuilder.AppendFormat("{0} title=\"{1}\" href=\"{2}\">{3}</{4}>",
                 GetPartialPhraseStartTag("a", hyperlink.Attributes), hyperlink.Title.Trim(),
@@ -91,7 +91,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="image"/> elements.
         /// </summary>
         /// <param name="image"></param>
-        public void Visit(Image image)
+        public virtual void Visit(Image image)
         {
             htmlBuilder.AppendFormat("{0} src=\"{1}\" alt=\"{2}\" />", GetPartialPhraseStartTag("img", image.Attributes),
                 image.Url, image.AlternateText);
@@ -101,7 +101,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="textBlock"/> element.
         /// </summary>
         /// <param name="textBlock"></param>
-        public void Visit(TextBlock textBlock)
+        public virtual void Visit(TextBlock textBlock)
         {
             //
             // If textBlock.Formatting equals unknown, we don't even render span
@@ -167,7 +167,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="acronym"/> element.
         /// </summary>
         /// <param name="acronym"></param>
-        public void Visit(Acronym acronym)
+        public virtual void Visit(Acronym acronym)
         {
             htmlBuilder.AppendFormat("<acronym title=\"{0}\">{1}</acronym>", 
                 acronym.InnerText, acronym.Title);
@@ -177,7 +177,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="table"/> element.
         /// </summary>
         /// <param name="table"></param>
-        public void Visit(Table table)
+        public virtual void Visit(Table table)
         {
             htmlBuilder.AppendFormat("{0}>", GetPartialPhraseStartTag("table", table.Attributes));
             VisitChildElements(table);
@@ -188,7 +188,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="tableRow"/> element.
         /// </summary>
         /// <param name="tableRow"></param>
-        public void Visit(TableRow tableRow)
+        public virtual void Visit(TableRow tableRow)
         {
             htmlBuilder.AppendFormat("{0}>", GetPartialPhraseStartTag("tr", tableRow.Attributes));
             VisitChildElements(tableRow);
@@ -199,7 +199,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="tableCell"/> element.
         /// </summary>
         /// <param name="tableCell"></param>
-        public void Visit(TableCell tableCell)
+        public virtual void Visit(TableCell tableCell)
         {
             htmlBuilder.AppendFormat("{0}>", GetPartialPhraseStartTag("td", tableCell.Attributes));
             VisitChildElements(tableCell);
@@ -210,7 +210,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="footnote"/> element.
         /// </summary>
         /// <param name="footnote"></param>
-        public void Visit(Footnote footnote)
+        public virtual void Visit(Footnote footnote)
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("p", footnote.Attributes));
             
@@ -225,7 +225,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="footnoteReference"/> element.
         /// </summary>
         /// <param name="footnoteReference"></param>
-        public void Visit(FootnoteReference footnoteReference)
+        public virtual void Visit(FootnoteReference footnoteReference)
         {
             htmlBuilder.AppendFormat("<sup>[<a href=\"#{0}\">{1}</a>]</sup>", 
                 GetFoonoteAnchorName(footnoteReference.Number), footnoteReference.Number);
@@ -235,7 +235,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="orderedList"/> element.
         /// </summary>
         /// <param name="orderedList"></param>
-        public void Visit(OrderedList orderedList)
+        public virtual void Visit(OrderedList orderedList)
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("ol", orderedList.Attributes));
             VisitChildElements(orderedList);
@@ -246,7 +246,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="unorderedList"/> element.
         /// </summary>
         /// <param name="unorderedList"></param>
-        public void Visit(UnorderedList unorderedList)
+        public virtual void Visit(UnorderedList unorderedList)
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("ul", unorderedList.Attributes));
             VisitChildElements(unorderedList);
@@ -257,7 +257,7 @@ namespace octalforty.Brushie.Text.Authoring
         /// Visits the <paramref name="listItem"/> element.
         /// </summary>
         /// <param name="listItem"></param>
-        public void Visit(ListItem listItem)
+        public virtual void Visit(ListItem listItem)
         {
             htmlBuilder.AppendFormat(GetFullBlockStartTag("li", listItem.Attributes));
             VisitChildElements(listItem);
