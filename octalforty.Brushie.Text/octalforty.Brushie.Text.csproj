@@ -75,6 +75,7 @@
     <Compile Include="Authoring\IAuthoringEngine.cs" />
     <Compile Include="Authoring\IBlockElementParser.cs" />
     <Compile Include="Authoring\IElementParser.cs" />
+    <Compile Include="Authoring\IAuthoringEngineBuilder.cs" />
     <Compile Include="Authoring\IInlineElementParser.cs" />
     <Compile Include="Authoring\InlineElementParserBase.cs" />
     <Compile Include="Authoring\Internal\NullBlockElementParser.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Authoring\Textile\TextileAuthoringEngine.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Authoring\Textile\TextileAuthoringEngineBuilder.cs" />
     <Compile Include="Authoring\Textile\TextileRegexBasedBlockElementParserBase.cs" />
     <Compile Include="Authoring\Textile\TextileRegexBasedElementParserBase.cs" />
     <Compile Include="Authoring\Textile\TextileRegexBasedInlineElementParserBase.cs" />

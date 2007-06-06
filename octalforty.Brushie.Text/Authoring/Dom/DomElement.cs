@@ -3,7 +3,7 @@ using System;
 namespace octalforty.Brushie.Text.Authoring.Dom
 {
     /// <summary>
-    /// Defines a base class for all elements in Textile DOM.
+    /// Defines a base class for all elements in DOM.
     /// </summary>
     public abstract class DomElement
     {
