@@ -32,6 +32,14 @@ namespace octalforty.Brushie.Text.Authoring
         {
         }
 
+        /// <summary>
+        /// Resets the <see cref="HtmlAuthoringDomElementVisitor"/>.
+        /// </summary>
+        public void Reset()
+        {
+            htmlBuilder = new StringBuilder();
+        }
+
         #region IDomElementVisitor Members
         /// <summary>
         /// Visits the <paramref name="document"/> element.
