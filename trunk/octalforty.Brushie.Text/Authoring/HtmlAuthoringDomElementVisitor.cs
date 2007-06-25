@@ -15,6 +15,16 @@ namespace octalforty.Brushie.Text.Authoring
         private StringBuilder htmlBuilder = new StringBuilder();
         #endregion
 
+        #region Protected Properties
+        /// <summary>
+        /// Gets a reference to the <see cref="StringBuilder"/> used to build resulting HTML.
+        /// </summary>
+        protected StringBuilder HtmlBuilder
+        {
+            get { return htmlBuilder; }
+        }
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// Gets a <see cref="String"/> which contains the HTML markup.
