@@ -17,7 +17,7 @@ namespace octalforty.Brushie.Text.Authoring.Textile
         /// Creates an instance of <see cref="IAuthoringEngine"/>.
         /// </summary>
         /// <returns></returns>
-        public IAuthoringEngine CreateAuthoringEngine()
+        public virtual IAuthoringEngine CreateAuthoringEngine()
         {
             IAuthoringEngine authoringEngine = new TextileAuthoringEngine();
 
