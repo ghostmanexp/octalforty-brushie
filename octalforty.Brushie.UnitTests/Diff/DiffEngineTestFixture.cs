@@ -44,7 +44,9 @@ namespace octalforty.Brushie.UnitTests.Diff
                     new string[] {"c", "d"});
 
             PatchOperation[] expectedPatchOperations = 
-                new PatchOperation[] { PatchOperation.CreateDeletion(0, 1)};
+                new PatchOperation[] {
+                    PatchOperation.CreateDeletion(0, 1),
+                    PatchOperation.CreateCopy(2, 3) };
 
             AssertDifferences(diffEngine, expectedPatchOperations);
         }
@@ -80,7 +82,8 @@ namespace octalforty.Brushie.UnitTests.Diff
                     PatchOperation.CreateAddition(1, 2),
                     PatchOperation.CreateCopy(1, 2),
                     PatchOperation.CreateAddition(5, 5),
-                    PatchOperation.CreateDeletion(3, 3) };
+                    PatchOperation.CreateDeletion(3, 3),
+                    PatchOperation.CreateCopy(4, 4) };
 
             AssertDifferences(diffEngine, expectedPatchOperations);
         }
@@ -92,7 +95,9 @@ namespace octalforty.Brushie.UnitTests.Diff
                 new long[] { 1, 2, 3 }, new long[] { 2, 3 } );
 
             PatchOperation[] expectedPatchOperations =
-                new PatchOperation[] { PatchOperation.CreateDeletion(0, 0) };
+                new PatchOperation[] {
+                    PatchOperation.CreateDeletion(0, 0),
+                    PatchOperation.CreateCopy(1, 2)};
 
             AssertDifferences(diffEngine, expectedPatchOperations);
         }
@@ -113,7 +118,8 @@ namespace octalforty.Brushie.UnitTests.Diff
                     PatchOperation.CreateAddition(2, 6),
                     PatchOperation.CreateCopy(2, 9),
                     PatchOperation.CreateAddition(15, 15),
-                    PatchOperation.CreateDeletion(10, 10) };
+                    PatchOperation.CreateDeletion(10, 10),
+                    PatchOperation.CreateCopy(11, 11) };
 
             AssertDifferences(diffEngine, expectedPatchOperations);
         }
@@ -168,7 +174,8 @@ namespace octalforty.Brushie.UnitTests.Diff
                     PatchOperation.CreateCopy(0, 2),
                     PatchOperation.CreateAddition(3, 10), 
                     PatchOperation.CreateCopy(3, 87),
-                    PatchOperation.CreateAddition(96, 96) };
+                    PatchOperation.CreateAddition(96, 96),
+                    PatchOperation.CreateCopy(88, 90) };
 
             AssertDifferences(diffEngine, expectedPatchOperations);
         }
@@ -207,7 +214,34 @@ namespace octalforty.Brushie.UnitTests.Diff
                     PatchOperation.CreateDeletion(3, 3),
                     PatchOperation.CreateCopy(4, 14),
                     PatchOperation.CreateAddition(15, 19),
-                    PatchOperation.CreateDeletion(15, 15) };
+                    PatchOperation.CreateDeletion(15, 15),
+                    PatchOperation.CreateCopy(16, 18)};
+
+            AssertDifferences(diffEngine, expectedPatchOperations);
+        }
+
+        [Test()]
+        public void GetPatchOperations11()
+        {
+            DiffEngine<string> diffEngine =
+                new DiffEngine<string>(
+                    "The metrics for clarity are more-well understood. Do you have a game PLAN to become peerlessly synergetic across all platforms ? Think interactive".Split(' '),
+                    //0    1       2    3     4      5      6           7  8   9   10 11   12  13   14      15        16         17   18   19       20 21     22   
+                    //0    1       2    3         4     5         6         7  8   9   10 11  12   13  14         15     16  17   18
+                    "The metrics for obfuscation are more-well understood. Do you have a game plan to become cross-media ? Think interactive".Split(' '));
+
+            PatchOperation[] expectedPatchOperations =
+                new PatchOperation[] {
+                    PatchOperation.CreateCopy(0, 2),
+                    PatchOperation.CreateAddition(3, 3),
+                    PatchOperation.CreateDeletion(3, 3),
+                    PatchOperation.CreateCopy(4, 11),
+                    PatchOperation.CreateAddition(12, 12),
+                    PatchOperation.CreateDeletion(12, 12),
+                    PatchOperation.CreateCopy(13, 14),
+                    PatchOperation.CreateAddition(15, 15),
+                    PatchOperation.CreateDeletion(15, 19),
+                    PatchOperation.CreateCopy(20, 22)};
 
             AssertDifferences(diffEngine, expectedPatchOperations);
         }
@@ -219,7 +253,7 @@ namespace octalforty.Brushie.UnitTests.Diff
             Assert.AreEqual(expectedPatchOperations.GetLength(0), patchOperations.Count);
 
             for(int index = 0; index < patchOperations.Count; ++index)
-                Assert.AreEqual(patchOperations[index], expectedPatchOperations[index], 
+                Assert.AreEqual(expectedPatchOperations[index], patchOperations[index], 
                     string.Format("Collections differ at index {0}", index));
         }
     }
