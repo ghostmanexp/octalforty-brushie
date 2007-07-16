@@ -22,9 +22,12 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 
             blockElementParser.Parse(new TextileAuthoringEngine(), document, MultilevelListMarkup);
 
+            HtmlAuthoringDomElementVisitor visitor = new HtmlAuthoringDomElementVisitor();
+            visitor.Visit(document);
+
             //
             // Root ordered list
-            OrderedList rootOrderedList = document.ChildElements[0] as OrderedList;
+           /* OrderedList rootOrderedList = document.ChildElements[0] as OrderedList;
             
             Assert.IsNotNull(rootOrderedList);
             Assert.AreEqual(3, rootOrderedList.ChildElements.Count);
@@ -55,7 +58,9 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
             orderedList = item.ChildElements[1] as OrderedList;
 
             Assert.IsNotNull(orderedList);
-            Assert.AreEqual(2, orderedList.ChildElements.Count);
+            Assert.AreEqual(2, orderedList.ChildElements.Count);*/
+            Assert.AreEqual("<ol><li><ol><li></li><li></li><li></li></ol></li><li><ol><li></li><li></li></ol></li><li></li></ol>",
+                visitor.Html);
         }
 
         [Test()]
@@ -68,9 +73,12 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
 
             blockElementParser.Parse(new TextileAuthoringEngine(), document, MixedListMarkup);
 
+            HtmlAuthoringDomElementVisitor visitor = new HtmlAuthoringDomElementVisitor();
+            visitor.Visit(document);
+
             //
             // Root unordered list
-            UnorderedList rootUnorderedList = document.ChildElements[0] as UnorderedList;
+            /*UnorderedList rootUnorderedList = document.ChildElements[0] as UnorderedList;
 
             Assert.IsNotNull(rootUnorderedList);
             Assert.AreEqual(3, rootUnorderedList.ChildElements.Count);
@@ -101,7 +109,9 @@ namespace octalforty.Brushie.UnitTests.Text.Authoring.Textile
             UnorderedList unorderedList = listItem.ChildElements[1] as UnorderedList;
 
             Assert.IsNotNull(unorderedList);
-            Assert.AreEqual(2, unorderedList.ChildElements.Count);
+            Assert.AreEqual(2, unorderedList.ChildElements.Count);*/
+            Assert.AreEqual("<ul><li></li><li><ol><li></li><li></li><li></li></ol></li><li><ul><li></li><li></li></ul></li></ul>",
+                visitor.Html);
         }
     }
 }

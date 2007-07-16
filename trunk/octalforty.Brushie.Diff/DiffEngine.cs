@@ -90,7 +90,9 @@ namespace octalforty.Brushie.Diff
         private PatchOperationCollection InternalGetPatchOperations()
         {
             TraverseSequences();
+
             CommitPendingPatchOperations();
+            CommitCopy();
 
             return patchOperations;
         }
