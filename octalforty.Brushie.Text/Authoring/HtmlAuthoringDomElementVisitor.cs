@@ -429,6 +429,11 @@ namespace octalforty.Brushie.Text.Authoring
             return tagBuilder.ToString();
         }
 
+        /// <summary>
+        /// Tests whether <paramref name="value"/> is <c>null</c> or equals to <see cref="String.Empty"/>.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         protected static bool IsNullOrEmpty(String value)
         {
             return value == null || value == string.Empty;
