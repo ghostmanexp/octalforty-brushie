@@ -125,7 +125,8 @@ namespace octalforty.Brushie.Text.LuceneNet
         /// <returns></returns>
         public static FieldAdapter CreateKeywordField(string name, DateTime value)
         {
-            return new FieldAdapter(Field.Keyword(name, value));
+            return new FieldAdapter(new Field(name, DateTools.DateToString(value, DateTools.Resolution.MINUTE),
+                Field.Store.YES, Field.Index.UN_TOKENIZED));
         }
         
         /// <summary>
@@ -140,7 +141,7 @@ namespace octalforty.Brushie.Text.LuceneNet
         /// <returns></returns>
         public static FieldAdapter CreateKeywordField(string name, string value)
         {
-            return new FieldAdapter(Field.Keyword(name, value));
+            return new FieldAdapter(new Field(name, value, Field.Store.YES, Field.Index.UN_TOKENIZED));
         }
         
         /// <summary>
@@ -158,7 +159,7 @@ namespace octalforty.Brushie.Text.LuceneNet
         /// <returns></returns>
         public static FieldAdapter CreateTextField(string name, TextReader value, bool storeTermVector)
         {
-            return new FieldAdapter(Field.Text(name, value, storeTermVector));
+            return new FieldAdapter(new Field(name, value));
         }
 
         /// <summary>
