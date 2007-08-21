@@ -68,15 +68,6 @@
     <Compile Include="Text\Authoring\Textile\NoTextileParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\ParagraphParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\TextBlockParserTestFixture.cs" />
-    <Compile Include="Text\LuceneNet\DocumentAdapterTestFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Text\LuceneNet\FieldAdapterTestFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Text\LuceneNet\IndexWriterAdapterTestFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Xml\XmlBuilderTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>

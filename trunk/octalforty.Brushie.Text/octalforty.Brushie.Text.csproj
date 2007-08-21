@@ -30,10 +30,6 @@
     <DocumentationFile>octalforty.Brushie.Text.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucene.Net, Version=1.4.3.4, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Lucene.Net-1.4.3\Lucene.Net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -115,10 +111,6 @@
     <Compile Include="Authoring\Textile\TextileRegexBasedElementParserBase.cs" />
     <Compile Include="Authoring\Textile\TextileRegexBasedInlineElementParserBase.cs" />
     <Compile Include="Authoring\Textile\UnformattedTextBlockParser.cs" />
-    <Compile Include="LuceneNet\DocumentAdapter.cs" />
-    <Compile Include="LuceneNet\FieldAdapter.cs" />
-    <Compile Include="LuceneNet\FieldAdapterReadOnlyCollection.cs" />
-    <Compile Include="LuceneNet\IndexWriterAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
