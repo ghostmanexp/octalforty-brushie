@@ -24,8 +24,8 @@ namespace octalforty.Brushie.Web.XmlRpc
         public void Dispatch(Stream inputStream, Stream outputStream)
         {
             XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
-            XmlRpcRequest xmlRpcRequest = xmlRpcSerializer.DeserializeRequest(inputStream, 
-                );
+            /*XmlRpcRequest xmlRpcRequest = xmlRpcSerializer.DeserializeRequest(inputStream, 
+                );*/
         }
     }
 }

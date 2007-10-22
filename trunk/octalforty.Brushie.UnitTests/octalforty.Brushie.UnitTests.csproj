@@ -28,10 +28,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucene.Net, Version=1.4.3.4, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Lucene.Net-1.4.3\Lucene.Net.dll</HintPath>
-    </Reference>
     <Reference Include="NMock2, Version=1.0.2313.18049, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\NMock-2.0.0 RC1\NMock2.dll</HintPath>
@@ -68,6 +64,24 @@
     <Compile Include="Text\Authoring\Textile\NoTextileParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\ParagraphParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\TextBlockParserTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\BooleanDeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\DateTimeDeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\DoubleDeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\Int32DeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\StringDeserializerUnitTests.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\TypeDeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\XmlRpcStructureDeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\ArraySerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\BooleanSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\DateTimeSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\DoubleSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\Int32SerializerUnitTests.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\StringSerializerUnitTests.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\TypeSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\XmlRpcStructureSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\DoubleRange.cs" />
+    <Compile Include="Web\XmlRpc\Range.cs" />
+    <Compile Include="Web\XmlRpc\XmlRpcSerializerTestFixture.cs" />
     <Compile Include="Xml\XmlBuilderTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +100,10 @@
     <ProjectReference Include="..\octalforty.Brushie.Text\octalforty.Brushie.Text.csproj">
       <Project>{6D115D49-63E6-40D6-833D-A2CD399395FE}</Project>
       <Name>octalforty.Brushie.Text</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\octalforty.Brushie.Web\octalforty.Brushie.Web.csproj">
+      <Project>{7CA74C48-1B1E-4E52-AABA-C06B8E511A3E}</Project>
+      <Name>octalforty.Brushie.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\octalforty.Brushie.Xml\octalforty.Brushie.Xml.csproj">
       <Project>{D970186E-319F-4B63-B7A1-855BA17EF4F8}</Project>
