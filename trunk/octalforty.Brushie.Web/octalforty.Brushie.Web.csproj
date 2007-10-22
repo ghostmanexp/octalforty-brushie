@@ -1,0 +1,74 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7CA74C48-1B1E-4E52-AABA-C06B8E511A3E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>octalforty.Brushie.Web</RootNamespace>
+    <AssemblyName>octalforty.Brushie.Web</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlRpc\Conversion\DeserializationContext.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\BooleanDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\DateTimeDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\DoubleDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\Int32Deserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\StringDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\XmlRpcStructureDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\ITypeDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\ITypeSerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\SerializationContext.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\ArraySerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\BooleanSerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\ByteArraySerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\DateTimeSerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\DoubleSerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\Int32Serializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\StringSerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Serialization\XmlRpcStructureSerializer.cs" />
+    <Compile Include="XmlRpc\Conversion\TypeSerializationException.cs" />
+    <Compile Include="XmlRpc\Conversion\TypeSerializerBase.cs" />
+    <Compile Include="XmlRpc\XmlRpcException.cs" />
+    <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcRequest.cs" />
+    <Compile Include="XmlRpc\XmlRpcSerializer.cs" />
+    <Compile Include="XmlRpc\XmlRpcService.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceDispatcher.cs" />
+    <Compile Include="XmlRpc\XmlRpcStructureAttribute.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
