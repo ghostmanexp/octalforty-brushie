@@ -70,8 +70,8 @@ namespace octalforty.Brushie.Web.XmlRpc
         protected virtual void HandleHttpPost()
         {
             XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
-            XmlRpcRequest xmlRpcRequest = 
-                xmlRpcSerializer.DeserializeRequest(Context.Request.InputStream,);
+            /*XmlRpcRequest xmlRpcRequest = 
+                xmlRpcSerializer.DeserializeRequest(Context.Request.InputStream,);*/
         }
     }
 }
