@@ -1,29 +1,31 @@
 using System.IO;
-using System.Web;
 
 using octalforty.Brushie.Web.XmlRpc;
 
 namespace octalforty.Brushie.Web.XmlRpc.Impl
 {
     /// <summary>
-    /// An implementation of <see cref="IXmlRpcServiceContext"/> which uses <see cref="HttpContext"/>.
+    /// An implementation of <see cref="IXmlRpcServiceContext"/>.
     /// </summary>
-    public class HttpContextXmlRpcServiceContext : IXmlRpcServiceContext
+    public class XmlRpcServiceContext : IXmlRpcServiceContext
     {
         #region Private Member Variables
         private IXmlRpcService xmlRpcService;
-        private HttpContext httpContext;
+        private Stream inputStream;
+        private Stream outputStream;
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="HttpContextXmlRpcServiceContext"/>.
+        /// Initializes a new instance of <see cref="XmlRpcServiceContext"/>.
         /// </summary>
         /// <param name="xmlRpcService"></param>
-        /// <param name="httpContext"></param>
-        public HttpContextXmlRpcServiceContext(IXmlRpcService xmlRpcService, HttpContext httpContext)
+        /// <param name="inputStream"></param>
+        /// <param name="outputStream"></param>
+        public XmlRpcServiceContext(IXmlRpcService xmlRpcService, Stream inputStream, Stream outputStream)
         {
             this.xmlRpcService = xmlRpcService;
-            this.httpContext = httpContext;
+            this.inputStream = inputStream;
+            this.outputStream = outputStream;
         }
 
         #region IXmlRpcServiceContext Members
@@ -40,7 +42,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Impl
         /// </summary>
         public Stream InputStream
         {
-            get { return httpContext.Request.InputStream; }
+            get { return inputStream; }
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Impl
         /// </summary>
         public Stream OutputStream
         {
-            get { return httpContext.Response.OutputStream; }
+            get { return outputStream; }
         }
         #endregion
     }

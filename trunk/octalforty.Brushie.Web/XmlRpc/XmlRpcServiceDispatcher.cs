@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace octalforty.Brushie.Web.XmlRpc
 {
     /// <summary>
     /// Dispatches XML-RPC service requests.
     /// </summary>
-    public class XmlRpcServiceDispatcher : IXmlRpcSerializerParameterTypesProvider
+    public class XmlRpcServiceDispatcher : IXmlRpcServiceDispatcher, IXmlRpcSerializerParameterTypesProvider
     {
         #region Private Member Variables
         private Type serviceType;
+        private XmlRpcSerializer xmlRpcSerializer;
+        private XmlRpcServiceInfo xmlRpcServiceInfo;
         #endregion
 
         /// <summary>
@@ -20,6 +20,9 @@ namespace octalforty.Brushie.Web.XmlRpc
         public XmlRpcServiceDispatcher(Type serviceType)
         {
             this.serviceType = serviceType;
+            
+            xmlRpcSerializer = new XmlRpcSerializer();
+            xmlRpcServiceInfo = XmlRpcServiceInfo.CreateXmlRpcServiceInfo(serviceType);
         }
 
         /// <summary>
@@ -28,11 +31,13 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// <param name="xmlRpcServiceContext"></param>
         public void Dispatch(IXmlRpcServiceContext xmlRpcServiceContext)
         {
-            XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
-            XmlRpcRequest xmlRpcRequest = xmlRpcSerializer.DeserializeRequest(xmlRpcServiceContext.InputStream, this);
+            XmlRpcRequest xmlRpcRequest = DeserializeRequest(xmlRpcServiceContext);
+            XmlRpcServiceMethodInfo xmlRpcServiceMethodInfo = 
+                xmlRpcServiceInfo.GetMethod(xmlRpcRequest.MethodName);
 
-            object returnValue = GetXmlRpcServiceMethod(xmlRpcRequest.MethodName).Invoke(xmlRpcServiceContext.XmlRpcService,
+            object returnValue = xmlRpcServiceMethodInfo.Invoke(xmlRpcServiceContext.XmlRpcService,
                 xmlRpcRequest.Parameters);
+
             XmlRpcResponse xmlRpcResponse = new XmlRpcResponse(returnValue);
             xmlRpcSerializer.SerializeResponse(xmlRpcResponse, xmlRpcServiceContext.OutputStream);
         }
@@ -45,38 +50,13 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// <returns></returns>
         public Type[] GetRequestParameterTypes(string methodName)
         {
-            //
-            // First find the requested method
-            MethodInfo xmlRpcServiceMethod = GetXmlRpcServiceMethod(methodName);
-            if(xmlRpcServiceMethod == null)
-                throw new NotImplementedException();
-
-            //
-            // Now collect its parameter types
-            List<Type> parameterTypes = new List<Type>();
-            foreach(ParameterInfo parameter in xmlRpcServiceMethod.GetParameters())
-                parameterTypes.Add(parameter.ParameterType);
-
-            return parameterTypes.ToArray();
+            return xmlRpcServiceInfo.GetMethod(methodName).ParameterTypes;
         }
         #endregion
 
-        private MethodInfo GetXmlRpcServiceMethod(string methodName)
+        private XmlRpcRequest DeserializeRequest(IXmlRpcServiceContext xmlRpcServiceContext)
         {
-            MethodInfo[] methods = serviceType.GetMethods(BindingFlags.Instance | BindingFlags.Public);
-            foreach(MethodInfo method in methods)
-            {
-                if(Attribute.IsDefined(method, typeof(XmlRpcServiceMethodAttribute), true))
-                {
-                    XmlRpcServiceMethodAttribute serviceMethodAttribute =
-                        (XmlRpcServiceMethodAttribute)
-                            Attribute.GetCustomAttribute(method, typeof(XmlRpcServiceMethodAttribute));
-                    if(serviceMethodAttribute.Name == methodName)
-                        return method;
-                } // if
-            } // foreach
-
-            return null;
+            return xmlRpcSerializer.DeserializeRequest(xmlRpcServiceContext.InputStream, this);
         }
     }
 }

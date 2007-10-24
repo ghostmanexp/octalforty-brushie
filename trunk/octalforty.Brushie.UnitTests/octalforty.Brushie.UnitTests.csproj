@@ -36,6 +36,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\NUint-2.2.8\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.2.0.781, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\RhinoMocks-3.0.2\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -80,8 +84,12 @@
     <Compile Include="Web\XmlRpc\Conversion\Serialization\TypeSerializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Serialization\XmlRpcStructureSerializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\DoubleRange.cs" />
+    <Compile Include="Web\XmlRpc\IMathXmlRpcService.cs" />
     <Compile Include="Web\XmlRpc\Range.cs" />
     <Compile Include="Web\XmlRpc\XmlRpcSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\MathXmlRpcService.cs" />
+    <Compile Include="Web\XmlRpc\XmlRpcServiceDispatcherTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\XmlRpcServiceInfoTestFixture.cs" />
     <Compile Include="Xml\XmlBuilderTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
                 "<value>" +
                     "<struct>" +
                         "<member>" +
-                            "<name>LowerBound</name><value><i4>4</i4></value>" +
+                            "<name>lower-bound</name><value><i4>4</i4></value>" +
                         "</member>" +
                         "<member>" +
                             "<name>UpperBound</name><value>from</value>" +
