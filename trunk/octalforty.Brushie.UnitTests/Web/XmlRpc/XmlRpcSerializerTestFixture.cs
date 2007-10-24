@@ -209,6 +209,57 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
             Assert.AreEqual(1, xmlRpcRequest.Parameters.GetLength(0));
         }
 
+        [Test()]
+        public void SerializeResponse()
+        {
+            XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
+
+            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcResponse(1),
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodResponse><params><param><value><i4>1</i4></value></param></params></methodResponse>");
+
+            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcResponse(new DoubleRange(new Range(4, "from"), new Range(54, "to"))),
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodResponse>" +
+                "<params>" +
+                    "<param>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>From</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>lower-bound</name><value><i4>4</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value>from</value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>To</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>lower-bound</name><value><i4>54</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value>to</value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
+                    "</param>" +
+                "</params>" +
+                "</methodResponse>");
+        }
+
         private static XmlRpcRequest DeserializeRequest(XmlRpcSerializer xmlRpcSerializer,
             string serializedRequest, params Type[] parameterTypes)
         {
@@ -230,6 +281,20 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                     xmlRpcSerializer.Encoding.GetString(memoryStream.ToArray());
 
                 Assert.AreEqual(serializedRequest, actualSerializedRequest);
+            } // using
+        }
+
+        private static void AssertSerializedResponse(XmlRpcSerializer xmlRpcSerializer,
+            XmlRpcResponse response, string serializesResponse)
+        {
+            using(MemoryStream memoryStream = new MemoryStream())
+            {
+                xmlRpcSerializer.SerializeResponse(response, memoryStream);
+
+                string actualSerializedResponse =
+                    xmlRpcSerializer.Encoding.GetString(memoryStream.ToArray());
+
+                Assert.AreEqual(serializesResponse, actualSerializedResponse);
             } // using
         }
     }
