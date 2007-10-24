@@ -193,14 +193,23 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// </summary>
         /// <param name="response"></param>
         /// <param name="stream"></param>
-        public void SerializeResponse(XmlRpcSuccessResponse response, Stream stream)
+        public void SerializeResponse(XmlRpcResponse response, Stream stream)
         {
             XmlTextWriter xmlTextWriter = new XmlTextWriter(stream, Encoding);
 
             xmlTextWriter.WriteStartDocument();
             xmlTextWriter.WriteStartElement("methodResponse");
-            
-            SerializeParameters(new object[] { response.ReturnValue }, xmlTextWriter);
+
+            if(response is XmlRpcSuccessResponse)
+            {
+                SerializeParameters(new object[] { ((XmlRpcSuccessResponse)response).ReturnValue }, xmlTextWriter);
+            } // if
+            else if(response is XmlRpcFaultResponse)
+            {
+                xmlTextWriter.WriteStartElement("fault");
+                SerializeObject(((XmlRpcFaultResponse)response).Fault, xmlTextWriter);
+                xmlTextWriter.WriteEndElement();
+            } // else
 
             xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndDocument();

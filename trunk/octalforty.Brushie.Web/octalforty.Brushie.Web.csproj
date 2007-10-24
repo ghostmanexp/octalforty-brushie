@@ -63,7 +63,10 @@
     <Compile Include="XmlRpc\IXmlRpcServiceContext.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\XmlRpcException.cs" />
+    <Compile Include="XmlRpc\XmlRpcFault.cs" />
+    <Compile Include="XmlRpc\XmlRpcFaultResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceInfo.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceMethodAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcRequest.cs" />

@@ -258,6 +258,26 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                     "</param>" +
                 "</params>" +
                 "</methodResponse>");
+
+            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcFaultResponse(new XmlRpcFault(1, "Error")),
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodResponse>" +
+                    "<fault>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>faultCode</name>" +
+                                    "<value><i4>1</i4></value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>faultString</name>" +
+                                    "<value><string>Error</string></value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
+                    "</fault>" +
+                "</methodResponse>");
         }
 
         private static XmlRpcRequest DeserializeRequest(XmlRpcSerializer xmlRpcSerializer,
@@ -285,7 +305,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
         }
 
         private static void AssertSerializedResponse(XmlRpcSerializer xmlRpcSerializer,
-            XmlRpcSuccessResponse response, string serializesResponse)
+            XmlRpcResponse response, string serializedResponse)
         {
             using(MemoryStream memoryStream = new MemoryStream())
             {
@@ -294,7 +314,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 string actualSerializedResponse =
                     xmlRpcSerializer.Encoding.GetString(memoryStream.ToArray());
 
-                Assert.AreEqual(serializesResponse, actualSerializedResponse);
+                Assert.AreEqual(serializedResponse, actualSerializedResponse);
             } // using
         }
     }
