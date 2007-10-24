@@ -25,6 +25,8 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion
             typeDeserializers.Add(new BooleanDeserializer());
             typeDeserializers.Add(new DateTimeDeserializer());
             typeDeserializers.Add(new StringDeserializer());
+            typeDeserializers.Add(new ByteArrayDeserializer());
+            typeDeserializers.Add(new ArrayDeserializer());
             typeDeserializers.Add(new XmlRpcStructureDeserializer());
         }
 

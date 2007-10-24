@@ -36,7 +36,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlRpc\Conversion\DeserializationContext.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\ArrayDeserializer.cs" />
     <Compile Include="XmlRpc\Conversion\Deserialization\BooleanDeserializer.cs" />
+    <Compile Include="XmlRpc\Conversion\Deserialization\ByteArrayDeserializer.cs" />
     <Compile Include="XmlRpc\Conversion\Deserialization\DateTimeDeserializer.cs" />
     <Compile Include="XmlRpc\Conversion\Deserialization\DoubleDeserializer.cs" />
     <Compile Include="XmlRpc\Conversion\Deserialization\Int32Deserializer.cs" />
