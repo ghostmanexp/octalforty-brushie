@@ -2,7 +2,7 @@ using System.IO;
 
 using octalforty.Brushie.Web.XmlRpc;
 
-namespace octalforty.Brushie.Web.XmlRpc.Impl
+namespace octalforty.Brushie.Web.XmlRpc
 {
     /// <summary>
     /// An implementation of <see cref="IXmlRpcServiceContext"/>.
