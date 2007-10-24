@@ -14,7 +14,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
         public void Serialize()
         {
             Assert.AreEqual("<value><array><data><value><i4>12</i4></value>" +
-                "<value>Egypt</value></data></array></value>", 
+                "<value><string>Egypt</string></value></data></array></value>", 
                 InternalSerialize(new object[] { 12, "Egypt" }));
         }
     }

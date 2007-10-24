@@ -41,7 +41,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<params>"+
                 "<param><value><i4>1</i4></value></param>" +
                 "<param><value><double>2.5</double></value></param>" +
-                "<param><value>three</value></param>" +
+                "<param><value><string>three</string></value></param>" +
                 "<param><value><boolean>true</boolean></value></param>" +
                 "<param><value><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></value></param></params>" +
                 "</methodCall>");
@@ -55,7 +55,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<params>" +
                 "<param><value><i4>-1</i4></value></param>" +
                 "<param><value><double>-52.5</double></value></param>" +
-                "<param><value>yep</value></param>" +
+                "<param><value><string>yep</string></value></param>" +
                 "<param><value><boolean>false</boolean></value></param>" +
                 "<param><value><base64>AAECNkI=</base64></value></param></params>" +
                 "</methodCall>");
@@ -71,17 +71,17 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<params>" +
                 "<param><value><i4>-1</i4></value></param>" +
                 "<param><value><double>-52.5</double></value></param>" +
-                "<param><value>yep</value></param>" +
+                "<param><value><string>yep</string></value></param>" +
                 "<param><value><boolean>false</boolean></value></param>" +
                 "<param><value><base64>AAECNkI=</base64></value></param>" +
                 "<param><value><array><data>" +
                 "<value><i4>12</i4></value>" +
-                "<value>Egypt</value>" +
+                "<value><string>Egypt</string></value>" +
                 "<value><boolean>false</boolean></value>" + 
                 "</data></array></value></param>" +
                 "<param><value><struct>" +
                 "<member><name>lower-bound</name><value><i4>12</i4></value></member>" +
-                "<member><name>UpperBound</name><value>hi!</value></member>" +
+                "<member><name>UpperBound</name><value><string>hi!</string></value></member>" +
                 "</struct></value></param>" +
                 "</params>" +
                 "</methodCall>");
@@ -104,7 +104,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                                 "<name>lower-bound</name><value><i4>4</i4></value>" +
                                             "</member>" +
                                             "<member>" +
-                                                "<name>UpperBound</name><value>from</value>" +
+                                                "<name>UpperBound</name><value><string>from</string></value>" +
                                             "</member>" +
                                         "</struct>" +
                                     "</value>" +
@@ -117,7 +117,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                                 "<name>lower-bound</name><value><i4>54</i4></value>" +
                                             "</member>" +
                                             "<member>" +
-                                                "<name>UpperBound</name><value>to</value>" +
+                                                "<name>UpperBound</name><value><string>to</string></value>" +
                                             "</member>" +
                                         "</struct>" +
                                     "</value>" +
@@ -235,7 +235,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                                 "<name>lower-bound</name><value><i4>4</i4></value>" +
                                             "</member>" +
                                             "<member>" +
-                                                "<name>UpperBound</name><value>from</value>" +
+                                                "<name>UpperBound</name><value><string>from</string></value>" +
                                             "</member>" +
                                         "</struct>" +
                                     "</value>" +
@@ -248,7 +248,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                                 "<name>lower-bound</name><value><i4>54</i4></value>" +
                                             "</member>" +
                                             "<member>" +
-                                                "<name>UpperBound</name><value>to</value>" +
+                                                "<name>UpperBound</name><value><string>to</string></value>" +
                                             "</member>" +
                                         "</struct>" +
                                     "</value>" +
