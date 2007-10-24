@@ -26,7 +26,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <returns></returns>
         public bool CanSerialize(XmlNode xmlNode, Type type)
         {
-            return xmlNode.Name == "dateTime.iso8601" && type == typeof(DateTime);
+            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "dateTime.iso8601" && type == typeof(DateTime);
         }
 
         /// <summary>
@@ -39,8 +39,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         public object Deserialize(DeserializationContext deserializationContext,
             XmlNode xmlNode, Type type)
         {
-            return DateTime.ParseExact(xmlNode.InnerText,
-                "yyyyMMddTHH:mm:ss", CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(xmlNode.InnerText, "yyyyMMddTHH:mm:ss", CultureInfo.InvariantCulture);
         }
         #endregion
     }

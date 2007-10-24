@@ -13,8 +13,8 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
         [Test()]
         public void Serialize()
         {
-            Assert.AreEqual("<double>1</double>", InternalSerialize(1.0));
-            Assert.AreEqual("<double>-153.43</double>", InternalSerialize(-153.43));
+            Assert.AreEqual("<value><double>1</double></value>", InternalSerialize(1.0));
+            Assert.AreEqual("<value><double>-153.43</double></value>", InternalSerialize(-153.43));
         }
     }
 }

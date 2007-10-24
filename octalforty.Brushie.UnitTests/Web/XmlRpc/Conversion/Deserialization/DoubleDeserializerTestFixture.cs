@@ -13,8 +13,17 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
         [Test()]
         public void Deserialize()
         {
-            Assert.AreEqual(1.0, InternalDeserialize("<double>1.0</double>", typeof(double)));
-            Assert.AreEqual(-541.4, InternalDeserialize("<double>-541.4</double>", typeof(double)));
+            Assert.AreEqual(1.0, InternalDeserialize("<value><double>1.0</double></value>", typeof(double)));
+            Assert.AreEqual(-541.4, InternalDeserialize("<value><double>-541.4</double></value>", typeof(double)));
+        }
+
+        [Test()]
+        public void CanDeserialize()
+        {
+            Assert.IsTrue(InternalCanDeserialize("<value><double>1.0</double></value>", typeof(double)));
+
+            Assert.IsFalse(InternalCanDeserialize("<value><d>1.0</d></value>", typeof(double)));
+            Assert.IsFalse(InternalCanDeserialize("<double>1.0</double>", typeof(double)));
         }
     }
 }

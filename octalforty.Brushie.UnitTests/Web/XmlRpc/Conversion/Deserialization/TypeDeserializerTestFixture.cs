@@ -27,5 +27,13 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
             return CreateTypeDeserializer().Deserialize(deserializationContext, 
                 xmlNode, type);
         }
+
+        protected static bool InternalCanDeserialize(string serializedObject, Type type)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(serializedObject);
+
+            return CreateTypeDeserializer().CanSerialize(xmlDocument.DocumentElement, type);
+        }
     }
 }

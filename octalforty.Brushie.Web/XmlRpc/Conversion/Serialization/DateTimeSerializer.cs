@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Xml;
 
 namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
@@ -28,8 +27,10 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         public override void Serialize(SerializationContext serializationContext, object value,
             XmlTextWriter xmlTextWriter)
         {
+            xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteElementString(String.Empty, "dateTime.iso8601", String.Empty,
                 ((DateTime)value).ToString("yyyyMMddTHH:mm:ss"));
+            xmlTextWriter.WriteEndElement();
         }
         #endregion
     }

@@ -27,8 +27,10 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         public override void Serialize(SerializationContext serializationContext, object value,
             XmlTextWriter xmlTextWriter)
         {
+            xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteStartElement("base64");
             xmlTextWriter.WriteString(Convert.ToBase64String((byte[])value));
+            xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
         }
         #endregion

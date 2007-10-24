@@ -1,12 +1,14 @@
 ﻿using System.Web;
 using System.Web.SessionState;
 
+using octalforty.Brushie.Web.XmlRpc.Impl;
+
 namespace octalforty.Brushie.Web.XmlRpc
 {
     /// <summary>
     /// Provides a base class for creating XML-RPC services.
     /// </summary>
-    public abstract class XmlRpcService : IHttpHandler, IRequiresSessionState
+    public abstract class XmlRpcService : IHttpHandler, IRequiresSessionState, IXmlRpcService
     {
         #region Private Member Variables
         private HttpContext context;
@@ -46,8 +48,7 @@ namespace octalforty.Brushie.Web.XmlRpc
             context = httpContext;
 
             if(Context.Request.HttpMethod.ToUpper() == "POST")
-                xmlRpcServiceDispatcher.Dispatch(Context.Request.InputStream, 
-                    Context.Response.OutputStream);
+                xmlRpcServiceDispatcher.Dispatch(new HttpContextXmlRpcServiceContext(this, httpContext));
         }
         
         /// <summary>

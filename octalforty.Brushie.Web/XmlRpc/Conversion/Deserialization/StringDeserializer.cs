@@ -25,8 +25,9 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <returns></returns>
         public bool CanSerialize(XmlNode xmlNode, Type type)
         {
-            return ((xmlNode.NodeType == XmlNodeType.Element && xmlNode.Name == "string") || 
-                (xmlNode.NodeType == XmlNodeType.Text)) && 
+            return xmlNode.Name == "value" && 
+                ((xmlNode.FirstChild.NodeType == XmlNodeType.Element && xmlNode.FirstChild.Name == "string") || 
+                (xmlNode.FirstChild.NodeType == XmlNodeType.Text)) && 
                 type == typeof(string);
         }
 
@@ -40,7 +41,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         public object Deserialize(DeserializationContext deserializationContext,
             XmlNode xmlNode, Type type)
         {
-            return xmlNode.InnerText;
+            return xmlNode.FirstChild.InnerText;
         }
         #endregion
     }

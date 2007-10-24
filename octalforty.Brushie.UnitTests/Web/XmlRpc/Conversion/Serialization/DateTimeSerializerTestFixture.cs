@@ -15,7 +15,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
         [Test()]
         public void Serialize()
         {
-            Assert.AreEqual("<dateTime.iso8601>20070102T15:20:54</dateTime.iso8601>", 
+            Assert.AreEqual("<value><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></value>", 
                 InternalSerialize(new DateTime(2007, 1, 2, 15, 20, 54)));
         }    
     }

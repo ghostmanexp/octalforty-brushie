@@ -55,8 +55,14 @@
     <Compile Include="XmlRpc\Conversion\Serialization\XmlRpcStructureSerializer.cs" />
     <Compile Include="XmlRpc\Conversion\TypeSerializationException.cs" />
     <Compile Include="XmlRpc\Conversion\TypeSerializerBase.cs" />
+    <Compile Include="XmlRpc\Impl\HttpContextXmlRpcServiceContext.cs" />
+    <Compile Include="XmlRpc\IXmlRpcSerializerParameterTypesProvider.cs" />
+    <Compile Include="XmlRpc\IXmlRpcService.cs" />
+    <Compile Include="XmlRpc\IXmlRpcServiceContext.cs" />
     <Compile Include="XmlRpc\XmlRpcException.cs" />
     <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcResponse.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceMethodAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcRequest.cs" />
     <Compile Include="XmlRpc\XmlRpcSerializer.cs" />
     <Compile Include="XmlRpc\XmlRpcService.cs" />
