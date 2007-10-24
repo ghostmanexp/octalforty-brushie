@@ -49,13 +49,24 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
                 value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach(PropertyInfo property in properties)
             {
-                xmlTextWriter.WriteStartElement("member");
-                
-                xmlTextWriter.WriteElementString("name", String.Empty, property.Name);
+                if(Attribute.IsDefined(property, typeof(XmlRpcMemberAttribute)))
+                {
+                    //
+                    // Find out member name
+                    string memberName = property.Name;
+                    XmlRpcMemberAttribute memberAttribute =
+                        (XmlRpcMemberAttribute)Attribute.GetCustomAttribute(property, typeof(XmlRpcMemberAttribute));
+                    if(!string.IsNullOrEmpty(memberAttribute.Name))
+                        memberName = memberAttribute.Name;
 
-                serializationContext.Serialize(property.GetValue(value, null), xmlTextWriter);
+                    xmlTextWriter.WriteStartElement("member");
 
-                xmlTextWriter.WriteEndElement();
+                    xmlTextWriter.WriteElementString("name", String.Empty, memberName);
+
+                    serializationContext.Serialize(property.GetValue(value, null), xmlTextWriter);
+
+                    xmlTextWriter.WriteEndElement();
+                } // if
             } // foreach
 
             xmlTextWriter.WriteEndElement();

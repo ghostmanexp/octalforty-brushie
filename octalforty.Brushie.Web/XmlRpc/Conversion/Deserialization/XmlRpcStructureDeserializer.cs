@@ -49,9 +49,8 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
             foreach(XmlNode memberNode in xmlNode.FirstChild.SelectNodes("./member"))
             {
                 string memberName = memberNode.SelectSingleNode("./name").InnerText;
-                
-                PropertyInfo property = type.GetProperty(memberName, BindingFlags.Instance |
-                    BindingFlags.Public);
+                PropertyInfo property = GetProperty(type, memberName);
+
                 property.SetValue(value, 
                     deserializationContext.Deserialize(
                         memberNode.SelectSingleNode("./value"), property.PropertyType), null);
@@ -60,5 +59,22 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
             return value;
         }
         #endregion
+
+        private static PropertyInfo GetProperty(Type type, string memberName)
+        {
+            foreach(PropertyInfo property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if(Attribute.IsDefined(property, typeof(XmlRpcMemberAttribute)))
+                {
+                    XmlRpcMemberAttribute memberAttribute =
+                        (XmlRpcMemberAttribute)Attribute.GetCustomAttribute(property, typeof(XmlRpcMemberAttribute));
+                    if((string.IsNullOrEmpty(memberAttribute.Name) && property.Name == memberName) ||
+                        memberAttribute.Name == memberName)
+                        return property;
+                } // if
+            } // foreach
+
+            return null;
+        }
     }
 }

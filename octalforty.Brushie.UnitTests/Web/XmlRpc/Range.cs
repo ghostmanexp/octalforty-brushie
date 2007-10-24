@@ -7,8 +7,9 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
     {
         private int lowerBound;
         private string upperBound;
+        private string ignored;
 
-        [XmlRpcMember()]
+        [XmlRpcMember("lower-bound")]
         public int LowerBound
         {
             get { return lowerBound; }
@@ -20,6 +21,12 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
         {
             get { return upperBound; }
             set { upperBound = value; }
+        }
+
+        public string Ignored
+        {
+            get { return ignored; }
+            set { ignored = value; }
         }
 
         public Range(int lowerBound, string upperBound)
