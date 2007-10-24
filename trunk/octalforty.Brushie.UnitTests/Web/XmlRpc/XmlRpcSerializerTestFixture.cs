@@ -80,7 +80,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<value><boolean>false</boolean></value>" + 
                 "</data></array></value></param>" +
                 "<param><value><struct>" +
-                "<member><name>LowerBound</name><value><i4>12</i4></value></member>" +
+                "<member><name>lower-bound</name><value><i4>12</i4></value></member>" +
                 "<member><name>UpperBound</name><value>hi!</value></member>" +
                 "</struct></value></param>" +
                 "</params>" +
@@ -101,7 +101,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                     "<value>" +
                                         "<struct>" +
                                             "<member>" +
-                                                "<name>LowerBound</name><value><i4>4</i4></value>" +
+                                                "<name>lower-bound</name><value><i4>4</i4></value>" +
                                             "</member>" +
                                             "<member>" +
                                                 "<name>UpperBound</name><value>from</value>" +
@@ -114,7 +114,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                     "<value>" +
                                         "<struct>" +
                                             "<member>" +
-                                                "<name>LowerBound</name><value><i4>54</i4></value>" +
+                                                "<name>lower-bound</name><value><i4>54</i4></value>" +
                                             "</member>" +
                                             "<member>" +
                                                 "<name>UpperBound</name><value>to</value>" +
@@ -177,7 +177,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                     "<value>" +
                                         "<struct>" +
                                             "<member>" +
-                                                "<name>LowerBound</name><value><i4>4</i4></value>" +
+                                                "<name>lower-bound</name><value><i4>4</i4></value>" +
                                             "</member>" +
                                             "<member>" +
                                                 "<name>UpperBound</name><value>from</value>" +
@@ -190,7 +190,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                     "<value>" +
                                         "<struct>" +
                                             "<member>" +
-                                                "<name>LowerBound</name><value><i4>54</i4></value>" +
+                                                "<name>lower-bound</name><value><i4>54</i4></value>" +
                                             "</member>" +
                                             "<member>" +
                                                 "<name>UpperBound</name><value>to</value>" +
