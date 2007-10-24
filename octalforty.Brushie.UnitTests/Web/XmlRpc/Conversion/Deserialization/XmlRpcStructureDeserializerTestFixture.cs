@@ -21,7 +21,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
                 "<value>" +
                     "<struct>" +
                         "<member>" +
-                            "<name>LowerBound</name><value><i4>4</i4></value>" +
+                            "<name>lower-bound</name><value><i4>4</i4></value>" +
                         "</member>" +
                         "<member>" +
                             "<name>UpperBound</name><value>from</value>" +
@@ -29,7 +29,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
                     "</struct>" +
                 "</value>");
 
-            Range range = (Range)InternalDeserialize(xmlDocument.FirstChild, typeof(Range));
+            Range range = (Range)InternalDeserialize(xmlDocument.DocumentElement, typeof(Range));
 
             Assert.AreEqual(4, range.LowerBound);
             Assert.AreEqual("from", range.UpperBound);
@@ -42,7 +42,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
                 "<value>" +
                     "<struct>" +
                         "<member>" +
-                            "<name>LowerBound</name><value><i4>4</i4></value>" +
+                            "<name>lower-bound</name><value><i4>4</i4></value>" +
                         "</member>" +
                         "<member>" +
                             "<name>UpperBound</name><value>from</value>" +

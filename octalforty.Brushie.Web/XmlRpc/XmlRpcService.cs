@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.IO;
+using System.Net;
+using System.Web;
 using System.Web.SessionState;
 
 using octalforty.Brushie.Web.XmlRpc.Impl;
@@ -48,7 +50,25 @@ namespace octalforty.Brushie.Web.XmlRpc
             context = httpContext;
 
             if(Context.Request.HttpMethod.ToUpper() == "POST")
-                xmlRpcServiceDispatcher.Dispatch(new HttpContextXmlRpcServiceContext(this, httpContext));
+            {
+                using(MemoryStream memoryStream = new MemoryStream())
+                {
+                    xmlRpcServiceDispatcher.Dispatch(new XmlRpcServiceContext(this, httpContext.Request.InputStream, 
+                        memoryStream));
+
+                    httpContext.Response.Clear();
+                    httpContext.Response.ClearContent();
+                    httpContext.Response.ClearHeaders();
+
+                    httpContext.Response.ContentType = "text/xml";
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    memoryStream.WriteTo(httpContext.Response.OutputStream);
+
+                    httpContext.Response.End();
+                } // using
+            } // if
         }
         
         /// <summary>
