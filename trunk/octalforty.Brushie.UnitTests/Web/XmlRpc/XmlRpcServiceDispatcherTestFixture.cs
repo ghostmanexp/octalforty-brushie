@@ -4,7 +4,6 @@ using System.Text;
 using NUnit.Framework;
 
 using octalforty.Brushie.Web.XmlRpc;
-using octalforty.Brushie.Web.XmlRpc.Impl;
 
 using Rhino.Mocks;
 

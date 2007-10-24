@@ -3,8 +3,6 @@ using System.Net;
 using System.Web;
 using System.Web.SessionState;
 
-using octalforty.Brushie.Web.XmlRpc.Impl;
-
 namespace octalforty.Brushie.Web.XmlRpc
 {
     /// <summary>
