@@ -35,20 +35,20 @@ namespace octalforty.Brushie.Web.XmlRpc
             XmlRpcServiceMethodInfo xmlRpcServiceMethodInfo = 
                 xmlRpcServiceInfo.GetMethod(xmlRpcRequest.MethodName);
 
-            object returnValue = null;
+            XmlRpcResponse xmlRpcResponse;
 
             try
             {
-                returnValue = xmlRpcServiceMethodInfo.Invoke(xmlRpcServiceContext.XmlRpcService, 
+                object returnValue = xmlRpcServiceMethodInfo.Invoke(xmlRpcServiceContext.XmlRpcService, 
                     xmlRpcRequest.Parameters);
+                xmlRpcResponse = new XmlRpcSuccessResponse(returnValue);
             } // try
 
             catch(Exception e)
             {
-                //returnValue = new XmlRpcF
+                xmlRpcResponse = new XmlRpcFaultResponse(new XmlRpcFault(0, e.ToString()));
             } // catch
 
-            XmlRpcSuccessResponse xmlRpcResponse = new XmlRpcSuccessResponse(returnValue);
             xmlRpcSerializer.SerializeResponse(xmlRpcResponse, xmlRpcServiceContext.OutputStream);
         }
 

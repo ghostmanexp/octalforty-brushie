@@ -3,7 +3,7 @@ namespace octalforty.Brushie.Web.XmlRpc
     /// <summary>
     /// Represents an XML-RPC response.
     /// </summary>
-    public class XmlRpcSuccessResponse
+    public class XmlRpcSuccessResponse : XmlRpcResponse
     {
         #region Private Member Variables
         private object returnValue;
