@@ -26,7 +26,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <returns></returns>
         public bool CanSerialize(XmlNode xmlNode, Type type)
         {
-            return xmlNode.Name == "double" && type == typeof(double);
+            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "double" && type == typeof(double);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         public object Deserialize(DeserializationContext deserializationContext,
             XmlNode xmlNode, Type type)
         {
-            return Double.Parse(xmlNode.InnerText, CultureInfo.InvariantCulture);
+            return Double.Parse(xmlNode.FirstChild.InnerText, CultureInfo.InvariantCulture);
         }
         #endregion
     }

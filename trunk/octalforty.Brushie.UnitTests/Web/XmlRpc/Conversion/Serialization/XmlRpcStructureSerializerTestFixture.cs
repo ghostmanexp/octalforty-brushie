@@ -15,14 +15,16 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
         public void Serialize()
         {
             Assert.AreEqual(
-                "<struct>" +
-                    "<member>" +
-                        "<name>LowerBound</name><value><i4>4</i4></value>" +
-                    "</member>" +
-                    "<member>" +
-                        "<name>UpperBound</name><value>from</value>" +
-                    "</member>" +
-                "</struct>", InternalSerialize(new Range(4, "from")));
+                "<value>" +
+                    "<struct>" +
+                        "<member>" +
+                            "<name>LowerBound</name><value><i4>4</i4></value>" +
+                        "</member>" +
+                        "<member>" +
+                            "<name>UpperBound</name><value>from</value>" +
+                        "</member>" +
+                    "</struct>" +
+                "</value>", InternalSerialize(new Range(4, "from")));
         }
     }
 }

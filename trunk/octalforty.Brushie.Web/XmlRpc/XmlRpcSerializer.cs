@@ -80,14 +80,27 @@ namespace octalforty.Brushie.Web.XmlRpc
 
             //
             // Deserializing parameters
-            List<object> parameters = new List<object>();
-            int parameterIndex = 0;
+            List<object> parameters = DeserializeParameters(parameterTypes, xmlDocument);
+            return new XmlRpcRequest(methodName, parameters.ToArray());
+        }
 
-            foreach(XmlNode parameterXmlNode in xmlDocument.SelectNodes("methodCall/params/param"))
-            {
-                parameters.Add(DeserializeParameter(parameterXmlNode,
-                    parameterTypes[parameterIndex++]));
-            } // foreach
+        /// <summary>
+        /// Deserializes <see cref="XmlRpcRequest"/> from the <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="parameterTypesProvider"></param>
+        /// <returns></returns>
+        public XmlRpcRequest DeserializeRequest(Stream stream, IXmlRpcSerializerParameterTypesProvider parameterTypesProvider)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(stream);
+
+            //
+            // Method name
+            string methodName = xmlDocument.SelectSingleNode("methodCall/methodName").InnerText;
+
+            Type[] parameterTypes = parameterTypesProvider.GetRequestParameterTypes(methodName);
+            List<object> parameters = DeserializeParameters(parameterTypes, xmlDocument);
 
             return new XmlRpcRequest(methodName, parameters.ToArray());
         }
@@ -152,6 +165,47 @@ namespace octalforty.Brushie.Web.XmlRpc
         private void SerializeObject(object value, XmlTextWriter xmlTextWriter)
         {
             serializationContext.Serialize(value, xmlTextWriter);
+        }
+
+        /// <summary>
+        /// Deserializes parameters from <paramref name="xmlDocument"/>.
+        /// </summary>
+        /// <param name="parameterTypes"></param>
+        /// <param name="xmlDocument"></param>
+        /// <returns></returns>
+        private List<object> DeserializeParameters(Type[] parameterTypes, XmlDocument xmlDocument)
+        {
+            //
+            // Deserializing parameters
+            List<object> parameters = new List<object>();
+            int parameterIndex = 0;
+
+            foreach(XmlNode parameterXmlNode in xmlDocument.SelectNodes("methodCall/params/param"))
+            {
+                parameters.Add(DeserializeParameter(parameterXmlNode,
+                    parameterTypes[parameterIndex++]));
+            } // foreach
+            return parameters;
+        }
+
+        /// <summary>
+        /// Serializes <paramref name="response"/> into <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="stream"></param>
+        public void SerializeResponse(XmlRpcResponse response, Stream stream)
+        {
+            XmlTextWriter xmlTextWriter = new XmlTextWriter(stream, Encoding);
+
+            xmlTextWriter.WriteStartDocument();
+            xmlTextWriter.WriteStartElement("methodResponse");
+            
+            SerializeParameters(new object[] { response.ReturnValue }, xmlTextWriter);
+
+            xmlTextWriter.WriteEndElement();
+            xmlTextWriter.WriteEndDocument();
+
+            xmlTextWriter.Flush();
         }
     }
 }

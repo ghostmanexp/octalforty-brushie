@@ -16,8 +16,16 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
         public void Deserialize()
         {
             Assert.AreEqual(new DateTime(2007, 1, 2, 15, 20, 54),
-                InternalDeserialize("<dateTime.iso8601>20070102T15:20:54</dateTime.iso8601>", 
+                InternalDeserialize("<value><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></value>", 
                 typeof(DateTime)));
+        }
+
+        [Test()]
+        public void CanDeserialize()
+        {
+            Assert.IsTrue(InternalCanDeserialize("<value><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></value>",
+                typeof(DateTime)));
+            Assert.IsFalse(InternalCanDeserialize("<dateTime.iso8601>20070102T15:20:54</dateTime.iso8601>", typeof(DateTime)));
         }
     }
 }

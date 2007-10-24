@@ -28,8 +28,10 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         public override void Serialize(SerializationContext serializationContext, object value,
             XmlTextWriter xmlTextWriter)
         {
+            xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteElementString(String.Empty, "double", String.Empty,
                 ((double)value).ToString(CultureInfo.InvariantCulture));
+            xmlTextWriter.WriteEndElement();
         }
         #endregion
     }

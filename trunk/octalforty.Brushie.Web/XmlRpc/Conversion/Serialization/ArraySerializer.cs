@@ -28,16 +28,16 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         public override void Serialize(SerializationContext serializationContext, object value,
             XmlTextWriter xmlTextWriter)
         {
+            xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteStartElement("array");
             xmlTextWriter.WriteStartElement("data");
 
             foreach(object _value in (IEnumerable)value)
             {
-                xmlTextWriter.WriteStartElement("value");
                 serializationContext.Serialize(_value, xmlTextWriter);
-                xmlTextWriter.WriteEndElement();
             } // foreach
 
+            xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
         }

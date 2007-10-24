@@ -27,7 +27,9 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         public override void Serialize(SerializationContext serializationContext, object value,
             XmlTextWriter xmlTextWriter)
         {
+            xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteElementString(String.Empty, "i4", String.Empty, value.ToString());
+            xmlTextWriter.WriteEndElement();
         }
         #endregion
     }

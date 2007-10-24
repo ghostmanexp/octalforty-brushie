@@ -39,11 +39,11 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodCall><methodName>namespace/sampleMethod</methodName>" +
                 "<params>"+
-                "<param><i4>1</i4></param>" +
-                "<param><double>2.5</double></param>" +
-                "<param>three</param>" +
-                "<param><boolean>true</boolean></param>" +
-                "<param><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></param></params>" +
+                "<param><value><i4>1</i4></value></param>" +
+                "<param><value><double>2.5</double></value></param>" +
+                "<param><value>three</value></param>" +
+                "<param><value><boolean>true</boolean></value></param>" +
+                "<param><value><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></value></param></params>" +
                 "</methodCall>");
 
             AssertSerializedRequest(xmlRpcSerializer,
@@ -53,11 +53,11 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodCall><methodName>namespace/sampleMethod</methodName>" +
                 "<params>" +
-                "<param><i4>-1</i4></param>" +
-                "<param><double>-52.5</double></param>" +
-                "<param>yep</param>" +
-                "<param><boolean>false</boolean></param>" +
-                "<param><base64>AAECNkI=</base64></param></params>" +
+                "<param><value><i4>-1</i4></value></param>" +
+                "<param><value><double>-52.5</double></value></param>" +
+                "<param><value>yep</value></param>" +
+                "<param><value><boolean>false</boolean></value></param>" +
+                "<param><value><base64>AAECNkI=</base64></value></param></params>" +
                 "</methodCall>");
 
             AssertSerializedRequest(xmlRpcSerializer,
@@ -69,20 +69,20 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodCall><methodName>namespace/sampleMethod</methodName>" +
                 "<params>" +
-                "<param><i4>-1</i4></param>" +
-                "<param><double>-52.5</double></param>" +
-                "<param>yep</param>" +
-                "<param><boolean>false</boolean></param>" +
-                "<param><base64>AAECNkI=</base64></param>" +
-                "<param><array><data>" +
+                "<param><value><i4>-1</i4></value></param>" +
+                "<param><value><double>-52.5</double></value></param>" +
+                "<param><value>yep</value></param>" +
+                "<param><value><boolean>false</boolean></value></param>" +
+                "<param><value><base64>AAECNkI=</base64></value></param>" +
+                "<param><value><array><data>" +
                 "<value><i4>12</i4></value>" +
                 "<value>Egypt</value>" +
                 "<value><boolean>false</boolean></value>" + 
-                "</data></array></param>" +
-                "<param><struct>" +
+                "</data></array></value></param>" +
+                "<param><value><struct>" +
                 "<member><name>LowerBound</name><value><i4>12</i4></value></member>" +
                 "<member><name>UpperBound</name><value>hi!</value></member>" +
-                "</struct></param>" +
+                "</struct></value></param>" +
                 "</params>" +
                 "</methodCall>");
 
@@ -94,34 +94,36 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<methodCall><methodName>namespace/sampleMethod</methodName>" +
                 "<params>" +
                     "<param>" +
-                        "<struct>" +
-                            "<member>" +
-                                "<name>From</name>" +
-                                "<value>" +
-                                    "<struct>" +
-                                        "<member>" +
-                                            "<name>LowerBound</name><value><i4>4</i4></value>" +
-                                        "</member>" +
-                                        "<member>" +
-                                            "<name>UpperBound</name><value>from</value>" +
-                                        "</member>" +
-                                    "</struct>" +
-                                "</value>" +
-                            "</member>" +
-                            "<member>" +
-                                "<name>To</name>" +
-                                "<value>" +
-                                    "<struct>" +
-                                        "<member>" +
-                                            "<name>LowerBound</name><value><i4>54</i4></value>" +
-                                        "</member>" +
-                                        "<member>" +
-                                            "<name>UpperBound</name><value>to</value>" +
-                                        "</member>" +
-                                    "</struct>" +
-                                "</value>" +
-                            "</member>" +
-                        "</struct>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>From</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>LowerBound</name><value><i4>4</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value>from</value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>To</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>LowerBound</name><value><i4>54</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value>to</value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
                     "</param>" +
                 "</params>" +
                 "</methodCall>");
@@ -144,11 +146,11 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodCall><methodName>namespace/sampleMethod</methodName>" +
                 "<params>" +
-                "<param><i4>1</i4></param>" +
-                "<param><double>2.5</double></param>" +
-                "<param>three</param>" +
-                "<param><boolean>true</boolean></param>" +
-                "<param><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></param></params>" +
+                "<param><value><i4>1</i4></value></param>" +
+                "<param><value><double>2.5</double></value></param>" +
+                "<param><value>three</value></param>" +
+                "<param><value><boolean>true</boolean></value></param>" +
+                "<param><value><dateTime.iso8601>20070102T15:20:54</dateTime.iso8601></value></param></params>" +
                 "</methodCall>",
                 typeof(int), typeof(double), typeof(string), typeof(bool), typeof(DateTime));
 
@@ -168,34 +170,36 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<methodCall><methodName>namespace/sampleMethod</methodName>" +
                 "<params>" +
                     "<param>" +
-                        "<struct>" +
-                            "<member>" +
-                                "<name>From</name>" +
-                                "<value>" +
-                                    "<struct>" +
-                                        "<member>" +
-                                            "<name>LowerBound</name><value><i4>4</i4></value>" +
-                                        "</member>" +
-                                        "<member>" +
-                                            "<name>UpperBound</name><value>from</value>" +
-                                        "</member>" +
-                                    "</struct>" +
-                                "</value>" +
-                            "</member>" +
-                            "<member>" +
-                                "<name>To</name>" +
-                                "<value>" +
-                                    "<struct>" +
-                                        "<member>" +
-                                            "<name>LowerBound</name><value><i4>54</i4></value>" +
-                                        "</member>" +
-                                        "<member>" +
-                                            "<name>UpperBound</name><value>to</value>" +
-                                        "</member>" +
-                                    "</struct>" +
-                                "</value>" +
-                            "</member>" +
-                        "</struct>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>From</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>LowerBound</name><value><i4>4</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value>from</value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>To</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>LowerBound</name><value><i4>54</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value>to</value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
                     "</param>" +
                 "</params>" +
                 "</methodCall>",

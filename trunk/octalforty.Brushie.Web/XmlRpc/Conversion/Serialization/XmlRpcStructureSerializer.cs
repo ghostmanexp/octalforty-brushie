@@ -40,6 +40,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         public void Serialize(SerializationContext serializationContext, 
             object value, XmlTextWriter xmlTextWriter)
         {
+            xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteStartElement("struct");
 
             //
@@ -52,13 +53,12 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
                 
                 xmlTextWriter.WriteElementString("name", String.Empty, property.Name);
 
-                xmlTextWriter.WriteStartElement("value");
                 serializationContext.Serialize(property.GetValue(value, null), xmlTextWriter);
-                xmlTextWriter.WriteEndElement();
 
                 xmlTextWriter.WriteEndElement();
             } // foreach
 
+            xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
         }
         #endregion

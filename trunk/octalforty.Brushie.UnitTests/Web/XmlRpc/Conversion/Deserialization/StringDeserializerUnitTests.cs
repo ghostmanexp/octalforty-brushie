@@ -16,11 +16,21 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
         public void Deserialize()
         {
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<string>string value</string>");
+            xmlDocument.LoadXml("<value><string>string value</string></value>");
 
             Assert.AreEqual("string value", InternalDeserialize(xmlDocument, typeof(string)));
             Assert.AreEqual("string value", 
                 InternalDeserialize(xmlDocument.FirstChild.FirstChild, typeof(string)));
+        }
+
+        [Test()]
+        public void CanDeserialize()
+        {
+            Assert.IsTrue(InternalCanDeserialize("<value>String</value>", typeof(string)));
+            Assert.IsTrue(InternalCanDeserialize("<value><string>String</string></value>", typeof(string)));
+
+            Assert.IsFalse(InternalCanDeserialize("<value><str>String</str></value>", typeof(string)));
+            Assert.IsFalse(InternalCanDeserialize("<string>String</string>", typeof(string)));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <returns></returns>
         public bool CanSerialize(XmlNode xmlNode, Type type)
         {
-            return xmlNode.Name == "struct" &&
+            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "struct" &&
                 Attribute.IsDefined(type, typeof(XmlRpcStructureAttribute));
         }
 
@@ -46,7 +46,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
             // Creating instance of type
             object value = Activator.CreateInstance(type);
 
-            foreach(XmlNode memberNode in xmlNode.SelectNodes("./member"))
+            foreach(XmlNode memberNode in xmlNode.FirstChild.SelectNodes("./member"))
             {
                 string memberName = memberNode.SelectSingleNode("./name").InnerText;
                 
@@ -54,8 +54,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
                     BindingFlags.Public);
                 property.SetValue(value, 
                     deserializationContext.Deserialize(
-                        memberNode.SelectSingleNode("./value").FirstChild, 
-                        property.PropertyType), null);
+                        memberNode.SelectSingleNode("./value"), property.PropertyType), null);
             } // foreach
 
             return value;
