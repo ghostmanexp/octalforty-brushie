@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Xml;
 
 namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
 {
     /// <summary>
-    /// Deserializes <see cref="bool"/> objects.
+    /// Deserializes byte arrays.
     /// </summary>
-    public class BooleanDeserializer : ITypeDeserializer
+    public class ByteArrayDeserializer : ITypeDeserializer
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="BooleanDeserializer"/> class.
+        /// Initializes a new instance of <see cref="ByteArrayDeserializer"/>.
         /// </summary>
-        public BooleanDeserializer()
+        public ByteArrayDeserializer()
         {
         }
 
@@ -25,7 +25,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <returns></returns>
         public bool CanSerialize(XmlNode xmlNode, Type type)
         {
-            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "boolean" && type == typeof(bool);
+            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "base64" && type == typeof(byte[]);
         }
 
         /// <summary>
@@ -35,18 +35,9 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <param name="deserializationContext"></param>
         /// <param name="xmlNode"></param>
         /// <param name="type"></param>
-        public object Deserialize(DeserializationContext deserializationContext, 
-            XmlNode xmlNode, Type type)
+        public object Deserialize(DeserializationContext deserializationContext, XmlNode xmlNode, Type type)
         {
-            string innerText = xmlNode.FirstChild.InnerText;
-            
-            if(innerText == "1")
-                return true;
-
-            if(innerText == "0")
-                return false;
-
-            return Convert.ToBoolean(innerText);
+            return Convert.FromBase64String(xmlNode.FirstChild.InnerText);
         }
         #endregion
     }

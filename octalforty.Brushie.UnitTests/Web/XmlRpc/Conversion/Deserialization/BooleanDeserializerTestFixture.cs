@@ -15,6 +15,9 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
         {
             Assert.AreEqual(true, InternalDeserialize("<value><boolean>true</boolean></value>", typeof(bool)));
             Assert.AreEqual(false, InternalDeserialize("<value><boolean>false</boolean></value>", typeof(bool)));
+
+            Assert.AreEqual(true, InternalDeserialize("<value><boolean>1</boolean></value>", typeof(bool)));
+            Assert.AreEqual(false, InternalDeserialize("<value><boolean>0</boolean></value>", typeof(bool)));
         }
 
         [Test()]
