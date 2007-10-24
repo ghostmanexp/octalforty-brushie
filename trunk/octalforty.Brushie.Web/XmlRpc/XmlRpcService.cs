@@ -84,15 +84,5 @@ namespace octalforty.Brushie.Web.XmlRpc
             get { return false; }
         }
         #endregion
-
-        /// <summary>
-        /// Handles HTTP POST request.
-        /// </summary>
-        protected virtual void HandleHttpPost()
-        {
-            XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
-            /*XmlRpcRequest xmlRpcRequest = 
-                xmlRpcSerializer.DeserializeRequest(Context.Request.InputStream,);*/
-        }
     }
 }

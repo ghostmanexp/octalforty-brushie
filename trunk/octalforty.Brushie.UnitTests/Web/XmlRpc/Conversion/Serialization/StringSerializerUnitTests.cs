@@ -13,8 +13,10 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
         [Test()]
         public void Serialize()
         {
-            Assert.AreEqual("<value>123</value>", InternalSerialize("123"));
-            Assert.AreEqual("<value>123&lt;&gt;</value>", InternalSerialize("123<>"));
+            Assert.AreEqual("<value><string>123</string></value>", InternalSerialize("123"));
+            Assert.AreEqual("<value><string>123&lt;&gt;</string></value>", InternalSerialize("123<>"));
+            Assert.AreEqual("<value><string /></value>", InternalSerialize(null));
+
         }
     }
 }

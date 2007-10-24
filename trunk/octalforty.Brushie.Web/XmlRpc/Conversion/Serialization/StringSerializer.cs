@@ -28,7 +28,11 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
             XmlTextWriter xmlTextWriter)
         {
             xmlTextWriter.WriteStartElement("value");
-            xmlTextWriter.WriteString(value.ToString());
+            xmlTextWriter.WriteStartElement("string");
+
+            xmlTextWriter.WriteString((string)value);
+
+            xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
         }
         #endregion
