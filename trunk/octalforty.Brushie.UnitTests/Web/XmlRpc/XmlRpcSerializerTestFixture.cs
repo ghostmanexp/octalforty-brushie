@@ -214,12 +214,12 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
         {
             XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
 
-            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcResponse(1),
+            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcSuccessResponse(1),
                 xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodResponse><params><param><value><i4>1</i4></value></param></params></methodResponse>");
 
-            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcResponse(new DoubleRange(new Range(4, "from"), new Range(54, "to"))),
+            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcSuccessResponse(new DoubleRange(new Range(4, "from"), new Range(54, "to"))),
                 xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodResponse>" +
@@ -285,7 +285,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
         }
 
         private static void AssertSerializedResponse(XmlRpcSerializer xmlRpcSerializer,
-            XmlRpcResponse response, string serializesResponse)
+            XmlRpcSuccessResponse response, string serializesResponse)
         {
             using(MemoryStream memoryStream = new MemoryStream())
             {

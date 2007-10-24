@@ -64,7 +64,6 @@
     <Compile Include="XmlRpc\IXmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\XmlRpcException.cs" />
     <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
-    <Compile Include="XmlRpc\XmlRpcResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceInfo.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceMethodAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcRequest.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="XmlRpc\XmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceMethodInfo.cs" />
     <Compile Include="XmlRpc\XmlRpcStructureAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcSuccessResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

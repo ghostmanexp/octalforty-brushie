@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace octalforty.Brushie.Web.XmlRpc
 {
@@ -36,10 +35,20 @@ namespace octalforty.Brushie.Web.XmlRpc
             XmlRpcServiceMethodInfo xmlRpcServiceMethodInfo = 
                 xmlRpcServiceInfo.GetMethod(xmlRpcRequest.MethodName);
 
-            object returnValue = xmlRpcServiceMethodInfo.Invoke(xmlRpcServiceContext.XmlRpcService,
-                xmlRpcRequest.Parameters);
+            object returnValue = null;
 
-            XmlRpcResponse xmlRpcResponse = new XmlRpcResponse(returnValue);
+            try
+            {
+                returnValue = xmlRpcServiceMethodInfo.Invoke(xmlRpcServiceContext.XmlRpcService, 
+                    xmlRpcRequest.Parameters);
+            } // try
+
+            catch(Exception e)
+            {
+                //returnValue = new XmlRpcF
+            } // catch
+
+            XmlRpcSuccessResponse xmlRpcResponse = new XmlRpcSuccessResponse(returnValue);
             xmlRpcSerializer.SerializeResponse(xmlRpcResponse, xmlRpcServiceContext.OutputStream);
         }
 

@@ -51,7 +51,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion
         public virtual ITypeDeserializer GetTypeDeserializer(XmlNode xmlNode, Type type)
         {
             foreach(ITypeDeserializer typeDeserializer in typeDeserializers)
-                if(typeDeserializer.CanSerialize(xmlNode, type))
+                if(typeDeserializer.CanDeserialize(xmlNode, type))
                     return typeDeserializer;
 
             return null;

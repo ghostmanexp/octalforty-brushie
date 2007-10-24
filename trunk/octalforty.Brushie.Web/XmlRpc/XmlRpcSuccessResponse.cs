@@ -3,7 +3,7 @@ namespace octalforty.Brushie.Web.XmlRpc
     /// <summary>
     /// Represents an XML-RPC response.
     /// </summary>
-    public class XmlRpcResponse
+    public class XmlRpcSuccessResponse
     {
         #region Private Member Variables
         private object returnValue;
@@ -20,10 +20,10 @@ namespace octalforty.Brushie.Web.XmlRpc
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="XmlRpcResponse"/> class.
+        /// Initializes a new instance of <see cref="XmlRpcSuccessResponse"/> class.
         /// </summary>
         /// <param name="returnValue"></param>
-        public XmlRpcResponse(object returnValue)
+        public XmlRpcSuccessResponse(object returnValue)
         {
             this.returnValue = returnValue;
         }
