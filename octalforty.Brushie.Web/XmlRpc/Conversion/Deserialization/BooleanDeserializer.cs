@@ -23,7 +23,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <param name="xmlNode"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool CanSerialize(XmlNode xmlNode, Type type)
+        public bool CanDeserialize(XmlNode xmlNode, Type type)
         {
             return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "boolean" && type == typeof(bool);
         }

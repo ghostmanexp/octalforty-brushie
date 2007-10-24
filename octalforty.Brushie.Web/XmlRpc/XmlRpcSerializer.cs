@@ -193,7 +193,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// </summary>
         /// <param name="response"></param>
         /// <param name="stream"></param>
-        public void SerializeResponse(XmlRpcResponse response, Stream stream)
+        public void SerializeResponse(XmlRpcSuccessResponse response, Stream stream)
         {
             XmlTextWriter xmlTextWriter = new XmlTextWriter(stream, Encoding);
 

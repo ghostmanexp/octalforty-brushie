@@ -33,7 +33,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(serializedObject);
 
-            return CreateTypeDeserializer().CanSerialize(xmlDocument.DocumentElement, type);
+            return CreateTypeDeserializer().CanDeserialize(xmlDocument.DocumentElement, type);
         }
     }
 }

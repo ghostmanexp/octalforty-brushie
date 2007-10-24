@@ -15,7 +15,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion
         /// <param name="xmlNode"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        bool CanSerialize(XmlNode xmlNode, Type type);
+        bool CanDeserialize(XmlNode xmlNode, Type type);
 
         /// <summary>
         /// Serializes from <paramref name="xmlNode"/> using
