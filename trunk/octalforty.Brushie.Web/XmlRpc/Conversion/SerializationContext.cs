@@ -41,13 +41,15 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion
         /// </exception>
         public virtual void Serialize(object value, XmlTextWriter xmlTextWriter)
         {
-            ITypeSerializer typeSerializer = GetTypeSerializer(value.GetType());
-            if(typeSerializer == null)
-                throw new TypeSerializationException(
-                    string.Format("Could not find type serializer for {0}",
-                        value.GetType().FullName));
+            if(value != null)
+            {
+                ITypeSerializer typeSerializer = GetTypeSerializer(value.GetType());
+                if(typeSerializer == null)
+                    throw new TypeSerializationException(
+                        string.Format("Could not find type serializer for {0}", value.GetType().FullName));
 
-            typeSerializer.Serialize(this, value, xmlTextWriter);
+                typeSerializer.Serialize(this, value, xmlTextWriter);
+            } // if
         }
 
         /// <summary>
