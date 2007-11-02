@@ -57,7 +57,15 @@ namespace octalforty.Brushie.Text.Authoring
         /// <param name="document"></param>
         public virtual void Visit(DomDocument document)
         {
-            VisitChildElements(document);
+            try
+            {
+                VisitChildElements(document);
+            } // try
+
+            catch(Exception e)
+            {
+                throw new AuthoringException(string.Format("Failed to author {0}", document.GetType().FullName), e);
+            } // catch
         }
 
         /// <summary>

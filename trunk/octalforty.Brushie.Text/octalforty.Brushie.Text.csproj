@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authoring\AuthoringEngineBase.cs" />
+    <Compile Include="Authoring\AuthoringException.cs" />
     <Compile Include="Authoring\AuthoringScope.cs" />
     <Compile Include="Authoring\BlockElementParserBase.cs" />
     <Compile Include="Authoring\Dom\Acronym.cs" />
