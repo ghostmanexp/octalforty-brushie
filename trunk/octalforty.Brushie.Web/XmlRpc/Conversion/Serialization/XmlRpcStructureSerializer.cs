@@ -43,31 +43,36 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
             xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteStartElement("struct");
 
-            //
-            // Serializing properties marked with XmlRpcMemberAttribute
-            PropertyInfo[] properties = 
-                value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach(PropertyInfo property in properties)
+            if(value != null)
             {
-                if(Attribute.IsDefined(property, typeof(XmlRpcMemberAttribute)))
+                //
+                // Serializing properties marked with XmlRpcMemberAttribute
+                PropertyInfo[] properties =
+                    value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach(PropertyInfo property in properties)
                 {
-                    //
-                    // Find out member name
-                    string memberName = property.Name;
-                    XmlRpcMemberAttribute memberAttribute =
-                        (XmlRpcMemberAttribute)Attribute.GetCustomAttribute(property, typeof(XmlRpcMemberAttribute));
-                    if(!string.IsNullOrEmpty(memberAttribute.Name))
-                        memberName = memberAttribute.Name;
+                    if(Attribute.IsDefined(property, typeof(XmlRpcMemberAttribute)))
+                    {
+                        //
+                        // Find out member name
+                        string memberName = property.Name;
+                        XmlRpcMemberAttribute memberAttribute =
+                            (XmlRpcMemberAttribute)Attribute.GetCustomAttribute(property,
+                                typeof(XmlRpcMemberAttribute));
+                        if(!string.IsNullOrEmpty(memberAttribute.Name))
+                            memberName = memberAttribute.Name;
 
-                    xmlTextWriter.WriteStartElement("member");
+                        xmlTextWriter.WriteStartElement("member");
 
-                    xmlTextWriter.WriteElementString("name", String.Empty, memberName);
+                        xmlTextWriter.WriteElementString("name", String.Empty, memberName);
 
-                    serializationContext.Serialize(property.GetValue(value, null), xmlTextWriter);
+                        serializationContext.Serialize(property.GetValue(value, null), property.PropertyType,
+                            xmlTextWriter);
 
-                    xmlTextWriter.WriteEndElement();
-                } // if
-            } // foreach
+                        xmlTextWriter.WriteEndElement();
+                    } // if
+                } // foreach
+            } // if
 
             xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();

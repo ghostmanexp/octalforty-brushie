@@ -16,7 +16,6 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
             Assert.AreEqual("<value><string>123</string></value>", InternalSerialize("123"));
             Assert.AreEqual("<value><string>123&lt;&gt;</string></value>", InternalSerialize("123<>"));
             Assert.AreEqual("<value><string /></value>", InternalSerialize(null));
-
         }
     }
 }

@@ -30,7 +30,8 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
             xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteStartElement("string");
 
-            xmlTextWriter.WriteString((string)value);
+            if(value != null)
+                xmlTextWriter.WriteString((string)value);
 
             xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();

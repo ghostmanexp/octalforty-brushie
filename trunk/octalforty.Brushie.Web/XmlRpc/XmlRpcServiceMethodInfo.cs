@@ -65,8 +65,11 @@ namespace octalforty.Brushie.Web.XmlRpc
         public static XmlRpcServiceMethodInfo CreateXmlRpcServiceMethodInfo(MethodInfo methodInfo)
         {
             XmlRpcServiceMethodAttribute serviceMethodAttribute =
-                (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(methodInfo, typeof(XmlRpcServiceMethodAttribute));
-            return new XmlRpcServiceMethodInfo(serviceMethodAttribute.Name, methodInfo, GetParameterTypes(methodInfo));
+                (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(methodInfo, 
+                typeof(XmlRpcServiceMethodAttribute));
+
+            return new XmlRpcServiceMethodInfo(serviceMethodAttribute.Name, methodInfo, 
+                GetParameterTypes(methodInfo));
         }
 
         private static Type[] GetParameterTypes(MethodInfo methodInfo)

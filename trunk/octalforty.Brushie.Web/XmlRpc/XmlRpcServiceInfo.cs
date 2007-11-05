@@ -63,12 +63,16 @@ namespace octalforty.Brushie.Web.XmlRpc
                 for(int i = 0; i < interfaceMapping.InterfaceMethods.GetLength(0); ++i)
                 {
                     XmlRpcServiceMethodAttribute serviceMethodAttribute =
-                        (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(interfaceMapping.InterfaceMethods[i],
+                        (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(
+                            interfaceMapping.InterfaceMethods[i],
                             typeof(XmlRpcServiceMethodAttribute));
+
                     if(serviceMethodAttribute != null)
                     {
                         XmlRpcServiceMethodInfo xmlRpcServiceMethodInfo =
-                            XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(interfaceMapping.InterfaceMethods[i]);
+                            XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(
+                            interfaceMapping.InterfaceMethods[i]);
+
                         methods.Add(xmlRpcServiceMethodInfo.Name, xmlRpcServiceMethodInfo);
                     } // if
                 } // for
