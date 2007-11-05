@@ -51,8 +51,8 @@ namespace octalforty.Brushie.Web.XmlRpc
             {
                 using(MemoryStream memoryStream = new MemoryStream())
                 {
-                    xmlRpcServiceDispatcher.Dispatch(new XmlRpcServiceContext(this, httpContext.Request.InputStream, 
-                        memoryStream));
+                    xmlRpcServiceDispatcher.Dispatch(new XmlRpcServiceContext(this, 
+                        httpContext.Request.InputStream, memoryStream));
 
                     httpContext.Response.Clear();
                     httpContext.Response.ClearContent();

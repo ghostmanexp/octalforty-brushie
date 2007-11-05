@@ -86,6 +86,32 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "</params>" +
                 "</methodCall>");
 
+            AssertSerializedRequest(xmlRpcSerializer,
+                new XmlRpcRequest("namespace/sampleMethod", -1, -52.5, "yep",
+                false, new byte[] { 0, 1, 2, 54, 66 },
+                new object[] { 12, "Egypt", false },
+                new Range(12, null)),
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodCall><methodName>namespace/sampleMethod</methodName>" +
+                "<params>" +
+                "<param><value><i4>-1</i4></value></param>" +
+                "<param><value><double>-52.5</double></value></param>" +
+                "<param><value><string>yep</string></value></param>" +
+                "<param><value><boolean>false</boolean></value></param>" +
+                "<param><value><base64>AAECNkI=</base64></value></param>" +
+                "<param><value><array><data>" +
+                "<value><i4>12</i4></value>" +
+                "<value><string>Egypt</string></value>" +
+                "<value><boolean>false</boolean></value>" +
+                "</data></array></value></param>" +
+                "<param><value><struct>" +
+                "<member><name>lower-bound</name><value><i4>12</i4></value></member>" +
+                "<member><name>UpperBound</name><value><string /></value></member>" +
+                "</struct></value></param>" +
+                "</params>" +
+                "</methodCall>");
+
             AssertSerializedRequest(xmlRpcSerializer, 
                 new XmlRpcRequest("namespace/sampleMethod",
                 new DoubleRange(new Range(4, "from"), new Range(54, "to"))), 
@@ -120,6 +146,41 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                                                 "<name>UpperBound</name><value><string>to</string></value>" +
                                             "</member>" +
                                         "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
+                    "</param>" +
+                "</params>" +
+                "</methodCall>");
+
+            AssertSerializedRequest(xmlRpcSerializer,
+                new XmlRpcRequest("namespace/sampleMethod",
+                new DoubleRange(new Range(4, "from"), null)),
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodCall><methodName>namespace/sampleMethod</methodName>" +
+                "<params>" +
+                    "<param>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>From</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>lower-bound</name><value><i4>4</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value><string>from</string></value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>To</name>" +
+                                    "<value>" +
+                                        "<struct />" +
                                     "</value>" +
                                 "</member>" +
                             "</struct>" +
