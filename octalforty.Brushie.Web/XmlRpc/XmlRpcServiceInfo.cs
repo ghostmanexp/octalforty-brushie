@@ -51,7 +51,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// <returns></returns>
         public static XmlRpcServiceInfo CreateXmlRpcServiceInfo(Type serviceType)
         {
-            IDictionary<string, XmlRpcServiceMethodInfo> methods =
+            IDictionary<string, XmlRpcServiceMethodInfo> serviceMethods  =
                 new Dictionary<string, XmlRpcServiceMethodInfo>();
 
             //
@@ -59,26 +59,46 @@ namespace octalforty.Brushie.Web.XmlRpc
             Type[] interfaceTypes = serviceType.GetInterfaces();
             foreach(Type interfaceType in interfaceTypes)
             {
-                InterfaceMapping interfaceMapping = serviceType.GetInterfaceMap(interfaceType);
-                for(int i = 0; i < interfaceMapping.InterfaceMethods.GetLength(0); ++i)
-                {
-                    XmlRpcServiceMethodAttribute serviceMethodAttribute =
-                        (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(
-                            interfaceMapping.InterfaceMethods[i],
-                            typeof(XmlRpcServiceMethodAttribute));
-
-                    if(serviceMethodAttribute != null)
-                    {
-                        XmlRpcServiceMethodInfo xmlRpcServiceMethodInfo =
-                            XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(
-                            interfaceMapping.InterfaceMethods[i]);
-
-                        methods.Add(xmlRpcServiceMethodInfo.Name, xmlRpcServiceMethodInfo);
-                    } // if
-                } // for
+                if(!serviceType.IsInterface)
+                    CreateInterfaceMethodsInfo(serviceType, interfaceType, serviceMethods);
+                else 
+                    CreateMethodsMethodsInfo(interfaceType.GetMethods(), 
+                        serviceMethods);
             } // foreach
 
-            return new XmlRpcServiceInfo(methods);
+            //
+            // Now the type itself
+            CreateMethodsMethodsInfo(serviceType.GetMethods(), serviceMethods);
+
+            return new XmlRpcServiceInfo(serviceMethods);
+        }
+
+        private static void CreateInterfaceMethodsInfo(Type serviceType, 
+            Type interfaceType, IDictionary<string, XmlRpcServiceMethodInfo> serviceMethods)
+        {
+            InterfaceMapping interfaceMapping = serviceType.GetInterfaceMap(interfaceType);
+            CreateMethodsMethodsInfo(interfaceMapping.InterfaceMethods, serviceMethods);
+        }
+
+        private static void CreateMethodsMethodsInfo(MethodInfo[] methods, 
+            IDictionary<string, XmlRpcServiceMethodInfo> serviceMethods)
+        {
+            for(int i = 0; i < methods.GetLength(0); ++i)
+            {
+                XmlRpcServiceMethodAttribute serviceMethodAttribute =
+                    (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(
+                        methods[i],
+                        typeof(XmlRpcServiceMethodAttribute));
+
+                if(serviceMethodAttribute != null)
+                {
+                    XmlRpcServiceMethodInfo xmlRpcServiceMethodInfo =
+                        XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(
+                            methods[i]);
+
+                    serviceMethods.Add(xmlRpcServiceMethodInfo.Name, xmlRpcServiceMethodInfo);
+                } // if
+            } // for
         }
     }
 }

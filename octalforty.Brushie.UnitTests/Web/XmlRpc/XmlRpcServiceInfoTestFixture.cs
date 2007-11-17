@@ -24,5 +24,18 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
             Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[0]);
             Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[1]);
         }
+
+        [Test()]
+        public void CreateXmlRpcServiceInfoForInterface()
+        {
+            XmlRpcServiceInfo serviceInfo =
+                XmlRpcServiceInfo.CreateXmlRpcServiceInfo(typeof(IMathXmlRpcService));
+
+            Assert.IsNotEmpty((ICollection)serviceInfo.Methods);
+
+            Assert.AreEqual("math:add", serviceInfo.Methods[0].Name);
+            Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[0]);
+            Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[1]);
+        }
     }
 }
