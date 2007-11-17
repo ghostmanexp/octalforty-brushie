@@ -28,6 +28,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Castle-2.0 RC3\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2, Version=2.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Castle-2.0 RC3\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
@@ -61,10 +69,12 @@
     <Compile Include="XmlRpc\IXmlRpcService.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceContext.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceDispatcher.cs" />
+    <Compile Include="XmlRpc\IXmlRpcServiceProxy.cs" />
     <Compile Include="XmlRpc\XmlRpcException.cs" />
     <Compile Include="XmlRpc\XmlRpcFault.cs" />
     <Compile Include="XmlRpc\XmlRpcFaultResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceProxyGenerator.cs" />
     <Compile Include="XmlRpc\XmlRpcResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceContext.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceInfo.cs" />
@@ -74,6 +84,7 @@
     <Compile Include="XmlRpc\XmlRpcService.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceMethodInfo.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceProxy.cs" />
     <Compile Include="XmlRpc\XmlRpcStructureAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcSuccessResponse.cs" />
   </ItemGroup>
