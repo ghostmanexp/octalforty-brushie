@@ -5,5 +5,7 @@
     /// </summary>
     public interface IXmlRpcServiceProxy
     {
+        IXmlRpcWebRequestFactory WebRequestFactory
+        { get; set; }
     }
 }

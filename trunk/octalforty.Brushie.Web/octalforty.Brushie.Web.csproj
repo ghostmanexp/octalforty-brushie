@@ -70,6 +70,7 @@
     <Compile Include="XmlRpc\IXmlRpcServiceContext.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceProxy.cs" />
+    <Compile Include="XmlRpc\IXmlRpcWebRequestFactory.cs" />
     <Compile Include="XmlRpc\XmlRpcException.cs" />
     <Compile Include="XmlRpc\XmlRpcFault.cs" />
     <Compile Include="XmlRpc\XmlRpcFaultResponse.cs" />
