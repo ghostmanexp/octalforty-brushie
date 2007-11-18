@@ -5,7 +5,8 @@ namespace octalforty.Brushie.Web.XmlRpc
     /// <summary>
     /// Dispatches XML-RPC service requests.
     /// </summary>
-    public class XmlRpcServiceDispatcher : IXmlRpcServiceDispatcher, IXmlRpcSerializerParameterTypesProvider
+    public class XmlRpcServiceDispatcher : IXmlRpcServiceDispatcher, 
+        IXmlRpcSerializerParameterTypesProvider
     {
         #region Private Member Variables
         private Type serviceType;

@@ -72,6 +72,20 @@ namespace octalforty.Brushie.Web.XmlRpc
                 GetParameterTypes(methodInfo));
         }
 
+        /// <summary>
+        /// Returns the name of an XML-RPC service method for <paramref name="methodInfo"/>.
+        /// </summary>
+        /// <param name="methodInfo"></param>
+        /// <returns></returns>
+        public static string GetXmlRpcServiceMethodName(MethodInfo methodInfo)
+        {
+            XmlRpcServiceMethodAttribute serviceMethodAttribute =
+                (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(methodInfo,
+                typeof(XmlRpcServiceMethodAttribute));
+
+            return serviceMethodAttribute.Name;
+        }
+
         private static Type[] GetParameterTypes(MethodInfo methodInfo)
         {
             List<Type> parameterTypes = new List<Type>();
