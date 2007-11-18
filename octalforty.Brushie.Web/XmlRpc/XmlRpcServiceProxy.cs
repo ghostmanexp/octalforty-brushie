@@ -13,6 +13,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         #region Private Member Variables
         private Uri serviceEndpointUri;
         private XmlRpcServiceInfo xmlRpcServiceInfo;
+        private XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
         #endregion
 
         /// <summary>
@@ -38,7 +39,6 @@ namespace octalforty.Brushie.Web.XmlRpc
             XmlRpcServiceMethodInfo methodInfo =
                 XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(invocation.Method);
             
-            XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
             xmlRpcSerializer.SerializeRequest(new XmlRpcRequest(methodInfo.Name, 
                 1, 2, 3), webRequest.GetRequestStream());
 
