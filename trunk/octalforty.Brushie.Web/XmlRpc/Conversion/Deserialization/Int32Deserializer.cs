@@ -26,7 +26,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         public bool CanDeserialize(XmlNode xmlNode, Type type)
         {
             return xmlNode.Name == "value" && (xmlNode.FirstChild.Name == "i4" || xmlNode.FirstChild.Name == "int") &&
-                type == typeof(int);
+                (type == typeof(int) || type == typeof(object));
         }
 
         /// <summary>

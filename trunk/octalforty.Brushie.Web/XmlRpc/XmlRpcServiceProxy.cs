@@ -2,18 +2,19 @@
 using System.Net;
 
 using Castle.Core.Interceptor;
+using Castle.DynamicProxy;
 
 namespace octalforty.Brushie.Web.XmlRpc
 {
     /// <summary>
     /// Provides a base class for creating client-side XML-RPC Service proxies.
     /// </summary>
-    public class XmlRpcServiceProxy : IInterceptor
+    public class XmlRpcServiceProxy : IXmlRpcServiceProxy
     {
         #region Private Member Variables
         private Uri serviceEndpointUri;
         private XmlRpcServiceInfo xmlRpcServiceInfo;
-        private XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
+        private IXmlRpcWebRequestFactory webRequestFactory;
         #endregion
 
         /// <summary>
@@ -21,37 +22,33 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// </summary>
         /// <param name="serviceEndpointUri"></param>
         /// <param name="xmlRpcServiceType"></param>
-        internal XmlRpcServiceProxy(Uri serviceEndpointUri, Type xmlRpcServiceType)
+        internal XmlRpcServiceProxy(Uri serviceEndpointUri, Type xmlRpcServiceType) :
+            this(xmlRpcServiceType)
         {
             this.serviceEndpointUri = serviceEndpointUri;
+        }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="XmlRpcServiceProxy"/> class.
+        /// </summary>
+        /// <param name="xmlRpcServiceType"></param>
+        internal XmlRpcServiceProxy(Type xmlRpcServiceType)
+        {
             xmlRpcServiceInfo =
                 XmlRpcServiceInfo.CreateXmlRpcServiceInfo(xmlRpcServiceType);
         }
 
-        #region IInterceptor Members
-        public void Intercept(IInvocation invocation)
+        #region IXmlRpcServiceProxy Members
+        public Uri ServiceEndpointUri
         {
-            WebRequest webRequest = WebRequest.Create(serviceEndpointUri);
-            webRequest.Method = "POST";
-            webRequest.ContentType = "text/xml";
+            get { return serviceEndpointUri; }
+            set { serviceEndpointUri = value; }
+        }
 
-            XmlRpcServiceMethodInfo methodInfo =
-                XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(invocation.Method);
-            
-            xmlRpcSerializer.SerializeRequest(new XmlRpcRequest(methodInfo.Name, 
-                1, 2, 3), webRequest.GetRequestStream());
-
-            WebResponse webResponse = webRequest.GetResponse();
-
-            XmlRpcResponse xmlRpcResponse = 
-                xmlRpcSerializer.DeserializeResponse(webResponse.GetResponseStream(), 
-                invocation.Method.ReturnType);
-
-            if(xmlRpcResponse is XmlRpcFaultResponse)
-                throw new XmlRpcInvocationException(((XmlRpcFaultResponse)xmlRpcResponse).Fault);
-
-            invocation.ReturnValue = ((XmlRpcSuccessResponse)xmlRpcResponse).ReturnValue;
+        public IXmlRpcWebRequestFactory WebRequestFactory
+        {
+            get { return webRequestFactory; }
+            set { webRequestFactory = value; }
         }
         #endregion
     }
