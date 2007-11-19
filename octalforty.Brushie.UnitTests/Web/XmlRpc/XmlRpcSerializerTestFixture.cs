@@ -280,7 +280,8 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodResponse><params><param><value><i4>1</i4></value></param></params></methodResponse>");
 
-            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcSuccessResponse(new DoubleRange(new Range(4, "from"), new Range(54, "to"))),
+            AssertSerializedResponse(xmlRpcSerializer, new XmlRpcSuccessResponse(
+                new DoubleRange(new Range(4, "from"), new Range(54, "to"))),
                 xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<methodResponse>" +
@@ -341,6 +342,89 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 "</methodResponse>");
         }
 
+        [Test()]
+        public void DeserializeResponse()
+        {
+            XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
+            XmlRpcResponse xmlRpcResponse = DeserializeResponse(xmlRpcSerializer,
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodResponse>" +
+                    "<fault>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>faultCode</name>" +
+                                    "<value><i4>1</i4></value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>faultString</name>" +
+                                    "<value><string>Error</string></value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
+                    "</fault>" +
+                "</methodResponse>", typeof(int));
+
+            Assert.IsTrue(xmlRpcResponse is XmlRpcFaultResponse);
+            XmlRpcFaultResponse xmlRpcFaultResponse = (XmlRpcFaultResponse)xmlRpcResponse;
+
+            Assert.AreEqual(1, xmlRpcFaultResponse.Fault.Code);
+            Assert.AreEqual("Error", xmlRpcFaultResponse.Fault.Message);
+
+            xmlRpcResponse = DeserializeResponse(xmlRpcSerializer,
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodResponse>" +
+                "<params>" +
+                    "<param>" +
+                        "<value>" +
+                            "<struct>" +
+                                "<member>" +
+                                    "<name>From</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>lower-bound</name><value><i4>4</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value><string>from</string></value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                                "<member>" +
+                                    "<name>To</name>" +
+                                    "<value>" +
+                                        "<struct>" +
+                                            "<member>" +
+                                                "<name>lower-bound</name><value><i4>54</i4></value>" +
+                                            "</member>" +
+                                            "<member>" +
+                                                "<name>UpperBound</name><value><string>to</string></value>" +
+                                            "</member>" +
+                                        "</struct>" +
+                                    "</value>" +
+                                "</member>" +
+                            "</struct>" +
+                        "</value>" +
+                    "</param>" +
+                "</params>" +
+                "</methodResponse>", typeof(DoubleRange));
+
+            Assert.IsTrue(xmlRpcResponse is XmlRpcSuccessResponse);
+            XmlRpcSuccessResponse xmlRpcSuccessResponse = (XmlRpcSuccessResponse)xmlRpcResponse;
+
+            Assert.IsTrue(xmlRpcSuccessResponse.ReturnValue is DoubleRange);
+            DoubleRange doubleRange = (DoubleRange)xmlRpcSuccessResponse.ReturnValue;
+
+            Assert.AreEqual(4, doubleRange.From.LowerBound);
+            Assert.AreEqual("from", doubleRange.From.UpperBound);
+
+            Assert.AreEqual(54, doubleRange.To.LowerBound);
+            Assert.AreEqual("to", doubleRange.To.UpperBound);
+        }
+
         private static XmlRpcRequest DeserializeRequest(XmlRpcSerializer xmlRpcSerializer,
             string serializedRequest, params Type[] parameterTypes)
         {
@@ -348,6 +432,16 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
                 new MemoryStream(xmlRpcSerializer.Encoding.GetBytes(serializedRequest)))
             {
                 return xmlRpcSerializer.DeserializeRequest(memoryStream, parameterTypes);
+            } // using
+        }
+
+        private static XmlRpcResponse DeserializeResponse(XmlRpcSerializer xmlRpcSerializer,
+            string serializedResponse, Type returnValueType)
+        {
+            using(MemoryStream memoryStream =
+                new MemoryStream(xmlRpcSerializer.Encoding.GetBytes(serializedResponse)))
+            {
+                return xmlRpcSerializer.DeserializeResponse(memoryStream, returnValueType);
             } // using
         }
 

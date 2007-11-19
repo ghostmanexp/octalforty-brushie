@@ -43,6 +43,15 @@ namespace octalforty.Brushie.Web.XmlRpc
                 1, 2, 3), webRequest.GetRequestStream());
 
             WebResponse webResponse = webRequest.GetResponse();
+
+            XmlRpcResponse xmlRpcResponse = 
+                xmlRpcSerializer.DeserializeResponse(webResponse.GetResponseStream(), 
+                invocation.Method.ReturnType);
+
+            if(xmlRpcResponse is XmlRpcFaultResponse)
+                throw new XmlRpcInvocationException(((XmlRpcFaultResponse)xmlRpcResponse).Fault);
+
+            invocation.ReturnValue = ((XmlRpcSuccessResponse)xmlRpcResponse).ReturnValue;
         }
         #endregion
     }

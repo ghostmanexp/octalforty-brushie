@@ -74,6 +74,7 @@
     <Compile Include="XmlRpc\XmlRpcException.cs" />
     <Compile Include="XmlRpc\XmlRpcFault.cs" />
     <Compile Include="XmlRpc\XmlRpcFaultResponse.cs" />
+    <Compile Include="XmlRpc\XmlRpcInvocationException.cs" />
     <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceProxyGenerator.cs" />
     <Compile Include="XmlRpc\XmlRpcResponse.cs" />
