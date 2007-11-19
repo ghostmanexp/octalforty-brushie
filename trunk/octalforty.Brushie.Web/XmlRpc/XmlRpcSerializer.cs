@@ -216,5 +216,25 @@ namespace octalforty.Brushie.Web.XmlRpc
 
             xmlTextWriter.Flush();
         }
+
+        /// <summary>
+        /// Deserializes an <see cref="XmlRpcResponse"/> from <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="returnValueType"></param>
+        /// <returns></returns>
+        public XmlRpcResponse DeserializeResponse(Stream stream, Type returnValueType)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(stream);
+
+            XmlNode faultXmlNode = xmlDocument.SelectSingleNode("methodResponse/fault");
+            if(faultXmlNode != null)
+                return new XmlRpcFaultResponse(
+                    (XmlRpcFault)DeserializeObject(faultXmlNode.FirstChild, typeof(XmlRpcFault)));
+
+            return new XmlRpcSuccessResponse(DeserializeObject(
+                xmlDocument.SelectSingleNode("methodResponse/params/param").FirstChild, returnValueType));
+        }
     }
 }

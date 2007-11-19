@@ -13,6 +13,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
     public class XmlRpcServiceProxyGeneratorTestFixture
     {
         [Test()]
+        [Ignore()]
         public void CreateProxy()
         {
             XmlRpcServiceProxyGenerator xmlRpcServiceProxyGenerator = 
