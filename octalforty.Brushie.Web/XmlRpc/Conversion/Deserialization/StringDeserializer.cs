@@ -27,8 +27,8 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         {
             return xmlNode.Name == "value" && 
                 ((xmlNode.FirstChild.NodeType == XmlNodeType.Element && xmlNode.FirstChild.Name == "string") || 
-                (xmlNode.FirstChild.NodeType == XmlNodeType.Text)) && 
-                type == typeof(string);
+                (xmlNode.FirstChild.NodeType == XmlNodeType.Text)) &&
+                (type == typeof(string) || type == typeof(object));
         }
 
         /// <summary>

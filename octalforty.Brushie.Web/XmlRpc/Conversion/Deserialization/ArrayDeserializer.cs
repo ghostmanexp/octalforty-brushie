@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
@@ -27,7 +26,8 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <returns></returns>
         public bool CanDeserialize(XmlNode xmlNode, Type type)
         {
-            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "array" && type.IsArray;
+            return xmlNode.Name == "value" && xmlNode.FirstChild.Name == "array" && 
+                (type.IsArray || type == typeof(object));
         }
 
         /// <summary>
@@ -41,12 +41,12 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         {
             ArrayList array = new ArrayList();
 
-            foreach(XmlNode valueNode in xmlNode.FirstChild.SelectNodes("./value"))
+            foreach(XmlNode valueNode in xmlNode.SelectNodes("./array/data/value"))
             {
-                array.Add(deserializationContext.Deserialize(valueNode, type.GetElementType()));
+                array.Add(deserializationContext.Deserialize(valueNode, type.GetElementType() ?? typeof(object)));
             } // foreach
 
-            return array.ToArray(type.GetElementType());
+            return array.ToArray(type.GetElementType() ?? typeof(object));
         }
         #endregion
     }

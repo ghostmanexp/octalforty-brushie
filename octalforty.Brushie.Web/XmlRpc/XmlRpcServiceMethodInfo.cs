@@ -94,5 +94,10 @@ namespace octalforty.Brushie.Web.XmlRpc
 
             return parameterTypes.ToArray();
         }
+
+        public static bool IsXmlRpcServiceMethod(MethodInfo methodInfo)
+        {
+            return Attribute.IsDefined(methodInfo, typeof(XmlRpcServiceMethodAttribute));
+        }
     }
 }

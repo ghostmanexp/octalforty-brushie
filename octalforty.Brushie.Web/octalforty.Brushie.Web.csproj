@@ -32,9 +32,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Castle-2.0 RC3\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.DynamicProxy2, Version=2.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.DynamicProxy, Version=1.1.5.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Castle-2.0 RC3\Castle.DynamicProxy2.dll</HintPath>
+      <HintPath>..\ThirdParty\Castle-2.0 RC3\Castle.DynamicProxy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,6 +87,7 @@
     <Compile Include="XmlRpc\XmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceMethodInfo.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceProxy.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceProxyInterceptor.cs" />
     <Compile Include="XmlRpc\XmlRpcStructureAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcSuccessResponse.cs" />
   </ItemGroup>

@@ -1,6 +1,4 @@
-﻿using System;
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 using octalforty.Brushie.Web.XmlRpc;
 
@@ -13,16 +11,17 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
     public class XmlRpcServiceProxyGeneratorTestFixture
     {
         [Test()]
-        [Ignore()]
         public void CreateProxy()
         {
             XmlRpcServiceProxyGenerator xmlRpcServiceProxyGenerator = 
                 new XmlRpcServiceProxyGenerator();
             IMathXmlRpcService mathXmlRpcService = 
-                xmlRpcServiceProxyGenerator.CreateProxy<IMathXmlRpcService>(
-                    new Uri("http://www.math.com/xmlrpc"));
+                xmlRpcServiceProxyGenerator.CreateProxy<IMathXmlRpcService>();
             
-            int i = mathXmlRpcService.Add(1, 2);
+            Assert.IsTrue(mathXmlRpcService is IXmlRpcServiceProxy);
+            Assert.IsNull(((IXmlRpcServiceProxy)mathXmlRpcService).ServiceEndpointUri);
+
+            int result = mathXmlRpcService.Add(1, 2);
         }
     }
 }
