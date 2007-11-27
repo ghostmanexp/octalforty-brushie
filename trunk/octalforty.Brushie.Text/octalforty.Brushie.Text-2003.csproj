@@ -377,6 +377,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Authoring\Textile\TextileAuthoringEngineBuilder.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Authoring\Textile\TextileRegexBasedBlockElementParserBase.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

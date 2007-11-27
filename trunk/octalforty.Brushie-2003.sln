@@ -3,6 +3,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.Text-200
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "octalforty.Brushie.Web-2003", "octalforty.Brushie.Web\octalforty.Brushie.Web-2003.csproj", "{09A560F9-1B8C-4F62-B53B-1732D67FA6C7}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -15,6 +19,10 @@ Global
 		{1ABCEBAC-FDEE-4F36-8739-5C4962124E06}.Debug.Build.0 = Debug|.NET
 		{1ABCEBAC-FDEE-4F36-8739-5C4962124E06}.Release.ActiveCfg = Release|.NET
 		{1ABCEBAC-FDEE-4F36-8739-5C4962124E06}.Release.Build.0 = Release|.NET
+		{09A560F9-1B8C-4F62-B53B-1732D67FA6C7}.Debug.ActiveCfg = Debug|.NET
+		{09A560F9-1B8C-4F62-B53B-1732D67FA6C7}.Debug.Build.0 = Debug|.NET
+		{09A560F9-1B8C-4F62-B53B-1732D67FA6C7}.Release.ActiveCfg = Release|.NET
+		{09A560F9-1B8C-4F62-B53B-1732D67FA6C7}.Release.Build.0 = Release|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

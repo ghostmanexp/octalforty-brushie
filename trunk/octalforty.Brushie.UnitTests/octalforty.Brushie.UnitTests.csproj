@@ -68,6 +68,9 @@
     <Compile Include="Text\Authoring\Textile\NoTextileParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\ParagraphParserTestFixture.cs" />
     <Compile Include="Text\Authoring\Textile\TextBlockParserTestFixture.cs" />
+    <Compile Include="Web\QueryStringCompilerTestFixture.cs" />
+    <Compile Include="Web\QueryStringContainer.cs" />
+    <Compile Include="Web\QueryStringParserTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\ArrayDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\BooleanDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\DateTimeDeserializerTestFixture.cs" />
