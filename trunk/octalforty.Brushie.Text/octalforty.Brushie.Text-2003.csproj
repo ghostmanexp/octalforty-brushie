@@ -89,6 +89,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Authoring\AuthoringException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Authoring\AuthoringScope.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -110,6 +115,11 @@
                 />
                 <File
                     RelPath = "Authoring\IAuthoringEngine.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Authoring\IAuthoringEngineBuilder.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
