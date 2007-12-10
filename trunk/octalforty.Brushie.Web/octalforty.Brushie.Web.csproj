@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -46,6 +47,11 @@
     <Compile Include="QueryStringCompiler.cs" />
     <Compile Include="QueryStringFieldAttribute.cs" />
     <Compile Include="QueryStringParser.cs" />
+    <Compile Include="UI\GoogleChartTypeNameAttribute.cs" />
+    <Compile Include="UI\SimpleGoogleChartDataEncoder.cs" />
+    <Compile Include="UI\GoogleChartType.cs" />
+    <Compile Include="UI\GoogleChartUrlBuilder.cs" />
+    <Compile Include="UI\IGoogleChartDataEncoder.cs" />
     <Compile Include="XmlRpc\Conversion\DeserializationContext.cs" />
     <Compile Include="XmlRpc\Conversion\Deserialization\ArrayDeserializer.cs" />
     <Compile Include="XmlRpc\Conversion\Deserialization\BooleanDeserializer.cs" />
