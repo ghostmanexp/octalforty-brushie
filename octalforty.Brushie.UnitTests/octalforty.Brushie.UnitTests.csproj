@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,8 @@
     <Compile Include="Web\QueryStringCompilerTestFixture.cs" />
     <Compile Include="Web\QueryStringContainer.cs" />
     <Compile Include="Web\QueryStringParserTestFixture.cs" />
+    <Compile Include="Web\UI\GoogleChartUrlBuilderTestFixture.cs" />
+    <Compile Include="Web\UI\SimpleGoogleChartDataEncoderTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\ArrayDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\BooleanDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\DateTimeDeserializerTestFixture.cs" />
