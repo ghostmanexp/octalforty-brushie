@@ -47,6 +47,8 @@
     <Compile Include="QueryStringCompiler.cs" />
     <Compile Include="QueryStringFieldAttribute.cs" />
     <Compile Include="QueryStringParser.cs" />
+    <Compile Include="UI\GoogleChart.cs" />
+    <Compile Include="UI\GoogleChartDataEncoder.cs" />
     <Compile Include="UI\GoogleChartTypeNameAttribute.cs" />
     <Compile Include="UI\SimpleGoogleChartDataEncoder.cs" />
     <Compile Include="UI\GoogleChartType.cs" />

@@ -1,5 +1,7 @@
 using System.Collections;
+#if FW2
 using System.Collections.Generic;
+#endif
 using System.Collections.Specialized;
 using System.Drawing;
 using System.Reflection;
@@ -17,7 +19,11 @@ namespace octalforty.Brushie.Web.UI
         private Size chartSize;
         private GoogleChartType chartType;
         private IGoogleChartDataEncoder encoder;
+#if FW2
         private List<string> dataSets = new List<string>();
+#else
+		private ArrayList dataSets = new ArrayList();
+#endif
         private StringCollection pieChartLabels = new StringCollection();
         #endregion
 
@@ -64,8 +70,12 @@ namespace octalforty.Brushie.Web.UI
 
             uriBuilder.AppendFormat("chs={0}x{1}", chartSize.Width, chartSize.Height);
             uriBuilder.AppendFormat("&cht={0}", GetChartTypeName());
-            uriBuilder.AppendFormat("&chd={0}:{1}", 
-                encoder.Prefix, string.Join(encoder.DataSetSeparator, dataSets.ToArray()));
+            uriBuilder.AppendFormat("&chd={0}:{1}", encoder.Prefix, 
+#if FW2
+                string.Join(encoder.DataSetSeparator, dataSets.ToArray()));
+#else
+				string.Join(encoder.DataSetSeparator, (string[])dataSets.ToArray(typeof(string))));
+#endif
 
             //
             // Pie chart labels
@@ -77,11 +87,19 @@ namespace octalforty.Brushie.Web.UI
 
         private string[] GetPieChartLabels()
         {
+#if FW2
             List<string> labels = new List<string>();
+#else
+			ArrayList labels = new ArrayList();
+#endif
             foreach(string pieChartLabel in pieChartLabels)
                 labels.Add(HttpUtility.UrlEncode(pieChartLabel));
 
+#if FW2
             return labels.ToArray();
+#else
+			return (string[])labels.ToArray(typeof(string));
+#endif
         }
 
         private string GetChartTypeName()
