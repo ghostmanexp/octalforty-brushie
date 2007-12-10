@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Reflection;
 using System.Text;
+using System.Web;
 
 namespace octalforty.Brushie.Web.UI
 {
@@ -16,6 +18,18 @@ namespace octalforty.Brushie.Web.UI
         private GoogleChartType chartType;
         private IGoogleChartDataEncoder encoder;
         private List<string> dataSets = new List<string>();
+        private StringCollection pieChartLabels = new StringCollection();
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Gets a reference to the <see cref="StringCollection"/>, which contains
+        /// labels for the pie chart.
+        /// </summary>
+        public StringCollection PieChartLabels
+        {
+            get { return pieChartLabels; }
+        }
         #endregion
 
         /// <summary>
@@ -53,7 +67,21 @@ namespace octalforty.Brushie.Web.UI
             uriBuilder.AppendFormat("&chd={0}:{1}", 
                 encoder.Prefix, string.Join(encoder.DataSetSeparator, dataSets.ToArray()));
 
+            //
+            // Pie chart labels
+            if((chartType == GoogleChartType.PieChart || chartType == GoogleChartType.PieChart3D) && PieChartLabels.Count > 0)
+                uriBuilder.AppendFormat("&chl={0}", string.Join("|", GetPieChartLabels()));
+
             return uriBuilder.ToString();
+        }
+
+        private string[] GetPieChartLabels()
+        {
+            List<string> labels = new List<string>();
+            foreach(string pieChartLabel in pieChartLabels)
+                labels.Add(HttpUtility.UrlEncode(pieChartLabel));
+
+            return labels.ToArray();
         }
 
         private string GetChartTypeName()
