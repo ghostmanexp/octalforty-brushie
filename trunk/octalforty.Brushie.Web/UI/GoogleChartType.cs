@@ -58,7 +58,7 @@ namespace octalforty.Brushie.Web.UI
         /// Vienn diagram.
         /// </summary>
         [GoogleChartTypeName("v")]
-        ViennDiagram = 8,
+        VennDiagram = 8,
 
         /// <summary>
         /// Scatter plot.
