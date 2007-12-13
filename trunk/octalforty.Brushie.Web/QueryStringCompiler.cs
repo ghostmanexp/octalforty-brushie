@@ -109,9 +109,9 @@ namespace octalforty.Brushie.Web
                 values.Add(value.ToString());
 
 #if FW2
-            return string.Join("&", values.ToArray());
+            return string.Join(",", values.ToArray());
 #else
-            return string.Join("&", (string[])values.ToArray(typeof(string)));
+            return string.Join(",", (string[])values.ToArray(typeof(string)));
 #endif
         }
     }
