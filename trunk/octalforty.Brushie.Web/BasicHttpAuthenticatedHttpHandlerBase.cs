@@ -29,7 +29,8 @@ namespace octalforty.Brushie.Web
         {
             context.Response.ClearHeaders();
 
-            string authorization = context.Request.Headers["Authorization"] ?? string.Empty;
+            string authorization = context.Request.Headers["Authorization"] == null ? 
+				string.Empty : context.Request.Headers["Authorization"];
             string login = string.Empty;
             string password = string.Empty;
 
@@ -40,8 +41,10 @@ namespace octalforty.Brushie.Web
 
                 userIndex = userInfo.IndexOf(':');
 
-                login = userInfo.Substring(0, userIndex) ?? string.Empty;
-                password = userInfo.Substring(userIndex + 1) ?? string.Empty;
+                login = userInfo.Substring(0, userIndex) == null ? 
+					string.Empty : userInfo.Substring(0, userIndex);
+                password = userInfo.Substring(userIndex + 1) == null ? 
+					string.Empty : userInfo.Substring(userIndex + 1);
             } // if
 
             int pos = login.IndexOf(@"\");
