@@ -79,8 +79,33 @@ namespace octalforty.Brushie.Web
             if(property.PropertyType.IsAssignableFrom(typeof(DateTime)))
                 return CompileDateTimePropertyValue(container, property, queryStringField);
 
+            if(typeof(IList).IsAssignableFrom(property.PropertyType))
+                return CompileListPropertyValue(container, property, queryStringField);
+
             object value = property.GetValue(container, null);
             return value == null ? null : value.ToString();
+        }
+
+        private static string CompileListPropertyValue(object container, PropertyInfo property, 
+            QueryStringFieldAttribute queryStringField)
+        {
+            IList list = (IList)property.GetValue(container, null);
+            if(list == null || list.Count == 0)
+                return null;
+
+#if FW2
+			List<string> values = new List<string>();
+#else
+			ArrayList values = new ArrayList();
+#endif
+            foreach(object value in list)
+                values.Add(value.ToString());
+
+#if FW2
+            return string.Join(",", values.ToArray());
+#else
+            return string.Join(",", (string[])values.ToArray(typeof(string)));
+#endif
         }
 
         private static string CompileDateTimePropertyValue(object container, 

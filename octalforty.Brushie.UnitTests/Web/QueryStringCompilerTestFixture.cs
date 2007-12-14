@@ -30,10 +30,12 @@ namespace octalforty.Brushie.UnitTests.Web
             QueryStringContainer queryStringContainer = new QueryStringContainer("Hey", 122, new int[] { 1, 23, 456 });
             queryStringContainer.DateField = new DateTime(2007, 4, 8);
             queryStringContainer.DateTimeField = new DateTime(2007, 4, 8, 12, 34, 56);
+            queryStringContainer.Strings.Add("Hi");
+            queryStringContainer.Strings.Add("There");
 
             string queryString = queryStringCompiler.Compile(queryStringContainer);
 
-            Assert.AreEqual("s=Hey&intField=122&iaf=1,23,456&df=20070408&dtf=20070408123456", queryString);
+            Assert.AreEqual("s=Hey&intField=122&iaf=1,23,456&df=20070408&dtf=20070408123456&sts=Hi,There", queryString);
         }
     }
 }

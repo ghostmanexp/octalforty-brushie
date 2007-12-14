@@ -72,22 +72,29 @@ namespace octalforty.Brushie.Web
                     propertyType = Nullable.GetUnderlyingType(property.PropertyType);
 #endif
                 ParseTypedProperty(container, property, propertyType, fieldName, queryStringFields);
-                
             } // else
         }
 
         protected virtual void ParseTypedProperty(object container, PropertyInfo property, Type propertyType,
             string fieldName, NameValueCollection queryStringFields)
         {
+            QueryStringFieldAttribute queryStringField =
+                (QueryStringFieldAttribute)Attribute.GetCustomAttribute(property, typeof(QueryStringFieldAttribute));
+
             if(propertyType.IsAssignableFrom(typeof(DateTime)))
             {
-                QueryStringFieldAttribute queryStringField =
-                    (QueryStringFieldAttribute)Attribute.GetCustomAttribute(property, typeof(QueryStringFieldAttribute));
-
                 property.SetValue(container,
                     DateTime.ParseExact(queryStringFields[fieldName], queryStringField.DateTimeFormatString,
                         CultureInfo.InvariantCulture), null);
             } // if
+            else if(typeof(IList).IsAssignableFrom(propertyType))
+            {
+                IList list = (IList)property.GetValue(container, null);
+                
+                string[] values = queryStringFields[fieldName].Split(',');
+                foreach(string value in values)
+                    list.Add(Convert.ChangeType(value, queryStringField.ElementType));
+            } // else
             else
                 property.SetValue(container,
                     Convert.ChangeType(queryStringFields[fieldName], propertyType), null);

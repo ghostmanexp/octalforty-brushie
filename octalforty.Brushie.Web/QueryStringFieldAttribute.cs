@@ -8,6 +8,7 @@ namespace octalforty.Brushie.Web
         #region Private Member Variables
         private string name;
         private string dateTimeFormatString;
+        private Type elementType;
         #endregion
 
         #region Public Properties
@@ -20,6 +21,12 @@ namespace octalforty.Brushie.Web
         {
             get { return dateTimeFormatString; }
             set { dateTimeFormatString = value; }
+        }
+
+        public Type ElementType
+        {
+            get { return elementType; }
+            set { elementType = value; }
         }
         #endregion
 
