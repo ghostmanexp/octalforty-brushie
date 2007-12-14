@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using octalforty.Brushie.Web;
 
@@ -12,6 +13,8 @@ namespace octalforty.Brushie.UnitTests.Web
         private int[] intArrayField;
         private DateTime? dateField;
         private DateTime? dateTimeField;
+        private List<string> strings = new List<string>();
+        private List<int> ints = new List<int>();
         #endregion
 
         #region Public Properties
@@ -48,6 +51,20 @@ namespace octalforty.Brushie.UnitTests.Web
         {
             get { return dateTimeField; }
             set { dateTimeField = value; }
+        }
+
+        [QueryStringField("sts", ElementType = typeof(string))]
+        public List<string> Strings
+        {
+            get { return strings; }
+            set { strings = value; }
+        }
+
+        [QueryStringField("integers", ElementType = typeof(int))]
+        public List<int> Ints
+        {
+            get { return ints; }
+            set { ints = value; }
         }
         #endregion
 
