@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicHttpAuthenticatedHttpHandlerBase.cs" />
+    <Compile Include="FormsAuthenticationMuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryStringCompiler.cs" />
     <Compile Include="QueryStringFieldAttribute.cs" />

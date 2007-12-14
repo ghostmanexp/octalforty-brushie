@@ -81,18 +81,28 @@
                 />
                 <Reference
                     Name = "system.drawing"
-                    AssemblyName = "system.drawing"
+                    AssemblyName = "System.Drawing"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\system.drawing.dll"
                 />
                 <Reference
                     Name = "system.web"
-                    AssemblyName = "system.web"
+                    AssemblyName = "System.Web"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\system.web.dll"
                 />
             </References>
         </Build>
         <Files>
             <Include>
+                <File
+                    RelPath = "BasicHttpAuthenticatedHttpHandlerBase.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "FormsAuthenticationMuter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "QueryStringCompiler.cs"
                     SubType = "Code"
