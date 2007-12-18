@@ -10,8 +10,15 @@ namespace octalforty.Brushie.Web
     /// <summary>
     /// Compiles a query string from an object with properties marked with <see cref="QueryStringFieldAttribute"/>.
     /// </summary>
-    public sealed class QueryStringCompiler
+    public class QueryStringCompiler
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="QueryStringCompiler"/> class.
+        /// </summary>
+        public QueryStringCompiler()
+        {
+        }
+
         /// <summary>
         /// Compiles a query string from the <paramref name="container"/>.
         /// </summary>
@@ -37,7 +44,7 @@ namespace octalforty.Brushie.Web
 #endif
         }
 
-        private static void CompileProperties(object container, PropertyInfo[] properties, 
+        private void CompileProperties(object container, PropertyInfo[] properties, 
 #if FW2
 			List<string> fields
 #else
@@ -54,7 +61,7 @@ namespace octalforty.Brushie.Web
             } // foreach
         }
 
-        private static void CompileProperty(object container, PropertyInfo property, 
+        protected  virtual void CompileProperty(object container, PropertyInfo property, 
 #if FW2
 			List<string> fields
 #else
@@ -70,7 +77,7 @@ namespace octalforty.Brushie.Web
                 fields.Add(string.Format("{0}={1}", queryStringField.Name, propertyValue));
         }
 
-        private static string CompilePropertyValue(object container, PropertyInfo property,
+        protected virtual string CompilePropertyValue(object container, PropertyInfo property,
             QueryStringFieldAttribute queryStringField)
         {
             if(property.PropertyType.IsArray)
@@ -108,7 +115,7 @@ namespace octalforty.Brushie.Web
 #endif
         }
 
-        private static string CompileDateTimePropertyValue(object container, 
+        protected string CompileDateTimePropertyValue(object container, 
             PropertyInfo property, QueryStringFieldAttribute queryStringField)
         {
             object value = property.GetValue(container, null);
