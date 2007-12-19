@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using NUnit.Framework;
 
 using octalforty.Brushie.Web.XmlRpc;
 
@@ -20,6 +22,8 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
             
             Assert.IsTrue(mathXmlRpcService is IXmlRpcServiceProxy);
             Assert.IsNull(((IXmlRpcServiceProxy)mathXmlRpcService).ServiceEndpointUri);
+
+            ((IXmlRpcServiceProxy)mathXmlRpcService).ServiceEndpointUri = new Uri("http://www.math.com/math");
 
             int result = mathXmlRpcService.Add(1, 2);
         }

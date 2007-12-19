@@ -94,7 +94,12 @@ namespace octalforty.Brushie.Web
                 string[] values = queryStringFields[fieldName].Split(',');
                 foreach(string value in values)
                     list.Add(Convert.ChangeType(value, queryStringField.ElementType));
-            } // else
+            } // else if
+            else if(typeof(bool) == propertyType)
+            {
+                property.SetValue(container,
+                    queryStringFields[fieldName] == "1" ? true : false, null);
+            } // else if
             else
                 property.SetValue(container,
                     Convert.ChangeType(queryStringFields[fieldName], propertyType), null);
