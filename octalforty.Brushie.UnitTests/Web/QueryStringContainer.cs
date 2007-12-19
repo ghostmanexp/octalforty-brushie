@@ -15,6 +15,7 @@ namespace octalforty.Brushie.UnitTests.Web
         private DateTime? dateTimeField;
         private List<string> strings = new List<string>();
         private List<int> ints = new List<int>();
+        private bool boolField;
         #endregion
 
         #region Public Properties
@@ -65,6 +66,13 @@ namespace octalforty.Brushie.UnitTests.Web
         {
             get { return ints; }
             set { ints = value; }
+        }
+
+        [QueryStringField("b")]
+        public bool BoolField
+        {
+            get { return boolField; }
+            set { boolField = value; }
         }
         #endregion
 

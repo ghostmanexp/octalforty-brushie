@@ -27,6 +27,7 @@ namespace octalforty.Brushie.UnitTests.Web
             queryStringFields.Add("dtf", "20070408123456");
             queryStringFields.Add("sts", "Hi,There");
             queryStringFields.Add("integers", "1,2,3,4,5");
+            queryStringFields.Add("b", "1");
 
             queryStringParser.Parse(queryStringFields, queryStringContainer);
 
@@ -44,6 +45,8 @@ namespace octalforty.Brushie.UnitTests.Web
             Assert.AreEqual(3, queryStringContainer.Ints[2]);
             Assert.AreEqual(4, queryStringContainer.Ints[3]);
             Assert.AreEqual(5, queryStringContainer.Ints[4]);
+
+            Assert.IsTrue(queryStringContainer.BoolField);
         }
     }
 }

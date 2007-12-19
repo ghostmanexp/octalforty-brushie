@@ -89,8 +89,22 @@ namespace octalforty.Brushie.Web
             if(typeof(IList).IsAssignableFrom(property.PropertyType))
                 return CompileListPropertyValue(container, property, queryStringField);
 
+            if(typeof(bool) == property.PropertyType)
+                return CompileBooleanPropertyValue(container, property, queryStringField);
+
             object value = property.GetValue(container, null);
             return value == null ? null : value.ToString();
+        }
+
+        private string CompileBooleanPropertyValue(object container, PropertyInfo property, 
+            QueryStringFieldAttribute queryStringField)
+        {
+            object value = property.GetValue(container, null);
+
+            if(value == null)
+                return null;
+
+            return (bool)value ? "1" : "0";
         }
 
         private static string CompileListPropertyValue(object container, PropertyInfo property, 
