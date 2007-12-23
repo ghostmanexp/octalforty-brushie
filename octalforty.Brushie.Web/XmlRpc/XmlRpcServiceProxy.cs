@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Net;
-
-using Castle.Core.Interceptor;
-using Castle.DynamicProxy;
 
 namespace octalforty.Brushie.Web.XmlRpc
 {
@@ -39,6 +35,10 @@ namespace octalforty.Brushie.Web.XmlRpc
         }
 
         #region IXmlRpcServiceProxy Members
+        /// <summary>
+        /// Gets or sets an <see cref="Uri"/> which contains the service
+        /// point for this proxy.
+        /// </summary>
         public Uri ServiceEndpointUri
         {
             get { return serviceEndpointUri; }

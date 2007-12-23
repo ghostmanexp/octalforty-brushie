@@ -78,12 +78,17 @@
     <Compile Include="XmlRpc\Conversion\Serialization\XmlRpcStructureSerializer.cs" />
     <Compile Include="XmlRpc\Conversion\TypeSerializationException.cs" />
     <Compile Include="XmlRpc\Conversion\TypeSerializerBase.cs" />
+    <Compile Include="XmlRpc\HttpXmlRpcWebRequest.cs" />
+    <Compile Include="XmlRpc\HttpXmlRpcWebRequestFactory.cs" />
+    <Compile Include="XmlRpc\HttpXmlRpcWebResponse.cs" />
     <Compile Include="XmlRpc\IXmlRpcSerializerParameterTypesProvider.cs" />
     <Compile Include="XmlRpc\IXmlRpcService.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceContext.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceDispatcher.cs" />
     <Compile Include="XmlRpc\IXmlRpcServiceProxy.cs" />
+    <Compile Include="XmlRpc\IXmlRpcWebRequest.cs" />
     <Compile Include="XmlRpc\IXmlRpcWebRequestFactory.cs" />
+    <Compile Include="XmlRpc\IXmlRpcWebResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcException.cs" />
     <Compile Include="XmlRpc\XmlRpcFault.cs" />
     <Compile Include="XmlRpc\XmlRpcFaultResponse.cs" />

@@ -20,6 +20,7 @@ namespace octalforty.Brushie.Web.XmlRpc
             //
             // First, create mixin
             XmlRpcServiceProxy mixin = new XmlRpcServiceProxy(typeof(T));
+            mixin.WebRequestFactory = new HttpXmlRpcWebRequestFactory();
 
             //
             // Now create implementation
