@@ -7,6 +7,10 @@ namespace octalforty.Brushie.Web.XmlRpc
     /// </summary>
     public interface IXmlRpcServiceProxy
     {
+        /// <summary>
+        /// Gets or sets an <see cref="Uri"/> which contains the service
+        /// point for this proxy.
+        /// </summary>
         Uri ServiceEndpointUri
         { get; set; }
 

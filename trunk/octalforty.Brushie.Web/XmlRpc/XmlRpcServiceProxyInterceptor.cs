@@ -1,15 +1,23 @@
-using System.IO;
-using System.Net;
-
 using Castle.DynamicProxy;
 
 namespace octalforty.Brushie.Web.XmlRpc
 {
+    /// <summary>
+    /// An <see cref="IInterceptor"/> implementation, which is used to forward XML-RPC service
+    /// method calls to a remote service endpoint.
+    /// </summary>
     public class XmlRpcServiceProxyInterceptor : IInterceptor
     {
         #region Private Member Variables
         private XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
         #endregion
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="XmlRpcServiceProxyInterceptor"/> class.
+        /// </summary>
+        public XmlRpcServiceProxyInterceptor()
+        {
+        }
 
         #region IInterceptor Members
         public object Intercept(IInvocation invocation, params object[] args)
@@ -18,29 +26,27 @@ namespace octalforty.Brushie.Web.XmlRpc
             // Only intercept calls to XML-RPC service methods
             if(XmlRpcServiceMethodInfo.IsXmlRpcServiceMethod(invocation.Method))
             {
-                WebRequest webRequest =
-                    WebRequest.Create(((IXmlRpcServiceProxy)invocation.InvocationTarget).ServiceEndpointUri);
-                webRequest.Method = "POST";
-                webRequest.ContentType = "text/xml";
+                IXmlRpcServiceProxy xmlRpcServiceProxy = (IXmlRpcServiceProxy)invocation.InvocationTarget;
+                IXmlRpcWebRequest xmlRpcWebRequest =
+                    xmlRpcServiceProxy.WebRequestFactory.CreateRequest(xmlRpcServiceProxy.ServiceEndpointUri);
 
                 XmlRpcServiceMethodInfo methodInfo =
                     XmlRpcServiceMethodInfo.CreateXmlRpcServiceMethodInfo(invocation.Method);
 
-                Stream requestStream = webRequest.GetRequestStream();
                 xmlRpcSerializer.SerializeRequest(new XmlRpcRequest(methodInfo.Name, args), 
-                    requestStream);
-                requestStream.Close();
+                    xmlRpcWebRequest.RequestStream);
 
-                WebResponse webResponse = webRequest.GetResponse();
+                using(IXmlRpcWebResponse xmlRpcWebResponse = xmlRpcWebRequest.Invoke())
+                {
+                    XmlRpcResponse xmlRpcResponse =
+                        xmlRpcSerializer.DeserializeResponse(xmlRpcWebResponse.ResponseStream, 
+                        invocation.Method.ReturnType);
 
-                XmlRpcResponse xmlRpcResponse =
-                    xmlRpcSerializer.DeserializeResponse(webResponse.GetResponseStream(),
-                    invocation.Method.ReturnType);
+                    if(xmlRpcResponse is XmlRpcFaultResponse)
+                        throw new XmlRpcInvocationException(((XmlRpcFaultResponse)xmlRpcResponse).Fault);
 
-                if(xmlRpcResponse is XmlRpcFaultResponse)
-                    throw new XmlRpcInvocationException(((XmlRpcFaultResponse)xmlRpcResponse).Fault);
-
-                return ((XmlRpcSuccessResponse)xmlRpcResponse).ReturnValue;
+                    return ((XmlRpcSuccessResponse)xmlRpcResponse).ReturnValue;
+                } // using
             } // if
             else
                 return invocation.Proceed(args);

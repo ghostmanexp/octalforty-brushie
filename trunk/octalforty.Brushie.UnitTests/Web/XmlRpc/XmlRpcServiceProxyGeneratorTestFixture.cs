@@ -24,7 +24,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
             Assert.IsNull(((IXmlRpcServiceProxy)mathXmlRpcService).ServiceEndpointUri);
 
             ((IXmlRpcServiceProxy)mathXmlRpcService).ServiceEndpointUri = new Uri("http://www.math.com/math");
-
+                       
             int result = mathXmlRpcService.Add(1, 2);
         }
     }
