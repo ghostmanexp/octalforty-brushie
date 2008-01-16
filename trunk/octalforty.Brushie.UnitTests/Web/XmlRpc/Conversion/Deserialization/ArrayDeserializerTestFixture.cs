@@ -16,9 +16,9 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
         public void Deserialize()
         {
             object[] array = 
-                (object[])InternalDeserialize("<value><array><data><value><i4>12</i4></value>" +
+                (object[])InternalDeserialize("<array><data><value><i4>12</i4></value>" +
                 "<value><string>Egypt</string></value><value><boolean>0</boolean></value>" +
-                "<value><i4>-31</i4></value></data></array></value>", typeof(Array));
+                "<value><i4>-31</i4></value></data></array>", typeof(Array));
 
             Assert.AreEqual(4, array.GetLength(0));
 
