@@ -20,7 +20,12 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
 
             Assert.IsNotEmpty((ICollection)serviceInfo.Methods);
 
+            Assert.AreEqual("Math XML-RPC Service", serviceInfo.Name);
+            Assert.AreEqual("Provides an XML-RPC endpoint for trigonometric, logarithmic, and other common mathematical functions. ",
+                serviceInfo.Description);
+
             Assert.AreEqual("math:add", serviceInfo.Methods[0].Name);
+            Assert.AreEqual("Adds up two values", serviceInfo.Methods[0].Description);
             Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[0]);
             Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[1]);
         }
@@ -34,6 +39,7 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
             Assert.IsNotEmpty((ICollection)serviceInfo.Methods);
 
             Assert.AreEqual("math:add", serviceInfo.Methods[0].Name);
+            Assert.AreEqual("Adds up two values", serviceInfo.Methods[0].Description);
             Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[0]);
             Assert.AreEqual(typeof(int), serviceInfo.Methods[0].ParameterTypes[1]);
         }

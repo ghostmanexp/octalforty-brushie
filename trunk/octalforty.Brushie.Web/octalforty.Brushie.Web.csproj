@@ -94,6 +94,8 @@
     <Compile Include="XmlRpc\XmlRpcFaultResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcInvocationException.cs" />
     <Compile Include="XmlRpc\XmlRpcMemberAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceAttribute.cs" />
+    <Compile Include="XmlRpc\XmlRpcServiceIntrospector.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceProxyGenerator.cs" />
     <Compile Include="XmlRpc\XmlRpcResponse.cs" />
     <Compile Include="XmlRpc\XmlRpcServiceContext.cs" />
@@ -108,6 +110,9 @@
     <Compile Include="XmlRpc\XmlRpcServiceProxyInterceptor.cs" />
     <Compile Include="XmlRpc\XmlRpcStructureAttribute.cs" />
     <Compile Include="XmlRpc\XmlRpcSuccessResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XmlRpc\Resources\Introspection.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
