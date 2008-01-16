@@ -44,6 +44,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +95,7 @@
     <Compile Include="Web\XmlRpc\IDummyMarkerInterface.cs" />
     <Compile Include="Web\XmlRpc\IMathXmlRpcService.cs" />
     <Compile Include="Web\XmlRpc\Range.cs" />
+    <Compile Include="Web\XmlRpc\XmlRpcServiceIntrospectorTestFixture.cs" />
     <Compile Include="Web\XmlRpc\XmlRpcServiceMethodInfoTestFixture.cs" />
     <Compile Include="Web\XmlRpc\XmlRpcServiceProxyGeneratorTestFixture.cs" />
     <Compile Include="Web\XmlRpc\XmlRpcSerializerTestFixture.cs" />

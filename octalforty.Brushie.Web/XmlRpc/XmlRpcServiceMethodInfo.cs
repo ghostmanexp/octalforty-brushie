@@ -11,6 +11,7 @@ namespace octalforty.Brushie.Web.XmlRpc
     {
         #region Private Member Variables
         private string name;
+        private string description;
         private Type[] parameterTypes;
         private MethodInfo methodInfo;
         #endregion
@@ -22,6 +23,14 @@ namespace octalforty.Brushie.Web.XmlRpc
         public string Name
         {
             get { return name; }
+        }
+
+        /// <summary>
+        /// Gets a string which contains the description of the XML-RPC Service Method.
+        /// </summary>
+        public string Description
+        {
+            get { return description; }
         }
 
         /// <summary>
@@ -37,11 +46,13 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// Initializes a new instance of <see cref="XmlRpcServiceMethodInfo"/> class.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="description"></param>
         /// <param name="methodInfo"></param>
         /// <param name="parameterTypes"></param>
-        internal XmlRpcServiceMethodInfo(string name, MethodInfo methodInfo, Type[] parameterTypes)
+        internal XmlRpcServiceMethodInfo(string name, string description, MethodInfo methodInfo, Type[] parameterTypes)
         {
             this.name = name;
+            this.description = description;
             this.parameterTypes = parameterTypes;
             this.methodInfo = methodInfo;
         }
@@ -68,8 +79,8 @@ namespace octalforty.Brushie.Web.XmlRpc
                 (XmlRpcServiceMethodAttribute)Attribute.GetCustomAttribute(methodInfo, 
                 typeof(XmlRpcServiceMethodAttribute));
 
-            return new XmlRpcServiceMethodInfo(serviceMethodAttribute.Name, methodInfo, 
-                GetParameterTypes(methodInfo));
+            return new XmlRpcServiceMethodInfo(serviceMethodAttribute.Name, serviceMethodAttribute.Description,  
+                methodInfo, GetParameterTypes(methodInfo));
         }
 
         /// <summary>

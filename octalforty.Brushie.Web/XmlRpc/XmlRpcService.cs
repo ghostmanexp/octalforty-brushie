@@ -13,6 +13,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         #region Private Member Variables
         private HttpContext context;
         private XmlRpcServiceDispatcher xmlRpcServiceDispatcher;
+        private XmlRpcServiceIntrospector xmlRpcServiceIntrospector;
         #endregion
 
         #region Protected Properties
@@ -31,6 +32,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         protected XmlRpcService()
         {
             xmlRpcServiceDispatcher = new XmlRpcServiceDispatcher(GetType());
+            xmlRpcServiceIntrospector = new XmlRpcServiceIntrospector(GetType());
         }
 
         #region IHttpHandler Members
@@ -66,6 +68,18 @@ namespace octalforty.Brushie.Web.XmlRpc
 
                     httpContext.Response.End();
                 } // using
+            } // if
+
+            if(Context.Request.HttpMethod.ToUpper() == "GET")
+            {
+                httpContext.Response.Clear();
+                httpContext.Response.ClearContent();
+                httpContext.Response.ClearHeaders();
+
+                httpContext.Response.ContentType = "text/html";
+                httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+
+                xmlRpcServiceIntrospector.Introspect(httpContext.Response.OutputStream);
             } // if
         }
         

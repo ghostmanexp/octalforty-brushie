@@ -2,11 +2,8 @@ using System;
 
 namespace octalforty.Brushie.Web.XmlRpc
 {
-    /// <summary>
-    /// Denotes an XML-RPC service method.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public sealed class XmlRpcServiceMethodAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public sealed class XmlRpcServiceAttribute : Attribute
     {
         #region Private Member Variables
         private string name;
@@ -15,7 +12,7 @@ namespace octalforty.Brushie.Web.XmlRpc
 
         #region Public Properties
         /// <summary>
-        /// Gets a string which contains the name of the method.
+        /// Gets a string which contains the name of the XML-RPC service.
         /// </summary>
         public string Name
         {
@@ -23,7 +20,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         }
 
         /// <summary>
-        /// Gets a string which contains the description of the method.
+        /// Gets a string which contains the description of the XML-RPC service.
         /// </summary>
         public string Description
         {
@@ -32,20 +29,20 @@ namespace octalforty.Brushie.Web.XmlRpc
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of <see cref="XmlRpcServiceMethodAttribute"/> class.
+        /// Initializes a new instance of <see cref="XmlRpcServiceAttribute"/> class.
         /// </summary>
         /// <param name="name"></param>
-        public XmlRpcServiceMethodAttribute(string name)
+        public XmlRpcServiceAttribute(string name)
         {
             this.name = name;
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="XmlRpcServiceMethodAttribute"/> class.
+        /// Initializes a new instance of <see cref="XmlRpcServiceAttribute"/> class.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="description"></param>
-        public XmlRpcServiceMethodAttribute(string name, string description)
+        public XmlRpcServiceAttribute(string name, string description)
         {
             this.name = name;
             this.description = description;

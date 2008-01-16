@@ -6,7 +6,7 @@ namespace octalforty.Brushie.Web.XmlRpc
     /// An <see cref="IInterceptor"/> implementation, which is used to forward XML-RPC service
     /// method calls to a remote service endpoint.
     /// </summary>
-    public class XmlRpcServiceProxyInterceptor : IInterceptor
+    internal class XmlRpcServiceProxyInterceptor : IInterceptor
     {
         #region Private Member Variables
         private XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
@@ -20,7 +20,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         }
 
         #region IInterceptor Members
-        public object Intercept(IInvocation invocation, params object[] args)
+        object IInterceptor.Intercept(IInvocation invocation, params object[] args)
         {
             //
             // Only intercept calls to XML-RPC service methods
