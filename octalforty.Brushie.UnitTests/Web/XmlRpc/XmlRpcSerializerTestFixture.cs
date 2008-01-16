@@ -423,6 +423,33 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc
 
             Assert.AreEqual(54, doubleRange.To.LowerBound);
             Assert.AreEqual("to", doubleRange.To.UpperBound);
+
+            xmlRpcResponse = DeserializeResponse(xmlRpcSerializer,
+                xmlRpcSerializer.Encoding.GetString(xmlRpcSerializer.Encoding.GetPreamble()) +
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<methodResponse>" +
+                "<params>" +
+                    "<param>" +
+                        "<value>" +
+                            "<array>" +
+                                "<data>" +
+                                    "<value><i4>12</i4></value>" +
+                                    "<value><i4>121</i4></value>" +
+                                    "<value><i4>1212</i4></value>" +
+                                "</data>" +
+                            "</array>" +
+                        "</value>" +
+                    "</param>" +
+                "</params>" +
+                "</methodResponse>", typeof(int[]));
+
+            Assert.IsTrue(xmlRpcResponse is XmlRpcSuccessResponse);
+            xmlRpcSuccessResponse = (XmlRpcSuccessResponse)xmlRpcResponse;
+
+            Assert.IsTrue(xmlRpcSuccessResponse.ReturnValue is int[]);
+            int[] ints = (int[])xmlRpcSuccessResponse.ReturnValue;
+
+            Assert.AreEqual(new int[] { 12, 121, 1212 }, ints);
         }
 
         private static XmlRpcRequest DeserializeRequest(XmlRpcSerializer xmlRpcSerializer,

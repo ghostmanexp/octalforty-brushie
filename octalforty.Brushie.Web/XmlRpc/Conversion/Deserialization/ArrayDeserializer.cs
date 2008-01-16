@@ -41,7 +41,7 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         {
             ArrayList array = new ArrayList();
 
-            foreach(XmlNode valueNode in xmlNode.SelectNodes("value/array/data/value"))
+            foreach(XmlNode valueNode in xmlNode.SelectNodes("array/data/value"))
             {
                 array.Add(deserializationContext.Deserialize(valueNode, type.GetElementType() ?? typeof(object)));
             } // foreach
