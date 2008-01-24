@@ -49,6 +49,11 @@
     <Compile Include="QueryStringCompiler.cs" />
     <Compile Include="QueryStringFieldAttribute.cs" />
     <Compile Include="QueryStringParser.cs" />
+    <Compile Include="Rest\Conversion\IRepresentationSerializer.cs" />
+    <Compile Include="HttpMethod.cs" />
+    <Compile Include="Rest\HttpRequestHandlerAttribute.cs" />
+    <Compile Include="Rest\IResource.cs" />
+    <Compile Include="Rest\RestEndpointService.cs" />
     <Compile Include="UI\GoogleChart.cs" />
     <Compile Include="UI\GoogleChartDataEncoder.cs" />
     <Compile Include="UI\GoogleChartTypeNameAttribute.cs" />
