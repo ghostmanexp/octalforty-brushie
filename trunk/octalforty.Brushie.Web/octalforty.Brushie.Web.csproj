@@ -52,7 +52,8 @@
     <Compile Include="Rest\Conversion\IRepresentationSerializer.cs" />
     <Compile Include="HttpMethod.cs" />
     <Compile Include="Rest\HttpRequestHandlerAttribute.cs" />
-    <Compile Include="Rest\IResource.cs" />
+    <Compile Include="Rest\Resources\IResource.cs" />
+    <Compile Include="Rest\Resources\ResourceBase.cs" />
     <Compile Include="Rest\RestEndpointService.cs" />
     <Compile Include="UI\GoogleChart.cs" />
     <Compile Include="UI\GoogleChartDataEncoder.cs" />
