@@ -34,8 +34,9 @@
         <xsl:for-each select="./methods/method">
                             <li><strong><xsl:value-of select="./@name"/></strong></li>
                             <span>
-                                <br />
                                 <xsl:value-of select="./@description"/>
+                                <br />
+                                <br />
                             </span>
         </xsl:for-each>
                         </ul>
