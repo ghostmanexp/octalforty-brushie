@@ -77,6 +77,7 @@
     <Compile Include="Web\UI\SimpleGoogleChartDataEncoderTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\ArrayDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\BooleanDeserializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Deserialization\ByteArrayDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\DateTimeDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\DoubleDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\Int32DeserializerTestFixture.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Web\XmlRpc\Conversion\Deserialization\XmlRpcStructureDeserializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Serialization\ArraySerializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Serialization\BooleanSerializerTestFixture.cs" />
+    <Compile Include="Web\XmlRpc\Conversion\Serialization\ByteArraySerializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Serialization\DateTimeSerializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Serialization\DoubleSerializerTestFixture.cs" />
     <Compile Include="Web\XmlRpc\Conversion\Serialization\Int32SerializerUnitTests.cs" />

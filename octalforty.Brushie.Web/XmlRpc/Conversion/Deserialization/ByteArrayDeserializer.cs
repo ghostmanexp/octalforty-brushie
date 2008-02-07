@@ -38,7 +38,8 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Deserialization
         /// <param name="type"></param>
         public object Deserialize(DeserializationContext deserializationContext, XmlNode xmlNode, Type type)
         {
-            return Convert.FromBase64String(xmlNode.FirstChild.InnerText);
+            return string.IsNullOrEmpty(xmlNode.FirstChild.InnerText) ? null : 
+                Convert.FromBase64String(xmlNode.FirstChild.InnerText);
         }
         #endregion
     }
