@@ -29,7 +29,10 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
         {
             xmlTextWriter.WriteStartElement("value");
             xmlTextWriter.WriteStartElement("base64");
-            xmlTextWriter.WriteString(Convert.ToBase64String((byte[])value));
+            
+            if(value != null)
+                xmlTextWriter.WriteString(Convert.ToBase64String((byte[])value));
+            
             xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
         }
