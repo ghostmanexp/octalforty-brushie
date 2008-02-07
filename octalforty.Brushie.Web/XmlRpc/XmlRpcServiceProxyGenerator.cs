@@ -15,7 +15,6 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// <typeparam name="T">XML-RPC service interface.</typeparam>
         /// <returns></returns>
         public T CreateProxy<T>()
-            where T : IXmlRpcService
         {
             //
             // First, create mixin
@@ -39,7 +38,6 @@ namespace octalforty.Brushie.Web.XmlRpc
         /// <param name="serviceEndpointUri"></param>
         /// <returns></returns>
         public T CreateProxy<T>(Uri serviceEndpointUri)
-            where T : IXmlRpcService
         {
             T t = CreateProxy<T>();
             ((IXmlRpcServiceProxy)t).ServiceEndpointUri = serviceEndpointUri;
