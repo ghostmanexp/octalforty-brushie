@@ -27,7 +27,7 @@ namespace octalforty.Brushie.Web.XmlRpc
             generatorContext.AddMixinInstance(mixin);
 
             ProxyGenerator proxyGenerator = new ProxyGenerator();
-            return (T)proxyGenerator.CreateCustomProxy(typeof(T), new XmlRpcServiceProxyInterceptor(typeof(T)),
+            return (T)proxyGenerator.CreateCustomProxy(typeof(T), new XmlRpcServiceProxyInterceptor(),
                 mixin, generatorContext);
         }
 
