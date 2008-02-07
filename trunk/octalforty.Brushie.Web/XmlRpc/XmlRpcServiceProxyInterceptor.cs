@@ -1,5 +1,3 @@
-using System;
-
 using Castle.DynamicProxy;
 
 namespace octalforty.Brushie.Web.XmlRpc
@@ -12,16 +10,13 @@ namespace octalforty.Brushie.Web.XmlRpc
     {
         #region Private Member Variables
         private XmlRpcSerializer xmlRpcSerializer = new XmlRpcSerializer();
-        private Type xmlRpcServiceInterface;
         #endregion
 
         /// <summary>
         /// Initializes a new instance of <see cref="XmlRpcServiceProxyInterceptor"/> class.
         /// </summary>
-        /// <param name="xmlRpcServiceInterface"></param>
-        public XmlRpcServiceProxyInterceptor(Type xmlRpcServiceInterface)
+        public XmlRpcServiceProxyInterceptor()
         {
-            this.xmlRpcServiceInterface = xmlRpcServiceInterface;
         }
 
         #region IInterceptor Members
@@ -29,8 +24,7 @@ namespace octalforty.Brushie.Web.XmlRpc
         {
             //
             // Only intercept calls to XML-RPC service methods
-            if(XmlRpcServiceMethodInfo.IsXmlRpcServiceMethod(invocation.Method) ||
-                invocation.Method.DeclaringType.IsAssignableFrom(xmlRpcServiceInterface))
+            if(XmlRpcServiceMethodInfo.IsXmlRpcServiceMethod(invocation.Method))
             {
                 IXmlRpcServiceProxy xmlRpcServiceProxy = (IXmlRpcServiceProxy)invocation.InvocationTarget;
                 IXmlRpcWebRequest xmlRpcWebRequest =
