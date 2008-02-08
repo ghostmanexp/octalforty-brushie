@@ -16,6 +16,9 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Serialization
             Assert.AreEqual("<value><array><data><value><i4>12</i4></value>" +
                 "<value><string>Egypt</string></value></data></array></value>", 
                 InternalSerialize(new object[] { 12, "Egypt" }));
+
+            Assert.AreEqual("<value><array><data /></array></value>",
+                InternalSerialize(null));
         }
     }
 }

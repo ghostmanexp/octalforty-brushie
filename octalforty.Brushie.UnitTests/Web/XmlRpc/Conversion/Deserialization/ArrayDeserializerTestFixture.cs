@@ -26,6 +26,9 @@ namespace octalforty.Brushie.UnitTests.Web.XmlRpc.Conversion.Deserialization
             Assert.AreEqual("Egypt", array[1]);
             Assert.AreEqual(false, array[2]);
             Assert.AreEqual(-31, array[3]);
+
+            array = (object[])InternalDeserialize("<array><data /></array>", typeof(Array));
+            Assert.IsEmpty(array);
         }
     }
 }

@@ -32,10 +32,13 @@ namespace octalforty.Brushie.Web.XmlRpc.Conversion.Serialization
             xmlTextWriter.WriteStartElement("array");
             xmlTextWriter.WriteStartElement("data");
 
-            foreach(object _value in (IEnumerable)value)
+            if(value != null && value is IEnumerable)
             {
-                serializationContext.Serialize(_value, xmlTextWriter);
-            } // foreach
+                foreach(object _value in (IEnumerable) value)
+                {
+                    serializationContext.Serialize(_value, xmlTextWriter);
+                } // foreach
+            } // if
 
             xmlTextWriter.WriteEndElement();
             xmlTextWriter.WriteEndElement();
